@@ -1,0 +1,33 @@
+<section class="overflow-cards">
+    <div class="container">
+        <div class="top">
+            <div class="top_left">
+                <h2 gh-id="${ghId}.title"> TITLE </h2>
+                
+                ${jsonData.subtitle ? `
+                    <p class="subtitle" gh-id="${ghId}.subtitle">
+                        SUBTITLE
+                    </p>
+                ` : ''}
+            </div>
+            <div class="top_right">
+                ${button ? `
+                    <button-component data-popup-id="${button.popupId}" data-placement="${button.placement}">${button.text}</button-component>
+                ` : ''}
+            </div>
+        </div>
+        <div class="flex-wrapper">
+            ${cards.reduce((acc, card, index) => {
+                return acc + `
+                <div class="cards">
+                    <h3 gh-id="${ghId}.cards.${index}.title"></h3>
+                    <div class="text">
+                        <p gh-id="${ghId}.cards.${index}.text"></p>
+                    </div>
+                    <image-component src="${card.image.src}" alt="${card.image.alt}" title="${card.image.title}" lazyload width="330" height="274"></image-component>
+                </div>
+                `
+                }, '')}
+        </div>
+    </div>
+</section>

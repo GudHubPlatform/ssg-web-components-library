@@ -1,0 +1,35 @@
+<div class="get-in-touch-form">
+    <form class="get-in-touch" action="#">
+        ${config.title ? `<div class="popup_text like_title">${config.title}</div>` : ''}
+        ${config.subtitle ? `<div class="popup_text subtitle">${config.subtitle}</div>` : ''}
+        
+        <div class="form_wrap">
+            ${generateInput(config)}
+        </div>
+        <div class="btn_wrapper">
+            <button type="submit" class="btn">Замовити консультацію</button>
+            <div class="loader"></div>
+        </div>
+    </form>
+    <div class="success-overflow">
+        <div class="icon_wrapper">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" viewBox="0 0 65 65" fill="none"> <g clip-path="url(#clip0_1277_2760)"> <path d="M20.8 22.75L16.25 27.3L32.5 43.55L65 11.05L60.45 6.5L32.5 34.45L20.8 22.75Z" fill="#E9FF6B"/> <path d="M29.25 55.25C16.575 55.25 6.5 45.175 6.5 32.5C6.5 19.825 16.575 9.75 29.25 9.75C33.15 9.75 37.05 10.725 40.625 12.675L43.875 7.15C39.325 4.55 34.45 3.25 29.25 3.25C13 3.25 0 16.25 0 32.5C0 48.75 13 61.75 29.25 61.75C45.5 61.75 58.5 48.75 58.5 32.5H52C52 45.175 41.925 55.25 29.25 55.25Z" fill="#E9FF6B"/> </g> <defs> <clipPath id="clip0_1277_2760"> <rect width="65" height="65" fill="white"/> </clipPath> </defs> </svg>
+            </div>
+        </div>
+        <div class="success_middle">
+            <div class="bold">Successful</div>
+            <div class="text">Your form has been succesfully submitted! Please, check if info you provided is correct:</div>
+            <div class="check">
+                <div class="check_entity">
+                    <span>Email:</span>
+                    <span class="email"></span>
+                </div>
+                <div class="check_entity phone_entity">
+                    <span>Phone:</span>
+                    <span class="phone"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

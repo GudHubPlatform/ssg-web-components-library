@@ -1,0 +1,26 @@
+# Attributes:
+
+none
+
+
+
+# Component data-object: 
+("?" means "unnecessary")
+```json
+{
+    "title": "Title",
+    "subtitle?": "Subtitle",
+    "button_text?": "button_text",
+    "image": {
+      "src": "/assets/images/gudhub-abilities.jpg",
+      "alt": "image alt",
+      "title": "image title"
+    },
+    "items": [
+      "Nulla dapibus neque lacus",
+      "Nullam eu sapien in elit porta",
+      "Vivamus tincidunt purus leo",
+      "Cras vehicula rhoncus dolor"
+    ]
+}
+```

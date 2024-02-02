@@ -1,0 +1,58 @@
+{
+    "type": "array",
+    "id": 1,
+    "childs": [
+        {
+            "type": "property",
+            "id": 3,
+            "property_name": "title",
+            "property_type": "field_value",
+            "name_space": "h1",
+            "interpretation": 1
+        },
+        {
+            "type": "property",
+            "id": 4,
+            "property_name": "slug",
+            "property_type": "field_value",
+            "name_space": "slug",
+            "interpretation": 1
+        }
+    ],
+    "property_name": "pages",
+    "app_id": "33452",
+    "filter": [
+        {
+            "field_id": 796197,
+            "data_type": "text",
+            "valuesArray": [
+                "/",
+                "/authors/"
+            ],
+            "search_type": "not_equal_or",
+            "$$hashKey": "object:1871",
+            "selected_search_option_variable": "Value"
+        },
+        {
+            "field_id": 796203,
+            "data_type": "radio_button",
+            "valuesArray": [
+                "1"
+            ],
+            "search_type": "equal_or",
+            "$$hashKey": "object:1921",
+            "selected_search_option_variable": "Value"
+        },
+        {
+            "field_id": 796197,
+            "data_type": "text",
+            "valuesArray": [
+                "blog"
+            ],
+            "search_type": "not_contain_or",
+            "$$hashKey": "object:1959",
+            "selected_search_option_variable": "Value"
+        }
+    ],
+    "isSortable": 0
+}

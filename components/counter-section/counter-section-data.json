@@ -1,0 +1,21 @@
+{
+    "title": "Title",
+    "subtitle": "Subtitle",
+    "button_text": "button_text",
+    "items": [
+      {
+        "number": "98",
+        "symbol": "%",
+        "text": "Sed rhoncus venenatis velit"
+      },
+      {
+        "number": "10/7",
+        "text": "Duis efficitur condimentum lacus"
+      },
+      {
+        "number": "На",
+        "symbol": "&nbsp%",
+        "text": "Quisque vel justo lorem"
+      }
+    ]
+  }

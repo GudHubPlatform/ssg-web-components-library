@@ -1,0 +1,69 @@
+body.edit-mode-enabled {
+    [gh-id] {
+        &:hover {
+            outline: 1px solid #2b61fa;
+        }
+    }
+}
+
+edit-mode {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    .edit-mode-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .edit-mode-switch {
+        height: 0;
+        width: 0;
+        visibility: hidden;
+    }
+
+    .edit-mode-label {
+        cursor: pointer;
+        text-indent: -9999px;
+        width: 60px;
+        height: 30px;
+        background: #dbdbdb;
+        display: block;
+        border-radius: 100px;
+        position: relative;
+    }
+
+    .edit-mode-label:after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 26px;
+        height: 26px;
+        background: #fff;
+        border-radius: 90px;
+        transition: 0.3s;
+    }
+
+    .edit-mode-switch:checked + .edit-mode-label {
+        background: #2b61fa;
+    }
+
+    .edit-mode-switch:checked + .edit-mode-label:after {
+        left: calc(100% - 2px);
+        transform: translateX(-100%);
+    }
+
+    .edit-mode-label:active:after {
+        width: 36px;
+    }
+    
+    p {
+        font-size: 24px;
+        color: #fff;
+    }
+}

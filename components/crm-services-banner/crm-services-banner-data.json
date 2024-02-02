@@ -1,0 +1,20 @@
+{
+    "title": "Title",
+    "subtitle": "Subtitle",
+    "button": {
+      "link": "/contact-us/",
+      "text": "Let's Talk!"
+    },
+    "list": [
+      "Lorem ipsum dolor sit amet",
+      "Donec ut placerat velit",
+      "Morbi euismod elementum nibh",
+      "Phasellus venenatis volutpat lectus",
+      "In hac habitasse platea dictumst"
+    ],
+    "image": {
+      "src": "/assets/images/banner-image.png",
+      "alt": "image alt",
+      "title": "image title"
+    }
+  }

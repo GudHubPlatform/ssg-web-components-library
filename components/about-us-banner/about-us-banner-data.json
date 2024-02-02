@@ -1,0 +1,9 @@
+{
+    "title": "Title",
+    "subtitle": "Subtitle",
+    "image": {
+      "src": "/assets/images/banner-image.png",
+      "alt": "image alt",
+      "title": "image title"
+    }
+  }

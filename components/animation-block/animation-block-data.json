@@ -1,0 +1,40 @@
+{
+    "title": "Інтеграції CRM для Бізнесу",
+    "subtitle": "Поєднайте інструменти, якими ви користуєтеся разом з вашим бізнесом для максимальної продуктивності та ефективності компанії.",
+    "buttons": [
+      {
+        "class": "btn",
+        "text": "Спробувати CRM"
+      },
+      {
+        "class": "btn empty",
+        "text": "Більше Інтеграцій"
+      }
+    ],
+    "rows": [
+      {
+        "row": [
+          {
+            "src": "/assets/images/slack.jpg",
+            "title": "Slack",
+            "alt": "Slack"
+          },
+          {
+            "src": "/assets/images/telegram.jpg",
+            "title": "Telegram",
+            "alt": "Telegram"
+          },
+          {
+            "src": "/assets/images/slack.jpg",
+            "title": "Slack",
+            "alt": "Slack"
+          },
+          {
+            "src": "/assets/images/telegram.jpg",
+            "title": "Telegram",
+            "alt": "Telegram"
+          }
+        ]
+      }
+    ]
+  }

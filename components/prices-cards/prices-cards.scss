@@ -1,0 +1,206 @@
+prices-cards {
+    .prices {
+        background: var(--primary-bg-color);
+        padding-bottom: 0;
+        .flex-wrapper {
+            gap: 20px;
+        }
+        h2 {
+            text-align: center;
+        }
+        .subtitle {
+            margin-right: auto;
+            margin-left: auto;
+            max-width: 507px;
+            text-align: center;
+        }
+        .card {
+            background: var(--block-primary-bg-color);
+            border-radius: var(--button-primary-border-radius);
+            box-shadow: var(--block-primary-box-shadow);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .title_card {
+                color: var(--block-primary-h-color);
+                text-align: center;
+                font-size: 30px;
+                font-weight: 700;
+                line-height: normal;
+                margin-bottom: 30px;
+            }
+            .price_card {
+                color: var(--block-primary-h-color);
+                font-size: 50px;
+                font-weight: 900;
+                line-height: 100%;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+            .subtitle_card {
+                color: var(--block-primary-text-color);
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 30px;
+                margin-bottom: 43px;
+                text-align: center;
+            }
+            .list_button {
+                background: var(--block-tertiary-bg-color);
+                padding: 30px;
+                margin: 0;
+                border-radius: var(--block-tertiary-border-radius);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .feature_list {
+                list-style: none;
+                margin-bottom: 30px;
+                li {
+                    display: flex;
+                    color: var(--block-tertiary-h-color);
+                    font-size: 18px;
+                    line-height: 30px;
+                    margin-bottom: 20px;
+                    position: relative;
+                    .marker {
+                        width: 27px;
+                        height: 27px;
+                        margin-right: 10px;
+                        svg {
+                            path {
+                                fill: #000;
+                            }
+                        }
+                    }
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                    &[data-status="false"] {
+                        text-decoration: line-through;
+                        color: var(--block-tertiary-text-color);
+                        span {
+                            opacity: .5;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.dark_theme {
+        .prices {
+            .card {
+                .feature_list {
+                    .marker {
+                        svg {
+                            path {
+                                fill: #fff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .prices .card {
+        .feature_list {
+            li {
+                margin-bottom: 15px;
+            }
+        }
+        .price_card {
+            font-size: 40px;
+        }
+        .title_card {
+            margin-bottom: 20px;
+        }
+    }
+}
+@media screen and (max-width: 1240px) {
+    .prices {
+        .flex-wrapper {
+            flex-wrap: wrap;
+        }
+        .card {
+            width: calc(33% - 12px);
+        }
+    }
+}
+@media screen and (max-width: 1215px) {
+    prices-cards .btn {
+        font-size: 14px;
+        text-align: center;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .prices .card .subtitle_card {
+        margin-bottom: 25px;
+    }
+}
+@media screen and (max-width: 1000px) {
+    .prices .card {
+        width: calc(50% - 10px);
+        .subtitle_card {
+            margin-bottom: 20px;
+        }
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .prices .card .list_button {
+        padding: 20px;
+    }
+    prices-cards .btn {
+        padding: 15px;
+    }
+}
+@media screen and (max-width: 800px) {
+    .prices h2 {
+        font-size: 36px;
+    }
+}
+@media screen and (max-width: 730px) {
+    .prices .card {
+        width: 100%;
+        max-width: 470px;
+        margin: 0 auto;
+        .subtitle_card {
+            margin-bottom: 15px;
+        }
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .prices {
+        h2 {
+            font-size: 30px;
+        }
+        .subtitle {
+            font-size: 18px;
+        }
+        .card {
+            padding: 15px;
+            .price_card {
+                font-size: 36px;
+            }
+            .title_card {
+               margin-bottom: 10px;
+            }
+            .list_button {
+                padding: 15px;
+            }
+            .feature_list {
+                margin-bottom: 20px;
+                li {
+                    font-size: 16px;
+                    margin-bottom: 5px;
+                }
+            }
+        }
+    }
+}

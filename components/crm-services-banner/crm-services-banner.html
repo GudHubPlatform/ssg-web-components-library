@@ -1,0 +1,28 @@
+<section>
+    <div class="container">
+        <div class="flex-wrapper">
+            <div class="left">
+                <h1 gh-id="${ghId}.title"></h1>
+                <div class="main-subtitle" gh-id="${ghId}.subtitle"></div>
+                <ul class="banner_list tick_list">
+                    ${
+                        list.reduce((acc, item, index) => {
+                            return acc + `
+                               <li gh-id="${ghId}.list.${index}"></li>
+                            `
+                        }, '')
+                    }
+                </ul>
+                <div class="flex_button">
+                    ${json.buttons ? `
+						<button-component data-popup-id="${json.buttons.primary.popupId}" data-placement="${json.buttons.primary.placement}">${json.buttons.primary.text}</button-component>
+						<button-component data-popup-id="${json.buttons.secondary.popupId}" data-placement="${json.buttons.secondary.placement}" class="btn empty">${json.buttons.secondary.text}</button-component>
+					` : ''}
+                </div>
+            </div>
+            <div class="right">
+				<image-component lazyload src="${image.src}" alt="${image.alt}" title="${image.title}" width="515" height="649"></image-component>
+            </div>
+        </div>
+    </div>
+</section>

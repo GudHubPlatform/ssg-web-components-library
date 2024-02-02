@@ -1,0 +1,19 @@
+<section>
+    <div class="container">
+        <div class="flex-wrapper">
+            <div class="text">
+                <h1 gh-id="${ghId}.title"></h1>
+                <div class="subtitle" gh-id="${ghId}.subtitle"></div>
+                <div class="flex_button">
+                    ${json.buttons ? `
+                        <button-component data-popup-id="${json.buttons.primary.popupId}" data-placement="${json.buttons.primary.placement}">${json.buttons.primary.text}</button-component>
+                        <button-component data-popup-id="${json.buttons.secondary.popupId}" data-placement="${json.buttons.secondary.placement}" class="btn empty">${json.buttons.secondary.text}</button-component>
+                    ` : ''}
+                </div>
+            </div>
+            <div class="image">
+				<image-component lazyload src="${image.src}" alt="${image.alt}" title="${image.title}" width="578" height="385"></image-component>
+            </div>
+        </div>
+    </div>
+</section>

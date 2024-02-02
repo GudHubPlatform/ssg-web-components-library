@@ -1,0 +1,25 @@
+<picture data-natural-width="${imageWidth}">
+    ${ (imageWidth < 1200) && (imageWidth > 600) ? `
+        <source media="(min-width: 600px)" srcset="${path}${extension}.webp" type="image/webp">
+        <source media="(min-width: 600px)" srcset="${path}${extension}" type="image/${extension.substring(1, extension.length)}">
+    ` : ''}
+    ${ imageWidth > 600 ? `
+        <source media="(max-width: 600px)" srcset="${path}-600${extension}.webp" type="image/webp">
+    ` : ''}
+    ${ imageWidth > 1200 ? `
+        <source media="(max-width: 1200px)" srcset="${path}-1200${extension}.webp" type="image/webp">
+        <source media="(min-width: 1200px)" srcset="${path}${extension}.webp" type="image/webp">
+    ` : ''}
+    ${ imageWidth > 600 ? `
+        <source media="(max-width: 600px)" srcset="${path}-600${extension}" type="image/${extension.substring(1, extension.length)}">
+    ` : ''}
+    ${ imageWidth > 1200 ? `
+        <source media="(max-width: 1200px)" srcset="${path}-1200${extension}" type="image/${extension.substring(1, extension.length)}">
+        <source media="(min-width: 1200px)" srcset="${path}${extension}" type="image/${extension.substring(1, extension.length)}">
+    ` : ''}
+    ${ imageWidth <= 600 ? `
+        <source srcset="${src}" type="image/${src.split('.')[src.split('.').length - 1]}" />
+    ` : ''}
+    <source srcset="${src}.webp" type="image/webp">
+    <img src="${src}" ${ title ? `title="${title}"` : '' } ${ alt ? `alt="${alt}"` : '' } ${ lazyload ? 'loading="lazy"' : '' } ${ width ? `width="${width}"` : '' } ${ height ? `height="${height}"` : '' } >
+</picture>

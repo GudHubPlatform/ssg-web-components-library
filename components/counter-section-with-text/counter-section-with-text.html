@@ -1,0 +1,46 @@
+<section class="service_counter">
+    <div class="container">
+        <div class="flex-wrapper">
+            <div class="left">
+                <div class="text">
+                    ${json.title ? `
+                        <h2 class="h2" gh-id="${ghId}.title"> TITLE </h2>
+                    ` : ''}
+                    ${json.subtitle ? `
+                        <p class="subtitle" gh-id="${ghId}.subtitle"> SUBTITLE </p>
+                    ` : ''}
+                </div>
+                ${json.button ? `
+                    <div class="bottom_button">
+                        <button-component data-popup-id="${json.button.popupId}" data-placement="${json.button.placement}">${json.button.text}</button-component>
+                    </div>
+                `: ''}
+            </div>
+            <div class="right">
+                <div class="counters">
+                    ${items.reduce((acc, item, index) => {
+                        return acc + `
+                        <div class="counter_item">
+                            <div class="counter_top">
+                                ${item.number ? `
+                                    <span class="counter_num" gh-id="${ghId}.items.${index}.number"></span>
+                                ` : ''}
+                                ${item.symbol ? `
+                                    <span class="counter_symbol" gh-id="${ghId}.items.${index}.symbol"></span>
+                                ` : ''}
+                            </div>
+                            ${item.text ? `
+                                <div class="counter_bottom" gh-id="${ghId}.items.${index}.text"></div>
+                            ` : ""}
+                        </div>
+                    `}, '')}
+                </div>
+            </div>
+        </div>
+        ${json.button_text ? `
+            <div class="bottom_button">
+                <button-component data-popup-title="Тестувати Безкоштовно" data-popup-subtitle="Заповніть форму зараз і ми зв'яжемося з вами!">${json.button_text}</button-component>
+            </div>
+        `: ''}
+    </div>
+</section>

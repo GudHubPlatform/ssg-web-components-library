@@ -1,0 +1,156 @@
+list-text-and-media {
+    background: var(--primary-bg-color);
+    .subtitle{
+        text-align: center;
+    }
+    .list {
+        flex-direction: column;
+        gap: 50px;
+        h2 {
+            margin-bottom: 0;
+        }
+        .subtitle {
+            margin-bottom:  0;
+        }
+        &_item {
+            gap: 20px;
+            color: var(--block-primary-text-color);
+            &:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+            .text, .media {
+                border-radius: 20px;
+            }
+            .subtitle {
+                color: inherit;
+            }
+            .text {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: flex-start;
+                flex-grow: 0;
+                flex-shrink: 1;
+                gap: 20px;
+                width: 100%;
+                padding: 30px;
+                background-color: var(--block-primary-bg-color);
+                transition: background-color .3s ease;
+                .top {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                    .subtitle {
+                        text-align: left;
+                    }
+                    .text-list {
+                        padding-left: 20px;
+                        line-height: 140%;
+                        font-size: var(--h2-subtitle-font-size);
+                        li:not(:last-child) {
+                            margin-bottom: 10px;
+                        }
+                    }
+                    h3 {
+                        color: var(--block-primary-h-color);
+                        margin-bottom: 0;
+                    }
+                }
+                .bottom {
+                    .link {
+                        padding: 10px 0;
+                        font-size: var(--text-font-size);
+                        font-weight: 700;
+                        color: var(--block-primary-h-color);
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        transition: color .3s ease;
+                        svg {
+                            position: relative;
+                            left: 0;
+                            transition: all .2s ease;
+                        }
+                    }
+                }
+            }
+            .media {
+                flex-grow: 1;
+                flex-shrink: 0;
+                overflow: hidden;
+                height: min-content;
+                
+                img {
+                    background-color: var(--image-bg-color);
+                }
+            }
+            &:hover {
+                .text {
+                    background-color: var(--tertiary-bg-color);
+                }
+                .bottom .link {
+                    color: var(--primary-color);
+                    svg {
+                        left: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 1025px) and (min-width: 870px) {
+        .list {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 20px;
+            .list_item {
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                background-color: var(--block-primary-bg-color);
+                padding: 20px;
+                border-radius: 20px;
+                max-width: calc(50% - 25px);
+                .text {
+                    padding: 0;
+                    height: 100%;
+                }
+                .media {
+                    flex-grow: 0;
+                    border-radius: 15px;
+                }
+                &:hover {
+                    background-color: var(--tertiary-bg-color);
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 870px) {
+        .list {
+            max-width: 500px;
+            margin: auto;
+            align-items: center;
+            gap: 20px;
+            .list_item {
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                background-color: var(--block-primary-bg-color);
+                padding: 20px;
+                border-radius: 20px;
+                .text {
+                    padding: 0;
+                    height: 100%;
+                }
+                .media {
+                    flex-grow: 0;
+                    border-radius: 15px;
+                }
+                &:hover {
+                    background-color: var(--tertiary-bg-color);
+                }
+            }
+        }
+    }
+}

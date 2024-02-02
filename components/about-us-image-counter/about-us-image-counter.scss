@@ -1,0 +1,44 @@
+about-us-image-counter {
+    --column-grid-gap: 10px;
+    background-color: var(--primary-bg-color);
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .top_part {
+        margin-bottom: 50px;
+    }
+    .h2 {
+        margin-bottom: 0;
+    }
+    .subtitle {
+        text-align: center;
+    }
+    .grid {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px var(--column-grid-gap);
+        margin-bottom: 50px;
+    }
+    .grid_item {
+        background-color: #fff;
+        border-radius: 10px;
+        img {
+            height: 83px;
+            object-fit: contain;
+        }
+    }
+
+    @media screen and (max-width: 650px) {
+        .top_part {
+            margin-bottom: 25px;
+        }
+        .grid {
+            margin-bottom: 25px;
+        }
+    }
+}

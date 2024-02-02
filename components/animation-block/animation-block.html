@@ -1,0 +1,37 @@
+<section class="animation-block">
+    <div class="container">
+        <h2 gh-id="${ghId}.title"></h2>
+        <p class="subtitle" gh-id="${ghId}.subtitle"></p>
+        <div class="rows-wrapper">
+            ${
+                rows.reduce((acc, row, rowIndex) => {
+                    return acc + `
+                    <div class="row">
+                        ${
+                            row.row.reduce((acc, row_item, index) => {
+                                return acc + `
+                                    <div class="item">
+                                        <div class="icon-wrapper">
+                                            <img src="${row_item.image.src}" alt="${row_item.image.alt}" title="${row_item.image.title}">
+                                        </div>
+                                        <div class="item-text">
+                                            <div class="bold" gh-id="${ghId}.rows.${rowIndex}.row.${index}.title"></div>
+                                            <span gh-id="${ghId}.rows.${rowIndex}.row.${index}.subtitle"></span>
+                                        </div>
+                                    </div>
+                                `
+                            }, '')
+                        }
+                    </div>
+                    `
+                }, '')
+            }
+            ${json.buttons ? `
+                <div class="buttons">
+                    <button-component class="btn" data-popup-id="${json.buttons.primary.popupId}" data-placement="${json.buttons.primary.placement}">${json.buttons.primary.text}</button-component>
+                    <button-component class="btn empty" data-popup-id="${json.buttons.secondary.popupId}" data-placement="${json.buttons.secondary.placement}">${json.buttons.secondary.text}</button-component>
+                </div>
+            ` : ''}
+        </div>
+    </div>
+</section>

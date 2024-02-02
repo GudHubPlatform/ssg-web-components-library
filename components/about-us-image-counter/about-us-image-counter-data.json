@@ -1,0 +1,35 @@
+{
+    "title": "Title",
+    "subtitle": "Etiam sed ullamcorper tortor, sit amet dictum est. Ut posuere dolor sodales euismod feugiat",
+    "button_text": "Тестувати безкоштовно",
+    "items": [
+      {
+        "icon": {
+          "src": "/assets/images/lowes.png",
+          "alt": "Image alt",
+          "title": "image title"
+        }
+      },
+      {
+        "icon": {
+          "src": "/assets/images/formica.png",
+          "alt": "Tristique senectus",
+          "title": "Tristique senectus"
+        }
+      },
+      {
+        "icon": {
+          "src": "/assets/images/master-brand.png",
+          "alt": "Donec lacinia orci",
+          "title": "Donec lacinia orci"
+        }
+      },
+      {
+        "icon": {
+          "src": "/assets/images/lg.png",
+          "alt": "Suspendisse",
+          "title": "Suspendisse"
+        }
+      }
+    ]
+  }

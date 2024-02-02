@@ -1,0 +1,125 @@
+categories-list {
+    margin-bottom: 60px;
+    .list_wrapper {
+        display: flex;
+        justify-content: center;
+    }
+    .categories-component {
+        display: flex;
+        justify-content: center;
+        .button {
+            display: none;
+        }
+    }
+    .categories_list {
+        display: flex;
+        background: #FFFFFF;
+        border: 1px solid rgba(17, 17, 17, 0.08);
+        box-shadow: 0px 4px 10px rgba(17, 17, 17, 0.02);
+        padding: 8px;
+        list-style: none;
+        li {
+            margin-right: 5px;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+        a {
+            display: block;
+            padding: 8px 16px;
+            font-size: 16px;
+            line-height: 24px;
+            color: #111111;
+            transition: all .2s ease;
+        }
+        li.active, li:hover {
+            a {
+                background: #0C6980;
+                box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05);
+                color: #fff;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    categories-list {
+        position: relative;
+        .categories-component {
+            position: absolute;
+            .button {
+                cursor: pointer;
+                display: inline-block;
+                border: 1px solid rgba(17, 17, 17, 0.08);
+                width: 165px;
+                padding: 8px;
+                border-bottom-color: transparent;
+                position: relative;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: calc(50% - 2px);
+                    right: 10px;
+                    width: 10px;
+                    height: 10px;
+                    transition: all 0.2s ease;
+                    background-repeat: no-repeat;
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none'%3E%3Cpath d='M13 1.5L7 7.5L1 1.5' stroke='%2300BFD6' stroke-width='2'/%3E%3C/svg%3E");
+                    background-size: contain;
+                }
+                &.active::after {
+                    top: calc(50% - 6px);
+                    transform: rotate(180deg);
+                }
+            }
+        }
+        .container {
+            position: relative;
+        }
+        .categories_list {
+            flex-direction: column;
+            align-items: flex-start;
+            height: 100%;
+            width: 165px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all .2s ease;
+            padding: 0;
+            li {
+                display: block;
+                width: 100%;
+            }
+        }
+        .list_wrapper {
+            position: absolute;
+            top: 36px;
+            left: 40px;
+        }
+        .button.active + .list_wrapper .categories_list {
+            max-height: 500px;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    categories-list .list_wrapper {
+        left: 15px;
+    }
+}
+@media screen and (max-width: 460px) {
+    categories-list {
+        margin-bottom: 20px !important;
+        .categories-component {
+            position: static;
+            .button {
+                width: 100%;
+            }
+        }
+        .list_wrapper {
+            width: calc(100% - 30px);
+        }
+        .categories_list {
+            width: 100%;
+        }
+    }
+}

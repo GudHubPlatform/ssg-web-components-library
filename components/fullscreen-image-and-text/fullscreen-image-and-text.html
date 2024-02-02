@@ -1,0 +1,42 @@
+<section class="fullscreen_image_and_text">
+    <div class="container">
+        <h2 gh-id="${ghId}.title"> TITLE </h2>
+        <div class="content">
+            ${
+                paragraphs.reduce((acc, item, index) => {
+                    return acc + `
+                        <p gh-id="${ghId}.paragraphs.${index}.text"> TEXT </p>
+                    `
+                }, '')
+            }
+            ${
+                lists ? `
+                    <div class="lists">
+                        ${ lists.reduce((acc, list, index) => {
+                            return acc + `
+                                <div class="list">
+                                    <h3 gh-id="${ghId}.lists.${index}.title"></h3>
+                                    <ul>
+                                        ${
+                                            list.list.reduce((acc, li, indexLi) => {
+                                                return acc + `
+                                                    <li gh-id="${ghId}.lists.${index}.list.${indexLi}.li"> TEXT </li>
+                                                `
+                                            }, '')
+                                        }
+                                    </ul>
+                                </div>
+                            `
+                        }, '')}
+                    </div>
+                ` : ''
+            }
+            ${ json.button ? `
+                <a href="${json.button.link}" class="btn" gh-id="${ghId}.button.text"></a>    
+            ` : ''}
+        </div>
+    </div>
+    <div class="image">
+        <image-component lazyload src="${image.src}" alt="${image.alt}" title="${image.title}"></image-component>
+    </div>
+</section>

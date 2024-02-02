@@ -1,0 +1,57 @@
+crm-services-banner {
+    background-color: var(--primary-bg-color);
+    display: block;
+    .main-subtitle {
+        margin-bottom: 40px;
+    }
+    .banner_list {
+        color: var(--subtitle-color);
+        margin-bottom: 40px;
+    }
+    .flex_button {
+        display: flex;
+        gap: 20px;
+    }
+    .flex-wrapper {
+        gap: 20px;
+        .left {
+            flex-shrink: 1;
+        }
+        .right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            max-width: calc(100% / 2);
+            img {
+                max-width: 100%;
+            }
+        }
+    }
+    .btn {
+        white-space: nowrap;
+    }
+
+    @media screen and (max-width: 1024px) {
+        .flex-wrapper {
+            flex-direction: column;
+            .left {
+                flex-shrink: 0;
+            }
+            .right {
+                max-width: 100%;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+        }
+    }
+
+    @media screen and (max-width: 550px) {
+        .flex_button {
+            flex-wrap: wrap;
+            & > * {
+                width: 100%;
+            }
+        }
+    }
+}

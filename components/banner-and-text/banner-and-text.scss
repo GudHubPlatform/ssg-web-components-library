@@ -1,0 +1,85 @@
+banner-and-text {
+    background-color: var(--primary-bg-color);
+    .flex-wrapper {
+        gap: 25px;
+        align-items: center;
+    }
+    .left {
+        width: 52%;
+        border-radius: var(--block-primary-border-radius);
+        background: var(--block-primary-bg-color);
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+        .image {
+            padding: 20px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #fff;
+            img {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+        }
+        .offer {
+            color: var(--block-primary-h-color);
+            text-align: center;
+            font-size: 30px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 120%;
+        }
+        .offer_subtitle {
+            color: var(--block-primary-text-color);
+            text-align: center;
+            font-size: var(--text-font-size);
+            font-weight: var(--text-font-weight);
+            line-height: 140%;
+        }
+    }
+    .right {
+        width: 45%;
+        .item {
+            margin-bottom: 25px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+        h3 {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        .text {
+            font-size: var(--text-font-size);
+            color: var(--text-color);
+        }
+    }
+}
+@media screen and (max-width: 900px) {
+    banner-and-text {
+        .flex-wrapper {
+            flex-direction: column-reverse;
+            gap: 20px;
+        }
+        .left, .right {
+            width: 100%;
+        }
+    }
+}
+@media screen and (max-width: 500px) {
+    banner-and-text .left .offer {
+        font-size: 24px;
+    }
+}
+@media screen and (max-width: 420px) {
+    banner-and-text .left {
+        padding: 15px;
+        .offer {
+            font-size: 20px;
+        }
+    }
+}

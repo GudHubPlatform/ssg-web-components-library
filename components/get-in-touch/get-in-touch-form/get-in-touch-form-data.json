@@ -1,0 +1,114 @@
+[
+    {
+        "id": "default",
+        "title": "Досягайте цілей з GudHub CRM платформою!",
+        "subtitle": "",
+        "mailConfig": {
+            "to": "gudhub",
+            "from": "gudhub",
+            "subject": "default main"
+        },
+        "inputs": [
+            {
+                "name": "name",
+                "type": "short",
+                "required": "true",
+                "placeholder": "Ім'я *",
+                "width": 6
+            },
+            {
+                "name": "company",
+                "type": "short",
+                "required": "false",
+                "placeholder": "Компанія",
+                "width": 6
+            },
+            {
+                "name": "email",
+                "type": "email",
+                "required": "true",
+                "placeholder": "E-mail *",
+                "errorText": "Введіть коректний E-mail",
+                "width": 6
+            },
+            {
+                "name": "phone",
+                "type": "phone",
+                "required": "false",
+                "placeholder": "Телефон",
+                "errorText": "Введіть коректний телефон",
+                "width": 6
+            },
+            {
+                "name": "message",
+                "type": "textarea",
+                "required": "false",
+                "placeholder": "Коментар",
+                "width": 12
+            }
+        ]
+    },
+    {
+        "id": "default popup",
+        "title": "Спробувати Безкоштовно",
+        "subtitle": "Заповніть форму зараз і ми зв'яжемося з вами!",
+        "mailConfig": {
+            "to": "gudhub",
+            "from": "gudhub",
+            "subject": "default popup"
+        },
+        "inputs": [
+            {
+                "name": "email",
+                "type": "email",
+                "required": "true",
+                "placeholder": "E-mail *",
+                "errorText": "Введіть коректний E-mail",
+                "width": 6
+            },
+            {
+                "name": "phone",
+                "type": "phone",
+                "required": "false",
+                "placeholder": "Телефон",
+                "errorText": "Введіть коректний телефон",
+                "width": 6
+            },
+            {
+                "name": "message",
+                "type": "textarea",
+                "required": "false",
+                "placeholder": "Коментар",
+                "width": 12
+            }
+        ]
+    },
+    {
+        "id":"small bottom-right popup",
+        "title":"Отримайте безкоштовну консультацію",
+        "subtitle":"",
+        "mailConfig":{
+            "to":"gudhub",
+            "from":"gudhub",
+            "subject":"Отримайте безкоштовну консультацію bottom-right popup"
+        },
+        "inputs":[
+            {
+                "name":"email",
+                "type":"email",
+                "required":"true",
+                "placeholder":"E-mail *",
+                "errorText":"Введіть коректний E-mail",
+                "width": 12
+            },
+            {
+                "name":"phone",
+                "type":"phone",
+                "required":"false",
+                "placeholder":"Телефон",
+                "errorText":"Введіть коректний телефон",
+                "width": 12
+            }
+        ]
+    }
+]

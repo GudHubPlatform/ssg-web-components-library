@@ -1,0 +1,30 @@
+<section class="banner-and-text">
+    <div class="container">
+        <h2 gh-id="${ghId}.title">Title</h2>
+        ${json.subtitle ? `
+            <div class="subtitle" gh-id="${ghId}.subtitle">Subtitle</div>    
+        ` : ''}
+        <div class="flex-wrapper">
+            <div class="left">
+                <div class="image">
+                    <img src="${image.src}" alt="${image.alt}" title="${image.title}">
+                </div>
+                <div class="offer" gh-id="${ghId}.offer"></div>
+                <div class="offer_subtitle" gh-id="${ghId}.offer_subtitle"></div>
+                ${json.button ? `
+                    <button-component data-popup-id="${json.button.popupId}" data-placement="${json.button.placement}">${json.button.text}</button-component>
+                ` : ''}
+            </div>
+            <div class="right">
+                ${ items.reduce((acc, item, index) => {
+                    return acc + `
+                        <div class="item">
+                            <h3 gh-id="${ghId}.items.${index}.title"></h3>
+                            <p class="text" gh-id="${ghId}.items.${index}.text"></p>
+                        </div>
+                    `
+                }, '')}
+            </div>
+        </div>
+    </div>
+</section>

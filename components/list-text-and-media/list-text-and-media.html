@@ -1,0 +1,38 @@
+<section class="list-text-and-media">
+    <div class="container">
+        ${json.title ? `
+            <h2 gh-id="${ghId}.title"> TITLE </h2>
+        ` : ''}
+        ${json.subtitle ? `
+            <p class="subtitle" gh-id="${ghId}.subtitle"> SUBTITLE </p>
+        ` : ''}
+        <div class="list flex-wrapper">
+            ${items.reduce((acc, item, index) => acc + `
+                <a href="${item.link}" class="list_item flex-wrapper">
+                    <div class="text">
+                        <div class="top">
+                            <h3>${item.title}</h3>
+                            <p class="subtitle">${item.subtitle}</p>
+                            ${item.text_list && item.text_list.length > 0 ? `
+                                <ul class="text-list">
+                                    ${item.text_list.reduce((acc, text) => acc + `
+                                        <li>${text}</li>
+                                    `, '')}
+                                </ul>
+                            ` : ''}
+                        </div>
+                        <div class="bottom">
+                            <div class="link">
+                                <span>${item.link_text}</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none"><circle cx="10" cy="10.6282" r="10" fill="#0A79FE"/><path d="M8.25 6.62817L12 10.3782L8.25 14.1282" stroke="white"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media">
+                            <image-component lazyload src="${item.image.src}" alt="${item.image.alt}" title="${item.image.title}" width="392" height="324"></image-component>
+                    </div>
+                </a>
+            `, '')}
+        </div>
+    </div>
+</section>

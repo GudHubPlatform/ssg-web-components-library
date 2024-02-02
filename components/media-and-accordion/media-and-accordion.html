@@ -1,0 +1,37 @@
+<section class="media-and-accordion">
+    <div class="container">
+        <h2 gh-id="${ghId}.title"> TITLE </h2>
+        ${json.subtitle ? `
+            <p class="subtitle" gh-id="${ghId}.subtitle"> SUBTITLE </p>
+        ` : ''}
+        <div class="section_wrapper">
+            ${
+                items.reduce((acc, item, index) => {
+                return acc + `
+                    <div class="flex-wrapper item ${index === 0 ? 'active' : ''}" onclick="openItem()">
+                        <div class="left">
+                            <div class="image_wrapper" data-index="">
+                                <image-component lazyload src="${item.image.src}" alt="${item.image.alt}" title="${item.image.title}" width="598" height="361"></image-component>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="text_content" data-index="${index}">
+                                <h3 gh-id="${ghId}.items.${index}.title"></h3>
+                                <div class="toggle_part">
+                                    <div class="content">
+                                        <p gh-id="${ghId}.items.${index}.text"></p>
+                                    </div>
+                                    <a href="${item.button.link}" class="bold_text">
+                                        <span>${item.button.text}</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none"><circle cx="10" cy="10.6282" r="10" fill="#0A79FE"/><path d="M8.25 6.62817L12 10.3782L8.25 14.1282" stroke="white"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `
+                }, '')
+            }
+        </div>
+    </div>
+</section>

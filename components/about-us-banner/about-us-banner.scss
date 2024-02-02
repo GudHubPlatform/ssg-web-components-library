@@ -1,0 +1,59 @@
+about-us-banner {
+    background-color: var(--primary-bg-color);
+    display: block;
+    .subtitle {
+        margin-bottom: 40px;
+    }
+    .flex_button {
+        display: flex;
+        gap: 20px;
+    }
+    .flex-wrapper {
+        gap: 40px;
+        .text {
+            max-width: calc((100% - 40px) / 2 + 70px);
+        }
+        .image {
+            max-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+                max-width: 100%;
+            }
+        }
+    }
+    .btn {
+        white-space: nowrap;
+    }
+
+    @media screen and (max-width: 1024px) {
+        .container {
+            .flex-wrapper {
+                flex-direction: column;
+                .text {
+                    flex-shrink: 0;
+                    max-width: 100%;
+                }
+                .image {
+                    max-width: 100%;
+                    justify-content: center;
+                    flex-shrink: 0;
+                    margin-top: -20px;
+                }
+                .flex_button {
+                    gap: 10px;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 550px) {
+        .flex_button {
+            flex-wrap: wrap;
+            & > * {
+                width: 100%;
+            }
+        }
+    }
+}

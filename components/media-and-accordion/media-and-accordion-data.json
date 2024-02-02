@@ -1,0 +1,84 @@
+{
+    "title": "Title",
+    "subtitle": "Subtitle",
+    "items": [
+      {
+        "title": "Item title",
+        "text": "text",
+        "button": {
+          "link": "#",
+          "text": "Зв’язатися з Нами"
+        },
+        "image": {
+          "src": "/assets/images/gudhub-abilities.jpg",
+          "alt": "image alt",
+          "title": "image alt"
+        }
+      },
+        {
+            "title": "Lorem",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus fringilla mi, id rhoncus risus consectetur ut. Nulla facilisi. Suspendisse potenti. Nullam in odio eu dui iaculis luctus. Nam ac justo at mi euismod malesuada.",
+            "button": {
+                "link": "#",
+                "text": "Зв’язатися з Нами"
+            },
+            "image": {
+                "src": "/assets/images/development-for-business.png",
+                "alt": "image alt",
+                "title": "image title"
+            }
+        },
+        {
+            "title": "Lorem",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus fringilla mi, id rhoncus risus consectetur ut. Nulla facilisi. Suspendisse potenti. Nullam in odio eu dui iaculis luctus. Nam ac justo at mi euismod malesuada.",
+            "button": {
+                "link": "#",
+                "text": "Зв’язатися з Нами"
+            },
+            "image": {
+                "src": "/assets/images/gudhub-abilities.jpg",
+                "alt": "image alt",
+                "title": "image title"
+            }
+        },
+        {
+            "title": "Lorem",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus fringilla mi, id rhoncus risus consectetur ut. Nulla facilisi. Suspendisse potenti. Nullam in odio eu dui iaculis luctus. Nam ac justo at mi euismod malesuada.",
+            "button": {
+                "link": "#",
+                "text": "Зв’язатися з Нами"
+            },
+            "image": {
+                "src": "/assets/images/gudhub-abilities.jpg",
+                "alt": "image alt",
+                "title": "image title"
+            }
+        },
+        {
+            "title": "Lorem",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus fringilla mi, id rhoncus risus consectetur ut. Nulla facilisi. Suspendisse potenti. Nullam in odio eu dui iaculis luctus. Nam ac justo at mi euismod malesuada.",
+            "button": {
+                "link": "#",
+                "text": "Зв’язатися з Нами"
+            },
+            "image": {
+                "src": "/assets/images/gudhub-abilities.jpg",
+                "alt": "image alt",
+                "title": "image title"
+            }
+        },
+        {
+            "title": "Lorem",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus fringilla mi, id rhoncus risus consectetur ut. Nulla facilisi. Suspendisse potenti. Nullam in odio eu dui iaculis luctus. Nam ac justo at mi euismod malesuada.",
+            "button": {
+                "link": "#",
+                "text": "Зв’язатися з Нами"
+            },
+            "image": {
+                "src": "/assets/images/gudhub-abilities.jpg",
+                "alt": "image alt",
+                "title": "image title"
+            }
+        }
+    ]
+  }

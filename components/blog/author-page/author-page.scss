@@ -1,0 +1,107 @@
+author-page {
+    .author-page {
+        padding-bottom: 0;
+        h1 {
+            text-align: center;
+            font-size: 64px;
+            line-height: 70px;
+            margin-bottom: 60px;
+        }
+        .author {
+            border: 1px solid #DBE2E7;
+            padding: 60px;
+            display: flex;
+            &_right {
+                width: 100%;
+            }
+            &_left {
+                width: 100%;
+                max-width: 335px;
+                min-width: 190px;
+                margin-right: 30px;
+                img {
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    max-height: 220px;
+                    object-fit: cover;
+                }
+            }
+            .name_top {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .soc_links {
+                display: flex;
+                align-items: center;
+            }
+            .name {
+                font-weight: 700;
+                font-size: 40px;
+                line-height: 48px;
+                color: #141616;
+            }
+            .description {
+                font-size: 18px;
+                line-height: 25px;
+                color: #4D555B;
+                margin-bottom: 24px;
+            }
+            .intro {
+                font-size: 18px;
+                line-height: 27px;
+                color: #4D555B;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1025px) {
+    author-page .author-page h1 {
+        font-size: 48px;
+        line-height: 58px;
+        margin-bottom: 23px;
+    }
+}
+@media screen and (max-width: 750px) {
+    author-page .author-page .author {
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+        &_left {
+            margin-right: 0;
+            margin-bottom: 20px;
+            img {
+                max-height: initial;
+            }
+        }
+        .name_top, .description {
+            margin-bottom: 10px;
+        }
+    }
+}
+@media screen and (max-width: 600px) {
+    author-page .author-page h1 {
+        font-size: 32px;
+        line-height: 35px;
+        margin-bottom: 25px;
+    }
+}
+@media screen and (max-width: 450px) {
+    author-page .author-page .author {
+        padding: 15px;
+        .name {
+            font-size: 26px;
+            line-height: 36px;
+        }
+        .name_top {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .intro {
+            font-size: 16px;
+            line-height: 24px;
+        }
+    }
+}

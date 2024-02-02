@@ -1,0 +1,38 @@
+<section class="service_counter">
+    <div class="container">
+        <div class="top_part">
+            ${json.title ? `
+                <h2 class="h2" gh-id="${ghId}.title"> TITLE </h2>
+            ` : ''}
+            ${json.subtitle ? `
+                <p gh-id="${ghId}.subtitle" class="subtitle"> SUBTITLE </p>
+            ` : ''}
+        </div>
+        <div class="counters">
+            ${
+                items.reduce((acc, item, index) => {
+                    return acc + `
+                    <div class="counter_item">
+                        <div class="counter_top">
+                            ${item.number ? `
+                                <span class="counter_num" gh-id="${ghId}.items.${index}.number"></span>
+                            ` : ''}
+                            ${item.symbol ? `
+                                <span class="counter_symbol" gh-id="${ghId}.items.${index}.symbol"></span>
+                            ` : ''}
+                        </div>
+                        ${item.text ? `
+                            <div class="counter_bottom" gh-id="${ghId}.items.${index}.text"></div>
+                        ` : ""}
+                    </div>
+                    `
+                }, '')
+            }
+        </div>
+        ${json.button ? `
+            <div class="bottom_button">
+                <button-component data-popup-id="${json.button.popupId}" data-placement="${json.button.placement}">${json.button.text}</button-component>
+            </div>
+        `: ''}
+    </div>
+</section>

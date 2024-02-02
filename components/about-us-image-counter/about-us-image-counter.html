@@ -1,0 +1,22 @@
+<section class="service_counter">
+    <div class="container">
+        <div class="top_part">
+            <h2 class="h2" gh-id="${ghId}.title"> TITLE </h2>
+            ${json.subtitle ? `
+                <p gh-id="${ghId}.subtitle" class="subtitle"> SUBTITLE </p>
+            ` : ''}
+        </div>
+        <div class="grid">
+            ${items.reduce((acc, item, index) => acc + `
+                    <div class="grid_item">
+                        <div class="image">
+                            <image-component src="${item.icon.src}" alt="${item.icon.alt}" title="${item.icon.title}" width="270" height="80"></image-component>
+                        </div>
+                    </div>
+                `, '')}
+        </div>
+        ${json.button ? `
+            <button-component data-popup-id="${json.button.popupId}" data-placement="${json.button.placement}">${json.button.text}</button-component>
+        `: ''}
+    </div>
+</section>

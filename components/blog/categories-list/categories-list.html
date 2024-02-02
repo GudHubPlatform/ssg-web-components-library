@@ -1,0 +1,21 @@
+<div class="categories-component">
+    <div class="container">
+        <div class="button" onclick="openList()">Categories</div>
+        <div class="list_wrapper">
+            <ul class="categories_list">
+                <li ${url == '/blog/' ? 'class="active"' : ''}>
+                    <a href="/blog/">View all</a>
+                </li>
+                ${
+                    categories.reduce((acc, category, index) => {
+                        return acc + `
+                            <li ${url == category.slug ? 'class="active"' : ''}>
+                                <a href="${category.slug}">${category.title}</a>
+                            </li>
+                        `
+                    }, '')
+                }
+            </ul>
+        </div>
+    </div>
+</div>

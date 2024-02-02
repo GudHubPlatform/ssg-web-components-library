@@ -1,0 +1,1443 @@
+<section>
+    <div class="container">
+        <div class="flex-wrapper">
+            <div class="left">
+                <h1 gh-id="${ghId}.title"></h1>
+                <div class="main-subtitle" gh-id="${ghId}.subtitle"></div>
+                <ul class="banner_list tick_list">
+                    ${
+                        list.reduce((acc, item, index) => {
+                            return acc + `
+                               <li gh-id="${ghId}.list.${index}"></li>
+                            `
+                        }, '')
+                    }
+                </ul>
+                <div class="flex_button">
+                    ${json.buttons ? `
+						<button-component data-popup-id="${json.buttons.primary.popupId}" data-placement="${json.buttons.primary.placement}">${json.buttons.primary.text}</button-component>
+						<button-component data-popup-id="${json.buttons.secondary.popupId}" data-placement="${json.buttons.secondary.placement}" class="btn empty">${json.buttons.secondary.text}</button-component>
+					` : ''}
+                </div>
+            </div>
+            <div class="right">
+                <style data-webpack-style="true" type="text/css" id="gwd-lightbox-style">
+					.gwd-lightbox {
+						overflow: hidden;
+					}
+				</style>
+				<style data-webpack-style="true" type="text/css" id="gwd-text-style">
+					homepage-banner .right p {
+						margin: 0px;
+					}
+					homepage-banner .right h1 {
+						margin: 0px;
+					}
+					homepage-banner .right h2 {
+						margin: 0px;
+					}
+					homepage-banner .right h3 {
+						margin: 0px;
+					}
+				</style>
+				<style data-webpack-style="true" type="text/css">
+					/* html, body {
+						width: 100%;
+						height: 100%;
+						margin: 0px;
+					} */
+					.gwd-page-container {
+						position: relative;
+						width: 100%;
+						height: 100%;
+					}
+					.gwd-page-content {
+						background-color: transparent;
+						transform: perspective(1400px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+						transform-style: preserve-3d;
+						position: absolute;
+					}
+					.gwd-page-wrapper {
+						background-color: rgb(255, 255, 255);
+						position: absolute;
+						transform: translateZ(0px);
+					}
+					.gwd-page-size {
+						width: 840px;
+						border-radius: 20px;
+						height: 524px;
+					}
+					@keyframes gwd-gen-1qv3gwdanimation_gwd-keyframes {
+						0% {
+							opacity: 0;
+							transform: translate3d(0px, 0px, 0px);
+							animation-timing-function: step-end;
+						}
+						73.75% {
+							opacity: 1;
+							transform: translate3d(0px, 0px, 0px);
+							animation-timing-function: step-end;
+						}
+						81.25% {
+							opacity: 0;
+							transform: translate3d(0px, 0px, 0px);
+							animation-timing-function: linear;
+						}
+						83.75% {
+							opacity: 0;
+							transform: translate3d(0px, 0px, 0px);
+							animation-timing-function: linear;
+						}
+						100% {
+							opacity: 0;
+							transform: translate3d(0px, 0px, 0px);
+							animation-timing-function: linear;
+						}
+					}
+					.gwd-gen-1qv3gwdanimation {
+						animation: 4s linear 0s infinite normal forwards running gwd-gen-1qv3gwdanimation_gwd-keyframes;
+					}
+					@keyframes gwd-gen-17jrgwdanimation_gwd-keyframes {
+						0% {
+							opacity: 0;
+							transform: translate3d(0px, 0px, 0px);
+							animation-timing-function: step-end;
+						}
+						45% {
+							opacity: 1;
+							transform: translate3d(0px, 0px, 0px);
+							animation-timing-function: step-end;
+						}
+						52.5% {
+							opacity: 0;
+							transform: translate3d(0px, 0px, 0px);
+							animation-timing-function: linear;
+						}
+						100% {
+							opacity: 0;
+							transform: translate3d(0px, 0px, 0px);
+							animation-timing-function: linear;
+						}
+					}
+					.gwd-gen-17jrgwdanimation {
+						animation: 4s linear 0s infinite normal forwards running gwd-gen-17jrgwdanimation_gwd-keyframes;
+					}
+					@keyframes gwd-gen-ipqagwdanimation_gwd-keyframes {
+						0% {
+							opacity: 0;
+							transform: translate3d(0px, 0px, 0px);
+							animation-timing-function: step-end;
+						}
+						22.5% {
+							opacity: 1;
+							transform: translate3d(0px, 0px, 0px);
+							animation-timing-function: step-end;
+						}
+						27.5% {
+							opacity: 0;
+							transform: translate3d(0px, 0px, 0px);
+							animation-timing-function: linear;
+						}
+						100% {
+							opacity: 0;
+							transform: translate3d(0px, 0px, 0px);
+							animation-timing-function: linear;
+						}
+					}
+					.gwd-gen-ipqagwdanimation {
+						animation: 4s linear 0s infinite normal forwards running gwd-gen-ipqagwdanimation_gwd-keyframes;
+					}
+					@keyframes gwd-gen-1iw9gwdanimation_gwd-keyframes {
+						0% {
+							transform: translate3d(-442px, -315px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: step-end;
+						}
+						40% {
+							transform: translate3d(-442px, -315px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: step-end;
+						}
+						67.5% {
+							transform: translate3d(-443px, -315px, 0px) scale3d(0.758022, 0.758022, 1);
+							animation-timing-function: linear;
+						}
+						76.25% {
+							transform: translate3d(69px, -383px, 0px) scale3d(0.758022, 0.758022, 1);
+							animation-timing-function: linear;
+						}
+						100% {
+							transform: translate3d(69px, -383px, 0px) scale3d(0.758022, 0.758022, 1);
+							animation-timing-function: linear;
+						}
+					}
+					.gwd-gen-1iw9gwdanimation {
+						animation: 4s linear 0s infinite normal forwards running gwd-gen-1iw9gwdanimation_gwd-keyframes;
+					}
+					@keyframes gwd-gen-tdqfgwdanimation_gwd-keyframes {
+						0% {
+							transform: translate3d(-442px, -293px, 0px) scale3d(0.758364, 0.758364, 1);
+							opacity: 1;
+							animation-timing-function: step-end;
+						}
+						19.5834% {
+							transform: translate3d(-442px, -293px, 0px) scale3d(0.758364, 0.758364, 1);
+							opacity: 1;
+							animation-timing-function: step-end;
+						}
+						40% {
+							transform: translate3d(-442px, -293px, 0px) scale3d(0.758364, 0.758364, 1);
+							opacity: 1;
+							animation-timing-function: linear;
+						}
+						47.5% {
+							transform: translate3d(-182px, -233px, 0px) scale3d(0.758364, 0.758364, 1);
+							opacity: 1;
+							animation-timing-function: linear;
+						}
+						52.5% {
+							transform: translate3d(-182px, -233px, 0px) scale3d(0.758364, 0.758364, 1);
+							opacity: 0;
+							animation-timing-function: linear;
+						}
+						100% {
+							transform: translate3d(-182px, -233px, 0px) scale3d(0.758364, 0.758364, 1);
+							opacity: 0;
+							animation-timing-function: linear;
+						}
+					}
+					.gwd-gen-tdqfgwdanimation {
+						animation: 4s linear 0s infinite normal forwards running gwd-gen-tdqfgwdanimation_gwd-keyframes;
+					}
+					@keyframes gwd-gen-lk4ugwdanimation_gwd-keyframes {
+						0% {
+							transform: translate3d(-442px, -271px, 0px) scale3d(0.758364, 0.758364, 1);
+							opacity: 1;
+							transform-origin: 95.05px 29.5px;
+							animation-timing-function: step-end;
+						}
+						15% {
+							transform: translate3d(-442px, -271px, 0px) scale3d(0.758364, 0.758364, 1);
+							opacity: 1;
+							transform-origin: 95.05px 29.5px;
+							animation-timing-function: linear;
+						}
+						19.5834% {
+							transform: translate3d(-283.109px, -230.666px, 0px) scale3d(0.760664, 0.760664, 1);
+							opacity: 0.9083;
+							transform-origin: 95.05px 29.5px;
+							animation-timing-function: linear;
+						}
+						22.5% {
+							transform: translate3d(-182px, -205px, 0px) scale3d(0.762064, 0.762064, 1);
+							opacity: 0.85;
+							transform-origin: 95.05px 29.5px;
+							animation-timing-function: step-end;
+						}
+						27.5% {
+							transform: translate3d(-182.065px, -205px, 0px) scale3d(0.761764, 0.761764, 1);
+							opacity: 0;
+							transform-origin: 95.05px 29.5px;
+							animation-timing-function: linear;
+						}
+						100% {
+							transform: translate3d(-183px, -205px, 0px) scale3d(0.758022, 0.758022, 1);
+							opacity: 0;
+							transform-origin: 95.05px 29.5px 0px;
+							animation-timing-function: linear;
+						}
+					}
+					.gwd-gen-lk4ugwdanimation {
+						animation: 4s linear 0s infinite normal forwards running gwd-gen-lk4ugwdanimation_gwd-keyframes;
+					}
+					@keyframes gwd-gen-afczgwdanimation_gwd-keyframes {
+						0% {
+							transform: translate3d(-957px, -173px, 0px);
+							opacity: 0;
+							animation-timing-function: step-end;
+						}
+						19.5834% {
+							transform: translate3d(-957px, -173px, 0px);
+							opacity: 0;
+							animation-timing-function: step-end;
+						}
+						81.25% {
+							transform: translate3d(-957px, -173px, 0px);
+							opacity: 0;
+							animation-timing-function: linear;
+						}
+						83.75% {
+							transform: translate3d(-957px, -173px, 0px);
+							opacity: 1;
+							animation-timing-function: step-end;
+						}
+						100% {
+							transform: translate3d(-957px, -173px, 0px);
+							opacity: 1;
+							animation-timing-function: step-end;
+						}
+					}
+					.gwd-gen-afczgwdanimation {
+						animation: 4s linear 0s infinite normal forwards running gwd-gen-afczgwdanimation_gwd-keyframes;
+					}
+					@keyframes gwd-gen-1sdmgwdanimation_gwd-keyframes {
+						0% {
+							opacity: 0;
+							transform: translate3d(-957px, -173px, 0px);
+							animation-timing-function: step-end;
+						}
+						19.5834% {
+							opacity: 0;
+							transform: translate3d(-957px, -173px, 0px);
+							animation-timing-function: step-end;
+						}
+						26.25% {
+							opacity: 0;
+							transform: translate3d(-957px, -173px, 0px);
+							animation-timing-function: linear;
+						}
+						28.75% {
+							opacity: 1;
+							transform: translate3d(-957px, -173px, 0px);
+							animation-timing-function: linear;
+						}
+						100% {
+							opacity: 1;
+							transform: translate3d(-957px, -173px, 0px);
+							animation-timing-function: linear;
+						}
+					}
+					.gwd-gen-1sdmgwdanimation {
+						animation: 4s linear 0s infinite normal forwards running gwd-gen-1sdmgwdanimation_gwd-keyframes;
+					}
+					@keyframes gwd-gen-vxhygwdanimation_gwd-keyframes {
+						0% {
+							opacity: 0;
+							transform-origin: 22.3125px 22.3125px;
+							transform: translate3d(-506px, -235px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: step-end;
+						}
+						19.5834% {
+							opacity: 0;
+							transform-origin: 22.3125px 22.3125px;
+							transform: translate3d(-506px, -235px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: step-end;
+						}
+						23.75% {
+							opacity: 1;
+							transform-origin: 22.3125px 22.3125px;
+							transform: translate3d(-535px, -292px, 0px) scale3d(1, 1, 1);
+							animation-timing-function: step-end;
+						}
+						26.25% {
+							opacity: 0;
+							transform-origin: 22.3125px 22.3125px;
+							transform: translate3d(-535px, -292px, 0px) scale3d(1, 1, 1);
+							animation-timing-function: step-end;
+						}
+						48.75% {
+							opacity: 1;
+							transform-origin: 22.3125px 22.3125px;
+							transform: translate3d(-526px, -232px, 0px) scale3d(1, 1, 1);
+							animation-timing-function: linear;
+						}
+						51.25% {
+							opacity: 0;
+							transform-origin: 22.3125px 22.3125px;
+							transform: translate3d(-526px, -232px, 0px) scale3d(1, 1, 1);
+							animation-timing-function: step-end;
+						}
+						77.5% {
+							opacity: 1;
+							transform-origin: 22.3125px 22.3125px;
+							transform: translate3d(-278px, -293px, 0px) scale3d(1, 1, 1);
+							animation-timing-function: linear;
+						}
+						80% {
+							opacity: 0;
+							transform-origin: 22.3125px 22.3125px;
+							transform: translate3d(-278px, -293px, 0px) scale3d(1, 1, 1);
+							animation-timing-function: step-end;
+						}
+						100% {
+							opacity: 0;
+							transform-origin: 22.3125px 22.3125px;
+							transform: translate3d(-278px, -293px, 0px) scale3d(1, 1, 1);
+							animation-timing-function: step-end;
+						}
+					}
+					.gwd-gen-vxhygwdanimation {
+						animation: 4s linear 0s infinite normal forwards running gwd-gen-vxhygwdanimation_gwd-keyframes;
+					}
+					.gwd-svg-1gsm {
+						display: block;
+						height: 512px;
+						position: absolute;
+						width: 834px;
+						left: 3px;
+						top: 6px;
+					}
+					.gwd-svg-175n {
+						display: block;
+						height: 284px;
+						position: absolute;
+						width: 561px;
+						left: 244px;
+						top: 143px;
+					}
+					.gwd-svg-1mji {
+						display: block;
+						height: 191px;
+						opacity: 0;
+						position: absolute;
+						width: 242px;
+						left: 505px;
+						top: 209px;
+						transform: translate3d(0px, 0px, 0px);
+					}
+					.gwd-svg-1p8q {
+						display: block;
+						height: 44px;
+						opacity: 0;
+						position: absolute;
+						width: 195px;
+						left: 278px;
+						top: 345px;
+						transform: translate3d(0px, 0px, 0px);
+					}
+					@keyframes gwd-gen-1ubdgwdanimation_gwd-keyframes {
+						0% {
+							opacity: 0;
+							transform: translate3d(-506px, -235px, 0px) scale3d(0.758364, 0.758364, 1);
+							transform-origin: 42.2969px 42.2969px;
+							animation-timing-function: step-end;
+						}
+						19.5834% {
+							opacity: 0;
+							transform: translate3d(-506px, -235px, 0px) scale3d(0.758364, 0.758364, 1);
+							transform-origin: 42.2969px 42.2969px;
+							animation-timing-function: step-end;
+						}
+						25% {
+							opacity: 1;
+							transform: translate3d(-535px, -292px, 0px) scale3d(1, 1, 1);
+							transform-origin: 42.2969px 42.2969px;
+							animation-timing-function: step-end;
+						}
+						27.5% {
+							opacity: 0;
+							transform: translate3d(-535px, -292px, 0px) scale3d(1, 1, 1);
+							transform-origin: 42.2969px 42.2969px;
+							animation-timing-function: step-end;
+						}
+						50% {
+							opacity: 1;
+							transform: translate3d(-526px, -232px, 0px) scale3d(1, 1, 1);
+							transform-origin: 42.2969px 42.2969px;
+							animation-timing-function: linear;
+						}
+						52.5% {
+							opacity: 0;
+							transform: translate3d(-526px, -232px, 0px) scale3d(1, 1, 1);
+							transform-origin: 42.2969px 42.2969px;
+							animation-timing-function: step-end;
+						}
+						78.75% {
+							opacity: 1;
+							transform: translate3d(-278px, -293px, 0px) scale3d(1, 1, 1);
+							transform-origin: 42.2969px 42.2969px;
+							animation-timing-function: linear;
+						}
+						81.25% {
+							opacity: 0;
+							transform: translate3d(-278px, -293px, 0px) scale3d(1, 1, 1);
+							transform-origin: 42.2969px 42.2969px;
+							animation-timing-function: step-end;
+						}
+						100% {
+							opacity: 0;
+							transform: translate3d(-278px, -293px, 0px) scale3d(1, 1, 1);
+							transform-origin: 42.2969px 42.2969px;
+							animation-timing-function: step-end;
+						}
+					}
+					.gwd-gen-1ubdgwdanimation {
+						animation: 4s linear 0s infinite normal forwards running gwd-gen-1ubdgwdanimation_gwd-keyframes;
+					}
+					.gwd-svg-f4hm {
+						display: block;
+						height: 44px;
+						opacity: 0;
+						position: absolute;
+						width: 195px;
+						left: 278px;
+						top: 284px;
+						transform: translate3d(0px, 0px, 0px);
+					}
+					.gwd-svg-gx2u {
+						display: block;
+						height: 45px;
+						left: 999px;
+						position: absolute;
+						top: 525px;
+						width: 145px;
+					}
+					.gwd-svg-1pse {
+						display: block;
+						height: 59px;
+						left: 462px;
+						position: absolute;
+						top: 660px;
+						transform-style: preserve-3d;
+						width: 190.094px;
+						transform: translate3d(-442px, -315px, 0px) scale3d(0.758364, 0.758364, 1);
+					}
+					.gwd-svg-1nlw {
+						display: block;
+						height: 45px;
+						left: 999px;
+						position: absolute;
+						top: 458px;
+						width: 145px;
+					}
+					.gwd-svg-1667 {
+						display: block;
+						height: 59px;
+						left: 462px;
+						position: absolute;
+						top: 571px;
+						transform-style: preserve-3d;
+						width: 190.094px;
+						opacity: 1;
+						transform: translate3d(-442px, -293px, 0px) scale3d(0.758364, 0.758364, 1);
+					}
+					.gwd-svg-p1hu {
+						display: block;
+						height: 45px;
+						left: 999px;
+						position: absolute;
+						top: 391px;
+						width: 145px;
+					}
+					.gwd-svg-12ts {
+						display: block;
+						height: 59px;
+						left: 462px;
+						position: absolute;
+						top: 482px;
+						transform-origin: 95.05px 29.5px;
+						transform-style: preserve-3d;
+						width: 190.094px;
+						opacity: 1;
+						transform: translate3d(-442px, -271px, 0px) scale3d(0.758364, 0.758364, 1);
+					}
+					.gwd-svg-km8h {
+						display: block;
+						height: 45px;
+						left: 999px;
+						position: absolute;
+						top: 324px;
+						transform: matrix(1, 0, 0, 1, 0, 0);
+						transform-style: preserve-3d;
+						width: 145px;
+					}
+					.gwd-svg-g052 {
+						display: block;
+						height: 45px;
+						position: absolute;
+						transform: matrix(1, 0, 0, 1, 0, 0);
+						transform-style: preserve-3d;
+						width: 145px;
+						left: 42px;
+						top: 151px;
+					}
+					.gwd-svg-vqq0 {
+						display: block;
+						height: 199px;
+						left: 1461px;
+						opacity: 0;
+						position: absolute;
+						top: 382px;
+						transform-style: preserve-3d;
+						width: 256px;
+						transform: translate3d(-957px, -173px, 0px);
+					}
+					.gwd-svg-1m3u {
+						display: block;
+						height: 21px;
+						opacity: 0;
+						position: absolute;
+						width: 155px;
+						left: 297px;
+						top: 357px;
+						transform: translate3d(0px, 0px, 0px);
+					}
+					.gwd-svg-1ihg {
+						display: block;
+						height: 21px;
+						left: 1254px;
+						opacity: 0;
+						position: absolute;
+						top: 469px;
+						width: 155px;
+						transform: translate3d(-957px, -173px, 0px);
+						transform-style: preserve-3d;
+					}
+					.gwd-svg-ffft {
+						display: block;
+						height: 21px;
+						position: absolute;
+						width: 155px;
+						left: 297px;
+						top: 236px;
+					}
+					.gwd-svg-wdnu {
+						display: block;
+						height: 44.625px;
+						left: 860px;
+						opacity: 0;
+						position: absolute;
+						top: 588px;
+						transform-origin: 22.3125px 22.3125px;
+						transform-style: preserve-3d;
+						width: 44.625px;
+						transform: translate3d(-506px, -235px, 0px) scale3d(0.758364, 0.758364, 1);
+					}
+					.gwd-svg-6sfm {
+						display: block;
+						height: 84.5938px;
+						left: 840px;
+						opacity: 0;
+						position: absolute;
+						top: 568px;
+						transform-origin: 42.2969px 42.2969px;
+						transform-style: preserve-3d;
+						width: 84.5938px;
+						transform: translate3d(-506px, -235px, 0px) scale3d(0.758364, 0.758364, 1);
+					}
+					.gwd-svg-1g3p {
+						display: block;
+						height: 115.5px;
+						left: 825px;
+						opacity: 0;
+						position: absolute;
+						top: 553px;
+						transform-style: preserve-3d;
+						width: 115.5px;
+						transform: translate3d(-535px, -292px, 0px) scale3d(0.758364, 0.758364, 1);
+					}
+					.gwd-svg-77lu {
+						display: block;
+						height: 140.594px;
+						left: 812px;
+						opacity: 0;
+						position: absolute;
+						top: 540px;
+						transform-origin: 70.2917px 70.2917px;
+						transform-style: preserve-3d;
+						width: 140.594px;
+						transform: translate3d(-521px, -295px, 0px) scale3d(0.758364, 0.758364, 1);
+					}
+					.gwd-svg-1z0i {
+						display: block;
+						filter: drop-shadow(rgb(51, 51, 51) 0px 0px 2px);
+						height: 36px;
+						left: 1613px;
+						position: absolute;
+						top: 610px;
+						transform-origin: 50% 50% 0px;
+						transform-style: preserve-3d;
+						width: 47px;
+						transform: translate3d(-703px, -299px, 0px) scale3d(0.758364, 0.758364, 1);
+					}
+					.gwd-svg-3jh7 {
+						left: 42px;
+						top: 352px;
+					}
+					.gwd-svg-miz4 {
+						left: 42px;
+						top: 285px;
+					}
+					.gwd-svg-l1h2 {
+						left: 42px;
+						top: 218px;
+					}
+					.gwd-svg-15yz {
+						left: 42px;
+						top: 151px;
+					}
+					@keyframes gwd-gen-171ngwdanimation_gwd-keyframes {
+						0% {
+							transform: translate3d(-703px, -299px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						12.5% {
+							transform: translate3d(-1533px, -365px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						15% {
+							transform: translate3d(-1533px, -365px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						19.5834% {
+							transform: translate3d(-1374.72px, -325.277px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						22.5% {
+							transform: translate3d(-1274px, -300px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: step-end;
+						}
+						30% {
+							transform: translate3d(-1274px, -300px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						32.5% {
+							transform: translate3d(-1271px, -290px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						40% {
+							transform: translate3d(-1527px, -301px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						47.5% {
+							transform: translate3d(-1266px, -240px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						56.25% {
+							transform: translate3d(-1266px, -240px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						58.75% {
+							transform: translate3d(-1262px, -234px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						65% {
+							transform: translate3d(-1529px, -235px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: step-end;
+						}
+						67.5% {
+							transform: translate3d(-1529px, -235px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						76.25% {
+							transform: translate3d(-1017px, -302px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						87.5% {
+							transform: translate3d(-1017px, -302px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						100% {
+							transform: translate3d(-703px, -299px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+					}
+					.gwd-gen-171ngwdanimation {
+						animation: 4s linear 0s infinite normal forwards running gwd-gen-171ngwdanimation_gwd-keyframes;
+					}
+					@keyframes gwd-gen-12figwdanimation_gwd-keyframes {
+						0% {
+							opacity: 0;
+							transform: translate3d(0px, 0px, 0px);
+							animation-timing-function: step-end;
+						}
+						19.5834% {
+							opacity: 0;
+							transform: translate3d(0px, 0px, 0px);
+							animation-timing-function: step-end;
+						}
+						52.5% {
+							opacity: 0;
+							transform: translate3d(0px, 0px, 0px);
+							animation-timing-function: linear;
+						}
+						55% {
+							opacity: 1;
+							transform: translate3d(0px, 0px, 0px);
+							animation-timing-function: linear;
+						}
+						100% {
+							opacity: 1;
+							transform: translate3d(0px, 0px, 0px);
+							animation-timing-function: linear;
+						}
+					}
+					.gwd-gen-12figwdanimation {
+						animation: 4s linear 0s infinite normal forwards running gwd-gen-12figwdanimation_gwd-keyframes;
+					}
+					@keyframes gwd-gen-1cgzgwdanimation_gwd-keyframes {
+						0% {
+							opacity: 0;
+							transform: translate3d(-535px, -292px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: step-end;
+						}
+						19.5834% {
+							opacity: 0;
+							transform: translate3d(-535px, -292px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: step-end;
+						}
+						26.25% {
+							opacity: 1;
+							transform: translate3d(-535px, -292px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						31.25% {
+							opacity: 0;
+							transform: translate3d(-535px, -292px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: step-end;
+						}
+						51.25% {
+							opacity: 1;
+							transform: translate3d(-526px, -232px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						53.75% {
+							opacity: 0;
+							transform: translate3d(-526px, -232px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: step-end;
+						}
+						80% {
+							opacity: 1;
+							transform: translate3d(-278px, -293px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						82.5% {
+							opacity: 0;
+							transform: translate3d(-278px, -293px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						100% {
+							opacity: 0;
+							transform: translate3d(-278px, -293px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+					}
+					.gwd-gen-1cgzgwdanimation {
+						animation: 4s linear 0s infinite normal forwards running gwd-gen-1cgzgwdanimation_gwd-keyframes;
+					}
+					@keyframes gwd-gen-105qgwdanimation_gwd-keyframes {
+						0% {
+							opacity: 0;
+							transform: translate3d(-521px, -295px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: step-end;
+						}
+						19.5834% {
+							opacity: 0;
+							transform: translate3d(-521px, -295px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: step-end;
+						}
+						27.5% {
+							opacity: 1;
+							transform: translate3d(-535px, -292px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						30% {
+							opacity: 0;
+							transform: translate3d(-535px, -292px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: step-end;
+						}
+						52.5% {
+							opacity: 1;
+							transform: translate3d(-526px, -232px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						55% {
+							opacity: 0;
+							transform: translate3d(-526px, -232px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: step-end;
+						}
+						81.25% {
+							opacity: 1;
+							transform: translate3d(-278px, -293px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						83.75% {
+							opacity: 0;
+							transform: translate3d(-278px, -293px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+						100% {
+							opacity: 0;
+							transform: translate3d(-278px, -293px, 0px) scale3d(0.758364, 0.758364, 1);
+							animation-timing-function: linear;
+						}
+					}
+					.gwd-gen-105qgwdanimation {
+						animation: 4s linear 0s infinite normal forwards running gwd-gen-105qgwdanimation_gwd-keyframes;
+					}
+				</style>
+				<gwd-google-ad id="gwd-ad" polite-load="">
+					<gwd-metric-configuration></gwd-metric-configuration>
+					<gwd-pagedeck class="gwd-page-container" id="pagedeck">
+						<gwd-page id="page1" class="gwd-page-wrapper gwd-page-size gwd-lightbox" data-gwd-width="954px" data-gwd-height="524px">
+							<div class="gwd-page-content gwd-page-size">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1099.2 675" preserveAspectRatio="none" class="gwd-svg-1gsm" id="browser_">
+									<defs>
+										<style data-webpack-style="true">
+											.browser_1 {
+												fill: #fafdfd;
+											}
+											.browser_1, .browser_2, .browser_3 {
+												stroke: #d7dee2;
+												stroke-miterlimit: 10;
+											}
+											.browser_2, .browser_3 {
+												fill: #fff;
+											}
+											.browser_3 {
+												stroke-width: 2px;
+											}
+										</style>
+									</defs>
+									<g id="Layer_3" data-name="Layer 2">
+										<g id="Layer_1-2_1" data-name="Layer 1">
+											<g id="browser_1">
+												<path class="browser_1" d="M1076.7,674.5H22.5a22,22,0,0,1-22-22V22.5a22,22,0,0,1,22-22H1076.7a22,22,0,0,1,22,22V652.6A22,22,0,0,1,1076.7,674.5Z"></path>
+												<path class="browser_2" d="M1098.7,62.2H.7V22.7a22,22,0,0,1,22-22h1054a22,22,0,0,1,22,22Z"></path>
+												<path class="browser_2" d="M1057,43.1H146.5a7.6,7.6,0,0,1-7.6-7.6V26.7a7.6,7.6,0,0,1,7.6-7.6H1057a7.6,7.6,0,0,1,7.6,7.6v8.8A7.6,7.6,0,0,1,1057,43.1Z"></path>
+												<circle class="browser_3" cx="36.9" cy="31.1" r="8.6"></circle>
+												<circle class="browser_3" cx="63.4" cy="31.1" r="8.6"></circle>
+												<circle class="browser_3" cx="90.3" cy="31.1" r="8.6" transform="translate(44 114.63) rotate(-80.01)"></circle>
+											</g>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 738.7 374.8" preserveAspectRatio="none" class="gwd-svg-175n" id="field_">
+									<defs>
+										<style data-webpack-style="true">
+											.field_1 {
+												fill: #fff;
+												stroke: #cde9f6;
+												stroke-miterlimit: 10;
+												stroke-dasharray: 5.99 5.99;
+											}
+											.field_2, .field_3 {
+												fill: #0893d2;
+											}
+											.field_3 {
+												isolation: isolate;
+												font-size: 29.07px;
+												font-family: ArialMT, Arial;
+											}
+										</style>
+									</defs>
+									<g id="Layer_26" data-name="Layer 2">
+										<g id="Layer_1-2_24" data-name="Layer 1">
+											<path id="field_3" class="field_1" d="M727.2,374.3H11.5a11,11,0,0,1-11-11V11.5a11,11,0,0,1,11-11H727.2a11,11,0,0,1,11,11V363.2A11.05,11.05,0,0,1,727.2,374.3Z"></path>
+											<rect class="field_2" x="21.4" y="56.9" width="667.9" height="0.9"></rect>
+											<text class="field_3" transform="translate(29.79 45.41)">Customer Profile</text>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 318.9 252" preserveAspectRatio="none" class="gwd-svg-1mji gwd-gen-1qv3gwdanimation" id="blue_mapp">
+									<defs>
+										<style data-webpack-style="true">
+											.blue_1 {
+												fill: #cde9f6;
+											}
+										</style>
+									</defs>
+									<g id="Layer_20" data-name="Layer 2">
+										<g id="Layer_1-2_18" data-name="Layer 1">
+											<rect class="blue_1" width="318.9" height="252" rx="13.05"></rect>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 257.18 58" preserveAspectRatio="none" class="gwd-svg-1p8q gwd-gen-17jrgwdanimation" id="blue_number">
+									<defs>
+										<style data-webpack-style="true">
+											.blue_1 {
+												fill: #cde9f6;
+											}
+										</style>
+									</defs>
+									<g id="Layer_19" data-name="Layer 2">
+										<g id="Layer_1-2_17" data-name="Layer 1">
+											<rect class="blue_1" width="257.18" height="58" rx="10.17"></rect>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 257.18 58" preserveAspectRatio="none" class="gwd-svg-f4hm gwd-gen-ipqagwdanimation" id="blue_mail">
+									<defs>
+										<style data-webpack-style="true">
+											.blue_1 {
+												fill: #cde9f6;
+											}
+										</style>
+									</defs>
+									<g id="Layer_18" data-name="Layer 2">
+										<g id="Layer_1-2_16" data-name="Layer 1">
+											<rect class="blue_1" width="257.18" height="58" rx="10.17"></rect>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190.1 59" preserveAspectRatio="none" class="gwd-svg-gx2u gwd-svg-jts8 gwd-svg-3jh7" id="mapp_1">
+									<defs>
+										<style data-webpack-style="true">
+											.map_1 {
+												fill: #fff;
+												stroke: #d7dee2;
+												stroke-miterlimit: 10;
+											}
+											.map_2 {
+												isolation: isolate;
+												font-size: 18px;
+												font-family: ArialMT, Arial;
+											}
+											.map_3 {
+												fill: #0893d2;
+											}
+										</style>
+									</defs>
+									<g id="Layer_25" data-name="Layer 2">
+										<g id="Layer_1-2_23" data-name="Layer 1">
+											<path class="map_1" d="M180.2,58.5H9.9A9.39,9.39,0,0,1,.5,49.1V9.9A9.39,9.39,0,0,1,9.9.5H180.2a9.39,9.39,0,0,1,9.4,9.4V49.1A9.39,9.39,0,0,1,180.2,58.5Z"></path>
+											<text class="map_2" transform="translate(84.77 33.88)">Map</text>
+											<path class="map_3" d="M53.1,22.8a10.75,10.75,0,0,0-3-7.1,10,10,0,0,0-7.3-3,9.88,9.88,0,0,0-7.3,3,10.75,10.75,0,0,0-3,7.1,10.78,10.78,0,0,0,2,7.4l8.3,12,8.3-12A10.78,10.78,0,0,0,53.1,22.8Zm-3.3,6.5-7,10.2-7-10.2A9.86,9.86,0,0,1,34,22.9a9.23,9.23,0,0,1,2.6-6.1,8.69,8.69,0,0,1,12.4,0,9.51,9.51,0,0,1,2.6,6.1A9.86,9.86,0,0,1,49.8,29.3Zm9.1,10.8q0,1.95-4.2,3.3a42.57,42.57,0,0,1-11.9,1.4,42.57,42.57,0,0,1-11.9-1.4q-4.2-1.35-4.2-3.3,0-1.65,2.7-3a26.41,26.41,0,0,1,6.9-1.8h0a.8.8,0,0,1,.9.6.82.82,0,0,1-.1.7.85.85,0,0,1-.6.2,19.26,19.26,0,0,0-6.2,1.6c-1.7.7-2,1.3-2,1.6s.5,1.1,3.8,2a41.41,41.41,0,0,0,10.7,1.1A46.33,46.33,0,0,0,53.5,42c3.3-.9,3.8-1.6,3.8-2s-.3-.9-2-1.6A19.93,19.93,0,0,0,49,36.8h0a.7.7,0,0,1-.7-.8.8.8,0,0,1,.9-.7h0a20.36,20.36,0,0,1,6.9,1.8C58,38,58.9,39,58.9,40.1ZM45.6,20.2A3.63,3.63,0,0,0,42.8,19,3.78,3.78,0,0,0,40,20.2,3.63,3.63,0,0,0,38.8,23,3.78,3.78,0,0,0,40,25.8,3.63,3.63,0,0,0,42.8,27a3.78,3.78,0,0,0,2.8-1.2A3.63,3.63,0,0,0,46.8,23,3.49,3.49,0,0,0,45.6,20.2Zm-.4,2.7a2.4,2.4,0,1,1-4.1-1.7,2.41,2.41,0,0,1,3.4,0A2.34,2.34,0,0,1,45.2,22.9Z"></path>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190.1 59" preserveAspectRatio="none" class="gwd-svg-gx2u gwd-svg-1pse gwd-gen-1iw9gwdanimation" id="mapp">
+									<defs>
+										<style data-webpack-style="true">
+											.map_1 {
+												fill: #fff;
+												stroke: #d7dee2;
+												stroke-miterlimit: 10;
+											}
+											.map_2 {
+												isolation: isolate;
+												font-size: 18px;
+												font-family: ArialMT, Arial;
+											}
+											.map_3 {
+												fill: #0893d2;
+											}
+										</style>
+									</defs>
+									<g id="Layer_8" data-name="Layer 2">
+										<g id="Layer_1-2_6" data-name="Layer 1">
+											<path class="map_1" d="M180.2,58.5H9.9A9.39,9.39,0,0,1,.5,49.1V9.9A9.39,9.39,0,0,1,9.9.5H180.2a9.39,9.39,0,0,1,9.4,9.4V49.1A9.39,9.39,0,0,1,180.2,58.5Z"></path>
+											<text class="map_2" transform="translate(84.77 33.88)">Map</text>
+											<path class="map_3" d="M53.1,22.8a10.75,10.75,0,0,0-3-7.1,10,10,0,0,0-7.3-3,9.88,9.88,0,0,0-7.3,3,10.75,10.75,0,0,0-3,7.1,10.78,10.78,0,0,0,2,7.4l8.3,12,8.3-12A10.78,10.78,0,0,0,53.1,22.8Zm-3.3,6.5-7,10.2-7-10.2A9.86,9.86,0,0,1,34,22.9a9.23,9.23,0,0,1,2.6-6.1,8.69,8.69,0,0,1,12.4,0,9.51,9.51,0,0,1,2.6,6.1A9.86,9.86,0,0,1,49.8,29.3Zm9.1,10.8q0,1.95-4.2,3.3a42.57,42.57,0,0,1-11.9,1.4,42.57,42.57,0,0,1-11.9-1.4q-4.2-1.35-4.2-3.3,0-1.65,2.7-3a26.41,26.41,0,0,1,6.9-1.8h0a.8.8,0,0,1,.9.6.82.82,0,0,1-.1.7.85.85,0,0,1-.6.2,19.26,19.26,0,0,0-6.2,1.6c-1.7.7-2,1.3-2,1.6s.5,1.1,3.8,2a41.41,41.41,0,0,0,10.7,1.1A46.33,46.33,0,0,0,53.5,42c3.3-.9,3.8-1.6,3.8-2s-.3-.9-2-1.6A19.93,19.93,0,0,0,49,36.8h0a.7.7,0,0,1-.7-.8.8.8,0,0,1,.9-.7h0a20.36,20.36,0,0,1,6.9,1.8C58,38,58.9,39,58.9,40.1ZM45.6,20.2A3.63,3.63,0,0,0,42.8,19,3.78,3.78,0,0,0,40,20.2,3.63,3.63,0,0,0,38.8,23,3.78,3.78,0,0,0,40,25.8,3.63,3.63,0,0,0,42.8,27a3.78,3.78,0,0,0,2.8-1.2A3.63,3.63,0,0,0,46.8,23,3.49,3.49,0,0,0,45.6,20.2Zm-.4,2.7a2.4,2.4,0,1,1-4.1-1.7,2.41,2.41,0,0,1,3.4,0A2.34,2.34,0,0,1,45.2,22.9Z"></path>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190.1 59" preserveAspectRatio="none" class="gwd-svg-1nlw gwd-svg-1ddu gwd-svg-miz4" id="phone_2">
+									<defs>
+										<style data-webpack-style="true">
+											.phone_1 {
+												fill: #fff;
+												stroke: #d7dee2;
+												stroke-miterlimit: 10;
+											}
+											.phone_2 {
+												isolation: isolate;
+												font-size: 18px;
+												font-family: ArialMT, Arial;
+											}
+											.phone_3 {
+												fill: #0893d2;
+											}
+										</style>
+									</defs>
+									<g id="Layer_24" data-name="Layer 2">
+										<g id="Layer_1-2_22" data-name="Layer 1">
+											<path class="phone_1" d="M180.2,58.5H9.9A9.39,9.39,0,0,1,.5,49.1V9.9A9.39,9.39,0,0,1,9.9.5H180.2a9.39,9.39,0,0,1,9.4,9.4V49.1A9.39,9.39,0,0,1,180.2,58.5Z"></path>
+											<text class="phone_2" transform="translate(84.77 36.42)">Phone</text>
+											<path class="phone_3" d="M59.3,39.4h0c-.2-.5-.8-1-2-1.6l-4.1-2.4a2.18,2.18,0,0,0-.8-.5,1.64,1.64,0,0,0-1-.2,3.33,3.33,0,0,0-1.6.8,9.39,9.39,0,0,0-1.2,1.4c-.1.1-.3.4-1.1,1.3-.3.3-.5.4-.4.4h-.2l-.4-.1-.9-.6a23.91,23.91,0,0,1-4.9-3.6,25.94,25.94,0,0,1-3.6-4.9l-.2-.4-.4-.9v-.2s0-.1.4-.5l1.3-1.1a8.06,8.06,0,0,0,1.4-1.2,2.22,2.22,0,0,0,.8-1.6,3.55,3.55,0,0,0-.2-1,9.22,9.22,0,0,1-.5-.8,1,1,0,0,0-.4-.5l-2-3.6c-.6-1.2-1-1.8-1.5-2l-.7-.1a7.55,7.55,0,0,0-1.7.3l-1.6.5a6.11,6.11,0,0,0-2.6,3A9,9,0,0,0,28,23.6a4.51,4.51,0,0,0,.1,1.3l.6,2.4.8,2.2a17.63,17.63,0,0,0,1.8,3.9A38.62,38.62,0,0,0,36,39.2a30.69,30.69,0,0,0,5.8,4.7,17.33,17.33,0,0,0,3.9,1.8l2.3.9,2.4.6,1.2.1A9.42,9.42,0,0,0,56,46.1a6.87,6.87,0,0,0,2.9-2.6,10.31,10.31,0,0,0,.5-1.6,11.14,11.14,0,0,0,.2-1.7ZM34.9,27.9l.2.7.2.5.5.8V30a23.92,23.92,0,0,0,3.8,5.2A23.92,23.92,0,0,0,44.8,39l1,.6.5.2a1.88,1.88,0,0,0,.8.2,2.75,2.75,0,0,0,1.5-.8l1.2-1.4a5.36,5.36,0,0,1,1.1-1.2c.4-.3.5-.4.6-.4l.3.1,4.9,2.9a5.18,5.18,0,0,1,1.3.7v.2a5.27,5.27,0,0,1-.2,1.3l-.4,1.4c-.2.6-1,1.2-2.3,1.9a8.15,8.15,0,0,1-3.6,1h-1l-1.1-.2-3.3-1.2a14.88,14.88,0,0,1-3.6-1.7,34.45,34.45,0,0,1-5.6-4.5,29,29,0,0,1-4.5-5.6,14.88,14.88,0,0,1-1.7-3.6l-1.4-4.4v-1a7,7,0,0,1,1-3.6,5.93,5.93,0,0,1,1.9-2.3l1.4-.4a6.88,6.88,0,0,1,1.3-.2H35l3.7,6.2.1.3c0,.1-.1.2-.4.6l-1.2,1.1a13,13,0,0,0-1.4,1.2A2,2,0,0,0,34.9,27.9Z"></path>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190.1 59" preserveAspectRatio="none" class="gwd-svg-1nlw gwd-svg-1667 gwd-gen-tdqfgwdanimation" id="phone_1">
+									<defs>
+										<style data-webpack-style="true">
+											.phone_1 {
+												fill: #fff;
+												stroke: #d7dee2;
+												stroke-miterlimit: 10;
+											}
+											.phone_2 {
+												isolation: isolate;
+												font-size: 18px;
+												font-family: ArialMT, Arial;
+											}
+											.phone_3 {
+												fill: #0893d2;
+											}
+										</style>
+									</defs>
+									<g id="Layer_7" data-name="Layer 2">
+										<g id="Layer_1-2_5" data-name="Layer 1">
+											<path class="phone_1" d="M180.2,58.5H9.9A9.39,9.39,0,0,1,.5,49.1V9.9A9.39,9.39,0,0,1,9.9.5H180.2a9.39,9.39,0,0,1,9.4,9.4V49.1A9.39,9.39,0,0,1,180.2,58.5Z"></path>
+											<text class="phone_2" transform="translate(84.77 36.42)">Phone</text>
+											<path class="phone_3" d="M59.3,39.4h0c-.2-.5-.8-1-2-1.6l-4.1-2.4a2.18,2.18,0,0,0-.8-.5,1.64,1.64,0,0,0-1-.2,3.33,3.33,0,0,0-1.6.8,9.39,9.39,0,0,0-1.2,1.4c-.1.1-.3.4-1.1,1.3-.3.3-.5.4-.4.4h-.2l-.4-.1-.9-.6a23.91,23.91,0,0,1-4.9-3.6,25.94,25.94,0,0,1-3.6-4.9l-.2-.4-.4-.9v-.2s0-.1.4-.5l1.3-1.1a8.06,8.06,0,0,0,1.4-1.2,2.22,2.22,0,0,0,.8-1.6,3.55,3.55,0,0,0-.2-1,9.22,9.22,0,0,1-.5-.8,1,1,0,0,0-.4-.5l-2-3.6c-.6-1.2-1-1.8-1.5-2l-.7-.1a7.55,7.55,0,0,0-1.7.3l-1.6.5a6.11,6.11,0,0,0-2.6,3A9,9,0,0,0,28,23.6a4.51,4.51,0,0,0,.1,1.3l.6,2.4.8,2.2a17.63,17.63,0,0,0,1.8,3.9A38.62,38.62,0,0,0,36,39.2a30.69,30.69,0,0,0,5.8,4.7,17.33,17.33,0,0,0,3.9,1.8l2.3.9,2.4.6,1.2.1A9.42,9.42,0,0,0,56,46.1a6.87,6.87,0,0,0,2.9-2.6,10.31,10.31,0,0,0,.5-1.6,11.14,11.14,0,0,0,.2-1.7ZM34.9,27.9l.2.7.2.5.5.8V30a23.92,23.92,0,0,0,3.8,5.2A23.92,23.92,0,0,0,44.8,39l1,.6.5.2a1.88,1.88,0,0,0,.8.2,2.75,2.75,0,0,0,1.5-.8l1.2-1.4a5.36,5.36,0,0,1,1.1-1.2c.4-.3.5-.4.6-.4l.3.1,4.9,2.9a5.18,5.18,0,0,1,1.3.7v.2a5.27,5.27,0,0,1-.2,1.3l-.4,1.4c-.2.6-1,1.2-2.3,1.9a8.15,8.15,0,0,1-3.6,1h-1l-1.1-.2-3.3-1.2a14.88,14.88,0,0,1-3.6-1.7,34.45,34.45,0,0,1-5.6-4.5,29,29,0,0,1-4.5-5.6,14.88,14.88,0,0,1-1.7-3.6l-1.4-4.4v-1a7,7,0,0,1,1-3.6,5.93,5.93,0,0,1,1.9-2.3l1.4-.4a6.88,6.88,0,0,1,1.3-.2H35l3.7,6.2.1.3c0,.1-.1.2-.4.6l-1.2,1.1a13,13,0,0,0-1.4,1.2A2,2,0,0,0,34.9,27.9Z"></path>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190.1 59" preserveAspectRatio="none" class="gwd-svg-p1hu gwd-svg-16ki gwd-svg-l1h2" id="mail_2">
+									<defs>
+										<style data-webpack-style="true">
+											.mail_1 {
+												fill: #fff;
+												stroke: #d7dee2;
+												stroke-miterlimit: 10;
+											}
+											.mail_2 {
+												isolation: isolate;
+												font-size: 18px;
+												font-family: ArialMT, Arial;
+											}
+											.mail_3 {
+												fill: #0893d2;
+											}
+										</style>
+									</defs>
+									<g id="Layer_23" data-name="Layer 2">
+										<g id="Layer_1-2_21" data-name="Layer 1">
+											<path class="mail_1" d="M180.2,58.5H9.9A9.39,9.39,0,0,1,.5,49.1V9.9A9.39,9.39,0,0,1,9.9.5H180.2a9.39,9.39,0,0,1,9.4,9.4V49.1A9.39,9.39,0,0,1,180.2,58.5Z"></path>
+											<text class="mail_2" transform="translate(84.77 35.99)">Email</text>
+											<path class="mail_3" d="M55,19.9a2.94,2.94,0,0,0-2.2-.9h-22a.53.53,0,0,0-.6.6c0,.4.2.7.6.7h22a1.66,1.66,0,0,1,1.2.5,1.58,1.58,0,0,1,.5,1.2V38.2a1.71,1.71,0,0,1-1.7,1.7H27.3a2.11,2.11,0,0,1-1.3-.5,1.66,1.66,0,0,1-.5-1.2V22.1c0-.6.1-.7.1-.7s.2-.1.6.1a3.59,3.59,0,0,1,1,.7l12.3,8.5a1.1,1.1,0,0,0,.8,0l10.8-7.5a.62.62,0,0,0,.3-.5.44.44,0,0,0-.1-.5,1.38,1.38,0,0,0-.4-.3h-.1a1,1,0,0,0-.4.1L39.9,29.3,28.1,21.1c-1.3-1.1-2.3-1.4-3.1-1A1.93,1.93,0,0,0,24,22V38.2a2.94,2.94,0,0,0,.9,2.2,3.1,3.1,0,0,0,2.2.9H52.6a3.07,3.07,0,0,0,3.1-3.1V22.1A2.31,2.31,0,0,0,55,19.9Z"></path>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190.1 59" preserveAspectRatio="none" class="gwd-svg-p1hu gwd-svg-12ts gwd-gen-lk4ugwdanimation" id="mail_1">
+									<defs>
+										<style data-webpack-style="true">
+											.mail_1 {
+												fill: #fff;
+												stroke: #d7dee2;
+												stroke-miterlimit: 10;
+											}
+											.mail_2 {
+												isolation: isolate;
+												font-size: 18px;
+												font-family: ArialMT, Arial;
+											}
+											.mail_3 {
+												fill: #0893d2;
+											}
+										</style>
+									</defs>
+									<g id="Layer_6" data-name="Layer 2">
+										<g id="Layer_1-2_4" data-name="Layer 1">
+											<path class="mail_1" d="M180.2,58.5H9.9A9.39,9.39,0,0,1,.5,49.1V9.9A9.39,9.39,0,0,1,9.9.5H180.2a9.39,9.39,0,0,1,9.4,9.4V49.1A9.39,9.39,0,0,1,180.2,58.5Z"></path>
+											<text class="mail_2" transform="translate(84.77 35.99)">Email</text>
+											<path class="mail_3" d="M55,19.9a2.94,2.94,0,0,0-2.2-.9h-22a.53.53,0,0,0-.6.6c0,.4.2.7.6.7h22a1.66,1.66,0,0,1,1.2.5,1.58,1.58,0,0,1,.5,1.2V38.2a1.71,1.71,0,0,1-1.7,1.7H27.3a2.11,2.11,0,0,1-1.3-.5,1.66,1.66,0,0,1-.5-1.2V22.1c0-.6.1-.7.1-.7s.2-.1.6.1a3.59,3.59,0,0,1,1,.7l12.3,8.5a1.1,1.1,0,0,0,.8,0l10.8-7.5a.62.62,0,0,0,.3-.5.44.44,0,0,0-.1-.5,1.38,1.38,0,0,0-.4-.3h-.1a1,1,0,0,0-.4.1L39.9,29.3,28.1,21.1c-1.3-1.1-2.3-1.4-3.1-1A1.93,1.93,0,0,0,24,22V38.2a2.94,2.94,0,0,0,.9,2.2,3.1,3.1,0,0,0,2.2.9H52.6a3.07,3.07,0,0,0,3.1-3.1V22.1A2.31,2.31,0,0,0,55,19.9Z"></path>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190.1 59" preserveAspectRatio="none" class="gwd-svg-km8h gwd-svg-1cs1 gwd-svg-15yz" id="name_3">
+									<defs>
+										<style data-webpack-style="true">
+											.name_1 {
+												fill: #fff;
+												stroke: #d7dee2;
+											}
+											.name_1, .name_3 {
+												stroke-miterlimit: 10;
+											}
+											.name_2 {
+												isolation: isolate;
+												font-size: 18px;
+												font-family: ArialMT, Arial;
+											}
+											.name_3 {
+												fill: #0893d2;
+												stroke: #0893d2;
+												stroke-width: 0.5px;
+											}
+										</style>
+									</defs>
+									<g id="Layer_22" data-name="Layer 2">
+										<g id="Layer_1-2_20" data-name="Layer 1">
+											<path class="name_1" d="M180.2,58.5H9.9A9.39,9.39,0,0,1,.5,49.1V9.9A9.39,9.39,0,0,1,9.9.5H180.2a9.39,9.39,0,0,1,9.4,9.4V49.1A9.39,9.39,0,0,1,180.2,58.5Z"></path>
+											<text class="name_2" transform="translate(84.77 35.84)">Name</text>
+											<path class="name_3" d="M47.6,16.9v.8H37.7L33.6,43.5h-.8l4.1-25.8H27.1v-.8Z"></path>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190.1 59" preserveAspectRatio="none" class="gwd-svg-km8h gwd-svg-g052" id="name_1">
+									<defs>
+										<style data-webpack-style="true">
+											.name_1 {
+												fill: #fff;
+												stroke: #d7dee2;
+											}
+											.name_1, .name_3 {
+												stroke-miterlimit: 10;
+											}
+											.name_2 {
+												isolation: isolate;
+												font-size: 18px;
+												font-family: ArialMT, Arial;
+											}
+											.name_3 {
+												fill: #0893d2;
+												stroke: #0893d2;
+												stroke-width: 0.5px;
+											}
+										</style>
+									</defs>
+									<g id="Layer_5" data-name="Layer 2">
+										<g id="Layer_1-2_3" data-name="Layer 1">
+											<path class="name_1" d="M180.2,58.5H9.9A9.39,9.39,0,0,1,.5,49.1V9.9A9.39,9.39,0,0,1,9.9.5H180.2a9.39,9.39,0,0,1,9.4,9.4V49.1A9.39,9.39,0,0,1,180.2,58.5Z"></path>
+											<text class="name_2" transform="translate(84.77 35.84)">Name</text>
+											<path class="name_3" d="M47.6,16.9v.8H37.7L33.6,43.5h-.8l4.1-25.8H27.1v-.8Z"></path>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 337.17 262.33" preserveAspectRatio="none" class="gwd-svg-vqq0 gwd-gen-afczgwdanimation" id="map_2">
+									<defs>
+										<style data-webpack-style="true">
+											.map_10, .map_18 {
+												fill: #f0f2f3;
+											}
+											.map_11 {
+												fill: #cde9d5;
+											}
+											.map_100, .map_12, .map_16, .map_17 {
+												fill: none;
+											}
+											.map_12 {
+												stroke: #3f7cc8;
+											}
+											.map_100, .map_101, .map_12, .map_17, .map_18 {
+												stroke-miterlimit: 10;
+											}
+											.map_100, .map_101, .map_12 {
+												stroke-width: 2px;
+											}
+											.map_103, .map_13, .map_14 {
+												fill: #fff;
+											}
+											.map_100, .map_14, .map_16, .map_17, .map_18 {
+												stroke: #e2e3e5;
+											}
+											.map_14 {
+												stroke-miterlimit: 10;
+												stroke-width: 1.5px;
+											}
+											.map_15 {
+												fill: #fefefe;
+											}
+											.map_16 {
+												stroke-miterlimit: 10;
+											}
+											.map_101 {
+												fill: #fce192;
+												stroke: #f2bb30;
+											}
+											.map_102 {
+												fill: #3f7cc8;
+											}
+											.map_103 {
+												isolation: isolate;
+												font-size: 5.99px;
+												font-family: Arial-Regular, Arial;
+											}
+											.map_104 {
+												fill: #f44336;
+											}
+											.map_105 {
+												fill: #c62828;
+											}
+										</style>
+									</defs>
+									<g id="Layer_21" data-name="Layer 2">
+										<g id="Layer_1-2_19" data-name="Layer 1">
+											<g id="map_1">
+												<rect class="map_10" x="1.32" y="0.1" width="318.8" height="251.9" rx="12.56"></rect>
+												<path class="map_11" d="M307.57,252H13.88A12.56,12.56,0,0,1,1.32,239.44v-8.56l117.45-79.83L176.25,116l33.05-15.65,12.07-2.6,20.24-2.11,23.16-.34,55.35,4.49V239.44A12.55,12.55,0,0,1,307.57,252Z"></path>
+												<path class="map_12" d="M321,196.4c-29.1,14.2-41.8,33.8-53.9,56.3"></path>
+												<rect class="map_13" x="253.55" y="252" width="25.14" height="10.33"></rect>
+												<rect class="map_13" x="320.12" y="185.28" width="17.04" height="23.49"></rect>
+												<rect class="map_14" x="221.11" y="20.39" width="8.5" height="62.6" transform="translate(-4.35 25.36) rotate(-6.38)"></rect>
+												<polygon class="map_15" points="320.13 162.8 293.52 158 293.93 150.5 245.93 143.2 247.03 115.6 320.13 124.7 320.13 162.8"></polygon>
+												<path class="map_10" d="M105.92,252l-5.8-9.3,7.2-5-2.8-4.2,5.8-3.4,8.7,13.3-6.5,4.8,2.5,3.7h-9.1Z"></path>
+												<polygon class="map_10" points="209.13 252 208.22 248.7 224.32 242.3 228.22 252 209.13 252"></polygon>
+												<path class="map_10" d="M73.12,252l-1.4-3.7,11.5-6.2,4.6,10H73.12Z"></path>
+												<polygon class="map_10" points="210.82 213.8 181.03 229.4 160.72 191 167.63 187.1 164.93 180.6 181.53 172 194.22 196.5 200.32 193.9 210.82 213.8"></polygon>
+												<path class="map_10" d="M264.82,170.4c2.5.8,33.4,16.2,35.7,17.8a50.85,50.85,0,0,1-5.2,10.1c-8.5-4.2-16.9-8.4-25.6-12.8-2,3.8-3.9,7.6-6.1,11.7-3.1-1.9-6.5-3.2-9.6-5.4C257.72,184.6,261.22,177.5,264.82,170.4Z"></path>
+												<polygon class="map_10" points="281.13 93.7 280.93 94.2 280.52 94.6 280.43 107 271.43 106.8 262.43 106.8 262.43 94.2 262.43 93.7 262.43 90.5 278.13 90.5 278.13 91.9 281.02 91.9 281.13 93.7"></polygon>
+												<path class="map_10" d="M203.72,131.6l6.3,10.8-16.6,9.2-6.2-10.9Z"></path>
+												<path class="map_10" d="M79.62,207.9l4,10.8-16.3,6.7-4.2-10.9Z"></path>
+												<path class="map_10" d="M148.92,226l-11.8,6.8-6.5-11.2,11.7-6.8Z"></path>
+												<polygon class="map_10" points="223.03 146.4 224.53 150.7 228.22 149.4 229.82 153.8 226.43 155 228.63 161.4 221.43 163.6 216.63 148.6 223.03 146.4"></polygon>
+												<rect class="map_16" x="7.92" y="115.78" width="21.4" height="13.4" transform="translate(-76.66 43.29) rotate(-41.62)"></rect>
+												<polygon class="map_17" points="18.93 143.2 32.02 162.6 49.73 150.8 41.52 138.3 38.02 140.2 33.42 134 18.93 143.2"></polygon>
+												<polygon class="map_17" points="13.22 159 18.73 155.5 26.23 165 21.13 168.8 13.22 159"></polygon>
+												<polyline class="map_17" points="0.52 18.29 8.93 13.2 19.23 26.2 0.69 38.91"></polyline>
+												<polygon class="map_17" points="50.33 17.6 33.42 30.8 41.9 42.22 59.42 30.2 50.33 17.6"></polygon>
+												<polygon class="map_17" points="33.92 40.1 42.13 49.6 24.73 64.9 27.18 67.39 19.09 75.75 14.32 71.1 19.82 65.4 13.62 58.58 33.92 40.1"></polygon>
+												<polygon class="map_17" points="60.63 128.5 91.63 109.5 101.92 125.4 71.22 145.4 60.63 128.5"></polygon>
+												<polygon class="map_17" points="29.02 71.9 53.83 59.1 74.63 98.3 50.02 112.1 29.02 71.9"></polygon>
+												<polygon class="map_17" points="150.82 25.3 187.82 13.1 190.72 22.4 153.93 34.2 150.82 25.3"></polygon>
+												<polygon class="map_17" points="147.82 44.5 152.82 41.6 159.93 52.3 155.13 55.5 147.82 44.5"></polygon>
+												<polygon class="map_18" points="176.22 47.4 208.93 39.3 213.13 57.5 180.72 65.7 176.22 47.4"></polygon>
+												<polygon class="map_17" points="198.19 15.36 214.09 13.55 215.91 24.34 199.39 25.86 198.19 15.36"></polygon>
+												<polygon class="map_17" points="231.61 34.05 247.21 33.25 247.51 36.75 276.01 35.35 275.61 31.75 290.11 31.05 291.81 55.65 233.01 58.15 231.61 34.05"></polygon>
+												<polyline class="map_17" points="320.13 38.7 315.63 40.8 313.93 37.4 311.63 37.9 306.02 21.9 299.23 23.9 305.13 40.8 302.23 42.6 307.13 56.1 320.13 51.8"></polyline>
+												<polyline class="map_17" points="245.63 0.02 245.63 7.2 253.32 7.2 253.32 9.7 283.73 9.7 283.73 0"></polyline>
+												<polyline class="map_17" points="197.13 0.1 197.13 7.2 239.93 5.9 239.93 0"></polyline>
+												<polygon class="map_17" points="284.73 69.1 308.52 72.6 307.63 81.9 283.63 77.9 284.73 69.1"></polygon>
+												<polyline class="map_18" points="0.36 48.04 13.53 62.1 0.98 73.77"></polyline>
+												<polyline class="map_17" points="0.98 82.4 8.22 91 11.03 89.2 19.52 100.5 4.41 111.63 0.4 106.37"></polyline>
+												<polygon class="map_13" points="96.92 0.5 167.03 102.9 179.13 97.1 114.33 0.5 96.92 0.5"></polygon>
+												<polyline class="map_100" points="167.03 102.9 96.81 1.11 114.24 1.1 179.13 97.1"></polyline>
+												<path class="map_101" d="M196.12,90C146.91,106.68,20.6,200.45,2.34,214.11l0,16.4C22.28,216.57,165,117.4,201.52,102.9c34.85-13.83,102.53-5.45,117.65-3.33l0-14.72C302.07,82.14,243.09,74.08,196.12,90Z"></path>
+												<rect class="map_102" x="278.12" y="84.1" width="15.8" height="7.8"></rect>
+												<text class="map_103" transform="translate(279.96 89.77)">M21</text>
+												<rect class="map_102" x="24.82" y="196.4" width="15.8" height="7.8"></rect>
+												<text class="map_103" transform="translate(26.68 202.13)">M21</text>
+												<path class="map_104" d="M96.92,17.5a15.66,15.66,0,0,0-15.7,15.7,11.53,11.53,0,0,0,.3,2.6,15.73,15.73,0,0,0,2.4,6.2c.7,1.1,1.4,2.3,2.2,3.6a59.87,59.87,0,0,1,9.4,22.2,1.43,1.43,0,0,0,2.8,0,58.26,58.26,0,0,1,9.4-22.2c.8-1.3,1.6-2.4,2.2-3.5a15.91,15.91,0,0,0,2.5-6.2,11.53,11.53,0,0,0,.3-2.6A16,16,0,0,0,96.92,17.5Z"></path>
+												<circle class="map_105" cx="96.92" cy="33.2" r="7.1"></circle>
+											</g>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 204 28.16" preserveAspectRatio="none" class="gwd-svg-1m3u gwd-gen-12figwdanimation" id="number">
+									<defs>
+										<style data-webpack-style="true">
+											.phone_4 {
+												fill: #bbbcc5;
+											}
+											.phone_5 {
+												isolation: isolate;
+												font-size: 18px;
+												fill: #034656;
+												font-family: ArialMT, Arial;
+											}
+										</style>
+									</defs>
+									<g id="Layer_11" data-name="Layer 2">
+										<g id="Layer_1-2_9" data-name="Layer 1">
+											<path id="line3_1" class="phone_4" d="M0,27.56v.6H204v-.6Z"></path>
+											<text class="phone_5" transform="translate(0.13 15.45)">+1 234 567 8900</text>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 204.29 28.16" preserveAspectRatio="none" class="gwd-svg-1ihg gwd-gen-1sdmgwdanimation" id="email">
+									<defs>
+										<style data-webpack-style="true">
+											.mail_4 {
+												fill: #bbbcc5;
+											}
+											.mail_5 {
+												isolation: isolate;
+												font-size: 18px;
+												fill: #034656;
+												font-family: ArialMT, Arial;
+											}
+										</style>
+									</defs>
+									<g id="Layer_10" data-name="Layer 2">
+										<g id="Layer_1-2_8" data-name="Layer 1">
+											<path id="line2_1" class="mail_4" d="M.29,27.56v.6h204v-.6Z"></path>
+											<text class="mail_5" transform="translate(0.83 15.45)">john.doe@mail.com</text>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 204 28.16" preserveAspectRatio="none" class="gwd-svg-ffft" id="name_2">
+									<defs>
+										<style data-webpack-style="true">
+											.name_4 {
+												fill: #bbbcc5;
+											}
+											.name_5 {
+												isolation: isolate;
+												font-size: 18px;
+												fill: #034656;
+												font-family: ArialMT, Arial;
+											}
+										</style>
+									</defs>
+									<g id="Layer_9" data-name="Layer 2">
+										<g id="Layer_1-2_7" data-name="Layer 1">
+											<path id="line1_1" class="name_4" d="M0,27.56v.6H204v-.6Z"></path>
+											<text class="name_5" transform="translate(0.13 15.45)">John Doe</text>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44.63 44.63" preserveAspectRatio="none" class="gwd-svg-wdnu gwd-gen-vxhygwdanimation" id="circle_1">
+									<defs>
+										<style data-webpack-style="true">
+											.circle_1 {
+												fill: #ddd;
+											}
+										</style>
+									</defs>
+									<g id="Layer_14" data-name="Layer 2">
+										<g id="Layer_1-2_12" data-name="Layer 1">
+											<path id="circle1_1" class="circle_1" d="M20,.11A22.32,22.32,0,1,1,.11,20,22.37,22.37,0,0,1,20,.11Z"></path>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84.6 84.6" preserveAspectRatio="none" class="gwd-svg-6sfm gwd-gen-1ubdgwdanimation" id="circle_2">
+									<defs>
+										<style data-webpack-style="true">
+											.circle_1 {
+												fill: #ddd;
+											}
+										</style>
+									</defs>
+									<g id="Layer_15" data-name="Layer 2">
+										<g id="Layer_1-2_13" data-name="Layer 1">
+											<g id="circle2_1">
+												<path class="circle_1" d="M42.3,8A34.3,34.3,0,1,1,8,42.3,34.34,34.34,0,0,1,42.3,8m0-8A42.3,42.3,0,1,0,84.6,42.3,42.3,42.3,0,0,0,42.3,0Z"></path>
+											</g>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 115.51 115.51" preserveAspectRatio="none" class="gwd-svg-1g3p gwd-gen-1cgzgwdanimation" id="circle_3">
+									<defs>
+										<style data-webpack-style="true">
+											.circle_1 {
+												fill: #ddd;
+											}
+										</style>
+									</defs>
+									<g id="Layer_16" data-name="Layer 2">
+										<g id="Layer_1-2_14" data-name="Layer 1">
+											<g id="circle3_1">
+												<path class="circle_1" d="M57.75,8A49.76,49.76,0,1,1,8,57.75,49.81,49.81,0,0,1,57.75,8m0-8a57.76,57.76,0,1,0,57.76,57.75A57.76,57.76,0,0,0,57.75,0Z"></path>
+											</g>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140.6 140.6" preserveAspectRatio="none" class="gwd-svg-77lu gwd-gen-105qgwdanimation" id="circle_4">
+									<defs>
+										<style data-webpack-style="true">
+											.circle_1 {
+												fill: #ddd;
+											}
+										</style>
+									</defs>
+									<g id="Layer_17" data-name="Layer 2">
+										<g id="Layer_1-2_15" data-name="Layer 1">
+											<g id="circle4_1">
+												<path class="circle_1" d="M70.3,8A62.3,62.3,0,1,1,8,70.3,62.37,62.37,0,0,1,70.3,8m0-8a70.3,70.3,0,1,0,70.3,70.3A70.29,70.29,0,0,0,70.3,0Z"></path>
+											</g>
+										</g>
+									</g>
+								</svg>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46.82 36.01" preserveAspectRatio="none" class="gwd-svg-1z0i gwd-gen-171ngwdanimation" id="right_hand">
+									<defs>
+										<style data-webpack-style="true">
+											.hand_1 {
+												fill: #fff;
+											}
+										</style>
+									</defs>
+									<g id="Layer_13" data-name="Layer 2">
+										<g id="Layer_1-2_11" data-name="Layer 1">
+											<path id="hand_1" class="hand_1" d="M43.4,8.7,36.2,1.5h0l-.3-.4a3.62,3.62,0,0,0-5.2,0,3.54,3.54,0,0,0-1,2.6,3.54,3.54,0,0,0,1,2.6L27.8,3.5a3.62,3.62,0,0,0-5.2,0,3.54,3.54,0,0,0-1,2.6,3.54,3.54,0,0,0,1,2.6L20,6.1a3.19,3.19,0,0,0-2.6-1,3.73,3.73,0,0,0-2.7,1.2,3.63,3.63,0,0,0-1.1,2.6,3.54,3.54,0,0,0,1,2.6L6.3,3.2a3.62,3.62,0,0,0-5.2,0,3.62,3.62,0,0,0,0,5.2L17.9,25.2a22.43,22.43,0,0,0-5.5-1.9c-3.8-.8-6.1-.1-6.9,2.3a3.41,3.41,0,0,0,.2,2.8,3.31,3.31,0,0,0,2.1,1.9l14.6,4.9,5.1.8c3.8.1,6.8-.9,8.9-3.1L43.3,26a11.76,11.76,0,0,0,3.5-8.7A10.76,10.76,0,0,0,43.4,8.7Z"></path>
+										</g>
+									</g>
+								</svg>
+							</div>
+						</gwd-page>
+					</gwd-pagedeck>
+				</gwd-google-ad>
+            </div>
+        </div>
+    </div>
+</section>

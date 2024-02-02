@@ -1,0 +1,21 @@
+text-only {
+    &.dark_theme {
+        background-color: #141616;
+        .content {
+            color: #DBE2E7;
+        }
+    }
+    &.centered {
+        h2 {
+            text-align: center;
+        }
+        .content {
+            text-align: center;
+        }
+    }
+    .content {
+        font-size: 16px;
+        line-height: 25px;
+        color: #4D555B;
+    }
+}

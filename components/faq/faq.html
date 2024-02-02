@@ -1,0 +1,20 @@
+<section itemscope="" itemtype="https://schema.org/FAQPage" class="faq">
+    <div class="container">
+        <h2 gh-id="${ghId}.title">FAQ</h2>
+        <div class="block_faq">
+            ${
+                items.reduce((acc, item, index) => {
+                    return acc + `
+                <div onclick="openItem()" class="faq_item ${index === 0 ? 'active' : '' }" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <h3 itemprop="name" gh-id="${ghId}.items.${index}.question"> QUESTION </h3>
+                    <div class="answer_wrapper" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <div class="answer" itemprop="text" gh-id="${ghId}.items.${index}.answer">
+                            ANSWER
+                        </div>
+                    </div>
+                </div>
+                `}, '')
+            }
+        </div>
+    </div>
+</section>

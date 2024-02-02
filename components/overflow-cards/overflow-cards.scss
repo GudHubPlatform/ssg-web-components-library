@@ -1,0 +1,112 @@
+overflow-cards {
+    background: var(--primary-bg-color);
+    .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+    h2 {
+        text-align: left;
+        max-width: 804px;
+    }
+    .subtitle {
+        max-width: 804px;
+        margin-bottom: 0 !important;
+    }
+    .btn {
+        white-space: nowrap;
+    }
+    .flex-wrapper {
+        position: relative;
+        bottom: -100px;
+        margin-top: -100px;
+        gap: 20px;
+        flex-wrap: wrap;
+        .cards {
+            width: calc(33% - 13px);
+            border-radius: var(--block-primary-border-radius);
+            background: var(--block-primary-bg-color);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            h3 {
+                color: var(--block-primary-h-color);
+                margin-bottom: 0;
+            }
+            .text {
+                color: var(--block-primary-text-color);
+            }
+            img {
+                width: 100%;
+                height: auto;
+                border-radius: var(--block-primary-border-radius);
+                background-color: var(--image-bg-color);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    overflow-cards .flex-wrapper .cards {
+        padding: 20px;
+    }
+}
+@media screen and (min-width: 1050px) {
+    overflow-cards {
+        section {
+            padding-bottom: 0;
+        }
+    }
+}
+@media screen and (max-width: 1050px) {
+    overflow-cards .flex-wrapper {
+        bottom: 0;
+        margin-top: 0;
+        .cards {
+            width: calc(50% - 10px);
+        }
+    }
+}
+@media screen and (max-width: 950px) {
+    overflow-cards .top {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    overflow-cards {
+        h2 {
+            text-align: center;
+        }
+        .subtitle {
+            text-align: center;
+        }
+        .flex-wrapper {
+            justify-content: center;
+            .cards {
+                width: 100%;
+                max-width: 400px;
+                text-align: center;
+            }
+        }
+    }
+}
+@media screen and (max-width: 450px) {
+    overflow-cards {
+        h2 {
+            text-align: left;
+        }
+        .subtitle {
+            text-align: left;
+        }
+        .flex-wrapper {
+            .cards {
+                text-align: left;
+
+            }
+        }
+    }
+}

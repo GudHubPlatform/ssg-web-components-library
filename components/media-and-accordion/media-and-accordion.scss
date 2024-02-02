@@ -1,0 +1,170 @@
+media-and-accordion {
+    background: var(--primary-bg-color);
+    .flex-wrapper {
+        gap: 20px;
+        cursor: pointer;
+    }
+    .section_wrapper {
+        position: relative;
+    }
+    .left, .right {
+        width: calc(50% - 10px);
+    }
+    .left {
+        img {
+            width: calc(50% - 10px);
+            border-radius: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            object-fit: contain;
+            transition: all .5s ease;
+            z-index: 1;
+            background-color: var(--image-bg-color);
+        }
+    }
+    .active {
+        .left img {
+            opacity: 1;
+            z-index: 2;
+        }
+        & + .flex-wrapper {
+            .right .text_content {
+                border-top-color: transparent;
+            }
+        }
+    }
+    .right .text_content {
+        border-radius: 0;
+        border-top: 2px solid var(--tertiary-bg-color);
+        padding: 30px;
+        transition: all .2s ease;
+        .toggle_part {
+            height: 100%;
+            max-height: 0;
+            overflow: hidden;
+            transition: all .2s ease;
+        }
+        h3 {
+            margin-bottom: 0;
+            transition: all .2s ease;
+        }
+        .content {
+            color: var(--text-color);
+            font-size: var(--text-font-size);
+            font-weight: var(--text-font-weight);
+            margin-bottom: 20px;
+        }
+        .bold_text {
+            color: var(--h-color);
+            font-size: var(--text-font-size);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            svg {
+                position: relative;
+                left: 0;
+                transition: all .2s ease;
+            }
+            span {
+                transition: color .3s ease;
+            }
+            &:hover {
+                span {
+                    color: var(--primary-color);
+                }
+            }
+        }
+    }
+    .active {
+        gap: 20px;
+        .text_content {
+            border-top-color: var(--h-color);
+            border-top-width: 4px;
+
+            box-shadow: 0px 4px 9px 0px rgba(0, 0, 0, 0.05);
+            border-bottom-color: transparent;
+            border-radius: 20px;
+            .toggle_part {
+                max-height: 1000px;
+            }
+            h3 {
+                margin-bottom: 20px;
+            }
+            .bold_text:hover svg {
+                left: 10px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 880px) {
+    media-and-accordion {
+        .flex-wrapper {
+            flex-direction: column-reverse;
+            border-radius: 0;
+            padding: 30px;
+            transition: all 0.2s ease;
+            gap: 0;
+            border-top: 2px solid var(--tertiary-bg-color);
+        }
+        .left {
+            height: 100%;
+            max-height: 0;
+            overflow: hidden;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            transition: all .2s ease;
+            img {
+                position: static;
+                opacity: 1;
+                width: 100%;
+            }
+        }
+        .active {
+            border-top-color: var(--h-color);
+            box-shadow: 0px 4px 9px 0px rgba(0, 0, 0, 0.05);
+            border-bottom-color: transparent;
+            border-radius: 20px;
+            gap: 15px;
+            .left {
+                max-height: 1000px;
+            }
+            .right .text_content {
+                box-shadow: none;
+                border-radius: 0;
+                border-top: none;
+            }
+            & + .flex-wrapper {
+                border-top-color: transparent;
+            }
+        }
+        .left, .right {
+            width: 100%;
+        }
+        .right .text_content {
+            border-top: none;
+            padding: 0;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    media-and-accordion {
+        .flex-wrapper {
+            padding: 15px;
+        }
+        .active {
+            gap: 15px;
+            .text_content h3 {
+                margin-bottom: 15px;
+            }
+        }
+        .right .text_content .content {
+            margin-bottom: 15px;
+        }
+    }
+}

@@ -1,0 +1,337 @@
+animation-block {
+    background: var(--primary-bg-color);
+    h1 {
+        text-align: center;
+    }
+    .subtitle {
+        text-align: center;
+        max-width: 805px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 50px;
+    }
+    .rows-wrapper {
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 100%;
+        background: var(--primary-bg-color);
+        background: linear-gradient(90deg, var(--primary-bg-color) 0%, rgba(0,212,255,0) 100%);
+        z-index: 1;
+        }
+        &::after {
+            z-index: 1;
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 100%;
+            background: var(--primary-bg-color);
+            background: linear-gradient(-90deg, var(--primary-bg-color) 0%, rgba(0,212,255,0) 100%);
+        }
+    }
+    .row {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 20px;
+        justify-content: center;
+        position: relative;
+        left: -7%;
+        animation-duration: 10s;
+        animation-iteration-count: infinite;
+        animation-name: swipe;
+        animation-timing-function: linear;
+        backface-visibility: hidden;
+        &:nth-child(2) {
+            animation-name: swipe-reverse;
+            left: 15%;
+            margin-bottom: 0;
+        }
+        
+        .item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            width: 230px;
+            height: 66px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            background-color: var(--block-primary-bg-color);
+            .icon-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .item-text {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                gap: 5px;
+                color: var(--block-primary-text-color);
+                font-size: var(--text-font-size);
+                .bold {
+                    word-break: keep-all;
+                    color: var(--block-primary-h-color);
+                    font-size: var(--h3-font-size);
+                    font-weight: bold;
+                }
+            } 
+        }
+    }
+    .buttons {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+}
+
+@keyframes swipe {
+    0% {
+        left: -7%;
+    }
+    25% {
+        left: 7%;
+    }
+    50% {
+        left: -7%;
+    }
+    75% {
+        left: 7%;
+    }
+    100% {
+        left: -7%;
+    }
+}
+
+@keyframes swipe-reverse {
+    0% {
+        left: 7%;
+    }
+    25% {
+        left: -7%;
+    }
+    50% {
+        left: 7%;
+    }
+    75% {
+        left: -7%;
+    }
+    100% {
+        left: 7%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    animation-block {
+        .row {
+            animation-duration: 15s;
+            left: -15%;
+            &:nth-child(2) {
+                left: 30%;
+            }
+            .item {
+                min-width: 200px;
+            }
+        }
+    }
+
+    @keyframes swipe {
+        0% {
+            left: -15%;
+        }
+        25% {
+            left: 15%;
+        }
+        50% {
+            left: -15%;
+        }
+        75% {
+            left: 15%;
+        }
+        100% {
+            left: -15%;
+        }
+    }
+    
+    @keyframes swipe-reverse {
+        0% {
+            left: 15%;
+        }
+        25% {
+            left: -15%;
+        }
+        50% {
+            left: 15%;
+        }
+        75% {
+            left: -15%;
+        }
+        100% {
+            left: 15%;
+        }
+    }
+}
+@media screen and (max-width: 650px) {
+    animation-block {
+        .buttons {
+            margin-top: 30px;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+            max-width: 350px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}
+
+@media screen and (max-width: 570px) {
+    animation-block {
+        .row {
+            animation-duration: 20s;
+            left: -35%;
+            &:nth-child(2) {
+                left: 70%;
+            }
+        }
+    }
+
+    @keyframes swipe {
+        0% {
+            left: -35%;
+        }
+        25% {
+            left: 35%;
+        }
+        50% {
+            left: -35%;
+        }
+        75% {
+            left: 35%;
+        }
+        100% {
+            left: -35%;
+        }
+    }
+    
+    @keyframes swipe-reverse {
+        0% {
+            left: 35%;
+        }
+        25% {
+            left: -35%;
+        }
+        50% {
+            left: 35%;
+        }
+        75% {
+            left: -35%;
+        }
+        100% {
+            left: 35%;
+        }
+    }
+}
+@media screen and (max-width: 450px) {
+    animation-block {
+        .row {
+            left: -50%;
+            &:nth-child(2) {
+                left: 100%;
+            }
+        }
+    }
+
+    @keyframes swipe {
+        0% {
+            left: -50%;
+        }
+        25% {
+            left: 50%;
+        }
+        50% {
+            left: -50%;
+        }
+        75% {
+            left: 50%;
+        }
+        100% {
+            left: -50%;
+        }
+    }
+    
+    @keyframes swipe-reverse {
+        0% {
+            left: 50%;
+        }
+        25% {
+            left: -50%;
+        }
+        50% {
+            left: 50%;
+        }
+        75% {
+            left: -50%;
+        }
+        100% {
+            left: 50%;
+        }
+    }
+}
+@media screen and (max-width: 380px) {
+    animation-block {
+        .row {
+            left: -70%;
+            &:nth-child(2) {
+                left: 140%;
+            }
+        }
+    }
+
+    @keyframes swipe {
+        0% {
+            left: -70%;
+        }
+        25% {
+            left: 70%;
+        }
+        50% {
+            left: -70%;
+        }
+        75% {
+            left: 70%;
+        }
+        100% {
+            left: -70%;
+        }
+    }
+    
+    @keyframes swipe-reverse {
+        0% {
+            left: 70%;
+        }
+        25% {
+            left: -70%;
+        }
+        50% {
+            left: 70%;
+        }
+        75% {
+            left: -70%;
+        }
+        100% {
+            left: 70%;
+        }
+    }
+}

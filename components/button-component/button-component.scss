@@ -1,0 +1,34 @@
+button-component {
+    .btn {
+        color: var(--button-primary-normal-font-color);
+        border-radius: var(--button-primary-border-radius);
+        border: 1px solid;
+        background-color: var(--button-primary-normal-fill-color);
+        border-color: var(--button-primary-normal-border-color);
+        padding: 20px 25px;
+        cursor: pointer;
+        font-weight: var(--button-primary-font-weight);
+        transition: all .2s ease;
+        &:hover {
+            color: var(--button-primary-hover-font-color);
+            background-color: var(--button-primary-hover-fill-color);
+            border-color: var(--button-primary-hover-border-color);
+        }
+        &.empty {
+            color: var(--button-secondary-normal-font-color);
+            border-radius: var(--button-secondary-border-radius);
+            background-color: var(--button-secondary-normal-fill-color);
+            border-color: var(--button-secondary-normal-border-color);
+            font-weight: var(--button-secondary-font-weight);
+            &:hover {
+                color: var(--button-secondary-hover-font-color);
+                background-color: var(--button-secondary-hover-fill-color);
+                border-color: var(--button-secondary-hover-border-color);
+            }
+        }
+    }
+
+    a {
+        display: block;
+    }
+}

@@ -1,0 +1,92 @@
+reviews-slider {
+    background: var(--tertiary-bg-color);
+    h2 {
+        text-align: left;
+    }
+    .subtitle {
+        text-align: left;
+    }
+    .review_item {
+        background: var(--block-tertiary-bg-color);
+        border-radius: 20px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        height: auto;
+        transition: all .5s ease;
+        .stars {
+            display: flex;
+            align-items: center;
+        }
+        svg {
+            width: 14px;
+            height: 14px;
+            path {
+                fill: var(--block-tertiary-h-color);
+                transition: all .5s ease;
+            }
+        }
+
+        .review_text p {
+            color: var(--block-tertiary-text-color);
+            font-size: var(--text-font-size);
+            font-weight: 400;
+            line-height: 140%; /* 22.4px */
+        }
+    
+        .author, .position {
+            color: var(--block-tertiary-h-color);
+        }
+        .author {
+            font-size: var(--text-font-size);
+            font-weight: 600;
+            line-height: 140%;
+        }
+        .position {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 140%;
+        }
+    }
+    
+    .relative_wrapper {
+        position: relative;
+    }
+    .navigation_wrapper {
+        display: flex;
+        gap: 30px;
+        height: 40px;
+        margin-top: 30px;
+        align-items: center;
+        justify-content: center;
+        .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after, .swiper-button-next:after, .swiper-rtl .swiper-button-prev:after {
+            content: none;
+        }
+        .swiper-button-next, .swiper-button-prev {
+            position: static;
+            width: 40px;
+            height: 40px;
+            margin-top: 0;
+            svg circle {
+                transition: all .2s ease;
+            }
+            &:hover svg circle {
+                fill: var(--text-font-size);
+            }
+        }
+    }
+    &.dark_theme {
+        .navigation_wrapper {
+            svg {
+                circle {
+                    fill: rgba(0, 0, 0, .5);
+                    stroke: white;
+                }
+                path {
+                    stroke: white;
+                }
+            }
+        }
+    }
+}

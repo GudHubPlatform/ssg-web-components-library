@@ -1,0 +1,25 @@
+<section>
+    <div class="container">
+        <div class="main-text">
+            <h2 class="h2" gh-id="${ghId}.title"> TITLE </h2>
+            <p gh-id="${ghId}.subtitle" class="subtitle"> SUBTITLE </p>
+        </div>
+        ${json.items.reduce((acc, item, gridIndex) => acc + `
+            <div class="grid-container">
+                <h3 class="h3" gh-id="${ghId}.items.${gridIndex}.title"> TITLE </h3>
+                <p gh-id="${ghId}.items.${gridIndex}.subtitle" class="subtitle"> SUBTITLE </p>
+                <div class="grid">
+                    ${item.items.reduce((acc, item, index) => acc + `
+                        <div class="grid-item">
+                            <div class="image">
+                                <image-component lazyload src="${item.image.src}" alt="${item.image.alt}" title="${item.image.title}" width="392" height="320"></image-component>
+                            </div>
+                            <h3 class="h3 name" gh-id="${ghId}.items.${gridIndex}.items.${index}.name"> NAME </h3>
+                            <div class="position accent-color" gh-id="${ghId}.items.${gridIndex}.items.${index}.position"> POSITION </div>
+                        </div>
+                    `, '')}
+                </div>
+            </div>
+        `,'')}
+    </div>
+</section>

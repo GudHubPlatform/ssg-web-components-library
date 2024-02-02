@@ -1,0 +1,53 @@
+{
+    "type": "array",
+    "id": 1,
+    "childs": [
+        {
+            "type": "property",
+            "id": 3,
+            "property_name": "title",
+            "property_type": "field_value",
+            "name_space": "title",
+            "interpretation": 1
+        },
+        {
+            "type": "property",
+            "id": 4,
+            "property_name": "slug",
+            "property_type": "field_value",
+            "name_space": "slug",
+            "interpretation": 1
+        },
+        {
+            "type": "property",
+            "id": 5,
+            "property_name": "id",
+            "property_type": "variable",
+            "variable_type": "current_item"
+        }
+    ],
+    "property_name": "categories",
+    "app_id": "33453",
+    "filter": [
+        {
+            "field_id": 796213,
+            "data_type": "radio_button",
+            "valuesArray": [
+                "2"
+            ],
+            "search_type": "equal_or",
+            "$$hashKey": "object:17515",
+            "selected_search_option_variable": "Value"
+        },
+        {
+            "field_id": 796222,
+            "data_type": "radio_button",
+            "valuesArray": [
+                "1"
+            ],
+            "search_type": "equal_or",
+            "$$hashKey": "object:17557",
+            "selected_search_option_variable": "Value"
+        }
+    ]
+}

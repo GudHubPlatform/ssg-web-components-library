@@ -1,0 +1,32 @@
+<section class="media-and-list-of-text">
+    <div class="container">
+        <h2 gh-id="${ghId}.title"> TITLE </h2>
+        ${json.subtitle ? `
+            <p class="subtitle" gh-id="${ghId}.subtitle">SUBTITLE</p>
+        ` : ''}
+        <div class="section_wrapper">
+            <div class="flex-wrapper item">
+                <div class="left">
+                    <image-component lazyload src="${json.image.src}" alt="${json.image.alt}" title="${json.image.title}" width="598" height="361"></image-component>
+                </div>
+                <div class="right">
+                    <ul class="text_list">
+                        ${items.reduce((acc, item, index) => acc + `
+                            <li class="text_list_item">
+                                <div>
+                                    <span class="marker">${index + 1}</span>
+                                </div>
+                                <h3 gh-id="${ghId}.items.${index}"></h3>
+                            </li>
+                        `, '')}
+                    </ul>
+                    ${json.button_text ? `
+                        <div class="bottom_button">
+                            <button-component data-popup-title="Тестувати Безкоштовно" data-popup-subtitle="Заповніть форму зараз і ми зв'яжемося з вами!">${json.button_text}</button-component>
+                        </div>
+                    `: ''}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
