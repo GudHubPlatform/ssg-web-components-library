@@ -1,5 +1,5 @@
-export const getInTouchBlock = {
-  tag: 'get-in-touch-block',
-  src: '@gudhub/ssg-web-component-library/src/components/get-in-touch-block/get-in-touch-block.js',
+export const counterSection = {
+  tag: 'counter-section',
+  src: '@gudhub/ssg-web-components-library/src/components/counter-section/counter-section.js',
   serverOnly: true
 }
