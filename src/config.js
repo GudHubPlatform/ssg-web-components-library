@@ -1,7 +1,5 @@
 export * as metaComponents from './components/meta/config.js';
 export { topBanner } from './components/top-banner/config.js';
-export { headerComponent } from './components/header/config.js';
-export { footerComponent } from './components/footer/config.js';
 export { counterSection } from './components/counter-section/config.js';
 export { getInTouchBlock } from './components/get-in-touch-block/config.js';
 export { buttonComponent } from './components/button-component/config.js';
