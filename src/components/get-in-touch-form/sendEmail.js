@@ -102,17 +102,17 @@ async function sendRequest(form, mailConfig, formId, placement) {
 }
 
 function getQueryParams() {
-  var url = window.location.search.substring(1);
-  var queryParamsArray = url.split("&");
-  if (queryParamsArray.length <= 1) {
-    return {};
-  }
-  var queryParams = {};
-  for (var i = 0; i < queryParamsArray.length; i++) {
-    var param = queryParamsArray[i].split("=");
-    queryParams[param[0]] = param[1];
-  }
-  return queryParams;
+    var url = window.location.search.substring(1);
+    var queryParamsArray = url.split("&");
+    if (queryParamsArray.length === 1 && queryParamsArray[0] === '') {
+        return {};
+    }
+    var queryParams = {};
+    for (var i = 0; i < queryParamsArray.length; i++) {
+        var param = queryParamsArray[i].split("=");
+        queryParams[param[0]] = decodeURIComponent(param[1]);
+    }
+    return queryParams;
 }
 
 function validate(form) {
