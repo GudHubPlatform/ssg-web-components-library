@@ -13,12 +13,15 @@ list-text-and-media {
             margin-bottom:  0;
         }
         &_item {
+            display: flex;
+            flex-wrap: nowrap;
             gap: 20px;
             color: var(--block-primary-text-color);
             &:nth-child(even) {
                 flex-direction: row-reverse;
             }
             .text, .media {
+                flex: 0 0 auto;
                 border-radius: 20px;
             }
             .subtitle {
@@ -40,6 +43,11 @@ list-text-and-media {
                     display: flex;
                     flex-direction: column;
                     gap: 20px;
+                    .item-title {
+                        font-size: var(--h3-font-size);
+                        color: var(--block-primary-h-color);
+                        font-weight: 800;
+                    }
                     .subtitle {
                         text-align: left;
                     }
@@ -79,12 +87,9 @@ list-text-and-media {
                 flex-shrink: 0;
                 overflow: hidden;
                 height: min-content;
-                
-                img {
-                    background-color: var(--image-bg-color);
-                }
             }
-            &:hover {
+            &.clickable:hover {
+                cursor: pointer;
                 .text {
                     background-color: var(--tertiary-bg-color);
                 }
@@ -98,7 +103,16 @@ list-text-and-media {
         }
     }
 
-    @media screen and (max-width: 1025px) and (min-width: 870px) {
+    @media screen and (min-width: 1025px) {
+        $grid-columns: 12;
+        @for $i from 1 through $grid-columns {
+            .col-#{$i} {
+                width: percentage($i / $grid-columns);
+            }
+        }
+    }
+
+    @media screen and (max-width: 1024px) and (min-width: 870px) {
         .list {
             flex-direction: row;
             flex-wrap: wrap;

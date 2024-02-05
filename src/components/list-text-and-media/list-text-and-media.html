@@ -8,10 +8,10 @@
         ` : ''}
         <div class="list flex-wrapper">
             ${items.reduce((acc, item, index) => acc + `
-                <a href="${item.link}" class="list_item flex-wrapper">
-                    <div class="text">
+                <div class="list_item flex-wrapper clickable">
+                    <div class="text col-6">
                         <div class="top">
-                            <h3>${item.title}</h3>
+                            <a href="${item.link}" class="item-title">${item.title}</a>
                             <p class="subtitle">${item.subtitle}</p>
                             ${item.text_list && item.text_list.length > 0 ? `
                                 <ul class="text-list">
@@ -28,10 +28,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="media">
-                            <image-component lazyload src="${item.image.src}" alt="${item.image.alt}" title="${item.image.title}" width="392" height="324"></image-component>
+                    <div class="media col-6">
+                            <image-component lazyload src="${item.image.src}" alt="${item.image.alt}" title="${item.image.title}"></image-component>
                     </div>
-                </a>
+                </div>
             `, '')}
         </div>
     </div>
