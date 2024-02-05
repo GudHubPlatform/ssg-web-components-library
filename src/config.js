@@ -12,7 +12,6 @@ export { gridOld } from './components/grid/config.js';
 export { editMode } from './components/edit-mode/config.js';
 export { imageComponent } from './components/image-component/config.js';
 export { fullscreenImageAndText } from './components/fullscreen-image-and-text/config.js';
-export { contactUsBlock } from './components/contact-us-block/config.js';
 export { tabsComponent } from './components/tabs/config.js';
 export { faqComponent } from './components/faq/config.js';
 export { breadcrumbsComponent } from './components/breadcrumbs/config.js';
