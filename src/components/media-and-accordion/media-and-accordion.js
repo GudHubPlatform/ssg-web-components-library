@@ -50,6 +50,15 @@ class MediaAndAccordion extends GHComponent {
         itemTarget.classList.add('active');
     }
 
+    openPopup (el) {
+        const popupId = el.getAttribute('data-popup-id');
+        window.dispatchEvent( new CustomEvent('open-popup', {
+            detail: {
+                popupId,
+                placement: this.tagName.toLowerCase()
+            }
+        }));
+    }
 }
 
 window.customElements.define('media-and-accordion', MediaAndAccordion);
