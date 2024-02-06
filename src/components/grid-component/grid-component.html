@@ -4,9 +4,8 @@
         ${json.subtitle ? `<p class="subtitle" gh-id="${ghId}.subtitle">SUBTITLE</p>` : ''}
         <div class="grid">
             ${items.reduce((acc, item, index) => {
-                const isClickable = item.link ? 'clickable' : '';
                 return acc + `
-                    <div class="grid_item ${isClickable}">
+                    <div class="grid_item ${item.button ? 'clickable' : ''}" ${item.button && item.button.popupId ? `data-popup-id="${item.button.popupId}"` : ''}>
                         ${item.letter ? `<div class="letter">${item.letter}</div>` : ''}
                         <div class="top">
                             ${item.marker ? `
@@ -20,7 +19,7 @@
                                 </div>
                             ` : ''}
                             ${item.title ? (() => {
-                                const tag = item.link ? `a href="${item.link}"` : 'h3';
+                                const tag = item.button && item.button.link ? `a href="${item.button.link}"` : 'h3';
                                 return `<${tag} class="item-title" gh-id="${ghId}.items.${index}.title">Title</${tag}>`;
                             })() : ''}
                             ${item.text ? `<div class="text">${item.text}</div>` : ''}
@@ -32,10 +31,10 @@
                                 </ul>
                             ` : ''}
                         </div>
-                        ${item.link ? `
+                        ${item.button ? `
                             <div class="bottom">
                                 <div class="bold_text">
-                                    <span gh-id="${ghId}.items.${index}.bold_text"></span>
+                                    <span gh-id="${ghId}.items.${index}.button.text"></span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none"><circle cx="10" cy="10.6282" r="10" fill="#0A79FE"/><path d="M8.25 6.62817L12 10.3782L8.25 14.1282" stroke="white"/></svg>
                                 </div>
                             </div>
@@ -43,9 +42,9 @@
                     </div>
             `}, '')}
         </div>
-        ${json.button_text ? `
+        ${json.button ? `
             <div class="bottom_button">
-                <get-in-touch-button data-popup-title="Тестувати Безкоштовно" data-popup-subtitle="Заповніть форму зараз і ми зв'яжемося з вами!">${json.button_text}</get-in-touch-button>
+                <button-component data-popup-id="${json.button.popupId}" data-placement="${json.button.placement}">${json.button.text}</button-component>
             </div>
         `: ''}
     </div>
