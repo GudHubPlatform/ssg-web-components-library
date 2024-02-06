@@ -24,15 +24,30 @@ class ListMediaAndText extends GHComponent {
             el.addEventListener('mouseup', (e) => {
                 if ("a" !== e.target.tagName.toLowerCase()) {
                     e.preventDefault();
-                    const link = e.currentTarget.querySelector(".item-title").getAttribute("href");
-                    if (e.button === 0) {
-                        window.location.href = link;
-                    } else if (e.button === 1) {
-                        window.open(link, '_blank');
+                    const item = e.currentTarget.querySelector(".item-title");
+                    const link = item.getAttribute("href");
+                    if (link) {
+                        if (e.button === 0) {
+                            window.location.href = link;
+                        } else if (e.button === 1) {
+                            window.open(link, '_blank');
+                        }
+                    } else {
+                        this.openPopup(e.currentTarget);
                     }
                 }
             });
         }
+    }
+
+    openPopup (el) {
+        const popupId = el.getAttribute('data-popup-id');
+        window.dispatchEvent( new CustomEvent('open-popup', {
+            detail: {
+                popupId,
+                placement: this.tagName.toLowerCase()
+            }
+        }));
     }
 }
 

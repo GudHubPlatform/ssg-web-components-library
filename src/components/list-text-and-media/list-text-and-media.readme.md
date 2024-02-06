@@ -12,8 +12,11 @@ none
         {
             "title": "Item Title",
             "subtitle": "Item Subtitle",
-            "link": "#",
-            "link_text": "link_text",
+            "button": {
+                "link?": "#",
+                "popupId?": "popupId",
+                "text": "link text"
+            },
             "image": {
                 "src": "/assets/images/placeholder392x324.png",
                 "alt": "Item Title",
@@ -28,3 +31,7 @@ none
     ]
 }
 ```
+## Button settings
+Use "link" if button must be <a> and redirect to link
+OR
+Use "popupId" to open popup with that id
