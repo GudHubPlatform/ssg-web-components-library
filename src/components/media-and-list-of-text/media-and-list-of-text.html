@@ -20,9 +20,9 @@
                             </li>
                         `, '')}
                     </ul>
-                    ${json.button_text ? `
+                    ${json.button ? `
                         <div class="bottom_button">
-                            <button-component data-popup-title="Тестувати Безкоштовно" data-popup-subtitle="Заповніть форму зараз і ми зв'яжемося з вами!">${json.button_text}</button-component>
+                            <button-component data-popup-id="${json.button.popupId}" data-placement="${json.button.placement}">${json.button.text}</button-component>
                         </div>
                     `: ''}
                 </div>
