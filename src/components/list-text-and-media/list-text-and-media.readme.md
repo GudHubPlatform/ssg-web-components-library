@@ -1,6 +1,9 @@
 # Attributes:
 
-none
+    data-image-shadow: adds box-shadow to image
+    data-image-radius: adds border-radius to image
+    data-image-border: adds border to image
+
 
 # Component data-object: 
 ("?" means "unnecessary")
