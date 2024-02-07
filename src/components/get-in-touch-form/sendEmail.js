@@ -30,7 +30,7 @@ async function sendRequest(form, mailConfig, formId, placement) {
         Website:  window.location.hostname,
         Url: window.location.pathname,
         FormId: formId,
-        FormPlacement: 'Body',
+        FormPlacement: placement,
         SearchParams: {
             ...searchParams
         },
@@ -67,38 +67,29 @@ async function sendRequest(form, mailConfig, formId, placement) {
             "</html>"
     };
 
-    console.log(formDataObj);
-    console.log(template);
-
-    return new Promise(res => {
-        setTimeout(() => {
-            res({status: 'success'});
-        }, 1000)
-    })
-
-    // try {
-    //     const response = await fetch('https://development.gudhub.com/api/services/send-email', {
-    //         method: 'POST',
-    //         body: JSON.stringify(template),
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //     })
-    //     if (response.status == 200) {
-    //         return {
-    //             status: 'success'
-    //         }
-    //     } else {
-    //         return {
-    //             status: 'error'
-    //         }
-    //     }
-    // } catch (error) {
-    //     return {
-    //         status: 'error',
-    //         error
-    //     }
-    // }
+    try {
+        const response = await fetch('https://gudhub.com/api/services/prod/send-email', {
+            method: 'POST',
+            body: JSON.stringify(template),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        if (response.status == 200) {
+            return {
+                status: 'success'
+            }
+        } else {
+            return {
+                status: 'error'
+            }
+        }
+    } catch (error) {
+        return {
+            status: 'error',
+            error
+        }
+    }
 }
 
 function getQueryParams() {
