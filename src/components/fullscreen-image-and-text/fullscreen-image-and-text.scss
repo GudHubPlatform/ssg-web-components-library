@@ -9,6 +9,9 @@ fullscreen-image-and-text {
         h2 {
             color: #fff;
         }
+        &.container {
+            max-width: 1920px;
+        }
         .image {
             width: 100%;
             max-width: 948px;
@@ -20,9 +23,8 @@ fullscreen-image-and-text {
                 object-fit: cover;
             }
         }
-        .container {
+        .content-container {
             width: 100%;
-            margin-left: auto;
             max-width: 704px;
             margin-right: 0;
             padding: 0;
@@ -41,6 +43,7 @@ fullscreen-image-and-text {
             }
             .btn {
                 margin-top: 30px;
+                margin-left: 10px;
                 width: fit-content;
             }
         }
