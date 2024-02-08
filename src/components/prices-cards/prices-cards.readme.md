@@ -37,12 +37,17 @@ data-border-top-on-hover: to add grid_item border top on hover
             "text": "Morbi vel lacinia lorem"
           }
         ],
-        "get_in_touch": {
-          "button": "get in touch btn",
-          "subtitle": "get in touch subtitle",
-          "title": "get in touch title"
+        "button?": {
+          "popupId?": "form",
+          "placement?": "prices_cards",
+          "text": "Спробувати Безкоштовно",
+          "class?": "empty"
         }
       }
     ]
 }
 ```
+
+## Button property
+
+class: this class name will be applyed to button (example: define styles of secondary button by using "empty" class)

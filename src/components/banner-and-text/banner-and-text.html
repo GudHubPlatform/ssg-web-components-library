@@ -7,7 +7,7 @@
         <div class="flex-wrapper">
             <div class="left">
                 <div class="image">
-                    <img src="${image.src}" alt="${image.alt}" title="${image.title}">
+                    <img src="${image.src ? image.src : svgPlaceholder}" alt="${image.alt}" title="${image.title}">
                 </div>
                 <div class="offer" gh-id="${ghId}.offer"></div>
                 <div class="offer_subtitle" gh-id="${ghId}.offer_subtitle"></div>

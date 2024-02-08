@@ -21,7 +21,7 @@
                 "text": "link text"
             },
             "image": {
-                "src": "/assets/images/placeholder392x324.png",
+                "src": "",
                 "alt": "Item Title",
                 "title": "Item Title"
             },

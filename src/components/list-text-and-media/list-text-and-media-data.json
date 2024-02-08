@@ -5,10 +5,12 @@
        {
             "title": "Item Title",
             "subtitle": "Item Subtitle",
-            "link": "#",
-            "link_text": "link_text",
+            "button": {
+                "popupId": "form",
+                "text": "Button Text"
+            },
             "image": {
-                "src": "/assets/images/placeholder392x324.png",
+                "src": "",
                 "alt": "Item Title",
                 "title": "Item Title"
             },
@@ -21,10 +23,12 @@
         {
             "title": "Item Title",
             "subtitle": "Item Subtitle",
-            "link": "#",
-            "link_text": "link_text",
+            "button": {
+                "popupId": "form",
+                "text": "Button Text"
+            },
             "image": {
-                "src": "/assets/images/placeholder392x324.png",
+                "src": "",
                 "alt": "Item Title",
                 "title": "Item Title"
             },
@@ -37,10 +41,12 @@
         {
             "title": "Item Title",
             "subtitle": "Item Subtitle",
-            "link": "#",
-            "link_text": "link_text",
+            "button": {
+                "popupId": "form",
+                "text": "Button Text"
+            },
             "image": {
-                "src": "/assets/images/placeholder392x324.png",
+                "src": "",
                 "alt": "Item Title",
                 "title": "Item Title"
             },
@@ -53,10 +59,12 @@
         {
             "title": "Item Title",
             "subtitle": "Item Subtitle",
-            "link": "#",
-            "link_text": "link_text",
+            "button": {
+                "popupId": "form",
+                "text": "Button Text"
+            },
             "image": {
-                "src": "/assets/images/placeholder392x324.png",
+                "src": "",
                 "alt": "Item Title",
                 "title": "Item Title"
             },

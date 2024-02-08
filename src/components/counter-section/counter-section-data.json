@@ -1,7 +1,11 @@
 {
     "title": "Title",
     "subtitle": "Subtitle",
-    "button_text": "button_text",
+    "button": {
+      "popupId": "form",
+      "placement": "counter-section",
+      "text": "Button Text"
+    },
     "items": [
       {
         "number": "98",

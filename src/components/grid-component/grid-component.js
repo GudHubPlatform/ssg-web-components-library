@@ -1,6 +1,7 @@
 import html from './grid-component.html';
 import './grid-component.scss';
 import jsonTemplate from './grid-component-data.json';
+import svgPlaceholder from '../svgPlaceholder.js'
 
 class GridComponent extends GHComponent {
     constructor() {
@@ -11,6 +12,8 @@ class GridComponent extends GHComponent {
     async onServerRender() {
         this.ghId = this.getAttribute('data-gh-id') || null;
         this.json = await super.getGhData(this.ghId);
+        
+        this.svgPlaceholder = svgPlaceholder;
 
         this.items = this.json.items;
 

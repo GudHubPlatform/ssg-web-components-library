@@ -1,6 +1,7 @@
 import html from './animation-block.html';
 import './animation-block.scss';
 import jsonTemplate from './animation-block-data.json';
+import svgPlaceholder from '../svgPlaceholder.js';
 class AnimationBlock extends GHComponent {
     constructor() {
         super();
@@ -8,6 +9,7 @@ class AnimationBlock extends GHComponent {
     }
 
     async onServerRender() {
+        this.svgPlaceholder = svgPlaceholder;
         this.ghId = this.getAttribute('data-gh-id') || null;
 
         

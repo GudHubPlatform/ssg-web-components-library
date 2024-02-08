@@ -1,20 +1,22 @@
 {
-    "title": "Title",
-    "subtitle": "subtitle",
-    "text": "Lorem ipsum su more de linge mofrolo rupy sorento camaro pide derono cama sulfato boroholero pita su mano. Reder no folo copita. Fato deliano ro hoto",
-    "buttons": [
-      {
-        "class": "btn",
-        "text": "Зв’язатись з Нами"
-      },
-      {
-        "class": "btn empty",
-        "text": "Розробка під Ключ"
-      }
-    ],
-    "image": {
-      "src": "/assets/images/development-for-business.png",
-      "alt": "image alt",
-      "title": "image title"
+  "title": "Title",
+  "subtitle": "subtitle",
+  "text": "Lorem ipsum su more de linge mofrolo rupy sorento camaro pide derono cama sulfato boroholero pita su mano. Reder no folo copita. Fato deliano ro hoto",
+  "buttons": {
+    "primary": {
+      "popupId": "form",
+      "placement": "media-and-text",
+      "text": "Зв’язатись з Нами"
+    },
+    "secondary": {
+      "popupId": "form",
+      "placement": "media-and-text",
+      "text": "Розробка під Ключ"
     }
+  }, 
+  "image": {
+    "src": "",
+    "alt": "image alt",
+    "title": "image title"
   }
+}

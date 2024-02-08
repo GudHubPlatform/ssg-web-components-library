@@ -1,6 +1,7 @@
 import html from './banner-and-text.html';
 import './banner-and-text.scss';
 import jsonTemplate from './banner-and-text-data.json';
+import svgPlaceholder from '../svgPlaceholder.js';
 
 class BannerAndText extends GHComponent {
     constructor() {
@@ -10,6 +11,7 @@ class BannerAndText extends GHComponent {
     }
 
     async onServerRender() {
+        this.svgPlaceholder = svgPlaceholder;
         this.ghId = this.getAttribute('data-gh-id') || null;
         this.chapter = this.getAttribute('data-chapter') || 'pages';
         

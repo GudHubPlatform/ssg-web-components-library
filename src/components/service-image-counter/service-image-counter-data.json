@@ -1,13 +1,17 @@
 {
     "title": "Title",
     "subtitle": "Etiam sed ullamcorper tortor, sit amet dictum est. Ut posuere dolor sodales euismod feugiat",
-    "button_text": "Тестувати безкоштовно",
+    "button": {
+      "popupId": "form",
+      "placement": "service-image-counter",
+      "text": "Button Text"
+    },
     "items": [
       {
         "text": "Item title",
         "link": "#",
         "icon": {
-          "src": "/assets/images/icons/school3.svg",
+          "src": "",
           "alt": "Image alt",
           "title": "image title"
         }
@@ -16,7 +20,7 @@
         "text": "Tristique senectus",
         "link": "#",
         "icon": {
-          "src": "/assets/images/icons/school.svg",
+          "src": "",
           "alt": "Tristique senectus",
           "title": "Tristique senectus"
         }
@@ -25,7 +29,7 @@
         "text": "Donec lacinia orci",
         "link": "#",
         "icon": {
-          "src": "/assets/images/icons/school1.svg",
+          "src": "",
           "alt": "Donec lacinia orci",
           "title": "Donec lacinia orci"
         }
@@ -34,7 +38,7 @@
         "text": "Suspendisse",
         "link": "#",
         "icon": {
-          "src": "/assets/images/icons/school3.svg",
+          "src": "",
           "alt": "Suspendisse",
           "title": "Suspendisse"
         }
@@ -43,7 +47,7 @@
         "text": "Nam bibendum",
         "link": "#",
         "icon": {
-          "src": "/assets/images/icons/school3.svg",
+          "src": "",
           "alt": "Nam bibendum",
           "title": "Nam bibendum"
         }

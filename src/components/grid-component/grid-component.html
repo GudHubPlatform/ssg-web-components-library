@@ -15,7 +15,7 @@
                             ` : ''}
                             ${item.icon ? `
                                 <div class="icon">
-                                    <img src="${item.icon.src}" alt="${item.icon.alt}" title="${item.icon.title}" width="80" height="80">
+                                    <img src="${item.icon.src ? item.icon.src : svgPlaceholder}" alt="${item.icon.alt}" title="${item.icon.title}" width="80" height="80">
                                 </div>
                             ` : ''}
                             ${item.title ? (() => {
@@ -44,7 +44,7 @@
         </div>
         ${json.button ? `
             <div class="bottom_button">
-                <button-component data-popup-id="${json.button.popupId}" data-placement="${json.button.placement}">${json.button.text}</button-component>
+                <button-component data-link="${json.button.link}" ${json.button.popupId && json.button.placement ? `data-popup-id="${json.button.popupId}" data-placement="${json.button.placement}"` : ''}>${json.button.text}</button-component>
             </div>
         `: ''}
     </div>

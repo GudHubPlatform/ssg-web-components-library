@@ -7,14 +7,14 @@ class ButtonComponent extends GHComponent {
         super();
         this.popupId = this.hasAttribute('data-popup-id') ? this.getAttribute('data-popup-id') : null;
         this.placement = this.hasAttribute('data-placement') ? this.getAttribute('data-placement') : 'no-placement-attribute';
-        this.href = this.hasAttribute('href') ? this.getAttribute('href') : null;
-        this.tag = !this.popupId && this.href ? `a href="${this.href}"` : 'div onclick="openPopup()"';
+        this.link = this.hasAttribute('data-link') ? this.getAttribute('data-link') : null;
+        this.tag = this.link && !this.popupId ? `a href="${this.link}"` : 'div onclick="openPopup()"';
     }
     
     async onServerRender() {
         this.text = this.textContent != '' ? this.textContent : 'Замовити консультацію';
-        if (this.href) {
-            this.removeHref();
+        if (this.link) {
+            this.removeLink();
         }
 
         this.className = this.hasAttribute('class') ? this.getAttribute('class') : 'btn';
@@ -32,8 +32,8 @@ class ButtonComponent extends GHComponent {
         }));
     }
 
-    removeHref() {
-        this.removeAttribute('href');
+    removeLink() {
+        this.removeAttribute('link');
     }
 }
 window.customElements.define('button-component', ButtonComponent);

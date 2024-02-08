@@ -10,9 +10,14 @@ none
 {
     "title": "Title",
     "subtitle?": "Subtitle",
-    "button_text?": "button_text",
+    "button?": {
+      "link?": "#link",
+      "popupId?": "form",
+      "placement?": "media-and-list-of-text",
+      "text": "Button Text"
+    },
     "image": {
-      "src": "/assets/images/gudhub-abilities.jpg",
+      "src": "",
       "alt": "image alt",
       "title": "image title"
     },

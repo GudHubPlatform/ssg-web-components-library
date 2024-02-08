@@ -1,7 +1,11 @@
 {
     "title": "Title",
     "subtitle": "Subtitle",
-    "button_text": "Button_text",
+    "button": {
+      "popupId": "form",
+      "placement": "grid-component",
+      "text": "Button Text"
+    },
     "items": [
       {
         "marker": "1",
@@ -14,9 +18,11 @@
           "Aenean eu lectus varius, tempor sem sed, maximus quam.",
           "Aenean pulvinar felis ac eros vulputate tristique."
         ],
-        "bold_text": "Спробувати Безкоштовно",
+        "button": {
+          "text": "Спробувати Безкоштовно"
+        },
         "icon": {
-          "src": "/assets/images/icons/placeholder.svg",
+          "src": "",
           "alt": "Image Alt",
           "title": "Image Title"
         }
@@ -32,9 +38,11 @@
           "Aenean eu lectus varius, tempor sem sed, maximus quam.",
           "Aenean pulvinar felis ac eros vulputate tristique."
         ],
-        "bold_text": "Спробувати Безкоштовно",
+        "button": {
+          "text": "Спробувати Безкоштовно"
+        },
         "icon": {
-          "src": "/assets/images/icons/placeholder.svg",
+          "src": "",
           "alt": "Image Alt",
           "title": "Image Title"
         }
@@ -50,9 +58,11 @@
           "Aenean eu lectus varius, tempor sem sed, maximus quam.",
           "Aenean pulvinar felis ac eros vulputate tristique."
         ],
-        "bold_text": "Спробувати Безкоштовно",
+        "button": {
+          "text": "Спробувати Безкоштовно"
+        },
         "icon": {
-          "src": "/assets/images/icons/placeholder.svg",
+          "src": "",
           "alt": "Image Alt",
           "title": "Image Title"
         }
@@ -68,9 +78,11 @@
           "Aenean eu lectus varius, tempor sem sed, maximus quam.",
           "Aenean pulvinar felis ac eros vulputate tristique."
         ],
-        "bold_text": "Спробувати Безкоштовно",
+        "button": {
+          "text": "Спробувати Безкоштовно"
+        },
         "icon": {
-          "src": "/assets/images/icons/placeholder.svg",
+          "src": "",
           "alt": "Image Alt",
           "title": "Image Title"
         }
@@ -86,9 +98,11 @@
           "Aenean eu lectus varius, tempor sem sed, maximus quam.",
           "Aenean pulvinar felis ac eros vulputate tristique."
         ],
-        "bold_text": "Спробувати Безкоштовно",
+        "button": {
+          "text": "Спробувати Безкоштовно"
+        },
         "icon": {
-          "src": "/assets/images/icons/placeholder.svg",
+          "src": "",
           "alt": "Image Alt",
           "title": "Image Title"
         }
@@ -104,9 +118,11 @@
           "Aenean eu lectus varius, tempor sem sed, maximus quam.",
           "Aenean pulvinar felis ac eros vulputate tristique."
         ],
-        "bold_text": "Спробувати Безкоштовно",
+        "button": {
+          "text": "Спробувати Безкоштовно"
+        },
         "icon": {
-          "src": "/assets/images/icons/placeholder.svg",
+          "src": "",
           "alt": "Image Alt",
           "title": "Image Title"
         }
