@@ -15,7 +15,7 @@
                         ${ lists.reduce((acc, list, index) => {
                             return acc + `
                                 <div class="list">
-                                    <h3 gh-id="${ghId}.lists.${index}.title"></h3>
+                                    ${list.title ? `<h3 gh-id="${ghId}.lists.${index}.title"></h3>` : ''}
                                     <ul>
                                         ${
                                             list.list.reduce((acc, li, indexLi) => {
