@@ -1,5 +1,5 @@
 import html from './image-component.html';
-
+import placeholderHtml from './image-component-placeholder.html';
 class ImageComponent extends GHComponent {
     /*
      * src - path to static image 
@@ -35,6 +35,10 @@ class ImageComponent extends GHComponent {
         
         this.width = this.hasAttribute('width') ? this.getAttribute('width') : false;
         this.height = this.hasAttribute('height') ? this.getAttribute('height') : false;
+        if (!this.src) {
+            super.render(placeholderHtml);
+            return
+        }
         // Download image from gudhub (this.dataUrl ) to cache (this.dataSrc)
         await new Promise(async (resolve) => {
             if(this.dataSrc && this.dataUrl && !window.disableImagesRegeneration) {
@@ -68,38 +72,39 @@ class ImageComponent extends GHComponent {
         
             this.image.setAttribute('src', this.src);
         })
-        caller == 'client' ? this.clientRender() : super.render(html);
+        super.render(html);
+        // caller == 'client' ? this.clientRender() : super.render(html);
     }
 
-    clientRender() {
-        this.innerHTML = /*html*/`
-        <picture data-natural-width="${this.imageWidth}">
-            ${ (this.imageWidth < 1200) && (this.imageWidth > 600) ? `
-                <source media="(min-width: 600px)" srcset="${this.path}${this.extension}.webp" type="image/webp">
-                <source media="(min-width: 600px)" srcset="${this.path}${this.extension}" type="image/${this.extension.substring(1, this.extension.length)}">
-            ` : ''}
-            ${ this.imageWidth > 600 ? `
-                <source media="(max-width: 600px)" srcset="${this.path}-600${this.extension}.webp" type="image/webp">
-            ` : ''}
-            ${ this.imageWidth > 1200 ? `
-                <source media="(max-width: 1200px)" srcset="${this.path}-1200${this.extension}.webp" type="image/webp">
-                <source media="(min-width: 1200px)" srcset="${this.path}${this.extension}.webp" type="image/webp">
-            ` : ''}
-            ${ this.imageWidth > 600 ? `
-                <source media="(max-width: 600px)" srcset="${this.path}-600${this.extension}" type="image/${this.extension.substring(1, this.extension.length)}">
-            ` : ''}
-            ${ this.imageWidth > 1200 ? `
-                <source media="(max-width: 1200px)" srcset="${this.path}-1200${this.extension}" type="image/${this.extension.substring(1, this.extension.length)}">
-                <source media="(min-width: 1200px)" srcset="${this.path}${this.extension}" type="image/${this.extension.substring(1, this.extension.length)}">
-            ` : ''}
-            ${ this.imageWidth <= 600 ? `
-                <source srcset="${this.src}" type="image/${this.src.split('.')[this.src.split('.').length - 1]}" />
-            ` : ''}
-            <source srcset="${this.src}.webp" type="image/webp">
-            <img src="${this.src}" ${ this.title ? `title="${this.title}"` : '' } ${ this.alt ? `alt="${this.alt}"` : '' } ${ this.lazyload ? 'loading="lazy"' : '' } ${ this.width ? `width="${this.width}"` : '' } ${ this.height ? `height="${this.height}"` : '' } >
-        </picture>
-        `;
-    }
+    // clientRender() {
+    //     this.innerHTML = /*html*/`
+    //     <picture data-natural-width="${this.imageWidth}">
+    //         ${ (this.imageWidth < 1200) && (this.imageWidth > 600) ? `
+    //             <source media="(min-width: 600px)" srcset="${this.path}${this.extension}.webp" type="image/webp">
+    //             <source media="(min-width: 600px)" srcset="${this.path}${this.extension}" type="image/${this.extension.substring(1, this.extension.length)}">
+    //         ` : ''}
+    //         ${ this.imageWidth > 600 ? `
+    //             <source media="(max-width: 600px)" srcset="${this.path}-600${this.extension}.webp" type="image/webp">
+    //         ` : ''}
+    //         ${ this.imageWidth > 1200 ? `
+    //             <source media="(max-width: 1200px)" srcset="${this.path}-1200${this.extension}.webp" type="image/webp">
+    //             <source media="(min-width: 1200px)" srcset="${this.path}${this.extension}.webp" type="image/webp">
+    //         ` : ''}
+    //         ${ this.imageWidth > 600 ? `
+    //             <source media="(max-width: 600px)" srcset="${this.path}-600${this.extension}" type="image/${this.extension.substring(1, this.extension.length)}">
+    //         ` : ''}
+    //         ${ this.imageWidth > 1200 ? `
+    //             <source media="(max-width: 1200px)" srcset="${this.path}-1200${this.extension}" type="image/${this.extension.substring(1, this.extension.length)}">
+    //             <source media="(min-width: 1200px)" srcset="${this.path}${this.extension}" type="image/${this.extension.substring(1, this.extension.length)}">
+    //         ` : ''}
+    //         ${ this.imageWidth <= 600 ? `
+    //             <source srcset="${this.src}" type="image/${this.src.split('.')[this.src.split('.').length - 1]}" />
+    //         ` : ''}
+    //         <source srcset="${this.src}.webp" type="image/webp">
+    //         <img src="${this.src}" ${ this.title ? `title="${this.title}"` : '' } ${ this.alt ? `alt="${this.alt}"` : '' } ${ this.lazyload ? 'loading="lazy"' : '' } ${ this.width ? `width="${this.width}"` : '' } ${ this.height ? `height="${this.height}"` : '' } >
+    //     </picture>
+    //     `;
+    // }
 }
 
 if(!window.customElements.get('image-component')) {
