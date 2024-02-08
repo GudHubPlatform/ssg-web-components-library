@@ -99,7 +99,7 @@ fullscreen-image-and-text {
 }
 
 @media screen and (max-width: 1250px) {
-    fullscreen-image-and-text .fullscreen_image_and_text, fullscreen-image-and-text.reverse .fullscreen_image_and_text {
+    fullscreen-image-and-text .fullscreen_image_and_text, fullscreen-image-and-text[data-reverse] .fullscreen_image_and_text {
         flex-direction: column-reverse;
         padding-right: 0;
         padding-left: 0;
