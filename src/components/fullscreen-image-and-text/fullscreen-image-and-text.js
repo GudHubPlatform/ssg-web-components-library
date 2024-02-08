@@ -1,5 +1,6 @@
 import html from './fullscreen-image-and-text.html';
 import './fullscreen-image-and-text.scss';
+import jsonTemplate from './fullscreen-image-and-text-data.json';
 
 class FullscreenImageAndText extends GHComponent {
     /**
@@ -8,6 +9,7 @@ class FullscreenImageAndText extends GHComponent {
      */
     constructor() {
         super();
+        super.setDefaultData(jsonTemplate);
     }
 
     async onServerRender() {
