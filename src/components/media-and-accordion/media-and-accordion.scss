@@ -7,6 +7,12 @@ media-and-accordion {
     .section_wrapper {
         position: relative;
     }
+    .subtitle {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 1000px;
+        text-align: center;
+    }
     .left, .right {
         width: calc(50% - 10px);
     }
