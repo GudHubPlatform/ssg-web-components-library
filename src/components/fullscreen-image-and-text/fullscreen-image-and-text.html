@@ -32,11 +32,11 @@
                 ` : ''
             }
             ${ json.button ? `
-                <a href="${json.button.link}" class="btn" gh-id="${ghId}.button.text"></a>    
+                <button-component data-link="${json.button.link}" ${json.button.popupId && json.button.placement ? `data-popup-id="${json.button.popupId}" data-placement="${json.button.placement}"` : ''}>${json.button.text}</button-component>
             ` : ''}
         </div>
     </div>
     <div class="image">
-        <image-component lazyload src="${image.src}" alt="${image.alt}" title="${image.title}"></image-component>
+        <image-component lazyload src="${image.src ? image.src : ''}" alt="${image.alt}" title="${image.title}"></image-component>
     </div>
 </section>

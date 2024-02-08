@@ -1,0 +1,48 @@
+{
+    "title": "Title",
+    "button": {
+      "popupId": "form",
+      "placement": "fullscreen-image-and-text",
+      "text": "Button Text"
+    },
+    "image": {
+      "src": "",
+      "alt": "Alt",
+      "title": "Title"
+    },
+    "paragraphs": [
+      {
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus fringilla mi1"
+      },
+      {
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus fringilla mi"
+      },
+      {
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus fringilla mi"
+      }
+    ],
+    "lists": [
+      {
+        "title": "sit amet",
+        "list": [
+          {
+            "li": "ipsum dolor"
+          },
+          {
+            "li": "ipsum dolor"
+          }
+        ]
+      },
+      {
+        "title": "faucibus fringilla",
+        "list": [
+          {
+            "li": "adipiscing elit"
+          },
+          {
+            "li": "adipiscing elit"
+          }
+        ]
+      }
+    ]
+  }

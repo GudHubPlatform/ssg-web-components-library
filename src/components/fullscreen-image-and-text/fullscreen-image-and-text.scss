@@ -53,7 +53,7 @@ fullscreen-image-and-text {
             color: #4D555B;
         }
     }
-    &.reverse {
+    &[data-reverse] {
         .fullscreen_image_and_text {
             flex-direction: row-reverse;
             padding-left: 0;
