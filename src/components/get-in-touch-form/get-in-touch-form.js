@@ -39,7 +39,10 @@ class GetInTouchForm extends GHComponent {
 
     onParentPopupClose() {
         if (this.isFormSubmitted) {
-            setTimeout(() => this.hideSuccess(), 500);
+            setTimeout(() => {
+                this.hideSuccess();
+                this.hideFail();
+            }, 500);
         }
     }
 
@@ -64,9 +67,11 @@ class GetInTouchForm extends GHComponent {
         this.removeLoader(element);
         let email = this.querySelector('[name="email"]').value;
         let phone = this.querySelector('[name="phone"]').value || '';
+        this.isFormSubmitted = true;
         if (res) {
-            this.isFormSubmitted = true;
             this.showSuccess({email, phone});
+        } else {
+            // this.showFail();
         }
     }
     async addLoader() {
@@ -85,11 +90,17 @@ class GetInTouchForm extends GHComponent {
         }
         this.classList.add('success');
     }
+    async showFail() {
+        this.classList.add('fail');
+    }
     async hideSuccess() {
         this.getElementsByClassName('email')[0].innerText = '';
         this.getElementsByClassName('phone')[0].innerText = '';
         this.querySelector('.check_entity.phone_entity').classList.remove('provided');
         this.classList.remove('success');
+    }
+    async hideFail() {
+        this.classList.remove('fail');
     }
 
     generateInput(config) {
