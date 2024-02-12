@@ -30,7 +30,7 @@ data-form-id="form-id": determine id of config that will be applyed to form
                 "required": "boolean",
                 "placeholder": "Ім'я *",
                 "width": "number from 1 to 12"
-            }
+            }>
         ]
     },
 ```
@@ -39,7 +39,7 @@ email: will be checked by email rules;
 phone: will be checked by phone number rules;
 short: max length 64 symbols;
 long: max length 128 symbols;
-textarea: tag "<textarea>";
+textarea: tag "textarea";
 
 ## Width:
 defines the width of the field in the row. The total width of the row is 12. That is, if 2 fields have a width of 6, then they will take up half of the line each
