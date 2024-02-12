@@ -1,5 +1,5 @@
 reviews-slider {
-    background: var(--tertiary-bg-color);
+    background: var(--bg-color);
     h2 {
         text-align: left;
     }
@@ -7,7 +7,7 @@ reviews-slider {
         text-align: left;
     }
     .review_item {
-        background: var(--block-tertiary-bg-color);
+        background: var(--block-primary-bg-color);
         border-radius: 20px;
         padding: 30px;
         display: flex;
@@ -23,20 +23,20 @@ reviews-slider {
             width: 14px;
             height: 14px;
             path {
-                fill: var(--block-tertiary-h-color);
+                fill: var(--block-primary-h-color);
                 transition: all .5s ease;
             }
         }
 
         .review_text p {
-            color: var(--block-tertiary-text-color);
+            color: var(--block-primary-text-color);
             font-size: var(--text-font-size);
             font-weight: 400;
             line-height: 140%; /* 22.4px */
         }
     
         .author, .position {
-            color: var(--block-tertiary-h-color);
+            color: var(--block-primary-h-color);
         }
         .author {
             font-size: var(--text-font-size);

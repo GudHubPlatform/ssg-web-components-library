@@ -1,5 +1,5 @@
 media-and-accordion {
-    background: var(--primary-bg-color);
+    background: var(--bg-color);
     .flex-wrapper {
         gap: 20px;
         cursor: pointer;
@@ -43,7 +43,7 @@ media-and-accordion {
     }
     .right .text_content {
         border-radius: 0;
-        border-top: 2px solid var(--tertiary-bg-color);
+        border-top: 2px solid rgba(0, 0, 0, 0.1);
         padding: 30px;
         transition: all .2s ease;
         .toggle_part {
@@ -79,7 +79,7 @@ media-and-accordion {
             }
             &:hover {
                 span {
-                    color: var(--primary-color);
+                    color: var(--link-hover-color);
                 }
             }
         }
@@ -90,7 +90,7 @@ media-and-accordion {
             border-top-color: var(--h-color);
             border-top-width: 4px;
 
-            box-shadow: 0px 4px 9px 0px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--block-primary-box-shadow);
             border-bottom-color: transparent;
             border-radius: 20px;
             .toggle_part {
@@ -114,7 +114,7 @@ media-and-accordion {
             padding: 30px;
             transition: all 0.2s ease;
             gap: 0;
-            border-top: 2px solid var(--tertiary-bg-color);
+            border-top: 2px solid rgba(0, 0, 0, 0.1);
         }
         .left {
             height: 100%;
@@ -132,7 +132,7 @@ media-and-accordion {
         }
         .active {
             border-top-color: var(--h-color);
-            box-shadow: 0px 4px 9px 0px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--block-primary-box-shadow);
             border-bottom-color: transparent;
             border-radius: 20px;
             gap: 15px;

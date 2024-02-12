@@ -1,6 +1,6 @@
 grid-component {
     --grid-gap: 20px;
-    background-color: var(--primary-bg-color);
+    background-color: var(--bg-color);
     .subtitle {
         max-width: 940px;
         text-align: center;
@@ -33,7 +33,7 @@ grid-component {
             justify-content: center;
             align-items: center;
             border-radius: 50%;
-            background-color: var(--primary-color);
+            background-color: var(--accent-color);
             .marker-symbol {
                 color: #FFF;
                 font-weight: 700;
@@ -128,12 +128,12 @@ grid-component {
         transition: all .3s ease-out;
         &:hover {
             cursor: pointer;
-            background: var(--tertiary-bg-color);
+            background: var(--block-primary-bg-hover-color);
             .letter {
                 color: #fff;
             }
             .bold_text {
-                color: var(--primary-color);
+                color: var(--block-primary-link-hover-color);
                 svg {
                     left: 10px;
                 }
@@ -173,14 +173,14 @@ grid-component {
     }
     &[data-items-shadow] {
         .grid_item {
-            box-shadow: 0px 4px 9px 0px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--block-primary-box-shadow);
         }
     }
     &[data-border-top-on-hover] {
         .grid_item {
                 border-top: 4px solid var(--block-primary-bg-color);
             &:hover {
-                border-top-color: var(--block-primary-h-color);
+                border-top-color: var(--block-primary-border-color);
             }
         }
     }

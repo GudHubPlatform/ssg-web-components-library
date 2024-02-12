@@ -21,7 +21,7 @@ recent-posts {
             transition: all .2s ease;
             cursor: pointer;
             &:hover {
-                box-shadow: 3px 3px 15px rgb(174 174 192 / 30%);
+                box-shadow: var(--block-primary-box-shadow);
                 .read_more {
                     a {
                         color: #00BFD6;

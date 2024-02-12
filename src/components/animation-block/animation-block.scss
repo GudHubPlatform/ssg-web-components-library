@@ -1,5 +1,5 @@
 animation-block {
-    background: var(--primary-bg-color);
+    background: var(--bg-color);
     h1 {
         text-align: center;
     }
@@ -21,8 +21,8 @@ animation-block {
         left: 0;
         width: 20px;
         height: 100%;
-        background: var(--primary-bg-color);
-        background: linear-gradient(90deg, var(--primary-bg-color) 0%, rgba(0,212,255,0) 100%);
+        background: var(--bg-color);
+        background: linear-gradient(90deg, var(--bg-color) 0%, rgba(0,212,255,0) 100%);
         z-index: 1;
         }
         &::after {
@@ -33,8 +33,8 @@ animation-block {
             right: 0;
             width: 20px;
             height: 100%;
-            background: var(--primary-bg-color);
-            background: linear-gradient(-90deg, var(--primary-bg-color) 0%, rgba(0,212,255,0) 100%);
+            background: var(--bg-color);
+            background: linear-gradient(-90deg, var(--bg-color) 0%, rgba(0,212,255,0) 100%);
         }
     }
     .row {

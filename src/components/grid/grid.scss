@@ -224,7 +224,7 @@ grid-component0[data-type="shadow"] {
         text-align: left;
     }
     .grid_item {
-        box-shadow: 3px 3px 15px rgba(174, 174, 192, 0.3);
+        box-shadow: var(--block-primary-box-shadow);
         border: none;
         &_text {
             text-align: left;
@@ -542,7 +542,7 @@ grid-component0.dark_theme {
                 padding-bottom: 15px;
             }
             .absolute_wrap {
-                box-shadow: 3px 3px 15px rgb(174 174 192 / 30%);
+                box-shadow: var(--block-primary-box-shadow);
                 padding: 15px;
             }
         }
