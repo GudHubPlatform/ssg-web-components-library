@@ -26,7 +26,7 @@ about-us-image-counter {
     }
     .grid_item {
         background-color: #fff;
-        border-radius: 10px;
+        border-radius: var(--block-primary-border-radius);
         img {
             height: 83px;
             object-fit: contain;

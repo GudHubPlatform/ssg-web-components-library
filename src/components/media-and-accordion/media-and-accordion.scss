@@ -19,7 +19,7 @@ media-and-accordion {
     .left {
         img {
             width: calc(50% - 10px);
-            border-radius: 20px;
+            border-radius: var(--block-primary-border-radius);
             position: absolute;
             top: 0;
             left: 0;
@@ -92,7 +92,7 @@ media-and-accordion {
 
             box-shadow: var(--block-primary-box-shadow);
             border-bottom-color: transparent;
-            border-radius: 20px;
+            border-radius: var(--block-primary-border-radius);
             .toggle_part {
                 max-height: 1000px;
             }
@@ -134,7 +134,7 @@ media-and-accordion {
             border-top-color: var(--h-color);
             box-shadow: var(--block-primary-box-shadow);
             border-bottom-color: transparent;
-            border-radius: 20px;
+            border-radius: var(--block-primary-border-radius);
             gap: 15px;
             .left {
                 max-height: 1000px;

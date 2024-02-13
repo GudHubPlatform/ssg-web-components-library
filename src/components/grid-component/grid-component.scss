@@ -17,7 +17,7 @@ grid-component {
         width: 100%;
         max-width: 100%;
         background: var(--block-primary-bg-color);
-        border-radius: 20px;
+        border-radius: var(--block-primary-border-radius);
         padding: 30px;
         display: flex;
         flex-direction: column;
