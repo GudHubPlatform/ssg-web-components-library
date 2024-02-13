@@ -48,10 +48,10 @@ async function sendRequest(form, mailConfig, formId, placement) {
             `<title>${mailConfig.subject}</title>` +
             "</head>" +
             "<body>" +
+            "<h1>" +
+            `${mailConfig.subject}` +
+            "</h1>" +
             "<ul>" +
-            "<li><strong>" +
-            "subject: </strong>" + `${mailConfig.subject}` +
-            "</li>" +
             "<li><strong>" +
             "formId: </strong>" + `${formId}` +
             "</li>" +
