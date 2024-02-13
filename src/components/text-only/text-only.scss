@@ -1,10 +1,5 @@
 text-only {
-    &.dark_theme {
-        background-color: #141616;
-        .content {
-            color: #DBE2E7;
-        }
-    }
+    background-color: var(--bg-color);
     &.centered {
         h2 {
             text-align: center;
@@ -16,6 +11,6 @@ text-only {
     .content {
         font-size: 16px;
         line-height: 25px;
-        color: #4D555B;
+        color: var(--text-color);
     }
 }

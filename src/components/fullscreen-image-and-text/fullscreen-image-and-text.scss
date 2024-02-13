@@ -1,5 +1,5 @@
 fullscreen-image-and-text {
-    background: #141616;
+    background: var(--bg-color);
     .fullscreen_image_and_text {
         position: relative;
         display: flex;
@@ -7,7 +7,7 @@ fullscreen-image-and-text {
         padding-top: 0;
         padding-left: 11%;
         h2 {
-            color: #fff;
+            color: var(--h-color);
         }
         &.container {
             max-width: 1920px;
@@ -34,7 +34,7 @@ fullscreen-image-and-text {
         .content {
             font-size: 16px;
             line-height: 25px;
-            color: #DBE2E7;
+            color: var(--text-color);
             p {
                 margin-bottom: 20px;
                 &:last-child {
@@ -46,15 +46,6 @@ fullscreen-image-and-text {
                 margin-left: 10px;
                 width: fit-content;
             }
-        }
-    }
-    &.light_theme {
-        background-color: #fff;
-        h2 {
-            color: #141616;
-        }
-        .fullscreen_image_and_text .content p {
-            color: #4D555B;
         }
     }
     &[data-reverse] {
@@ -84,7 +75,7 @@ fullscreen-image-and-text {
                 li {
                     font-size: 16px;
                     line-height: 25px;
-                    color: #4D555B;
+                    color: var(--text-color);
                 }
                 &:nth-child(2n) {
                     margin-right: 0;
