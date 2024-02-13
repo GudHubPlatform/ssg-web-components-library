@@ -1,4 +1,13 @@
-export * as metaComponents from './components/meta/config.js';
+export { 
+    metaIndex,
+    metaTag,
+    canonicalComponent,
+    organizationSchema,
+    serviceSchema,
+    blogSchema,
+    authorSchema,
+    titleTag
+} from './components/meta/config.js';
 export { topBanner } from './components/top-banner/config.js';
 export { counterSection } from './components/counter-section/config.js';
 export { getInTouchBlock } from './components/get-in-touch-block/config.js';
