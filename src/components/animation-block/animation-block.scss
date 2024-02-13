@@ -63,7 +63,7 @@ animation-block {
             min-width: 230px;
             height: 66px;
             padding: 10px 15px;
-            border-radius: --block-primary-border-radius;
+            border-radius: var(--block-primary-border-radius);
             background-color: var(--block-primary-bg-color);
             .icon-wrapper {
                 display: flex;
