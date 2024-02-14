@@ -8,7 +8,7 @@
         ` : ''}
         <div class="list flex-wrapper">
             ${items.reduce((acc, item, index) => acc + `
-                <div class="list_item flex-wrapper clickable" ${item.button && item.button.popupId ? `data-popup-id="${item.button.popupId}"` : ''}>
+                <div class="list_item flex-wrapper clickable primary-block" ${item.button && item.button.popupId ? `data-popup-id="${item.button.popupId}"` : ''}>
                     <div class="text col-6">
                         <div class="top">
                             ${(() => {
@@ -17,11 +17,11 @@
                                     <${tag} class="item-title">${item.title}</${tag}>
                                 `;
                             })()}
-                            <p class="subtitle">${item.subtitle}</p>
+                            <p class="subtitle text">${item.subtitle}</p>
                             ${item.text_list && item.text_list.length > 0 ? `
                                 <ul class="text-list">
                                     ${item.text_list.reduce((acc, text) => acc + `
-                                        <li>${text}</li>
+                                        <li class="text">${text}</li>
                                     `, '')}
                                 </ul>
                             ` : ''}

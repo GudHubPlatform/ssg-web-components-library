@@ -5,7 +5,7 @@
         <div class="grid">
             ${items.reduce((acc, item, index) => {
                 return acc + `
-                    <div class="grid_item ${item.button ? 'clickable' : ''}" ${item.button && item.button.popupId ? `data-popup-id="${item.button.popupId}"` : ''}>
+                    <div class="grid_item primary-block ${item.button ? 'clickable' : ''}" ${item.button && item.button.popupId ? `data-popup-id="${item.button.popupId}"` : ''}>
                         ${item.letter ? `<div class="letter">${item.letter}</div>` : ''}
                         <div class="top">
                             ${item.marker ? `
@@ -26,7 +26,7 @@
                             ${item.list ? `
                                 <ul class="item_list">
                                     ${item.list.reduce((acc, list_item, list_index) => acc + `
-                                        <li gh-id="${ghId}.items.${index}.list.${list_index}"></li>
+                                        <li class="text" gh-id="${ghId}.items.${index}.list.${list_index}"></li>
                                     `, '')}
                                 </ul>
                             ` : ''}

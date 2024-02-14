@@ -5,13 +5,13 @@
         <div class="flex-wrapper">
             ${ cards.reduce((acc, item, index) => {
                 return acc + `
-                    <div class="card">
+                    <div class="card primary-block">
                         <div class="text">
                             <div class="title_card" gh-id="${ghId}.cards.${index}.title">Title</div>
                             <div class="price_card" gh-id="${ghId}.cards.${index}.price">Price</div>
                             <div class="subtitle_card" gh-id="${ghId}.cards.${index}.subtitle">Subtitle</div>
                         </div>
-                        <div class="list_button">
+                        <div class="list_button secondary-block">
                             <ul class="feature_list">
                                 ${cards[index].list.reduce((acc, item, list_index) => {
                                     return acc + `
@@ -20,7 +20,7 @@
                                                 ${JSON.parse(cards[index].list[list_index].boolean) ?  '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5561 27.7882C21.043 27.7882 27.1123 21.6508 27.1123 14.0799C27.1123 6.50898 21.043 0.371552 13.5561 0.371552C6.06929 0.371552 0 6.50898 0 14.0799C0 21.6508 6.06929 27.7882 13.5561 27.7882ZM13.3578 17.5137L18.616 12.0303L17.1724 10.6461L12.6077 15.4063L9.91177 12.8111L8.52475 14.252L11.9425 17.542L12.6644 18.2368L13.3578 17.5137Z" fill="black"/></svg>'
                                                                 : '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M27.1123 13.7017C27.1123 21.2726 21.043 27.41 13.5561 27.41C6.06929 27.41 0 21.2726 0 13.7017C0 6.13081 6.06929 -0.00662231 13.5561 -0.00662231C21.043 -0.00662231 27.1123 6.13081 27.1123 13.7017ZM13.2071 15.4393L13.2066 15.4398L10.7071 17.9393L9.29289 16.525L11.7929 14.025L11.7934 14.0245L12.4743 13.3447L9.29234 10.1578L10.7077 8.74468L13.8896 11.9316L17.1881 8.63826L18.6012 10.0536L15.3027 13.3469L16.0933 14.1388L16.0939 14.1394L18.5933 16.6388L17.1791 18.053L14.6791 15.553L14.6786 15.5525L13.8874 14.76L13.2071 15.4393Z" fill="black"/></svg>'}
                                             </div>
-                                            <span gh-id="${ghId}.cards.${index}.list.${list_index}.text"></span>
+                                            <span class="text" gh-id="${ghId}.cards.${index}.list.${list_index}.text"></span>
                                         </li>
                                         `
                                 }, '')}

@@ -54,6 +54,12 @@ counter-section {
                         color: var(--h-color);
                         margin-bottom: 10px;
                     }
+                    &_num {
+                        color: inherit;
+                    }
+                    &_symbol {
+                        color: inherit;
+                    }
                     &_bottom {
                         text-align: center;
                         font-size: 16px;

@@ -82,6 +82,7 @@ animation-block {
                 color: var(--block-primary-text-color);
                 font-size: var(--text-font-size);
                 .bold {
+                    margin: 0;
                     word-break: keep-all;
                     color: var(--block-primary-h-color);
                     font-size: var(--h3-font-size);

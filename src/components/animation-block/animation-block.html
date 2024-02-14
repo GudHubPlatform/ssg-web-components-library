@@ -10,13 +10,13 @@
                         ${
                             row.row.reduce((acc, row_item, index) => {
                                 return acc + `
-                                    <div class="item">
+                                    <div class="primary-block item">
                                         <div class="icon-wrapper">
                                             <img src="${row_item.image.src ? row_item.image.src : svgPlaceholder}" alt="${row_item.image.alt}" title="${row_item.image.title}" height="40">
                                         </div>
                                         <div class="item-text">
-                                            <div class="bold" gh-id="${ghId}.rows.${rowIndex}.row.${index}.title"></div>
-                                            <span gh-id="${ghId}.rows.${rowIndex}.row.${index}.subtitle"></span>
+                                            <h3 class="bold" gh-id="${ghId}.rows.${rowIndex}.row.${index}.title"></h3>
+                                            <span class="text" gh-id="${ghId}.rows.${rowIndex}.row.${index}.subtitle"></span>
                                         </div>
                                     </div>
                                 `

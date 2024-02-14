@@ -52,12 +52,14 @@ counter-section-with-text {
                                     line-height: 120%;
                                     color: var(--h-color);
                                     margin-bottom: 10px;
-                                    
-                                    .counter {
-                                        &_num, &_symbol {
-                                            word-break: keep-all;
-                                        }
-                                    }
+                                }
+                                &_num {
+                                    color: inherit;
+                                    word-break: keep-all;
+                                }
+                                &_symbol {
+                                    color: inherit;
+                                    word-break: keep-all;
                                 }
                                 &_bottom {
                                     text-align: center;
