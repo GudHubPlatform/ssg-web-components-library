@@ -1,5 +1,5 @@
 {
-    "title": "Title",
+    "title": "Title adipiscing elit",
     "button": {
       "popupId": "form",
       "placement": "fullscreen-image-and-text",
@@ -12,29 +12,27 @@
     },
     "paragraphs": [
       {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus fringilla mi1, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus fringilla mi1elit. Sed faucibus fringilla mi1, Lorem ipsum dolor sit amet, consectetur adipiscing elit elit. Sed faucibus fringilla mi1, Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus fringilla mi Sed faucibus fringilla mi, Lorem ipsum dolor sit amet, consectetur adipiscing elit elit. Sed faucibus fringilla mi, Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus fringilla mielit."
       }
     ],
     "lists": [
       {
-        "title": "sit amet",
         "list": [
           {
-            "li": "ipsum dolor"
+            "li": "consectetur adipiscing elit"
           },
           {
-            "li": "ipsum dolor"
+            "li": "dolor sit amet ipsum dolor"
           }
         ]
       },
       {
-        "title": "faucibus fringilla",
         "list": [
           {
-            "li": "adipiscing elit"
+            "li": "Lorem ipsum dolor sit"
           },
           {
-            "li": "adipiscing elit"
+            "li": "Sed faucibus fringilla"
           }
         ]
       }

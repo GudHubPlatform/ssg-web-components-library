@@ -1,6 +1,6 @@
 {
-    "title": "Title",
-    "offer": "Offer",
+    "title": "Title Ac accumsan",
+    "offer": "Offer pulvinar ultricies",
     "offer_subtitle": "subtitle Nulla ac accumsan arcu, eget ullamcorper ipsum. Fusce ultricies pulvinar ultricies. Donec lacinia orci sed tellus condimentum hendrerit.",
     "button": {
       "class": "btn",
@@ -8,12 +8,12 @@
     },
     "items": [
       {
-        "title": "Item title",
-        "text": "Item text. Suspendisse ut scelerisque nibh. Nam bibendum"
+        "title": "Item title mauris sed consectetur",
+        "text": "Item text. Suspendisse ut scelerisque nibh. Nam bibendum eget ullamcorper ipsum. Fusce ultricies pulvinar ultricies."
       },
       {
-        "title": "Item title",
-        "text": "Nunc commodo, mauris sed consectetur tempor, purus lorem interdum massa"
+        "title": "Item title Nam bibendum",
+        "text": "Nunc commodo, mauris sed consectetur tempor, purus lorem interdum massa. Donec lacinia orci sed tellus condimentum hendrerit."
       }
     ],
     "image": {

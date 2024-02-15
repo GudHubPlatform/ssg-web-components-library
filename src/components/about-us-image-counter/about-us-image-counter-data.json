@@ -1,6 +1,6 @@
 {
-    "title": "Title",
-    "subtitle": "Etiam sed ullamcorper tortor, sit amet dictum est. Ut posuere dolor sodales euismod feugiat",
+    "title": "Title Lorem ipsum",
+    "subtitle": "Subtitle Etiam sed ullamcorper tortor, sit amet dictum est. Ut posuere dolor sodales euismod feugiat",
     "button": {
       "popupId": "form",
       "placement": "about-us-image-counter",

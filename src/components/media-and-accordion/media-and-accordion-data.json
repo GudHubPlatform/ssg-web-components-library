@@ -1,10 +1,10 @@
 {
-    "title": "Title",
-    "subtitle": "Subtitle",
+    "title": "Title faucibus fringilla",
+    "subtitle": "Subtitle consectetur ut. Nulla facilisi. Suspendisse potenti.",
     "items": [
       {
-        "title": "Item title",
-        "text": "text",
+        "title": "Sed sed diam",
+        "text": "Praesent vitae sapien fringilla eros dictum rutrum. Pellentesque at sapien id ligula lobortis ornare at non massa. Ut ut risus ut libero condimentum volutpat.",
         "button": {
           "link": "#",
           "text": "Зв’язатися з Нами"
@@ -16,8 +16,8 @@
         }
       },
         {
-            "title": "Lorem",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus fringilla mi, id rhoncus risus consectetur ut. Nulla facilisi. Suspendisse potenti. Nullam in odio eu dui iaculis luctus. Nam ac justo at mi euismod malesuada.",
+            "title": "Suspendisse ultricies sapien",
+            "text": "Sed ultricies nunc a aliquet tristique. Curabitur luctus nisi neque, semper malesuada turpis placerat a. Vestibulum iaculis ullamcorper convallis. Nunc feugiat dignissim volutpat.",
             "button": {
                 "link": "#",
                 "text": "Зв’язатися з Нами"
@@ -29,8 +29,8 @@
             }
         },
         {
-            "title": "Lorem",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus fringilla mi, id rhoncus risus consectetur ut. Nulla facilisi. Suspendisse potenti. Nullam in odio eu dui iaculis luctus. Nam ac justo at mi euismod malesuada.",
+            "title": "Pellentesque at sapien",
+            "text": "Aliquam eget tincidunt felis. Maecenas vitae cursus elit, tempus tempus velit. Vivamus viverra a mauris eget commodo. Nullam erat quam, gravida sollicitudin vulputate quis.",
             "button": {
                 "link": "#",
                 "text": "Зв’язатися з Нами"
@@ -42,8 +42,8 @@
             }
         },
         {
-            "title": "Lorem",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus fringilla mi, id rhoncus risus consectetur ut. Nulla facilisi. Suspendisse potenti. Nullam in odio eu dui iaculis luctus. Nam ac justo at mi euismod malesuada.",
+            "title": "Curabitur luctus nisi neque",
+            "text": "Nullam euismod aliquet quam, vitae vehicula massa aliquet at. Nullam id lectus a magna semper scelerisque et ut nibh. Sed a iaculis lectus. Vivamus eu neque dui. Ut vel ligula id enim placerat lobortis id",
             "button": {
                 "link": "#",
                 "text": "Зв’язатися з Нами"
@@ -55,8 +55,8 @@
             }
         },
         {
-            "title": "Lorem",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus fringilla mi, id rhoncus risus consectetur ut. Nulla facilisi. Suspendisse potenti. Nullam in odio eu dui iaculis luctus. Nam ac justo at mi euismod malesuada.",
+            "title": "Maecenas vitae cursus elit",
+            "text": "Ut ut risus ut libero condimentum volutpat. Donec faucibus tellus purus, vel lobortis massa blandit vel. Proin justo velit, blandit non venenatis eu, eleifend a libero. Sed ultricies nunc a aliquet tristique.",
             "button": {
                 "link": "#",
                 "text": "Зв’язатися з Нами"
@@ -68,8 +68,8 @@
             }
         },
         {
-            "title": "Lorem",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus fringilla mi, id rhoncus risus consectetur ut. Nulla facilisi. Suspendisse potenti. Nullam in odio eu dui iaculis luctus. Nam ac justo at mi euismod malesuada.",
+            "title": "Ut gravida a ante euismod",
+            "text": "Sed lobortis faucibus ante, non elementum urna fringilla a. Suspendisse sed mauris tincidunt, mattis lacus sit amet, sollicitudin neque. Vestibulum vel gravida eros.",
             "button": {
                 "link": "#",
                 "text": "Зв’язатися з Нами"
