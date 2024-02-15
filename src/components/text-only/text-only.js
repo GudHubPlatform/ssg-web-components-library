@@ -7,7 +7,6 @@ class TextOnly extends GHComponent {
     constructor() {
         super();
         super.setDefaultData(jsonTemplate);
-        console.log(111);
     }
 
     async onServerRender() {
