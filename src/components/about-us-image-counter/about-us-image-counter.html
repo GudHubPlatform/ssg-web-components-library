@@ -8,9 +8,9 @@
         </div>
         <div class="grid">
             ${items.reduce((acc, item, index) => acc + `
-                    <div class="grid_item">
+                    <div class="grid_item primary-block">
                         <div class="image">
-                            <img src="${item.icon.src}" alt="${item.icon.alt}" title="${item.icon.title}" height="62">
+                            <img src="${item.icon.src ? item.icon.src : svgPlaceholder}" alt="${item.icon.alt}" title="${item.icon.title}" height="62">
                         </div>
                     </div>
                 `, '')}

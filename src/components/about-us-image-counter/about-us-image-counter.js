@@ -1,6 +1,7 @@
 import html from './about-us-image-counter.html';
 import './about-us-image-counter.scss';
 import jsonTemplate from './about-us-image-counter-data.json';
+import svgPlaceholder from '../svgPlaceholder.js';
 
 class AboutUsImageCounter extends GHComponent {
 
@@ -10,6 +11,7 @@ class AboutUsImageCounter extends GHComponent {
     }
 
     async onServerRender() {
+        this.svgPlaceholder = svgPlaceholder;
         this.ghId = this.getAttribute('data-gh-id') || null;
 
         this.json = await super.getGhData(this.ghId);
