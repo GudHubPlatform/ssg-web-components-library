@@ -8,7 +8,7 @@
         ` : ''}
         <div class="list flex-wrapper">
             ${items.reduce((acc, item, index) => acc + `
-                <div class="list_item flex-wrapper clickable bg-hover-color" ${item.button && item.button.popupId ? `data-popup-id="${item.button.popupId}"` : ''}>
+                <div class="list_item flex-wrapper clickable bg-hover" ${item.button && item.button.popupId ? `data-popup-id="${item.button.popupId}"` : ''}>
                     <div class="primary-block text-block col-6">
                         <div class="top">
                             ${(() => {
