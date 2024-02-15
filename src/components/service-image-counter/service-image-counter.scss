@@ -53,7 +53,7 @@ service-image-counter {
         &:hover {
             transform: translateY(-10px);
             h3 {
-                color: var(--accent-color);
+                color: var(--link-hover-color);
             }
         }
     }

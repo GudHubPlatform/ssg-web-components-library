@@ -8,8 +8,8 @@
         ` : ''}
         <div class="list flex-wrapper">
             ${items.reduce((acc, item, index) => acc + `
-                <div class="list_item flex-wrapper clickable primary-block" ${item.button && item.button.popupId ? `data-popup-id="${item.button.popupId}"` : ''}>
-                    <div class="text col-6">
+                <div class="list_item flex-wrapper clickable bg-hover-color" ${item.button && item.button.popupId ? `data-popup-id="${item.button.popupId}"` : ''}>
+                    <div class="primary-block text-block col-6">
                         <div class="top">
                             ${(() => {
                                 const tag = item.button.link ? `a href="${item.button.link}"` : 'div';
@@ -28,14 +28,14 @@
                         </div>
                         ${item.button.text ? `
                             <div class="bottom">
-                                <div class="link">
-                                    <span>${item.button.text}</span>
+                                <div class="link-wrapper">
+                                    <span class="link">${item.button.text}</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none"><circle cx="10" cy="10.6282" r="10" fill="#0A79FE"/><path d="M8.25 6.62817L12 10.3782L8.25 14.1282" stroke="white"/></svg>
                                 </div>
                             </div>
                         ` : ''}
                     </div>
-                    <div class="media col-6">
+                    <div class="primary-block media-block col-6">
                             <image-component lazyload src="${item.image.src}" alt="${item.image.alt}" title="${item.image.title}"></image-component>
                     </div>
                 </div>

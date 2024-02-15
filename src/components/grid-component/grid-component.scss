@@ -109,13 +109,15 @@ grid-component {
         }
         .bottom {
             .bold_text {
-                font-size: var(--text-font-size);
-                font-weight: 700;
-                color: var(--block-primary-h-color);
                 display: flex;
                 align-items: center;
                 gap: 10px;
-                transition: color .2s ease;
+                color: var(--block-primary-h-color);
+                span {
+                    font-size: var(--text-font-size);
+                    font-weight: 700;
+                    transition: color .2s ease;
+                }
                 svg {
                     position: relative;
                     left: 0;
@@ -128,12 +130,13 @@ grid-component {
         transition: all .3s ease-out;
         &:hover {
             cursor: pointer;
-            background: var(--block-primary-bg-hover-color);
             .letter {
                 color: #fff;
             }
             .bold_text {
-                color: var(--block-primary-link-hover-color);
+                span {
+                    color: var(--block-primary-link-hover-color);
+                }
                 svg {
                     left: 10px;
                 }
