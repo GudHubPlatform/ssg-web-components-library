@@ -174,19 +174,6 @@ grid-component {
             --items-in-row: 2;
         }
     }
-    &[data-items-shadow] {
-        .grid_item {
-            box-shadow: var(--block-primary-box-shadow);
-        }
-    }
-    &[data-border-top-on-hover] {
-        .grid_item {
-                border-top: 4px solid var(--block-primary-bg-color);
-            &:hover {
-                border-top-color: var(--block-primary-border-color);
-            }
-        }
-    }
     @media screen and (max-width: 900px) {
         .grid_item {
             padding: 15px;

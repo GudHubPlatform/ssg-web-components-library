@@ -87,7 +87,7 @@ media-and-accordion {
     .active {
         gap: 20px;
         .text_content {
-            border-top-color: var(--h-color);
+            border-top-color: var(--block-primary-border-color);
             border-top-width: 4px;
 
             box-shadow: var(--block-primary-box-shadow);

@@ -374,18 +374,6 @@ popup-container[data-position="bottom-right"] {
     }
 }
 
-get-in-touch-form[data-theme="dark"] {
-    .get-in-touch-form form {
-        .form_flex input, textarea {
-            color: var(--input-text-color);
-        }
-    }
-    .get-in-touch-form form .form_flex input:-webkit-autofill, .get-in-touch-form form .form_flex input:-webkit-autofill:hover, .get-in-touch-form form .form_flex input:-webkit-autofill:focus, .get-in-touch-form form .form_flex input:-webkit-autofill:active {
-        -webkit-box-shadow: initial !important;
-        -webkit-text-fill-color: initial !important;
-    }
-}
-
 @-webkit-keyframes rotating /* Safari and Chrome */ {
     from {
         -webkit-transform: rotate(0deg);

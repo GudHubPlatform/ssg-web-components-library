@@ -173,20 +173,4 @@ list-text-and-media {
             }
         }
     }
-
-    &[data-image-shadow] {
-        .media-block {
-            box-shadow: var(--block-primary-box-shadow);
-        }
-    }
-    &[data-image-radius] {
-        .media-block {
-            border-radius: var(--block-primary-border-radius);
-        }
-    }
-    &[data-image-border] {
-        .media-block {
-            border: 1px solid #DFDFDF;
-        }
-    }
 }
