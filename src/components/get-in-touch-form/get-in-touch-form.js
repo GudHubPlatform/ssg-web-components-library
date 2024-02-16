@@ -26,15 +26,20 @@ class GetInTouchForm extends GHComponent {
 
     onClientReady() {
         if (!this.hasAttribute('data-in-popup')) {
-        this.initConfig(window.website_config.form);
-            this.getElementsByTagName('form')[0].addEventListener('submit', (e) => this.handleSubmit(e.target));
+            this.initConfig(window.website_config.form);
+            this.attachEventListeners();
         }
     }
 
     clientRender() {
         this.initConfig(window.website_config.form);
         super.render(html);
+        this.attachEventListeners();
+    }
+
+    attachEventListeners() {
         this.getElementsByTagName('form')[0].addEventListener('submit', (e) => this.handleSubmit(e.target));
+        this.getElementsByClassName('restart_button')[0].addEventListener('click', (e) => this.hideFail());
     }
 
     onParentPopupClose() {
@@ -71,7 +76,7 @@ class GetInTouchForm extends GHComponent {
         if (res) {
             this.showSuccess({email, phone});
         } else {
-            // this.showFail();
+            this.showFail();
         }
     }
     async addLoader() {
@@ -80,7 +85,10 @@ class GetInTouchForm extends GHComponent {
     }
     async removeLoader() {
         this.classList.remove('loading');
-        this.querySelector('button[type="submit"]').disabled = false;
+        const submitButton = this.querySelector('button[type="submit"]');
+        setTimeout(() => {
+            submitButton.disabled = false;
+        }, 500);
     }
     async showSuccess({email, phone}) {
         this.getElementsByClassName('email')[0].innerText = email;
@@ -100,7 +108,12 @@ class GetInTouchForm extends GHComponent {
         this.classList.remove('success');
     }
     async hideFail() {
-        this.classList.remove('fail');
+        const overflowFail = this.querySelector('.overflow.fail');
+        overflowFail.style.opacity = 0;
+        setTimeout(() => {
+            this.classList.remove('fail');
+            overflowFail.style.opacity = '';
+        }, 500);
     }
 
     generateInput(config) {

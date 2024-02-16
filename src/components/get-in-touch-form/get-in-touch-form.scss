@@ -57,6 +57,9 @@ get-in-touch-form {
                 justify-content: center;
                 .btn {
                     font-size: 16px;
+                    &:disabled {
+                        opacity: 0;
+                    }
                 }
             }
             .form_wrap {
@@ -248,13 +251,11 @@ get-in-touch-form {
                         }
                     }
                 }
-                .try_again {
-
-                }
                 .restart_button {
                     width: 50px;
                     transform: scaleX(-1);
                     transition: transform .4s ease-out;
+                    cursor: pointer;
                     svg {
                         transition: all .4s ease-in-out;
                         circle {
@@ -306,11 +307,6 @@ get-in-touch-form {
                 z-index: 11;
                 animation: loading 2s linear infinite;
             }
-        }
-    }
-    &.success, &.fail {
-        button[type="submit"] {
-            opacity: 0;
         }
     }
     &.success {
@@ -372,40 +368,4 @@ popup-container[data-position="bottom-right"] {
             }
         }
     }
-}
-
-@-webkit-keyframes rotating /* Safari and Chrome */ {
-    from {
-        -webkit-transform: rotate(0deg);
-        -o-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    to {
-        -webkit-transform: rotate(-360deg);
-        -o-transform: rotate(-360deg);
-        transform: rotate(-360deg);
-    }
-}
-@keyframes rotating {
-    from {
-        -ms-transform: rotate(0deg);
-        -moz-transform: rotate(0deg);
-        -webkit-transform: rotate(0deg);
-        -o-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    to {
-        -ms-transform: rotate(-360deg);
-        -moz-transform: rotate(-360deg);
-        -webkit-transform: rotate(-360deg);
-        -o-transform: rotate(-360deg);
-        transform: rotate(-360deg);
-    }
-}
-.rotating {
-    -webkit-animation: rotating 2s linear infinite;
-    -moz-animation: rotating 2s linear infinite;
-    -ms-animation: rotating 2s linear infinite;
-    -o-animation: rotating 2s linear infinite;
-    animation: rotating 2s linear infinite;
 }
