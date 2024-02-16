@@ -129,6 +129,7 @@ grid-component {
     .grid_item.clickable {
         transition: all .3s ease-out;
         &:hover {
+            background-color: var(--block-primary-bg-hover-color);
             cursor: pointer;
             .letter {
                 color: #fff;
@@ -176,7 +177,8 @@ grid-component {
     }
     @media screen and (max-width: 900px) {
         .grid_item {
-            padding: 15px;
+            padding: 20px;
+            padding-left: 30px;
         }
     }
     @media screen and (max-width: 650px) {
