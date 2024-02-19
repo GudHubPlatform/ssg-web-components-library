@@ -4,12 +4,12 @@
     "buttons": {
       "primary": {
         "popupId": "form",
-        "placement": "about-us-banner",
+        "placement": "banner",
         "text": "Primary"
       },
       "secondary": {
         "popupId": "form",
-        "placement": "about-us-banner",
+        "placement": "banner",
         "text": "Secondary"
       }
     },
