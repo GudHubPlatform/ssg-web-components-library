@@ -15,6 +15,8 @@ class AboutUsBanner extends GHComponent {
 
         this.image = this.json.image;
 
+        this.hLvl = this.hasAttribute('h1') ? 'h1' : 'h2';
+
         super.render(html);
     }
 

@@ -1,6 +1,9 @@
 about-us-banner {
     background-color: var(--bg-color);
     display: block;
+    .title {
+        text-align: left;
+    }
     .subtitle {
         margin-bottom: 40px;
     }
