@@ -147,7 +147,7 @@ class MetaTag extends GHComponent {
         if (!document.querySelector('[property="og:locale"]')) {
             const metaLocale = document.createElement('meta');
             metaLocale.setAttribute('property', 'og:locale');
-            metaLocale.setAttribute('content', 'en');
+            metaLocale.setAttribute('content', document.documentElement.lang);
             document.querySelector('head').prepend(metaLocale);
         }
 
