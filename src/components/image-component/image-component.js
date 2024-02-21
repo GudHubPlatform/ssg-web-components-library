@@ -35,7 +35,7 @@ class ImageComponent extends GHComponent {
         
         this.width = this.hasAttribute('width') ? this.getAttribute('width') : false;
         this.height = this.hasAttribute('height') ? this.getAttribute('height') : false;
-        if (!this.src) {
+        if (!this.src && !this.dataUrl && !this.dataSrc) {
             super.render(placeholderHtml);
             return
         }
