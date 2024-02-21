@@ -1,0 +1,57 @@
+.gudhub-login-popup {
+
+    &__bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+
+        &.active {
+            display: flex;
+        }
+
+        gudhub-login {
+
+            form {
+                background: #ffffff;
+                margin-top: 0px;
+                padding: 15px;
+                font-family: Helvetica;
+
+                h2 {
+                    font-family: Helvetica;
+                    color: #2b60fa;
+                }
+
+                .change-auth-form {
+                    display: none;
+                }
+
+                .auth__button {
+                    background: #2b60fa;
+                    font-family: Helvetica;
+                }
+
+                .login-form {
+
+                    &__item {
+
+                        label {
+                            font-family: Helvetica;
+                        }
+
+                        input {
+                            font-family: Helvetica;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
