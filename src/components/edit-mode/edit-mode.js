@@ -40,6 +40,8 @@ class EditMode extends GHComponent {
     }
 
     disableEditors() {
+        const body = document.getElementsByTagName('body')[0];
+        body.classList.remove('edit-mode-enabled');
         const elementsToEdit = document.querySelectorAll('[gh-id]');
         if(elementsToEdit.length) {
             elementsToEdit.forEach(element => {
@@ -52,6 +54,8 @@ class EditMode extends GHComponent {
     }
 
     initEditors() {
+        const body = document.getElementsByTagName('body')[0];
+        body.classList.add('edit-mode-enabled');
         const showLoginPopup = () => this.showLoginPopup();
         const initGudHub = (auth_key) => this.initGudHub(auth_key);
         if(!document.querySelector('script[id="tinymce_script"]')) {
