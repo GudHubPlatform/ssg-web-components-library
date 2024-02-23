@@ -1,9 +1,11 @@
 import html from './homepage-banner.html';
 import './homepage-banner.scss';
 
+import jsonTemplate from './homepage-banner-data.json';
 class HomepageBanner extends GHComponent {
     constructor() {
         super();
+        super.setDefaultData(jsonTemplate);
     }
 
     async onServerRender() {

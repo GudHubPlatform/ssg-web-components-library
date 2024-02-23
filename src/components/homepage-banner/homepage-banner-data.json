@@ -1,0 +1,27 @@
+{
+    "title": "Posuere lorem ipsum",
+    "subtitle": "At in tellus integer feugiat. Pulvinar pellentesque habitant morbi tristique senectus et netus. Quis lectus nulla at volutpat diam ut venenatis tellus. Porttitor rhoncus dolor purus non enim praesent elementum facilisis leo.",
+    "buttons": {
+      "primary": {
+        "popupId": "form",
+        "placement": "homepage_banner",
+        "text": "Спробувати Безкоштовно"
+      },
+      "secondary": {
+        "popupId": "form",
+        "placement": "homepage_banner",
+        "text": "Дізнатись Більше"
+      }
+    },
+    "list": [
+      "Irure dolor in reprehenderit",
+      "Excepteur sint occaecat cupidatat",
+      "Duis aute irure dolor in",
+      "Ut enim ad minim veniam"
+    ],
+    "image": {
+      "src": "",
+      "alt": "Image Alt",
+      "title": "Image Title"
+    }
+}
