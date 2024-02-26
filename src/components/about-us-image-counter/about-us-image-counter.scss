@@ -32,6 +32,10 @@ about-us-image-counter {
             display: flex;
             justify-content: center;
             align-items: center;
+
+            img {
+                height: 100%;
+            }
         }
     }
 
