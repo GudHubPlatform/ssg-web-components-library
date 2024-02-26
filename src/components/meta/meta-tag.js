@@ -140,7 +140,7 @@ class MetaTag extends GHComponent {
         if (!document.querySelector('[property="og:type"]')) {
             const metaWebsite = document.createElement('meta');
             metaWebsite.setAttribute('property', 'og:type');
-            metaWebsite.setAttribute('content', 'webiste');
+            metaWebsite.setAttribute('content', 'website');
             document.querySelector('head').prepend(metaWebsite);
         }
         
