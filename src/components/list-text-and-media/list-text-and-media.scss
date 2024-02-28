@@ -36,7 +36,6 @@ list-text-and-media {
                 flex-grow: 0;
                 flex-shrink: 1;
                 gap: 20px;
-                width: 100%;
                 padding: 30px;
                 background-color: var(--block-primary-bg-color);
                 transition: background-color .3s ease;
@@ -113,7 +112,7 @@ list-text-and-media {
         $grid-columns: 12;
         @for $i from 1 through $grid-columns {
             .col-#{$i} {
-                width: calc(percentage($i / $grid-columns) - (var(--row-gap) / 2));
+                width: calc(percentage(calc($i / $grid-columns)) - calc(var(--row-gap) / 2));
             }
         }
     }
