@@ -17,6 +17,11 @@ class GridComponent extends GHComponent {
 
         this.items = this.json.items;
 
+        const gridItem = this.children[0];
+        if (gridItem) {
+            this.gridItemTag = gridItem.tagName.toLowerCase();
+        }
+
         if (this.ghId) {
             super.render(html);
         }

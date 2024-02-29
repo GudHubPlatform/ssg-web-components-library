@@ -3,44 +3,12 @@
         <h2 gh-id="${ghId}.title"> TITLE </h2>
         ${json.subtitle ? `<p class="subtitle" gh-id="${ghId}.subtitle">SUBTITLE</p>` : ''}
         <div class="grid">
-            ${items.reduce((acc, item, index) => {
-                return acc + `
-                    <div class="grid_item primary-block ${item.button ? 'clickable bg-hover' : ''}" ${item.button && item.button.popupId ? `data-popup-id="${item.button.popupId}"` : ''}>
-                        ${item.letter ? `<div class="letter">${item.letter}</div>` : ''}
-                        <div class="top">
-                            ${item.marker ? `
-                                <div class="marker">
-                                    <span class="marker-symbol">${item.marker}</span>
-                                </div>
-                            ` : ''}
-                            ${item.icon ? `
-                                <div class="icon">
-                                    <img src="${item.icon.src ? item.icon.src : svgPlaceholder}" alt="${item.icon.alt}" title="${item.icon.title}" width="80" height="80">
-                                </div>
-                            ` : ''}
-                            ${item.title ? (() => {
-                                const tag = item.button && item.button.link ? `a href="${item.button.link}"` : 'h3';
-                                return `<${tag} class="item-title" gh-id="${ghId}.items.${index}.title">Title</${tag}>`;
-                            })() : ''}
-                            ${item.text ? `<div class="text">${item.text}</div>` : ''}
-                            ${item.list ? `
-                                <ul class="item_list">
-                                    ${item.list.reduce((acc, list_item, list_index) => acc + `
-                                        <li class="text" gh-id="${ghId}.items.${index}.list.${list_index}"></li>
-                                    `, '')}
-                                </ul>
-                            ` : ''}
-                        </div>
-                        ${item.button ? `
-                            <div class="bottom">
-                                <div class="bold_text">
-                                    <span class="link" gh-id="${ghId}.items.${index}.button.text"></span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none"><circle cx="10" cy="10.6282" r="10" fill="#0A79FE"/><path d="M8.25 6.62817L12 10.3782L8.25 14.1282" stroke="white"/></svg>
-                                </div>
-                            </div>
-                        ` : ''}
-                    </div>
-            `}, '')}
+            ${items.reduce((acc, item, index) => acc + `
+                ${gridItemTag 
+                    ? `<div class="grid-item-wrapper"><${gridItemTag} data-gh-id="${ghId}.items.${index}"></${gridItemTag}></div>`
+                    : 'No Grid Item'
+                }
+            `, '')}
         </div>
         ${json.button ? `
             <div class="bottom_button">
