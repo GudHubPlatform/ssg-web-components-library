@@ -1,0 +1,35 @@
+<div class="primary-block ${json.button ? 'clickable bg-hover' : ''}" ${json.button && json.button.popupId ? `data-popup-id="${json.button.popupId}"` : ''}>
+    ${json.letter ? `<div class="letter">${json.letter}</div>` : ''}
+    <div class="top">
+        ${json.marker ? `
+            <div class="marker">
+                <span class="marker-symbol" gh-id="${ghId}.marker">${json.marker}</span>
+            </div>
+        ` : ''}
+        ${json.icon ? `
+            <div class="icon">
+                <img src="${json.icon.src ? json.icon.src : svgPlaceholder}" alt="${json.icon.alt}" title="${json.icon.title}" width="80" height="80">
+            </div>
+        ` : ''}
+        ${json.title ? (() => {
+            const tag = json.button && json.button.link ? `a href="${json.button.link}"` : 'h3';
+            return `<${tag} class="item-title" gh-id="${ghId}.title">Title</${tag}>`;
+        })() : ''}
+        ${json.text ? `<div class="text" gh-id="${ghId}.text"></div>` : ''}
+        ${json.list ? `
+            <ul class="item_list">
+                ${json.list.reduce((acc, list_item, list_index) => acc + `
+                    <li class="text" gh-id="${ghId}.list.${list_index}"></li>
+                `, '')}
+            </ul>
+        ` : ''}
+    </div>
+    ${json.button ? `
+        <div class="bottom">
+            <div class="bold_text">
+                <span class="link" gh-id="${ghId}.button.text"></span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none"><circle cx="10" cy="10.6282" r="10" fill="#0A79FE"/><path d="M8.25 6.62817L12 10.3782L8.25 14.1282" stroke="white"/></svg>
+            </div>
+        </div>
+    ` : ''}
+</div>

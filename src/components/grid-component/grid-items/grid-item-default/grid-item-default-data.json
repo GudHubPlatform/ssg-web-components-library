@@ -1,0 +1,20 @@
+{
+  "marker": "1",
+  "letter": "W",
+  "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "link": "#",
+  "text": "Aliquam ullamcorper nunc tempus molestie venenatis.",
+  "list": [
+    "Suspendisse enim nulla, lacinia a eros at, ultrices porttitor dolor.",
+    "Aenean eu lectus varius, tempor sem sed, maximus quam.",
+    "Aenean pulvinar felis ac eros vulputate tristique."
+  ],
+  "button": {
+    "text": "Спробувати Безкоштовно"
+  },
+  "icon": {
+    "src": "",
+    "alt": "Image Alt",
+    "title": "Image Title"
+  }
+}

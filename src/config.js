@@ -27,6 +27,9 @@ export { categoryBanner } from './components/category-banner/config.js';
 export { reviewsSlider } from './components/reviews-slider/config.js';
 export { homepageBanner } from './components/homepage-banner/config.js';
 export { gridComponent } from './components/grid-component/config.js';
+export {
+    gridItemDefault,
+} from './components/grid-component/grid-items/config.js';
 export { mediaAndText } from './components/media-and-text/config.js';
 export { mediaAndAccordion } from './components/media-and-accordion/config.js';
 export { animationBlock } from './components/animation-block/config.js';
