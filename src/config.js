@@ -29,6 +29,7 @@ export { homepageBanner } from './components/homepage-banner/config.js';
 export { gridComponent } from './components/grid-component/config.js';
 export {
     gridItemDefault,
+    gridItemExpandableVertical
 } from './components/grid-component/grid-items/config.js';
 export { mediaAndText } from './components/media-and-text/config.js';
 export { mediaAndAccordion } from './components/media-and-accordion/config.js';

@@ -1,0 +1,117 @@
+grid-item-expandable-vertical {
+    width: 100%;
+    display: block;
+    --transition-duration: .2s;
+    .primary-block {
+        width: 100%;
+        height: 180px;
+        position: relative;
+        background: var(--block-primary-bg-color);
+        border-radius: var(--block-primary-border-radius);
+        cursor: pointer;
+        .absolute-wrap {
+            height: 180px;
+            padding: 12px 16px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: var(--block-primary-bg-color);
+            overflow: hidden;
+            z-index: 2;
+            transition: all var(--transition-duration) ease;
+            &.expand {
+                height: 210%;
+                max-height: 400px;
+                top: 0;
+                bottom: auto;
+                z-index: 3;
+                // background-color: var(--block-primary-bg-hover-color);
+                background-color: #e6e8ec;
+                .title {
+                    color: var(--block-primary-accent-color);
+                }
+                .text {
+                    max-height: 500px;
+                    display: block;
+                    -webkit-line-clamp: initial;
+                    -webkit-box-orient: initial;
+                    overflow: initial;
+                    text-overflow: initial;
+                }
+                .icon {
+                    svg {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+            &.expand-to-top {
+                top: auto;
+                bottom: 0;
+            }
+            &.overflow {
+                overflow: auto;
+            }
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            .title {
+                margin-bottom: 0;
+                transition: color var(--transition-duration) ease;
+            }
+            .text {
+                height: 100%;
+                max-height: 80px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                display: -webkit-box;
+                
+                font-size: var(--text-font-size);
+                font-weight: var(--text-font-weight);
+                color: var(--block-primary-text-color);
+                line-height: 140%;
+                letter-spacing: 0.01em;
+                text-align: inherit;
+            }
+        }
+        .bottom {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            .icon {
+                width: 24px;
+                height: 24px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                svg {
+                    width: 16px;
+                    height: auto;
+                    transition: transform var(--transition-duration) linear;
+                    path {
+                        stroke: #000;
+                        transition: stroke var(--transition-duration) ease;
+                    }
+                }
+            }
+        }
+        &:hover {
+            .title {
+                color: var(--block-primary-accent-color);
+            }
+            .icon {
+                svg {
+                    path {
+                        stroke: var(--block-primary-accent-color);
+                    }
+                }
+            }
+        }
+    }
+}
