@@ -32,6 +32,7 @@ export {
     gridItemExpandableVertical
 } from './components/grid-component/grid-items/config.js';
 export { mediaAndText } from './components/media-and-text/config.js';
+export { accordionOnly } from './components/accordion-only/config.js';
 export { mediaAndAccordion } from './components/media-and-accordion/config.js';
 export { animationBlock } from './components/animation-block/config.js';
 export { pricesCards } from './components/prices-cards/config.js';

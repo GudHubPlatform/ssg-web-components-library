@@ -1,0 +1,37 @@
+<section>
+    <div class="container">
+        <div class="flex-wrapper">
+            ${(() => {
+                    const halfLength = Math.ceil(json.items.length / 2);
+                    const firstColumnItems = json.items.slice(0, halfLength);
+                    const secondColumnItems = json.items.slice(halfLength);
+
+                    const reduceItems = (items) => {
+                        return items.reduce((acc, item, index) => acc + `
+                            <div class="primary-block" onclick="toggleExpand()">
+                                <div class="visible-content">
+                                    ${item.title ? `<h3 class="title" gh-id="${ghId}.items.${index}.title"></h3>` : ''}
+                                    <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M1 8.33333L8.5 14.8148L16 8.33333M8.5 15L8.5 0" stroke="none" stroke-width="2"></path></svg>
+                                    </div>
+                                </div>
+                                <div class="expandable-wrapper">
+                                    <div class="content">
+                                        ${item.title ? `<p class="text" gh-id="${ghId}.items.${index}.text"></p>` : ''}
+                                    </div>
+                                </div>
+                            </div>
+                        `, '')
+                    }
+                    return `
+                        <div class="accordion-column">
+                            ${reduceItems(firstColumnItems)}
+                        </div>
+                        <div class="accordion-column">
+                            ${reduceItems(secondColumnItems)}
+                        </div>
+                    `;
+            })()}
+        </div>
+    </div>
+</section>

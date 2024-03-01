@@ -1,0 +1,98 @@
+accordion-only {
+    --hover-transition-duration: .2s;
+    --expand-transition-duration: .5s;
+    --gap: 20px;
+    .flex-wrapper {
+        display: flex;
+        gap: var(--gap);
+    }
+    .accordion-column {
+        width: calc(50% - (var(--gap) / 2));
+        & > *:not(:last-child) {
+            margin-bottom: 20px;
+        }
+    }
+    .primary-block {
+        width: 100%;
+        background: var(--block-primary-bg-color);
+        border-radius: var(--block-primary-border-radius);
+        box-shadow: var(--block-primary-box-shadow);
+        cursor: pointer;
+        transition: box-shadow var(--hover-transition-duration) ease;
+        &:hover, &.expand {
+            box-shadow: 0 3px 18px rgba(18,57,153,.2);
+        }
+        .visible-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            .title {
+                margin-bottom: 0;
+                transition: color var(--hover-transition-duration) ease;
+            }
+            .icon {
+                width: 24px;
+                height: 24px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                svg {
+                    width: 16px;
+                    height: auto;
+                    transition: transform var(--hover-transition-duration) linear;
+                    path {
+                        stroke: #000;
+                        transition: stroke var(--hover-transition-duration) ease;
+                    }
+                }
+            }
+        }
+        .expandable-wrapper {
+            max-height: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow: hidden;
+            transition: max-height var(--expand-transition-duration) ease;
+            .content {
+                padding: 20px 15px;
+                .text {
+                    font-size: var(--text-font-size);
+                    font-weight: var(--text-font-weight);
+                    color: var(--block-primary-text-color);
+                    line-height: 140%;
+                    letter-spacing: 0.01em;
+                    text-align: inherit;
+                }
+            }
+        }
+        &.expand {
+            .expandable-wrapper {
+                max-height: 200px;
+            }
+            .icon {
+                svg {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+        &.overflow {
+            .expandable-wrapper {
+                overflow: auto;
+            }
+        }
+        &:hover, &.expand {
+            .title {
+                color: var(--block-primary-accent-color);
+            }
+            .icon {
+                svg {
+                    path {
+                        stroke: var(--block-primary-accent-color);
+                    }
+                }
+            }
+        }
+    }
+}
