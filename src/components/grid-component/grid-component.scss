@@ -16,6 +16,14 @@ grid-component {
     .grid-item-wrapper {
         width: 100%;
     }
+    .bottom_button {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+    }
+    .btn {
+        display: inline-block;
+    }
     &[data-items-in-row] {
         .grid-item-wrapper {
             //formula: (100%width - (gap * (items - 1))) / items
