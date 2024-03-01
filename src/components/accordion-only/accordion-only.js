@@ -25,9 +25,7 @@ class AccordionOnly extends GHComponent {
     toggleExpand(element) {
         const isOpening = element.classList.toggle('expand');
         const toggleOverflow = (element, bool) => {
-            console.log('element', element);
             const action = bool ? 'add' : 'remove';
-            console.log('action', action);
             element.classList[action]('overflow')
         };
         if (isOpening) {
