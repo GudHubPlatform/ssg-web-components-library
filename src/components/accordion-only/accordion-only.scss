@@ -95,4 +95,12 @@ accordion-only {
             }
         }
     }
+    @media screen and (max-width: 800px) {
+        .flex-wrapper {
+            flex-direction: column;
+        }
+        .accordion-column {
+            width: 100%;
+        }
+    }
 }
