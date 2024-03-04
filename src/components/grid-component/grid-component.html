@@ -5,7 +5,7 @@
         <div class="grid">
             ${items.reduce((acc, item, index) => acc + `
                 ${gridItemTag 
-                    ? `<div class="grid-item-wrapper"><${gridItemTag} data-gh-id="${ghId}.items.${index}"></${gridItemTag}></div>`
+                    ? `<div class="grid-item-wrapper"><${gridItemTag} data-item-index="${index}" data-gh-id="${ghId}"></${gridItemTag}></div>`
                     : 'No Grid Item'
                 }
             `, '')}

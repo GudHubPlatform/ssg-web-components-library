@@ -1,21 +1,21 @@
 import html from './grid-item-default.html';
 import './grid-item-default.scss';
-import jsonTemplate from './grid-item-default-data.json';
 import svgPlaceholder from '../../../svgPlaceholder.js'
 
 class GridItemDefault extends GHComponent {
     constructor() {
         super();
-        super.setDefaultData(jsonTemplate);
     }
 
     async onServerRender() {
-        this.ghId = this.getAttribute('data-gh-id') || null;
-        this.json = await super.getGhData(this.ghId);
-        
+        this.itemIndex = this.getAttribute('data-item-index') || null;
+        this.generalGhId = this.getAttribute('data-gh-id') || null;
+        this.ghId = `${this.generalGhId}.items.${this.itemIndex}`;
+        this.generalJson = await super.getGhData(this.generalGhId);
+        this.json = this.generalJson ? this.generalJson.items[this.itemIndex] : null;
         this.svgPlaceholder = svgPlaceholder;
 
-        if (this.ghId) {
+        if (this.ghId && this.generalJson) {
             super.render(html);
         }
     }
