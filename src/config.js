@@ -4,8 +4,6 @@ export {
     canonicalComponent,
     organizationSchema,
     serviceSchema,
-    blogSchema,
-    authorSchema,
     titleTag
 } from './components/meta/config.js';
 export { topBanner } from './components/top-banner/config.js';
@@ -23,7 +21,6 @@ export { tabsComponent } from './components/tabs/config.js';
 export { faqComponent } from './components/faq/config.js';
 export { breadcrumbsComponent } from './components/breadcrumbs/config.js';
 export { textOnly } from './components/text-only/config.js';
-export { categoryBanner } from './components/category-banner/config.js';
 export { reviewsSlider } from './components/reviews-slider/config.js';
 export { homepageBanner } from './components/homepage-banner/config.js';
 export { gridComponent } from './components/grid-component/config.js';
