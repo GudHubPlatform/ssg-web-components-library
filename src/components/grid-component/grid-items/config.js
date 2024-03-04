@@ -8,3 +8,8 @@ export const gridItemExpandableVertical = {
   src: '@gudhub/ssg-web-components-library/src/components/grid-component/grid-items/grid-item-expandable-vertical/grid-item-expandable-vertical.js',
   serverOnly: false
 }
+export const gridItemNumbered = {
+  tag: 'grid-item-numbered',
+  src: '@gudhub/ssg-web-components-library/src/components/grid-component/grid-items/grid-item-numbered/grid-item-numbered.js',
+  serverOnly: false
+}
