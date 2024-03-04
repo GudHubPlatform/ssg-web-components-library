@@ -18,32 +18,84 @@ class GridItemExpandableVertical extends GHComponent {
     }
 
     onClientReady() {
-        
+        this.parentGrid = this.parentElement.parentElement;
+        this.isOpened = false;
+        this.expandableWrapper = this.querySelector(`.expandable-wrapper`);
+
+        if (!this.isEnoughBottomSpace()) {
+            this.expandableWrapper.classList.add('expand-to-top');
+        }
+
+        this.appendEventListeners();
+    }
+
+    dispatchOpenEvent() {
+        const event = new CustomEvent(
+            'grid-item-event',
+            {
+                detail: {
+                    action: 'expand-item',
+                    element: this
+                }
+            }
+        );
+        this.parentGrid.dispatchEvent(event);
+    }
+
+    appendEventListeners() {
+        this.parentGrid.addEventListener('grid-item-event', this.handleItemExpandEvent);
+    }
+
+    handleItemExpandEvent = (event) => {
+        const { detail } = event;
+        const { action, element } = detail;
+
+        switch (action) {
+            case 'expand-item':
+                if (element !== this && this.isOpened) {
+                    this.toggleExpand();
+                }
+                break;
+            default:
+                break;
+        }
+    };
+
+    handleClick() {
+        this.toggleExpand();
+    }
+
+    toggleClasses(isOpened) {
+        const action = isOpened ? 'remove' : 'add';
+
+        this.expandableWrapper.classList[action]('expand');
+
+        if (action === 'add') {
+            setTimeout(() => {
+                this.expandableWrapper.classList[action]('overflow');
+            }, 200);
+        } else {
+            this.expandableWrapper.classList[action]('overflow');
+        }
     }
 
     toggleExpand() {
-        const wrap = this.querySelector(`.absolute-wrap`);
-        if (wrap) {
-            if (!this.isEnoughBottomSpace()) {
-                wrap.classList.add('expand-to-top');
-            }
-            const isOpening = wrap.classList.toggle('expand');
-            const toggleOverflow = () => wrap.classList.toggle('overflow');
-            if (isOpening) {
-                setTimeout(toggleOverflow, 200);
-            } else {
-                toggleOverflow();
-            }
+        this.toggleClasses(this.isOpened);
+
+        if (this.isOpened) {
+            this.isOpened = false;
+        } else {
+            this.isOpened = true;
+            this.dispatchOpenEvent();
         }
     }
 
     isEnoughBottomSpace() {
-        const grid = this.parentElement.parentElement;
-        if (grid && !grid.classList.contains('grid')) {
+        if (!this.parentGrid) {
             console.error('grid container isn`t found');
             return false;
         }
-        const gridBottom = grid.getBoundingClientRect().bottom;
+        const gridBottom = this.parentGrid.getBoundingClientRect().bottom;
         const { top: thisTop, height: thisHeight } = this.getBoundingClientRect();
         const thisExpandHeight = thisHeight * 2.1;
 
