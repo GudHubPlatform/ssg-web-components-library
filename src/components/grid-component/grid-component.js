@@ -28,26 +28,8 @@ class GridComponent extends GHComponent {
     }
 
     onClientReady() {
-        const clickableGridItems = this.getElementsByClassName('grid_item clickable');
-        for (const el of clickableGridItems) {
-            el.addEventListener('mouseup', (e) => {
-                if ("a" !== e.target.tagName.toLowerCase()) {
-                    e.preventDefault();
-                    const item = e.currentTarget.querySelector(".item-title");
-                    const link = item.getAttribute("href");
-                    if (link) {
-                        if (e.button === 0) {
-                            window.location.href = link;
-                        } else if (e.button === 1) {
-                            window.open(link, '_blank');
-                        }
-                    } else {
-                        this.openPopup(e.currentTarget);
-                    }
-                }
-            });
-        }
     }
+
     openPopup (el) {
         const popupId = el.getAttribute('data-popup-id');
         window.dispatchEvent( new CustomEvent('open-popup', {
