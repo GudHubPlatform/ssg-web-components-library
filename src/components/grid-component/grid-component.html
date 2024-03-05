@@ -2,13 +2,18 @@
     <div class="container">
         <h2 gh-id="${ghId}.title"> TITLE </h2>
         ${json.subtitle ? `<p class="subtitle" gh-id="${ghId}.subtitle">SUBTITLE</p>` : ''}
-        <div class="grid">
-            ${items.reduce((acc, item, index) => acc + `
-                ${gridItemTag 
-                    ? `<div class="grid-item-wrapper"><${gridItemTag} data-item-index="${index}" data-gh-id="${ghId}"></${gridItemTag}></div>`
-                    : 'No Grid Item'
-                }
-            `, '')}
+        <div class="grid_slider">
+            <div class="grid">
+                ${items.reduce((acc, item, index) => acc + `
+                    ${gridItemTag 
+                        ? `<div class="grid-item-wrapper"><${gridItemTag} data-item-index="${index}" data-gh-id="${ghId}"></${gridItemTag}></div>`
+                        : 'No Grid Item'
+                    }
+                `, '')}
+            </div>
+            <div class="navigation_wrapper">
+                
+            </div>
         </div>
         ${json.button ? `
             <div class="bottom_button">
