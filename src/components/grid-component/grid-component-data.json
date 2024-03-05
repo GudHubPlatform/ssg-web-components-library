@@ -8,118 +8,28 @@
     },
     "items": [
       {
-        "marker": "1",
-        "letter": "W",
-        "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "link": "#",
-        "text": "Aliquam ullamcorper nunc tempus molestie venenatis.",
-        "list": [
-          "Suspendisse enim nulla, lacinia a eros at, ultrices porttitor dolor.",
-          "Aenean eu lectus varius, tempor sem sed, maximus quam.",
-          "Aenean pulvinar felis ac eros vulputate tristique."
-        ],
-        "button": {
-          "text": "Спробувати Безкоштовно"
-        },
-        "icon": {
-          "src": "",
-          "alt": "Image Alt",
-          "title": "Image Title"
-        }
+        "title": "Lorem ipsum dolor sit amet",
+        "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
       },
       {
-        "marker": "2",
-        "letter": "W",
-        "title": "Praesent quis libero eu risus ultrices vulputate.",
-        "link": "#",
-        "text": "Aliquam ullamcorper nunc tempus molestie venenatis.",
-        "list": [
-          "Morbi euismod ipsum diam. Nullam magna massa, tristique et ante eget",
-          "Vestibulum ante ipsum primis in faucibus orci luctus et"
-        ],
-        "button": {
-          "text": "Спробувати Безкоштовно"
-        },
-        "icon": {
-          "src": "",
-          "alt": "Image Alt",
-          "title": "Image Title"
-        }
+        "title": "Lorem ipsum dolor sit amet",
+        "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
       },
       {
-        "marker": "3",
-        "letter": "W",
-        "title": "Vivamus quis orci mollis, tincidunt lorem",
-        "link": "#",
-        "text": "Cras ac elit vehicula, aliquam eros id ante ipsum primis in faucibus orci luctus et aliquam eros id ante ipsum primis in",
-        "button": {
-          "text": "Спробувати Безкоштовно"
-        },
-        "icon": {
-          "src": "",
-          "alt": "Image Alt",
-          "title": "Image Title"
-        }
+        "title": "Lorem ipsum dolor sit amet",
+        "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
       },
       {
-        "marker": "a",
-        "letter": "W",
-        "title": "Mauris nisl elit, fermentum non luctus",
-        "link": "#",
-        "text": "Pellentesque quis dapibus erat. Sed nec dui accumsan",
-        "list": [
-          "Cras ac elit vehicula, aliquam eros id, porta libero.",
-          "Phasellus eget condimentum mi. Praesent auctor, lorem.",
-          "Donec et molestie leo, vel maximus velit."
-        ],
-        "button": {
-          "text": "Спробувати Безкоштовно"
-        },
-        "icon": {
-          "src": "",
-          "alt": "Image Alt",
-          "title": "Image Title"
-        }
+        "title": "Lorem ipsum dolor sit amet",
+        "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
       },
       {
-        "marker": "b",
-        "letter": "W",
-        "title": "Donec dignissim tortor in efficitur",
-        "link": "#",
-        "text": "Praesent posuere, est nec finibus fermentum, ipsum urna",
-        "list": [
-          "Fusce porta odio eu neque iaculis vulputate. Sed a tortor.",
-          "Praesent auctor, lorem at auctor facilisis.",
-          "Aenean pulvinar felis ac eros vulputate tristique."
-        ],
-        "button": {
-          "text": "Спробувати Безкоштовно"
-        },
-        "icon": {
-          "src": "",
-          "alt": "Image Alt",
-          "title": "Image Title"
-        }
+        "title": "Lorem ipsum dolor sit amet",
+        "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
       },
       {
-        "marker": "c",
-        "letter": "W",
-        "title": "Quisque vel accumsan nisi, eu condimentum turpis.",
-        "link": "#",
-        "text": "Suspendisse blandit rutrum tortor, finibus",
-        "list": [
-          "Suspendisse in turpis eget mauris interdum accumsan quis id erat",
-          "In cursus justo a enim condimentum.",
-          "Praesent auctor, lorem at auctor facilisis, nunc dui"
-        ],
-        "button": {
-          "text": "Спробувати Безкоштовно"
-        },
-        "icon": {
-          "src": "",
-          "alt": "Image Alt",
-          "title": "Image Title"
-        }
+        "title": "Lorem ipsum dolor sit amet",
+        "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
       }
     ]
 }

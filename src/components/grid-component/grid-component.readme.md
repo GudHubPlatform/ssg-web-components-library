@@ -2,11 +2,7 @@
 
 data-items-in-row=[number]: to calculate item width in flex container;
 
-data-items-shadow: to turn on grid_item shadows;
-
-data-border-top-on-hover: to add grid_item border top on hover
-
-
+be-slider: on mobile devices (max-width: 700px) grid-items will be displayed as slider;
 
 # Component data-object: 
 ("?" means "unnecessary")
