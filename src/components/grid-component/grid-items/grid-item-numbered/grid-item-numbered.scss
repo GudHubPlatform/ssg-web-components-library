@@ -3,6 +3,8 @@ grid-item-numbered {
     .primary-block {
         background: var(--block-primary-bg-color);
         border-radius: var(--block-primary-border-radius);
+        padding: 15px 20px;
+        transition: all var(--transition-duration) ease;
         .item_top {
             .number {
                 margin-bottom: 15px;

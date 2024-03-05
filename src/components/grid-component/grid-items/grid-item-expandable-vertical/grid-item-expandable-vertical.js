@@ -1,18 +1,19 @@
 import html from './grid-item-expandable-vertical.html';
 import './grid-item-expandable-vertical.scss';
-import jsonTemplate from './grid-item-expandable-vertical-data.json';
 
 class GridItemExpandableVertical extends GHComponent {
     constructor() {
         super();
-        super.setDefaultData(jsonTemplate);
     }
 
     async onServerRender() {
-        this.ghId = this.getAttribute('data-gh-id') || null;
-        this.json = await super.getGhData(this.ghId);
+        this.itemIndex = this.getAttribute('data-item-index') || null;
+        this.generalGhId = this.getAttribute('data-gh-id') || null;
+        this.ghId = `${this.generalGhId}.items.${this.itemIndex}`;
+        this.generalJson = await super.getGhData(this.generalGhId);
+        this.json = this.generalJson ? this.generalJson.items[this.itemIndex] : null;
 
-        if (this.ghId) {
+        if (this.ghId && this.generalJson) {
             super.render(html);
         }
     }

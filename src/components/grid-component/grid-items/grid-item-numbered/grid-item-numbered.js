@@ -1,20 +1,20 @@
 import html from './grid-item-numbered.html';
 import './grid-item-numbered.scss';
-import jsonTemplate from './grid-item-numbered-data.json';
 
 class GridItemNumbered extends GHComponent {
     constructor() {
         super();
-        super.setDefaultData(jsonTemplate);
     }
 
     async onServerRender() {
-        this.ghId = this.getAttribute('data-gh-id') || null;
-        this.json = await super.getGhData(this.ghId);
-
+        this.itemIndex = this.getAttribute('data-item-index') || null;
+        this.generalGhId = this.getAttribute('data-gh-id') || null;
+        this.ghId = `${this.generalGhId}.items.${this.itemIndex}`;
+        this.generalJson = await super.getGhData(this.generalGhId);
+        this.json = this.generalJson ? this.generalJson.items[this.itemIndex] : null;
         this.number = this.getNumberFromGhId();
-
-        if (this.ghId) {
+        
+        if (this.ghId && this.generalJson) {
             super.render(html);
         }
     }
