@@ -87,9 +87,6 @@ media-and-accordion {
     .active {
         gap: 20px;
         .text_content {
-            border-top-color: var(--block-primary-border-color);
-            border-top-width: 4px;
-
             box-shadow: var(--block-primary-box-shadow);
             border-bottom-color: transparent;
             border-radius: var(--block-primary-border-radius);
@@ -101,6 +98,19 @@ media-and-accordion {
             }
             .bold_text:hover svg {
                 left: 10px;
+            }
+        }
+    }
+}
+
+media-and-accordion[reverse] {
+    @media screen and (min-width: 880px) {
+        .flex-wrapper.item {
+            flex-direction: row-reverse;
+        }
+        .left {
+            img {
+                left: auto;
             }
         }
     }
@@ -131,7 +141,6 @@ media-and-accordion {
             }
         }
         .active {
-            border-top-color: var(--h-color);
             box-shadow: var(--block-primary-box-shadow);
             border-bottom-color: transparent;
             border-radius: var(--block-primary-border-radius);
