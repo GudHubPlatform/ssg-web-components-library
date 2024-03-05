@@ -15,6 +15,7 @@ reverse: image and accordion places will be reversed
             "button": {
                 "link?": "#",
                 "popupId?": "popupId",
+                "placement": "media-and-accordion",
                 "text": "button text"
             },
             "image": {

@@ -10,19 +10,41 @@ be-slider: on mobile devices (max-width: 700px) grid-items will be displayed as 
 {
     "title?": "string",
     "subtitle?": "string",
-    "button_text?": "string",
-    "items": [ {
-    	"title?": "string",
-    	"link?": "string",
-    	"letter?": "symbol",
-		"marker?": "symbol",
-    	"icon?": {
-    		"src": "string",
-    		"alt": "string",
-    	    "title": "string",
-    	},
-    	"text?": "string",
-    	"list?": ["string"] // in most cases, either text or a list is used
-    } ]
+	"button": {
+		"link?": "#",
+		"popupId?": "popupId",
+		"placement": "grid-component",
+		"text": "button text"
+	},
+    "items": [
+	  {
+        "title": "Lorem ipsum dolor sit amet",
+        "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
+      },
+      {
+        "title": "Lorem ipsum dolor sit amet",
+        "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
+      },
+      {
+        "title": "Lorem ipsum dolor sit amet",
+        "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
+      },
+      {
+        "title": "Lorem ipsum dolor sit amet",
+        "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
+      },
+      {
+        "title": "Lorem ipsum dolor sit amet",
+        "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
+      },
+      {
+        "title": "Lorem ipsum dolor sit amet",
+        "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
+      }
+	]
 }
 ```
+## Button settings
+Use "link" if button must be <a> and redirect to link
+OR
+Use "popupId" to open popup with that id
