@@ -1,6 +1,6 @@
 # Attributes:
 
-none
+reverse: image and accordion places will be reversed
 
 # Component data-object: 
 ("?" means "unnecessary")
