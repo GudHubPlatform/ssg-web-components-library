@@ -1,5 +1,3 @@
-import generalInfo from '/src/general-info.json';
-
 class MetaTag extends GHComponent {
     /**
      * type = title / ddescription / meta_image_src - every value generate different meta tag
@@ -81,7 +79,7 @@ class MetaTag extends GHComponent {
                 const metaSiteName = document.createElement('meta');
                 const name = 'og:site_name';
                 metaSiteName.setAttribute('property', name);
-                metaSiteName.setAttribute('content', generalInfo.name);
+                metaSiteName.setAttribute('content', window.constants.clientConfig.generalInfo.name);
                 document.querySelector('head').prepend(metaSiteName);
             }
             if (this.type == 'meta_image_src') {

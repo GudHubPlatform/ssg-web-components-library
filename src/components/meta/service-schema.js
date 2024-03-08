@@ -1,4 +1,3 @@
-import generalInfo from '/src/general-info.json';
 class ServiceSchema extends GHComponent {
     /**
      * data-chapter - chapter, default - pages
@@ -9,6 +8,8 @@ class ServiceSchema extends GHComponent {
 
     async onServerRender() {
         const chapter = this.hasAttribute('data-chapter') ? this.getAttribute('data-chapter') : 'pages';
+
+        const { generalInfo } = window.website_config;
 
         let ids = await super.findIds(chapter);
         const app = await gudhub.getApp(ids.appId);

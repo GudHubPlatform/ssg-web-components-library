@@ -1,10 +1,10 @@
-import generalInfo from '/src/general-info.json';
 class OrganizationSchema extends GHComponent {
     constructor() {
         super();
     }
 
     async onServerRender() {
+        const { generalInfo } = window.constants.clientConfig;
         const schema = {
             "@context": "https://schema.org",
             "@type": "Organization",

@@ -1,4 +1,3 @@
-import generalInfo from '/src/general-info.json';
 import authorsObject from "./authors.json";
 import articlesObject from "./articles.json";
 class BlogSchema extends GHComponent {
@@ -68,7 +67,7 @@ class BlogSchema extends GHComponent {
                 "publisher": {
                     "@type": "Organization",
                     "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}`,
-                    "name": generalInfo.name,
+                    "name": window.website_config.generalInfo.name,
                     "logo": {
                         "@type": "ImageObject",
                         "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}` + blogImage,
