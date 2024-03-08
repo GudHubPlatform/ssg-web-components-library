@@ -13,16 +13,15 @@ export async function generateArticlesAndCommentsObject(filter, value) {
             }
         ],
         "property_name": "comments",
-        "app_id": "33454",
+        "app_id": "33960",
         "filter": [
             {
-                "field_id": 796249,
+                "field_id": 807640,
                 "data_type": "radio_button",
                 "valuesArray": [
                     "1"
                 ],
                 "search_type": "equal_or",
-                "$$hashKey": "object:3549",
                 "selected_search_option_variable": "Value"
             }
         ]
@@ -46,13 +45,6 @@ export async function generateArticlesAndCommentsObject(filter, value) {
                 "property_type": "field_value",
                 "name_space": "h1",
                 "interpretation": 1
-            },
-            {
-                "type": "property",
-                "id": 3,
-                "property_name": "intro",
-                "property_type": "field_value",
-                "name_space": "intro"
             },
             { 
                 "type": "property", 
@@ -128,7 +120,7 @@ export async function generateArticlesAndCommentsObject(filter, value) {
                 "id": 16,
                 "property_name": "categories",
                 "property_type": "function",
-                "function": "function(item, appId) {\n  const app = await gudhub.getApp(appId);\n  const categoryField = item.fields.find(field => field.field_id == 796231);\n  if(categoryField) {\n    const categoryItems = categoryField.field_value.split(',');\n    const categoryItemsIds = categoryItems.map(item => Number(item.split('.')[1]));\n    return app.items_list.filter(item => categoryItemsIds.includes(Number(item.item_id)));\n  }\n  return null;\n}"
+                "function": "function(item, appId) {\n  const app = await gudhub.getApp(appId);\n  const categoryField = item.fields.find(field => field.field_id == 807622);\n  if(categoryField) {\n    const categoryItems = categoryField.field_value.split(',');\n    const categoryItemsIds = categoryItems.map(item => Number(item.split('.')[1]));\n    return app.items_list.filter(item => categoryItemsIds.includes(Number(item.item_id)));\n  }\n  return null;\n}"
             },
             {
                 "type": "property",
@@ -181,7 +173,7 @@ export async function generateArticlesAndCommentsObject(filter, value) {
                 "id": 7,
                 "property_name": "rating",
                 "property_type": "function",
-                "function": "function(item, appId) {\n  const app = await gudhub.getApp(appId)\n  let ratings = item.fields.find(field => field.field_id == 796224);\n  let summ = 0;\n  if(ratings) {\n    ratings = ratings.field_value.split(',');\n    ratings.forEach(item => summ += Number(item));\n  }\n  return {\n    count: ratings.length || 0,\n    avg: summ / ratings.length\n  };\n}"
+                "function": "function(item, appId) {\n  const app = await gudhub.getApp(appId)\n  let ratings = item.fields.find(field => field.field_id == 807615);\n  let summ = 0;\n  if(ratings) {\n    ratings = ratings.field_value.split(',');\n    ratings.forEach(item => summ += Number(item));\n  }\n  return {\n    count: ratings.length || 0,\n    avg: summ / ratings.length\n  };\n}"
             },
             {
                 "type": "property",
@@ -193,26 +185,24 @@ export async function generateArticlesAndCommentsObject(filter, value) {
             }
         ],
         "property_name": "articles",
-        "app_id": "33453",
+        "app_id": "33959",
         "filter": [
             //type
             {
-                "field_id": 796213,
+                "field_id": 807604,
                 "data_type": "radio_button",
                 "valuesArray": [
                     "0"
                 ],
                 "search_type": "equal_or",
-                "$$hashKey": "object:17515",
                 "selected_search_option_variable": "Value"
             },
             //status
             {
-                "field_id": 796222,
+                "field_id": 807613,
                 "data_type": "radio_button",
                 "valuesArray": filter == "slug" ? ["1", "0"] : ["1"],
                 "search_type": "equal_or",
-                "$$hashKey": "object:17557",
                 "selected_search_option_variable": "Value"
             }
         ]
@@ -222,37 +212,34 @@ export async function generateArticlesAndCommentsObject(filter, value) {
     switch (filter) {
         case "slug":
             articles.filter.push({
-                "field_id": 796214,
+                "field_id": 807605, //slug
                 "data_type": "text",
                 "valuesArray": [
                     value
                 ],
                 "search_type": "contain_or",
-                "$$hashKey": "object:5841",
                 "selected_search_option_variable": "Value"
             });
             break;
         case "category":
             articles.filter.push({
-                "field_id": 796231,
+                "field_id": 807622, //category
                 "data_type": "item_ref",
                 "valuesArray": [
                     value
                 ],
                 "search_type": "equal_or",
-                "$$hashKey": "object:1225",
                 "selected_search_option_variable": "Value"
             });
             break;
         case "author":
             articles.filter.push({
-                "field_id": 796221,
+                "field_id": 807612, //author
                 "data_type": "item_ref",
                 "valuesArray": [
                     value
                 ],
                 "search_type": "equal_or",
-                "$$hashKey": "object:1025",
                 "selected_search_option_variable": "Value"
             });
             break;

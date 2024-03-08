@@ -27,10 +27,10 @@
         }
     ],
     "property_name": "authors",
-    "app_id": "33453",
+    "app_id": "33959",
     "filter": [
         {
-            "field_id": 796213,
+            "field_id": 807604,
             "data_type": "radio_button",
             "valuesArray": [
                 "1"
@@ -40,7 +40,7 @@
             "selected_search_option_variable": "Value"
         },
         {
-            "field_id": 796222,
+            "field_id": 807613,
             "data_type": "radio_button",
             "valuesArray": [
                 "1"
