@@ -31,6 +31,9 @@ breadcrumbs-component {
                     width: 100%;
                 }
             }
+            a[href="/"] {
+                transform: translateY(-2px);
+            }
             &:last-child {
                 color: var(--breadcrumbsLastColor);
                 margin-right: 0;
