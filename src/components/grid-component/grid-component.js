@@ -29,7 +29,6 @@ class GridComponent extends GHComponent {
 
     onClientReady() {
         if (this.isSlider()) {
-            console.log(1);
             this.enableSlider();
         }
     }
