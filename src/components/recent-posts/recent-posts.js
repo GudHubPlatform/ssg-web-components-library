@@ -10,16 +10,16 @@ class RecentPosts extends GHComponent {
     
     async onServerRender() {
         let articlesAndComments = await gudhub.jsonConstructor(await generateArticlesAndCommentsObject());
-        console.log('articlesAndComments',articlesAndComments)
+        // console.log('articlesAndComments',articlesAndComments)
         let articles = articlesAndComments.articlesAndComments.articles;
-        console.log('articles',articles)
+        // console.log('articles',articles)
         let comments = articlesAndComments.articlesAndComments.comments;
         let categories = articlesAndComments.articlesAndComments.categories;
 
         const authors = await gudhub.jsonConstructor(authorObject);
         this.authors = authors.authors;
 
-        this.articles = articles.slice(0, 3);
+        this.articles = articles.slice(0, 2);
         for (let article in this.articles) {
             let commentsQuantity = 0;
             for (let comment in comments) {
@@ -49,13 +49,13 @@ class RecentPosts extends GHComponent {
             delete this.articles[article].category;
 
             // AUTHORS
-            console.log(this.authors)
+            // console.log(this.authors)
             let authorSlug = this.authors.find(author => {
                 if (author.author_id == this.articles[article].author_id) {
                     return author
                 }
             });
-            console.log(authorSlug)
+            // console.log(authorSlug)
             this.articles[article].author_slug = authorSlug.slug
         }
 
@@ -76,6 +76,29 @@ class RecentPosts extends GHComponent {
         });
 
         super.render(html);
+    }
+
+    onClientReady() {
+        this.attachEventListener();
+    }
+
+    attachEventListener() {
+        const clickableItems = this.querySelectorAll('.post');
+        for (const el of clickableItems) {
+            el.addEventListener('mouseup', (e) => {
+            if ("a" !== e.target.tagName.toLowerCase()) {
+                e.preventDefault();
+                const item = e.currentTarget.querySelector("a.post_title");
+                const link = item.getAttribute("href");
+                if (link) {
+                    if (e.button === 0) {
+                        window.location.href = link;
+                    } else if (e.button === 1) {
+                        window.open(link, '_blank');
+                    }
+                }
+            }});
+        }
     }
 
     openArticle(post) {

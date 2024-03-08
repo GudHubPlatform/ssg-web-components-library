@@ -1,85 +1,52 @@
 <section class="recent_posts">
     <div class="container">
-        <h2> Our latest article </h2>
+        <h2 class="title">Блог</h2>
+        <div class="subtitle">Використовуйте CRM платформу для бізнесу, налаштовуйте роботу компанії легко, здійснюйте успішні угоди та будьте на зв‘язку з клієнтами!</div>
         <div class="posts_wrapper">
-            ${
-                articles.reduce((acc, article, index) => {
+            ${articles.reduce((acc, article, index) => {
                 return acc + `
-                <div class="post" onclick="openArticle()">
-                    <div class="post_left">
-                        <a href="${article.slug}">
-                            <image-component width="462" height="200" lazyload data-url="${article.thumbnail}" data-src="${article.thumbnail_src}" alt="${article.thumbnail_alt}" title="${article.thumbnail_title}"></image-component>
-                        </a>
-                    </div> 
-                    <div class="post_right">
-                        <div class="top">
-                            <div class="top_flex">
-                                <div>
-                                    <div class="categories">
-                                        ${
-                                            article.categories.reduce((acc, category, index) => {
-                                                return acc + ` 
-                                                    <div class="category">
-                                                        <a href="${category.slug}">${category.name}</a>
-                                                    </div>       
-                                                `
-                                                }, 
-                                            '')
-                                        }
-                                    </div>
-                                    <div class="time_to_read">
-                                        <span>${article.time_to_read}</span>
-                                        <span>min read</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="views">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none"> <g clip-path="url(#clip0_841_1707)"> <mask id="mask0_841_1707" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="21"> <path d="M20 0.5H0V20.5H20V0.5Z" fill="white"/> </mask> <g mask="url(#mask0_841_1707)"> <mask id="mask1_841_1707" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="21"> <path d="M0 0.500002H20V20.5H0V0.500002Z" fill="white"/> </mask> <g mask="url(#mask1_841_1707)"> <path d="M19.1719 10.5C19.1719 10.5 16.2031 16.75 9.95312 16.75C3.70312 16.75 0.734375 10.5 0.734375 10.5C0.734375 10.5 3.70312 4.25 9.95312 4.25C16.2031 4.25 19.1719 10.5 19.1719 10.5Z" stroke="#0C6980" stroke-width="1.5625" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/> <path d="M13.0781 10.5C13.0781 8.7741 11.679 7.375 9.95312 7.375C8.22723 7.375 6.82812 8.7741 6.82812 10.5C6.82812 12.2259 8.22723 13.625 9.95312 13.625C11.679 13.625 13.0781 12.2259 13.0781 10.5Z" stroke="#0C6980" stroke-width="1.5625" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/> </g> </g> </g> <defs> <clipPath id="clip0_841_1707"> <rect width="20" height="20" fill="white" transform="translate(0 0.5)"/> </clipPath> </defs> </svg>
-                                        <span>${article.views}</span>
-                                    </div>
-                                    <div class="rating">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none"> <path d="M9.5 1.33912L12.1266 6.65893L18 7.51203L13.75 11.6529L14.7532 17.5L9.5 14.7394L4.24678 17.5L5.25004 11.6529L1 7.51203L6.87335 6.65893L9.5 1.33912Z" stroke="#0C6980" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/> </svg>
-                                        <span>${article.rating.avg}</span>
-                                    </div>
-                                    <div class="comments">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none"> <g id="Group"> <g id="Group_2"> <g id="Group_3"> <path id="Vector" d="M12.8477 9.29297C13.3331 9.29297 13.7266 8.89947 13.7266 8.41406C13.7266 7.92866 13.3331 7.53516 12.8477 7.53516C12.3622 7.53516 11.9688 7.92866 11.9688 8.41406C11.9688 8.89947 12.3622 9.29297 12.8477 9.29297Z" fill="#0C6980"/> <path id="Vector_2" d="M9.33203 9.29297C9.81744 9.29297 10.2109 8.89947 10.2109 8.41406C10.2109 7.92866 9.81744 7.53516 9.33203 7.53516C8.84662 7.53516 8.45312 7.92866 8.45312 8.41406C8.45312 8.89947 8.84662 9.29297 9.33203 9.29297Z" fill="#0C6980"/> <path id="Vector_3" d="M5.81641 9.29297C6.30181 9.29297 6.69531 8.89947 6.69531 8.41406C6.69531 7.92866 6.30181 7.53516 5.81641 7.53516C5.331 7.53516 4.9375 7.92866 4.9375 8.41406C4.9375 8.89947 5.331 9.29297 5.81641 9.29297Z" fill="#0C6980"/> <path id="Vector_4" d="M17.6289 0.75H1.03516C0.64682 0.75 0.332031 1.06479 0.332031 1.45312V15.375C0.332031 15.7633 0.64682 16.0781 1.03516 16.0781H7.257L8.73754 18.4223C8.86639 18.6263 9.09079 18.75 9.33203 18.75C9.57327 18.75 9.79768 18.6263 9.92652 18.4223L11.4071 16.0781H17.6289C18.0172 16.0781 18.332 15.7633 18.332 15.375V1.45312C18.332 1.06479 18.0172 0.75 17.6289 0.75ZM16.9258 14.6719H11.0195C10.7783 14.6719 10.5539 14.7956 10.425 14.9995L9.33203 16.7301L8.23902 14.9995C8.11018 14.7956 7.88577 14.6719 7.64453 14.6719H1.73828V2.15625H16.9258V14.6719Z" fill="#0C6980"/> </g> </g> </g> </svg>
-                                        <span>${article.commentsQuantity}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="${article.slug}">
-                                <h3 class="post_title">
-                                    ${article.h1}
-                                </h3>
-                            </a>
+                    <div class="post primary-block">
+                        <div class="media">
+                            <image-component width="538" height="250" lazyload data-url="${article.thumbnail}" data-src="${article.thumbnail_src}" alt="${article.thumbnail_alt}" title="${article.thumbnail_title}"></image-component>
                         </div>
-                        <div class="bottom">
-                            <div class="author_date">
-                                <div class="symbol">By</div>
-                                <a class="author" href="${article.author_slug}">${article.author}</a>
-                                <div class="symbol"> | </div>
-                                <div class="posted_at">
-                                    ${new Date(Number(article.posted_at)).toLocaleDateString('uk')}
-                                </div>
+                        <div>
+                            <div class="categories">
+                                ${article.categories.reduce((acc, category, index) => {
+                                    return acc + ` 
+                                        <a class="btn" href="${category.slug}">${category.name}</a>  
+                                    `
+                                }, '')}
                             </div>
-                            <div class="intro">            
-                                ${article.intro}
+                        </div>
+                        <a class="post_title h3" href="${article.slug}">
+                            ${article.h1}
+                        </a>
+                        <div class="post_statistic">
+                            <div class="time_to_read">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20" viewBox="0 0 17 18" fill="none"><path d="M8.5 16.0299C7.02901 16.0299 5.59104 15.5937 4.36795 14.7765C3.14486 13.9592 2.19158 12.7976 1.62865 11.4386C1.06572 10.0796 0.918435 8.58416 1.20541 7.14143C1.49239 5.69869 2.20074 4.37346 3.2409 3.3333C4.28105 2.29315 5.60629 1.5848 7.04902 1.29782C8.49175 1.01084 9.98719 1.15813 11.3462 1.72106C12.7052 2.28398 13.8668 3.23727 14.6841 4.46036C15.5013 5.68345 15.9375 7.12141 15.9375 8.59241C15.9375 10.565 15.1539 12.4567 13.7591 13.8515C12.3643 15.2463 10.4726 16.0299 8.5 16.0299ZM8.5 2.21741C7.23915 2.21741 6.00661 2.5913 4.95824 3.29179C3.90988 3.99229 3.09278 4.98793 2.61027 6.1528C2.12776 7.31768 2.00152 8.59948 2.2475 9.83611C2.49348 11.0727 3.10064 12.2087 3.9922 13.1002C4.88376 13.9918 6.01967 14.5989 7.2563 14.8449C8.49293 15.0909 9.77473 14.9647 10.9396 14.4821C12.1045 13.9996 13.1001 13.1825 13.8006 12.1342C14.5011 11.0858 14.875 9.85327 14.875 8.59241C14.875 6.90166 14.2034 5.28015 13.0078 4.0846C11.8123 2.88906 10.1908 2.21741 8.5 2.21741Z" fill="#525252"></path><path d="M10.9384 11.7799L7.96875 8.81022V3.81116H9.03125V8.36928L11.6875 11.0308L10.9384 11.7799Z" fill="#525252"></path></svg>
+                                <span>${article.time_to_read}</span>
+                                <span>min. read</span>
                             </div>
-                            <div class="read_more">
-                                <a href="${article.slug}">
-                                    <span>Read more</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="17" viewBox="0 0 22 17" fill="none">
-                                        <path d="M12.5 1L20 8.5M20 8.5L12.5 16M20 8.5L0 8.5" stroke="#141616" stroke-width="2"/>
-                                    </svg>
-                                </a>
+                            <div class="views">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none"> <g clip-path="url(#clip0_841_1707)"> <mask id="mask0_841_1707" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="21"> <path d="M20 0.5H0V20.5H20V0.5Z" fill="white"/> </mask> <g mask="url(#mask0_841_1707)"> <mask id="mask1_841_1707" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="21"> <path d="M0 0.500002H20V20.5H0V0.500002Z" fill="white"/> </mask> <g mask="url(#mask1_841_1707)"> <path d="M19.1719 10.5C19.1719 10.5 16.2031 16.75 9.95312 16.75C3.70312 16.75 0.734375 10.5 0.734375 10.5C0.734375 10.5 3.70312 4.25 9.95312 4.25C16.2031 4.25 19.1719 10.5 19.1719 10.5Z" stroke="#525252" stroke-width="1.5625" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/> <path d="M13.0781 10.5C13.0781 8.7741 11.679 7.375 9.95312 7.375C8.22723 7.375 6.82812 8.7741 6.82812 10.5C6.82812 12.2259 8.22723 13.625 9.95312 13.625C11.679 13.625 13.0781 12.2259 13.0781 10.5Z" stroke="#525252" stroke-width="1.5625" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/> </g> </g> </g> <defs> <clipPath id="clip0_841_1707"> <rect width="20" height="20" fill="white" transform="translate(0 0.5)"/> </clipPath> </defs> </svg>
+                                <span>${article.views}</span>
                             </div>
+                            <div class="rating">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none"> <path d="M9.5 1.33912L12.1266 6.65893L18 7.51203L13.75 11.6529L14.7532 17.5L9.5 14.7394L4.24678 17.5L5.25004 11.6529L1 7.51203L6.87335 6.65893L9.5 1.33912Z" stroke="#525252" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/> </svg>
+                                <span>${article.rating.avg}</span>
+                            </div>
+                            <div class="comments">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none"> <g id="Group"> <g id="Group_2"> <g id="Group_3"> <path id="Vector" d="M12.8477 9.29297C13.3331 9.29297 13.7266 8.89947 13.7266 8.41406C13.7266 7.92866 13.3331 7.53516 12.8477 7.53516C12.3622 7.53516 11.9688 7.92866 11.9688 8.41406C11.9688 8.89947 12.3622 9.29297 12.8477 9.29297Z" fill="#525252"/> <path id="Vector_2" d="M9.33203 9.29297C9.81744 9.29297 10.2109 8.89947 10.2109 8.41406C10.2109 7.92866 9.81744 7.53516 9.33203 7.53516C8.84662 7.53516 8.45312 7.92866 8.45312 8.41406C8.45312 8.89947 8.84662 9.29297 9.33203 9.29297Z" fill="#525252"/> <path id="Vector_3" d="M5.81641 9.29297C6.30181 9.29297 6.69531 8.89947 6.69531 8.41406C6.69531 7.92866 6.30181 7.53516 5.81641 7.53516C5.331 7.53516 4.9375 7.92866 4.9375 8.41406C4.9375 8.89947 5.331 9.29297 5.81641 9.29297Z" fill="#525252"/> <path id="Vector_4" d="M17.6289 0.75H1.03516C0.64682 0.75 0.332031 1.06479 0.332031 1.45312V15.375C0.332031 15.7633 0.64682 16.0781 1.03516 16.0781H7.257L8.73754 18.4223C8.86639 18.6263 9.09079 18.75 9.33203 18.75C9.57327 18.75 9.79768 18.6263 9.92652 18.4223L11.4071 16.0781H17.6289C18.0172 16.0781 18.332 15.7633 18.332 15.375V1.45312C18.332 1.06479 18.0172 0.75 17.6289 0.75ZM16.9258 14.6719H11.0195C10.7783 14.6719 10.5539 14.7956 10.425 14.9995L9.33203 16.7301L8.23902 14.9995C8.11018 14.7956 7.88577 14.6719 7.64453 14.6719H1.73828V2.15625H16.9258V14.6719Z" fill="#525252"/> </g> </g> </g> </svg>
+                                <span>${article.commentsQuantity}</span>
+                            </div>
+                        </div>
+                        <div class="post_read_more">
+                            <span class="link">Читати</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none"><circle cx="10" cy="10.6282" r="10" fill="#0A79FE"></circle><path d="M8.25 6.62817L12 10.3782L8.25 14.1282" stroke="white"></path></svg>
                         </div>
                     </div>
-                </div>   
-                `
-                }, '')
+                `}, '')
             }
         </div>
-        <a href="/blog/" class="button">View all</a>
     </div>
 </section>
