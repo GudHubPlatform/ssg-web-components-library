@@ -67,7 +67,7 @@ class BlogSchema extends GHComponent {
                 "publisher": {
                     "@type": "Organization",
                     "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}`,
-                    "name": window.website_config.generalInfo.name,
+                    "name": window.constants.clientConfig.generalInfo.name,
                     "logo": {
                         "@type": "ImageObject",
                         "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}` + blogImage,
