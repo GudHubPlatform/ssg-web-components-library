@@ -13,6 +13,8 @@ class GetInTouchForm extends GHComponent {
         this.generateInput = this.generateInput;
         this.isFormSubmitted = false;
         this.placement = 'main';
+
+        this.config = window.constants.clientConfig;
     }
 
     onServerRender() {
@@ -20,19 +22,19 @@ class GetInTouchForm extends GHComponent {
             return;
         }
         
-        this.initConfig(window.constants.form_config);
+        this.initConfig(this.config);
         super.render(html);
     }
 
     onClientReady() {
         if (!this.hasAttribute('data-in-popup')) {
-            this.initConfig(window.website_config.form);
+            this.initConfig(this.config);
             this.attachEventListeners();
         }
     }
 
     clientRender() {
-        this.initConfig(window.website_config.form);
+        this.initConfig(this.config);
         super.render(html);
         this.attachEventListeners();
     }
