@@ -14,7 +14,7 @@ class GetInTouchForm extends GHComponent {
         this.isFormSubmitted = false;
         this.placement = 'main';
 
-        this.config = window.constants.clientConfig.formConfig;
+        this.config = window.constants.formConfig;
     }
 
     onServerRender() {

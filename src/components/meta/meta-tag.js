@@ -79,7 +79,7 @@ class MetaTag extends GHComponent {
                 const metaSiteName = document.createElement('meta');
                 const name = 'og:site_name';
                 metaSiteName.setAttribute('property', name);
-                metaSiteName.setAttribute('content', window.constants.clientConfig.generalInfo.name);
+                metaSiteName.setAttribute('content', window.constants.generalInfo.name);
                 document.querySelector('head').prepend(metaSiteName);
             }
             if (this.type == 'meta_image_src') {
