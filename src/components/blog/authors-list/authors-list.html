@@ -1,0 +1,41 @@
+<section class="authors-list-section">
+    <div class="container">
+        <breadcrumbs-component data-items='[{"title": "Блог", "slug": "/blog/"}, {"title": "Автори"}]'></breadcrumbs-component>
+        <h1 gh-id="${ghId}">Authors</h1>
+        <div class="authors-list">
+            ${
+                authors.reduce((acc, author, index) => {
+                return acc + `
+                    <div class="author primary-block">
+                        
+                            <div class="post_top">
+                                <div class="image">
+                                    <a class="link" href="${author.slug}">
+                                        <image-component data-url="${author.thumbnail}" data-src="${author.thumbnail_src}" alt="${author.thumbnail_alt}" title="${author.thumbnail_title}"></image-component>
+                                    </a>
+                                </div>
+                                <h2 class="post_title">
+                                    <a class="link h2" href="${author.slug}">
+                                        ${author.h1}
+                                    </a>
+                                </h2>
+                                <div class="intro text">            
+                                    ${author.intro}
+                                </div>
+                                <div class="description text">            
+                                    ${author.description}
+                                </div>
+                            </div> 
+                            <div class="post_bottom">
+                                <a class="link" href="${author.slug}">
+                                    <span>${config.general_settings.author_articles}</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <circle cx="10" cy="10" r="10" fill="#0A79FE"></circle> <path d="M8.25 6L12 9.75L8.25 13.5" stroke="white"></path> </svg>
+                                </a>
+                            </div>
+                    </div>
+                    `
+                }, '')
+            }
+        </div>
+    </div>
+</section>

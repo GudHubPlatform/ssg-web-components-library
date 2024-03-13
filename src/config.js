@@ -4,8 +4,26 @@ export {
     canonicalComponent,
     organizationSchema,
     serviceSchema,
+    blogSchema,
+    authorSchema,
     titleTag
 } from './components/meta/config.js';
+export {
+    articleComponent,
+    authorPage,
+    authorsList,
+    blogBanner,
+    categoriesList,
+    categoryBanner,
+    commentsComponent,
+    contentsComponent,
+    postsTemplate
+} from './components/blog/config.js';
+export {
+    gridItemDefault,
+    gridItemExpandableVertical,
+    gridItemNumbered
+} from './components/grid-component/grid-items/config.js';
 export { topBanner } from './components/top-banner/config.js';
 export { counterSection } from './components/counter-section/config.js';
 export { getInTouchBlock } from './components/get-in-touch-block/config.js';
@@ -24,11 +42,6 @@ export { textOnly } from './components/text-only/config.js';
 export { reviewsSlider } from './components/reviews-slider/config.js';
 export { homepageBanner } from './components/homepage-banner/config.js';
 export { gridComponent } from './components/grid-component/config.js';
-export {
-    gridItemDefault,
-    gridItemExpandableVertical,
-    gridItemNumbered
-} from './components/grid-component/grid-items/config.js';
 export { mediaAndText } from './components/media-and-text/config.js';
 export { accordionOnly } from './components/accordion-only/config.js';
 export { mediaAndAccordion } from './components/media-and-accordion/config.js';
@@ -45,3 +58,4 @@ export { counterSectionWithText } from './components/counter-section-with-text/c
 export { aboutUsBanner } from './components/about-us-banner/config.js';
 export { aboutUsImageCounter } from './components/about-us-image-counter/config.js';
 export { aboutUsTeamMembers } from './components/about-us-team-members/config.js';
+export { contactUsBlock } from './components/contact-us-block/config.js';

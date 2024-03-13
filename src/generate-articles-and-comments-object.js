@@ -1,4 +1,12 @@
-export async function generateArticlesAndCommentsObject(filter, value) {
+export async function generateArticlesAndCommentsObject(filter, value, blog) {
+    const {
+        comments_status_field_id,
+        type_field_id,
+        status_field_id,
+        slug_field_id,
+        categories_list_field_id,
+        article_authorRef
+    } = blog;
     let comments = {
         "type": "array",
         "id": 1,
@@ -16,7 +24,7 @@ export async function generateArticlesAndCommentsObject(filter, value) {
         "app_id": "33960",
         "filter": [
             {
-                "field_id": 807640,
+                "field_id": comments_status_field_id,
                 "data_type": "radio_button",
                 "valuesArray": [
                     "1"
@@ -189,7 +197,7 @@ export async function generateArticlesAndCommentsObject(filter, value) {
         "filter": [
             //type
             {
-                "field_id": 807604,
+                "field_id": type_field_id,
                 "data_type": "radio_button",
                 "valuesArray": [
                     "0"
@@ -199,20 +207,23 @@ export async function generateArticlesAndCommentsObject(filter, value) {
             },
             //status
             {
-                "field_id": 807613,
+                "field_id": status_field_id,
                 "data_type": "radio_button",
                 "valuesArray": filter == "slug" ? ["1", "0"] : ["1"],
                 "search_type": "equal_or",
                 "selected_search_option_variable": "Value"
             }
-        ]
+        ],
+        "isSortable": 1,
+        "field_id_to_sort": "807620",
+        "sortType": "desc"
     };
 
 
     switch (filter) {
         case "slug":
             articles.filter.push({
-                "field_id": 807605, //slug
+                "field_id": slug_field_id, //slug
                 "data_type": "text",
                 "valuesArray": [
                     value
@@ -223,7 +234,7 @@ export async function generateArticlesAndCommentsObject(filter, value) {
             break;
         case "category":
             articles.filter.push({
-                "field_id": 807622, //category
+                "field_id": categories_list_field_id, //category
                 "data_type": "item_ref",
                 "valuesArray": [
                     value
@@ -234,7 +245,7 @@ export async function generateArticlesAndCommentsObject(filter, value) {
             break;
         case "author":
             articles.filter.push({
-                "field_id": 807612, //author
+                "field_id": article_authorRef, //author
                 "data_type": "item_ref",
                 "valuesArray": [
                     value

@@ -9,8 +9,18 @@ class TitleTag extends GHComponent {
     }
 
     async onServerRender() {
-        const appId = this.hasAttribute('data-appId') ? this.getAttribute('data-appId') : false;
-        const itemId = this.hasAttribute('data-itemId') ? this.getAttribute('data-itemId') : false;
+        let appId = this.hasAttribute('data-appId') ? this.getAttribute('data-appId') : false;
+        let itemId = this.hasAttribute('data-itemId') ? this.getAttribute('data-itemId') : false;
+
+        // "file:///home/dima/Work/ssg-ssr-websites/192.168.14.224:3333/dist/blog/blog.html?routeObject={%22route%22:%22/blog/page/:page/%22,%22index%22:%22/blog/blog.html%22}&page=2&path=/blog/page/2/"
+        const url = new URL(window.location.href);
+        const path = url.searchParams.get('path');
+
+        if (!appId && !itemId && path.includes('/blog/')) {
+            appId = window.constants.chapters.pages.app_id;
+            itemId = window.constants.chapters.pages.blog_main_page_item_id;
+        }
+
         if (appId && itemId) {
             this.findTitle(appId, itemId, false);
         } else {

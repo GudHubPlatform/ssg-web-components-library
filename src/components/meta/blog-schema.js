@@ -29,10 +29,11 @@ class BlogSchema extends GHComponent {
             let posts = [];
             for (let article in articles) {
                 let author = authors.find(author => author.id == articles[article].author_id);
+
                 let authorObject = {
                     "@type": "Person",
                     "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}${author.slug}`,
-                    "url": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}{author.slug}`,
+                    "url": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}${author.slug}`,
                     "name": author.name
                 }
                 let post = {
@@ -56,6 +57,8 @@ class BlogSchema extends GHComponent {
                 };
                 posts.push(post);
             }
+
+            const { name } = window.constants.generalInfo;
             
             const schema = {
                 "@context": "https://schema.org/",
@@ -67,7 +70,7 @@ class BlogSchema extends GHComponent {
                 "publisher": {
                     "@type": "Organization",
                     "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}`,
-                    "name": window.constants.generalInfo.name,
+                    "name": name,
                     "logo": {
                         "@type": "ImageObject",
                         "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}` + blogImage,

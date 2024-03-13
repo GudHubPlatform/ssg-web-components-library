@@ -9,7 +9,7 @@ class RecentPosts extends GHComponent {
     }
     
     async onServerRender() {
-        let articlesAndComments = await gudhub.jsonConstructor(await generateArticlesAndCommentsObject());
+        let articlesAndComments = await gudhub.jsonConstructor(await generateArticlesAndCommentsObject(undefined, undefined, window.constants.chapters.blog));
         // console.log('articlesAndComments',articlesAndComments)
         let articles = articlesAndComments.articlesAndComments.articles;
         // console.log('articles',articles)

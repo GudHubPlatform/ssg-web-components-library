@@ -66,30 +66,28 @@
         }
     ],
     "property_name": "articles",
-    "app_id": "33453",
+    "app_id": "33959",
     "filter": [
         {
-            "field_id": 796213,
+            "field_id": 807604,
             "data_type": "radio_button",
             "valuesArray": [
                 "0"
             ],
             "search_type": "equal_or",
-            "$$hashKey": "object:16368",
             "selected_search_option_variable": "Value"
         },
         {
-            "field_id": 796222,
+            "field_id": 807613,
             "data_type": "radio_button",
             "valuesArray": [
                 "1"
             ],
             "search_type": "equal_or",
-            "$$hashKey": "object:16410",
             "selected_search_option_variable": "Value"
         }
     ],
     "isSortable": 1,
-    "field_id_to_sort": "796229",
+    "field_id_to_sort": "807620",
     "sortType": "desc"
 }

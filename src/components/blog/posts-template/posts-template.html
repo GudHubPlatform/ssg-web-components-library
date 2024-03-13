@@ -1,0 +1,242 @@
+<section class="posts-template" ${numberOfPage != 1 ? `data-page="${numberOfPage}"` : ''}>
+    ${empty ? 
+        empty === 'category' ? `
+            <div class="container">
+                <div class="empty_posts">
+                    ${config.general_settings.empty_posts.category} &#128557;
+                </div>
+            </div>
+        ` : empty === 'author' ? `
+            <div class="container">
+                <div class="empty_posts">
+                    ${config.general_settings.empty_posts.author} &#128557;
+                </div>
+            </div>
+        ` : ''
+    : `
+    <div class="container">
+        <div class="flex-wrapper">
+            <categories-list data-config='${configCategories}'></categories-list>
+            <div class="search">
+                <div class="icon">
+                    <svg class="loader_icon" width="111" height="111" viewBox="0 0 111 111" fill="none" xmlns="http://www.w3.org/2000/svg"> <ellipse cx="55.9604" cy="55.9604" rx="40.234" ry="40.234" stroke="#00BFD6" stroke-width="9"></ellipse> <path d="M55.6819 15.7275C66.3523 15.6536 76.6151 19.8216 84.2125 27.3145C91.8099 34.8074 96.1196 45.0115 96.1935 55.6819" stroke="url(#paint0_linear_4557_5035)" stroke-width="9" stroke-linecap="round"></path> <defs> <linearGradient id="paint0_linear_4557_5035" x1="90.6947" y1="76.2658" x2="16.332" y2="31.743" gradientUnits="userSpaceOnUse"> <stop stop-color="#C5DFFF"></stop> <stop offset="0.0001" stop-color="#C5DFFF"></stop> <stop offset="0.830038" stop-color="#1681FF" stop-opacity="0.01"></stop> <stop offset="1" stop-color="#1681FF" stop-opacity="0"></stop> </linearGradient> </defs> </svg>
+                    <svg class="search_icon" xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none"><path d="M21.3438 19.8274L15.9158 14.3994C17.2202 12.8335 17.8706 10.825 17.7319 8.79169C17.5931 6.75839 16.6757 4.85688 15.1706 3.48272C13.6656 2.10856 11.6887 1.36755 9.65116 1.41385C7.61366 1.46015 5.67245 2.29018 4.23134 3.73128C2.79024 5.17239 1.96021 7.1136 1.91391 9.1511C1.86762 11.1886 2.60862 13.1655 3.98278 14.6706C5.35694 16.1757 7.25845 17.093 9.29175 17.2318C11.325 17.3706 13.3336 16.7201 14.8995 15.4158L20.3275 20.8438L21.3438 19.8274ZM3.37507 9.34376C3.37507 8.06436 3.75445 6.81369 4.46525 5.74991C5.17604 4.68613 6.18633 3.85702 7.36833 3.36741C8.55034 2.87781 9.85099 2.7497 11.1058 2.9993C12.3606 3.2489 13.5132 3.86499 14.4179 4.76966C15.3226 5.67433 15.9387 6.82695 16.1883 8.08177C16.4379 9.33658 16.3098 10.6372 15.8202 11.8192C15.3306 13.0012 14.5014 14.0115 13.4377 14.7223C12.3739 15.4331 11.1232 15.8125 9.84382 15.8125C8.12878 15.8106 6.48454 15.1285 5.27182 13.9158C4.05911 12.703 3.37697 11.0588 3.37507 9.34376Z" fill="#525252"></path></svg>
+                </div>
+                <input type="text" placeholder="${config.general_settings.search_input_placeholder}" onfocus="triggeringFetchArticles()" oninput="triggeringSearch()">
+            </div>
+        </div>
+        ${type === "blog" ? `
+        ` : ''}
+        ${mainPost ? `
+            <div class="post main primary-block">
+                <div class="post_left">
+                    <a href="${mainArticle.slug}">
+                        <image-component width="670" height="285" data-url="${mainArticle.thumbnail}" data-src="${mainArticle.thumbnail_src}" alt="${mainArticle.thumbnail_alt}" title="${mainArticle.thumbnail_title}"></image-component>
+                    </a>
+                </div> 
+                <div class="post_right">
+                    <div class="top">
+                        <div class="top_flex">
+                            <div>
+                                <div class="categories">
+                                    ${
+                                        mainArticle.categories.reduce((acc, category, index) => {
+                                            return acc + ` 
+                                                <div class="category">
+                                                    <a href="${category.slug}" class="btn">${category.name}</a>
+                                                </div>       
+                                            `
+                                            }, 
+                                        '')
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <h2 class="post_title main_post_title link">
+                            <a href="${mainArticle.slug}">
+                                ${mainArticle.h1}
+                            </a>
+                        </h2>
+                    </div>
+                    <div class="info">
+                        <div class="text">
+                            <div class="time_to_read">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10.013 1.66699C14.6155 1.66699 18.3464 5.39783 18.3464 10.0003C18.3464 14.6028 14.6155 18.3337 10.013 18.3337C5.41052 18.3337 1.67969 14.6028 1.67969 10.0003C1.67969 5.39783 5.41052 1.66699 10.013 1.66699ZM10.013 3.33366C8.24491 3.33366 6.54922 4.03604 5.29897 5.28628C4.04873 6.53652 3.34635 8.23221 3.34635 10.0003C3.34635 11.7684 4.04873 13.4641 5.29897 14.7144C6.54922 15.9646 8.24491 16.667 10.013 16.667C11.7811 16.667 13.4768 15.9646 14.7271 14.7144C15.9773 13.4641 16.6797 11.7684 16.6797 10.0003C16.6797 8.23221 15.9773 6.53652 14.7271 5.28628C13.4768 4.03604 11.7811 3.33366 10.013 3.33366ZM10.013 5.00032C10.2171 5.00035 10.4141 5.07529 10.5667 5.21092C10.7192 5.34655 10.8166 5.53345 10.8405 5.73616L10.8464 5.83366V9.65532L13.1022 11.9112C13.2516 12.0611 13.3384 12.2624 13.3449 12.474C13.3513 12.6856 13.277 12.8918 13.137 13.0506C12.997 13.2094 12.8017 13.3089 12.591 13.329C12.3802 13.3491 12.1697 13.2882 12.0022 13.1587L11.9239 13.0895L9.42385 10.5895C9.29434 10.4599 9.21116 10.2912 9.18719 10.1095L9.17969 10.0003V5.83366C9.17969 5.61264 9.26748 5.40068 9.42376 5.2444C9.58004 5.08812 9.79201 5.00032 10.013 5.00032Z" fill="#545961"/></svg>
+                                <span>${mainArticle.time_to_read}</span>
+                                <span>${config.general_settings.time_to_read}</span>
+                            </div>
+                            <div class="views">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <g clip-path="url(#clip0_2295_2463)"> <mask id="mask0_2295_2463" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"> <path d="M20 0H0V20H20V0Z" fill="white"/> </mask> <g mask="url(#mask0_2295_2463)"> <mask id="mask1_2295_2463" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"> <path d="M0 1.90735e-06H20V20H0V1.90735e-06Z" fill="white"/> </mask> <g mask="url(#mask1_2295_2463)"> <path d="M19.1719 10C19.1719 10 16.2031 16.25 9.95312 16.25C3.70312 16.25 0.734375 10 0.734375 10C0.734375 10 3.70312 3.75 9.95312 3.75C16.2031 3.75 19.1719 10 19.1719 10Z" stroke="#545961" stroke-width="1.5625" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/> <path d="M13.0781 10C13.0781 8.2741 11.679 6.875 9.95312 6.875C8.22723 6.875 6.82812 8.2741 6.82812 10C6.82812 11.7259 8.22723 13.125 9.95312 13.125C11.679 13.125 13.0781 11.7259 13.0781 10Z" stroke="#545961" stroke-width="1.5625" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/> </g> </g> </g> <defs> <clipPath id="clip0_2295_2463"> <rect width="20" height="20" fill="white"/> </clipPath> </defs> </svg>
+                                <span>${mainArticle.views}</span>
+                            </div>
+                            <div class="rating">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none"><path d="M9.5 0.839123L12.1266 6.15893L18 7.01203L13.75 11.1529L14.7532 17L9.5 14.2394L4.24678 17L5.25004 11.1529L1 7.01203L6.87335 6.15893L9.5 0.839123Z" stroke="#545961" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                <span>${mainArticle.rating.avg}</span>
+                            </div>
+                            <div class="comments">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" fill="none"> <path d="M12.5156 8.79297C13.001 8.79297 13.3945 8.39947 13.3945 7.91406C13.3945 7.42866 13.001 7.03516 12.5156 7.03516C12.0302 7.03516 11.6367 7.42866 11.6367 7.91406C11.6367 8.39947 12.0302 8.79297 12.5156 8.79297Z" fill="#545961"/> <path d="M9 8.79297C9.48541 8.79297 9.87891 8.39947 9.87891 7.91406C9.87891 7.42866 9.48541 7.03516 9 7.03516C8.51459 7.03516 8.12109 7.42866 8.12109 7.91406C8.12109 8.39947 8.51459 8.79297 9 8.79297Z" fill="#545961"/> <path d="M5.48438 8.79297C5.96978 8.79297 6.36328 8.39947 6.36328 7.91406C6.36328 7.42866 5.96978 7.03516 5.48438 7.03516C4.99897 7.03516 4.60547 7.42866 4.60547 7.91406C4.60547 8.39947 4.99897 8.79297 5.48438 8.79297Z" fill="#545961"/> <path d="M17.2969 0.25H0.703125C0.314789 0.25 0 0.564789 0 0.953125V14.875C0 15.2633 0.314789 15.5781 0.703125 15.5781H6.92497L8.40551 17.9223C8.53436 18.1263 8.75876 18.25 9 18.25C9.24124 18.25 9.46564 18.1263 9.59449 17.9223L11.075 15.5781H17.2969C17.6852 15.5781 18 15.2633 18 14.875V0.953125C18 0.564789 17.6852 0.25 17.2969 0.25ZM16.5938 14.1719H10.6875C10.4463 14.1719 10.2219 14.2956 10.093 14.4995L9 16.2301L7.90699 14.4995C7.77814 14.2956 7.55374 14.1719 7.3125 14.1719H1.40625V1.65625H16.5938V14.1719Z" fill="#545961"/> </svg>
+                                <span>${mainArticle.commentsQuantity}</span>
+                            </div>
+                        </div>
+                        <div class="author_date text">
+                            <div class="symbol">${config.general_settings.author}</div>
+                            <a class="author link" href="${mainArticle.author_slug}">${mainArticle.author}</a>
+                            <div class="symbol"> | </div>
+                            <div class="posted_at">
+                                ${new Date(Number(mainArticle.posted_at)).toLocaleDateString('uk')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intro">            
+                        ${mainArticle.intro}
+                    </div>
+                    <div class="read_more">
+                        <a href="${mainArticle.slug}" class="link">
+                            <span>${config.general_settings.read_more}</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <circle cx="10" cy="10" r="10" fill="#0A79FE"/> <path d="M8.25 6L12 9.75L8.25 13.5" stroke="white"/> </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>    
+        ` : ''}
+        
+        <div class="posts_list">
+            ${
+                postForPage ? postForPage.reduce((acc, article, index) => {
+                return acc + `
+                    <div class="post primary-block">
+                        <div class="post_left">
+                            <a href="${article.slug}">
+                                <image-component width="462" height="200" lazyload data-url="${article.thumbnail}" data-src="${article.thumbnail_src}" alt="${article.thumbnail_alt}" title="${article.thumbnail_title}"></image-component>
+                            </a>
+                        </div> 
+                        <div class="post_right">
+                            <div class="top">
+                                <div class="top_flex">
+                                    <div>
+                                        <div class="categories">
+                                            ${
+                                                article.categories.reduce((acc, category, index) => {
+                                                    return acc + ` 
+                                                        <div class="category">
+                                                            <a href="${category.slug}" class="btn">${category.name}</a>
+                                                        </div>       
+                                                    `
+                                                    }, 
+                                                '')
+                                            }
+                                        </div>
+                                    </div>
+                                    <h2 class="post_title h2">
+                                        <a href="${article.slug}">
+                                            ${article.h1}
+                                        </a>
+                                    </h2>
+                                    <div class="author_date">
+                                        <div class="symbol">${config.general_settings.author}</div>
+                                        <a class="author link" href="${article.author_slug}">${article.author}</a>
+                                        <div class="symbol"> | </div>
+                                        <div class="posted_at">
+                                            ${new Date(Number(article.posted_at)).toLocaleDateString('uk')}
+                                        </div>
+                                    </div>
+                                    <div class="stats">
+                                        <div class="time_to_read">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10.013 1.66699C14.6155 1.66699 18.3464 5.39783 18.3464 10.0003C18.3464 14.6028 14.6155 18.3337 10.013 18.3337C5.41052 18.3337 1.67969 14.6028 1.67969 10.0003C1.67969 5.39783 5.41052 1.66699 10.013 1.66699ZM10.013 3.33366C8.24491 3.33366 6.54922 4.03604 5.29897 5.28628C4.04873 6.53652 3.34635 8.23221 3.34635 10.0003C3.34635 11.7684 4.04873 13.4641 5.29897 14.7144C6.54922 15.9646 8.24491 16.667 10.013 16.667C11.7811 16.667 13.4768 15.9646 14.7271 14.7144C15.9773 13.4641 16.6797 11.7684 16.6797 10.0003C16.6797 8.23221 15.9773 6.53652 14.7271 5.28628C13.4768 4.03604 11.7811 3.33366 10.013 3.33366ZM10.013 5.00032C10.2171 5.00035 10.4141 5.07529 10.5667 5.21092C10.7192 5.34655 10.8166 5.53345 10.8405 5.73616L10.8464 5.83366V9.65532L13.1022 11.9112C13.2516 12.0611 13.3384 12.2624 13.3449 12.474C13.3513 12.6856 13.277 12.8918 13.137 13.0506C12.997 13.2094 12.8017 13.3089 12.591 13.329C12.3802 13.3491 12.1697 13.2882 12.0022 13.1587L11.9239 13.0895L9.42385 10.5895C9.29434 10.4599 9.21116 10.2912 9.18719 10.1095L9.17969 10.0003V5.83366C9.17969 5.61264 9.26748 5.40068 9.42376 5.2444C9.58004 5.08812 9.79201 5.00032 10.013 5.00032Z" fill="#545961"/></svg>
+                                            <span>${article.time_to_read}</span>
+                                            <span>${config.general_settings.time_to_read}</span>
+                                        </div>
+                                        <div class="views">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <g clip-path="url(#clip0_2295_2463)"> <mask id="mask0_2295_2463" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"> <path d="M20 0H0V20H20V0Z" fill="white"/> </mask> <g mask="url(#mask0_2295_2463)"> <mask id="mask1_2295_2463" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20"> <path d="M0 1.90735e-06H20V20H0V1.90735e-06Z" fill="white"/> </mask> <g mask="url(#mask1_2295_2463)"> <path d="M19.1719 10C19.1719 10 16.2031 16.25 9.95312 16.25C3.70312 16.25 0.734375 10 0.734375 10C0.734375 10 3.70312 3.75 9.95312 3.75C16.2031 3.75 19.1719 10 19.1719 10Z" stroke="#545961" stroke-width="1.5625" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/> <path d="M13.0781 10C13.0781 8.2741 11.679 6.875 9.95312 6.875C8.22723 6.875 6.82812 8.2741 6.82812 10C6.82812 11.7259 8.22723 13.125 9.95312 13.125C11.679 13.125 13.0781 11.7259 13.0781 10Z" stroke="#545961" stroke-width="1.5625" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/> </g> </g> </g> <defs> <clipPath id="clip0_2295_2463"> <rect width="20" height="20" fill="white"/> </clipPath> </defs> </svg>
+                                            <span>${article.views}</span>
+                                        </div>
+                                        <div class="rating">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none"><path d="M9.5 0.839123L12.1266 6.15893L18 7.01203L13.75 11.1529L14.7532 17L9.5 14.2394L4.24678 17L5.25004 11.1529L1 7.01203L6.87335 6.15893L9.5 0.839123Z" stroke="#545961" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                            <span>${article.rating.avg}</span>
+                                        </div>
+                                        <div class="comments">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" fill="none"> <path d="M12.5156 8.79297C13.001 8.79297 13.3945 8.39947 13.3945 7.91406C13.3945 7.42866 13.001 7.03516 12.5156 7.03516C12.0302 7.03516 11.6367 7.42866 11.6367 7.91406C11.6367 8.39947 12.0302 8.79297 12.5156 8.79297Z" fill="#545961"/> <path d="M9 8.79297C9.48541 8.79297 9.87891 8.39947 9.87891 7.91406C9.87891 7.42866 9.48541 7.03516 9 7.03516C8.51459 7.03516 8.12109 7.42866 8.12109 7.91406C8.12109 8.39947 8.51459 8.79297 9 8.79297Z" fill="#545961"/> <path d="M5.48438 8.79297C5.96978 8.79297 6.36328 8.39947 6.36328 7.91406C6.36328 7.42866 5.96978 7.03516 5.48438 7.03516C4.99897 7.03516 4.60547 7.42866 4.60547 7.91406C4.60547 8.39947 4.99897 8.79297 5.48438 8.79297Z" fill="#545961"/> <path d="M17.2969 0.25H0.703125C0.314789 0.25 0 0.564789 0 0.953125V14.875C0 15.2633 0.314789 15.5781 0.703125 15.5781H6.92497L8.40551 17.9223C8.53436 18.1263 8.75876 18.25 9 18.25C9.24124 18.25 9.46564 18.1263 9.59449 17.9223L11.075 15.5781H17.2969C17.6852 15.5781 18 15.2633 18 14.875V0.953125C18 0.564789 17.6852 0.25 17.2969 0.25ZM16.5938 14.1719H10.6875C10.4463 14.1719 10.2219 14.2956 10.093 14.4995L9 16.2301L7.90699 14.4995C7.77814 14.2956 7.55374 14.1719 7.3125 14.1719H1.40625V1.65625H16.5938V14.1719Z" fill="#545961"/> </svg>
+                                            <span>${article.commentsQuantity}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bottom">
+                                <div class="intro">            
+                                    ${article.intro}
+                                </div>
+                                <div class="read_more">
+                                    <a href="${article.slug}" class="link">
+                                        <span>${config.general_settings.read_more}</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <circle cx="10" cy="10" r="10" fill="#0A79FE"/> <path d="M8.25 6L12 9.75L8.25 13.5" stroke="white"/> </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `
+                }, '') : ''
+            }
+        </div>
+        ${ amountOfPages > 1 ? `
+            <div class="pagination">
+                <div class="pagination_wrapper">
+                    <div class="prev ${numberOfPage == 1 ? 'disable' : ''}">
+                        ${numberOfPage == 2 ? `
+                            <a href="${currentCategory ? `${currentCategory.slug}` : '/blog/'}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M8 13L2 7M2 7L8 0.999999M2 7L18 7" stroke="#4D555B" stroke-width="2"/></svg>
+                            </a>
+                        ` : numberOfPage == 1 ? `
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M8 13L2 7M2 7L8 0.999999M2 7L18 7" stroke="#4D555B" stroke-width="2"/></svg>
+                            ` : `
+                                <a href="${currentCategory ? `${currentCategory.slug}` : '/blog/'}page/${numberOfPage -1}/">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M8 13L2 7M2 7L8 0.999999M2 7L18 7" stroke="#4D555B" stroke-width="2"/></svg>
+                                </a>
+                            `}
+                    </div>
+                    <ul class="pages">
+                        
+                        ${
+                            countOfPages.reduce((acc, page, index) => {
+                            return acc + `
+                                ${index > 0 ? `
+                                    ${numberOfPage == index + 1 ? `
+                                        <li class="page active">
+                                            <span>${index + 1}</span>
+                                        </li>
+                                    ` : `
+                                        <li class="page ${numberOfPage == index + 1 ? 'active' : ''}">
+                                            <a href="${currentCategory ? `${currentCategory.slug}` : '/blog/'}page/${index + 1}/">${index + 1}</a>
+                                        </li>
+                                    `}
+                                ` : `
+                                    ${numberOfPage == index + 1 ? `
+                                        <li class="page active">
+                                            <span>${index + 1}</span>
+                                        </li>
+                                    
+                                    ` : `
+                                        <li class="page">
+                                            <a href="${currentCategory ? `${currentCategory.slug}` : '/blog/'}">1</a>
+                                        </li>    
+                                    `}
+                                `}
+                                `
+                            }, '')
+                        }
+                    </ul>
+                    <div class="next ${countOfPages.length == numberOfPage ? 'disable' : ''}">
+                        ${countOfPages.length == numberOfPage ? `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M10 1L16 7M16 7L10 13M16 7L-1.04907e-06 7" stroke="#4D555B" stroke-width="2"/></svg>
+                        ` : `
+                            <a href="${currentCategory ? `${currentCategory.slug}` : '/blog/'}page/${numberOfPage + 1}/">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M10 1L16 7M16 7L10 13M16 7L-1.04907e-06 7" stroke="#4D555B" stroke-width="2"/></svg>
+                            </a>
+                        `}
+                    </div>
+                </div>
+            </div>
+        ` : ''}
+    </div>
+    `}
+</section>

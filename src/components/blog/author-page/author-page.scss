@@ -1,0 +1,48 @@
+author-page {
+    .author {
+        &_top {
+            .image {
+                border-radius: var(--block-secondary-border-radius);
+                border: 2px solid var(--block-secondary-border-color);
+                width: 150px;
+                height: 150px;
+                margin: 0 auto;
+                overflow: hidden;
+                img {
+                    width: 150px;
+                    height: 150px;
+                    margin: 0 auto;
+                    border-radius: var(--block-secondary-border-radius);
+                    object-fit: cover;
+                    display: block;
+                }
+            }
+        }
+        &_bottom {
+            width: 100%;
+            max-width: 1010px;
+            margin: 0 auto;
+            .soc_links {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                column-gap: 30px;
+                svg path {
+                    fill: var(--block-primary-accent-color);
+                }
+            }
+            .description {
+                text-align: center;
+                line-height: 22.4px;
+                font-size: 16px;
+                font-weight: 500;
+                color: var(--block-primary-text-color);
+                margin-top: 20px;
+            }
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+    }
+}

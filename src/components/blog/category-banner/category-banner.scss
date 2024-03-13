@@ -1,0 +1,22 @@
+category-banner {
+    section {
+        padding-top: 70px;
+    }
+    text-align: center;
+    h1 {
+        text-align: center;
+    }
+    p {
+        width: 100%;
+        max-width: 950px;
+        margin: 0 auto
+    }
+}
+
+@media screen and (max-width: 600px) {
+    category-banner {
+        section {
+            padding-top: 60px;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+<section>
+    <div class="container">
+        <div class="wrapper">
+            <breadcrumbs-component data-items='${breadcrumbs}'></breadcrumbs-component>
+            ${ page ? `
+                <h1>${json.title}</h1>
+                <div class="subtitle">${json.subtitle}</div>
+            ` : `
+                <h1 gh-id="${ghId}.title"></h1>
+                <div class="subtitle" gh-id="${ghId}.subtitle"></div>
+            `}
+        </div>
+    </div>
+</section>
