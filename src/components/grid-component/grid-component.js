@@ -70,7 +70,6 @@ class GridComponent extends GHComponent {
                 }
                 const interval = setInterval(() => {
                     if(typeof Swiper !== 'undefined') {
-                        console.log(Swiper);
                         this.initSlider();
                         clearInterval(interval);
                     }

@@ -10,9 +10,7 @@ class RecentPosts extends GHComponent {
     
     async onServerRender() {
         let articlesAndComments = await gudhub.jsonConstructor(await generateArticlesAndCommentsObject(undefined, undefined, window.constants.chapters.blog));
-        // console.log('articlesAndComments',articlesAndComments)
         let articles = articlesAndComments.articlesAndComments.articles;
-        // console.log('articles',articles)
         let comments = articlesAndComments.articlesAndComments.comments;
         let categories = articlesAndComments.articlesAndComments.categories;
 
@@ -49,13 +47,11 @@ class RecentPosts extends GHComponent {
             delete this.articles[article].category;
 
             // AUTHORS
-            // console.log(this.authors)
             let authorSlug = this.authors.find(author => {
                 if (author.author_id == this.articles[article].author_id) {
                     return author
                 }
             });
-            // console.log(authorSlug)
             this.articles[article].author_slug = authorSlug.slug
         }
 
