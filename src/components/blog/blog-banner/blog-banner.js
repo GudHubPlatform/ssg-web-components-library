@@ -11,7 +11,7 @@ class BlogBanner extends GHComponent {
 
     async onServerRender() {
 
-        this.config = initBlogConfig(window.constants.blog_config);
+        this.config = initBlogConfig(window.getConfig().blog_config);
 
         let url = new URL(window.location.href);
         url = url.searchParams.get('path');
@@ -22,8 +22,8 @@ class BlogBanner extends GHComponent {
             this.breadcrumbs = JSON.stringify([{"title": this.config.breadcrumbs.blog}])
             this.ghId = this.getAttribute('data-gh-id') || null;
             
-            // this.json = await super.getGhData(this.ghId, 'pages', window.constants.chapters.pages.app_id, window.constants.chapters.pages.blog_main_page_item_id);
-            const response = await gudhub.getDocument({ app_id: window.constants.chapters.pages.app_id, item_id: window.constants.chapters.pages.blog_main_page_item_id, element_id: window.constants.chapters.pages.json_field_id });
+            // this.json = await super.getGhData(this.ghId, 'pages', window.getConfig().chapters.pages.app_id, window.getConfig().chapters.pages.blog_main_page_item_id);
+            const response = await gudhub.getDocument({ app_id: window.getConfig().chapters.pages.app_id, item_id: window.getConfig().chapters.pages.blog_main_page_item_id, element_id: window.getConfig().chapters.pages.json_field_id });
             this.json = JSON.parse(response.data)[this.ghId];
 
         } else {

@@ -13,10 +13,10 @@ class AuthorsList extends GHComponent {
 
     async onServerRender() {
         
-        this.config = initBlogConfig(window.constants.blog_config);
+        this.config = initBlogConfig(window.getConfig().blog_config);
         
         this.ghId = this.getAttribute('data-gh-id') || null;
-        this.authors = await gudhub.jsonConstructor(generateAuthorsListScheme(window.constants.chapters.blog));
+        this.authors = await gudhub.jsonConstructor(generateAuthorsListScheme(window.getConfig().chapters.blog));
         this.authors = this.authors.authors;
         const getContent = (link) => {
             return new Promise(async (resolve) => {
@@ -35,7 +35,7 @@ class AuthorsList extends GHComponent {
         const promises = [];
         this.authors.forEach((author, index) => {
             promises.push(new Promise(async (resolve) => {
-                let content = await gudhub.getInterpretationById(window.constants.chapters.blog.app_id, author.id.split('.')[1], author.intro_id, 'html');
+                let content = await gudhub.getInterpretationById(window.getConfig().chapters.blog.app_id, author.id.split('.')[1], author.intro_id, 'html');
                 this.authors[index].intro = content;
                 resolve();
             }));
@@ -50,12 +50,12 @@ class AuthorsList extends GHComponent {
 
         const ogSiteImage = document.createElement('meta');
         ogSiteImage.setAttribute('property', 'og:image');
-        ogSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}${this.authors[0].thumbnail_src}`);
+        ogSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${this.authors[0].thumbnail_src}`);
         document.querySelector('head').prepend(ogSiteImage);
 
         const twitterSiteImage = document.createElement('meta');
         twitterSiteImage.setAttribute('name', 'twitter:image');
-        twitterSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}${this.authors[0].thumbnail_src}`);
+        twitterSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${this.authors[0].thumbnail_src}`);
         document.querySelector('head').prepend(twitterSiteImage);
 
         super.render(html);

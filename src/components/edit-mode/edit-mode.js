@@ -221,7 +221,7 @@ class EditMode extends GHComponent {
             console.error('GHCOMPONENT ERROR: you need to import GudHub library (@gudhub/core) before using GHComponent!');
         }
 
-        window.gudhub = !isUndefined(window.gudhub) ? window.gudhub : new GudHub(isUndefined(auth_key) ? window.constants.auth_key : auth_key, {
+        window.gudhub = !isUndefined(window.gudhub) ? window.gudhub : new GudHub(isUndefined(auth_key) ? window.getConfig().auth_key : auth_key, {
             server_url: 'https://gudhub.com/GudHub_Test',
             file_server_url: 'https://gudhub.com',
             async_modules_path: 'build/latest/async_modules/',

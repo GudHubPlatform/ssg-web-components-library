@@ -31,13 +31,13 @@ class PostsTemplate extends GHComponent {
 
         this.config;
         
-        this.headingFieldId = this.environment === 'server' ? window.constants.chapters.blog.heading_field_id : false;
-        this.slugFieldId = this.environment === 'server' ? window.constants.chapters.blog.slug_field_id : false;
+        this.headingFieldId = this.environment === 'server' ? window.getConfig().chapters.blog.heading_field_id : false;
+        this.slugFieldId = this.environment === 'server' ? window.getConfig().chapters.blog.slug_field_id : false;
     }
     
     async onServerRender() {
 
-        this.config = initBlogConfig(window.constants.blog_config);
+        this.config = initBlogConfig(window.getConfig().blog_config);
 
         this.configCategories = JSON.stringify(this.config);
 
@@ -46,12 +46,12 @@ class PostsTemplate extends GHComponent {
         let articlesAndComments;
         let articles;
 
-        let categories = await gudhub.jsonConstructor(generateCategoriesScheme(window.constants.chapters.blog));
+        let categories = await gudhub.jsonConstructor(generateCategoriesScheme(window.getConfig().chapters.blog));
         categories = categories.categories;
 
         this.empty = false;
 
-        const authors = await gudhub.jsonConstructor(generateAuthorsObjectScheme(window.constants.chapters.blog));
+        const authors = await gudhub.jsonConstructor(generateAuthorsObjectScheme(window.getConfig().chapters.blog));
         this.authors = authors.authors;
 
         if (this.type === "category") {
@@ -60,7 +60,7 @@ class PostsTemplate extends GHComponent {
             const category = url.searchParams.get('category');
             this.currentCategory = categories.find(iterationCategory => iterationCategory.slug == `/blog/${category}/`);
             const categoryId = this.currentCategory.category_id;
-            articlesAndComments = await gudhub.jsonConstructor(await generateArticlesAndCommentsObject('category', categoryId, window.constants.chapters.blog));
+            articlesAndComments = await gudhub.jsonConstructor(await generateArticlesAndCommentsObject('category', categoryId, window.getConfig().chapters.blog));
 
             articles = articlesAndComments.articlesAndComments;
 
@@ -74,7 +74,7 @@ class PostsTemplate extends GHComponent {
             const pageSlug = url.searchParams.get('path');
             let currentAuthor = this.authors.find(author => author.slug == pageSlug);
             let author_id = currentAuthor.author_id;
-            articlesAndComments = await gudhub.jsonConstructor(await generateArticlesAndCommentsObject('author', author_id, window.constants.chapters.blog));
+            articlesAndComments = await gudhub.jsonConstructor(await generateArticlesAndCommentsObject('author', author_id, window.getConfig().chapters.blog));
 
             articles = articlesAndComments.articlesAndComments;
 
@@ -85,7 +85,7 @@ class PostsTemplate extends GHComponent {
         else {
             // Fetch all articles
             this.currentCategory = false;
-            articlesAndComments = await gudhub.jsonConstructor(await generateArticlesAndCommentsObject(undefined, undefined, window.constants.chapters.blog));
+            articlesAndComments = await gudhub.jsonConstructor(await generateArticlesAndCommentsObject(undefined, undefined, window.getConfig().chapters.blog));
 
             articles = articlesAndComments.articlesAndComments;
         }
@@ -137,7 +137,7 @@ class PostsTemplate extends GHComponent {
         const promises = [];
         this.articles.forEach((article, index) => {
             promises.push(new Promise(async (resolve) => {
-                let content = await gudhub.getInterpretationById(window.constants.chapters.blog.app_id, article.id.split('.')[1], window.constants.chapters.blog.intro_field_id, 'html');
+                let content = await gudhub.getInterpretationById(window.getConfig().chapters.blog.app_id, article.id.split('.')[1], window.getConfig().chapters.blog.intro_field_id, 'html');
                 this.articles[index].intro = content;
                 resolve();
             }));
@@ -152,12 +152,12 @@ class PostsTemplate extends GHComponent {
             if (this.type != 'author') {
                 const ogSiteImage = document.createElement('meta');
                 ogSiteImage.setAttribute('property', 'og:image');
-                ogSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}${this.articles[0].thumbnail_src}`);
+                ogSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${this.articles[0].thumbnail_src}`);
                 document.querySelector('head').prepend(ogSiteImage);
                 
                 const twitterSiteImage = document.createElement('meta');
                 twitterSiteImage.setAttribute('name', 'twitter:image');
-                twitterSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}${this.articles[0].thumbnail_src}`);
+                twitterSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${this.articles[0].thumbnail_src}`);
                 document.querySelector('head').prepend(twitterSiteImage);
             }
             
@@ -216,9 +216,9 @@ class PostsTemplate extends GHComponent {
                 if (this.type == 'category') {
                     const url = new URL(window.location.href);
                     const category = url.searchParams.get('category');
-                    fetch(`${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}/blog/${category}/page/${this.numberOfPage+1}/?mode=ssr`);
+                    fetch(`${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}/blog/${category}/page/${this.numberOfPage+1}/?mode=ssr`);
                 } else {
-                    fetch(`${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}/blog/page/${this.numberOfPage+1}/?mode=ssr`);
+                    fetch(`${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}/blog/page/${this.numberOfPage+1}/?mode=ssr`);
                 }
             }
         }
@@ -281,7 +281,7 @@ class PostsTemplate extends GHComponent {
         let searchTarget = item;
         searchTarget.addEventListener('input', this.loadingCallback);
 
-        const { api_app_id } = window.constants.chapters.blog;
+        const { api_app_id } = window.getConfig().chapters.blog;
 
         const response = await fetch(`https://gudhub.com/api/services/prod/api/${api_app_id}/articles`);
         const data = await response.json();
@@ -381,7 +381,7 @@ class PostsTemplate extends GHComponent {
     }
 
     async fetchIntro(posts) {
-        const { api_app_id, intro_field_id, app_id } = window.constants.chapters.blog;
+        const { api_app_id, intro_field_id, app_id } = window.getConfig().chapters.blog;
         const fetchData = async (index, item_id) => {
             const responseIntro = await fetch(`https://gudhub.com/api/services/prod/api/${api_app_id}/get-intro?app_id=${app_id}&item_id=${item_id}&element_id=${intro_field_id}`);
             const dataIntro = await responseIntro.json();
@@ -429,7 +429,7 @@ class PostsTemplate extends GHComponent {
         }
 
         if (!this.config) {
-            this.config = window.constants.blog_config;
+            this.config = window.getConfig().blog_config;
         }
 
 
@@ -446,7 +446,7 @@ class PostsTemplate extends GHComponent {
             
             if (!articles[0].author_slug) {
                 
-                const { api_app_id } = window.constants.chapters.blog;
+                const { api_app_id } = window.getConfig().chapters.blog;
                 const authorsResponse = await fetch(`https://gudhub.com/api/services/prod/api/${api_app_id}/authors`)
                 authors = await authorsResponse.json();
                 authors = authors.authors;

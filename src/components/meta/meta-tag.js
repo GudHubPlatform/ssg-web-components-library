@@ -25,8 +25,8 @@ class MetaTag extends GHComponent {
         const path = url.searchParams.get('path');
 
         if (!appId && !itemId && path === ('/blog/')) { //blog/authors/
-            appId = window.constants.chapters.pages.app_id;
-            itemId = window.constants.chapters.pages.blog_main_page_item_id;
+            appId = window.getConfig().chapters.pages.app_id;
+            itemId = window.getConfig().chapters.pages.blog_main_page_item_id;
             this.addTag(appId, itemId, false, chapter);
         } else {
             const url = new URL(window.location.href);
@@ -79,11 +79,11 @@ class MetaTag extends GHComponent {
         }
 
         // fieldId = app.field_list.find(findedField => findedField.name_space === this.type);
-        const generalInfo = window.constants.generalInfo;
-        let titleId = window.constants.chapters[chapter].heading_field_id;
-        let descriptionId = window.constants.chapters[chapter].description_field_id;
-        let slugId = window.constants.chapters[chapter].slug_field_id;
-        let imageId = window.constants.chapters[chapter].image_field_id;
+        const generalInfo = window.getConfig().generalInfo;
+        let titleId = window.getConfig().chapters[chapter].heading_field_id;
+        let descriptionId = window.getConfig().chapters[chapter].description_field_id;
+        let slugId = window.getConfig().chapters[chapter].slug_field_id;
+        let imageId = window.getConfig().chapters[chapter].image_field_id;
         // fieldId = fieldId.field_id;
         // value = item.fields.find(findedField => findedField.field_id == fieldId).field_value;
 
@@ -93,11 +93,11 @@ class MetaTag extends GHComponent {
         let slugValue = item.fields.find(findedField => findedField.field_id == slugId).field_value;
         let imageValue = !slugValue.includes('/blog/') ? item.fields.find(findedField => findedField.field_id == imageId).field_value : false;
 
-        // value = isNaN(value) ? value : await this.getContent(`https://gudhub.com/userdata/${window.constants.chapters[chapter].app_id}/${value}.html`);
-        titleValue = isNaN(titleValue) ? titleValue : await this.getContent(`https://gudhub.com/userdata/${window.constants.chapters[chapter].app_id}/${titleValue}.html`);
-        descriptionValue = isNaN(descriptionValue) ? descriptionValue : await this.getContent(`https://gudhub.com/userdata/${window.constants.chapters[chapter].app_id}/${descriptionValue}.html`);
-        slugValue = isNaN(slugValue) ? slugValue : await this.getContent(`https://gudhub.com/userdata/${window.constants.chapters[chapter].app_id}/${slugValue}.html`);
-        imageValue = !slugValue.includes('/blog/') ? isNaN(imageValue) ? imageValue : await this.getContent(`https://gudhub.com/userdata/${window.constants .chapters[chapter].app_id}/${imageValue}.html`) : false;
+        // value = isNaN(value) ? value : await this.getContent(`https://gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${value}.html`);
+        titleValue = isNaN(titleValue) ? titleValue : await this.getContent(`https://gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${titleValue}.html`);
+        descriptionValue = isNaN(descriptionValue) ? descriptionValue : await this.getContent(`https://gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${descriptionValue}.html`);
+        slugValue = isNaN(slugValue) ? slugValue : await this.getContent(`https://gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${slugValue}.html`);
+        imageValue = !slugValue.includes('/blog/') ? isNaN(imageValue) ? imageValue : await this.getContent(`https://gudhub.com/userdata/${window.getConfig() .chapters[chapter].app_id}/${imageValue}.html`) : false;
 
         
         //TITLE
@@ -133,12 +133,12 @@ class MetaTag extends GHComponent {
         if (!slugValue.includes('/blog/')) {
             const twitterMetaSiteImage = document.createElement('meta');
             twitterMetaSiteImage.setAttribute('name', 'twitter:image');
-            twitterMetaSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}${imageValue}`);
+            twitterMetaSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${imageValue}`);
             document.querySelector('head').prepend(twitterMetaSiteImage);
 
             const metaSiteImage = document.createElement('meta');
             metaSiteImage.setAttribute('property', 'og:image');
-            metaSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}${imageValue}`);
+            metaSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${imageValue}`);
             document.querySelector('head').prepend(metaSiteImage);
         }
 

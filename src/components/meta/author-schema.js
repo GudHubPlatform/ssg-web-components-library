@@ -31,7 +31,7 @@ class AuthorSchema extends GHComponent {
             author.description = await getContent(author.description)
             let schema = {
                 "@context": "https://schema.org",
-                "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}` + author.slug,
+                "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}` + author.slug,
                 "@type": "Person",
                 "name": author.name,
                 "givenName": author.name.split(' ')[0],
@@ -39,14 +39,14 @@ class AuthorSchema extends GHComponent {
                 "description": JSON.parse(author.intro).blocks[0].data.text,
                 "knowsAbout": author.description,
                 "jobTitle": author.description,
-                "url": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}` + author.slug,
+                "url": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}` + author.slug,
                 "knowsLanguage": [
                     "English",
                     "Ukrainian"
                 ],
                 "image": {
                     "@type": "ImageObject",
-                    "url": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}` + author.thumbnail_src,
+                    "url": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}` + author.thumbnail_src,
                     "author": {
                         "@type": "Person",
                         "name": author.name

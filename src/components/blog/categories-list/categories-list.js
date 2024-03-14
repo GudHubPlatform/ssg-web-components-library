@@ -12,7 +12,7 @@ class CategoriesList extends GHComponent {
     async onServerRender() {
 
         this.config = JSON.parse(this.getAttribute('data-config')) || null;
-        this.categories = await gudhub.jsonConstructor(generateCategoriesListScheme(window.constants.chapters.blog));
+        this.categories = await gudhub.jsonConstructor(generateCategoriesListScheme(window.getConfig().chapters.blog));
 
 
         this.categories = this.categories.categories;

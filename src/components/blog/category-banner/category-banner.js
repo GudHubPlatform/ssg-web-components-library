@@ -13,7 +13,7 @@ class CategoryBanner extends GHComponent {
 
     async onServerRender() {
 
-        this.config = initBlogConfig(window.constants.blog_config);
+        this.config = initBlogConfig(window.getConfig().blog_config);
 
         let chapter = this.getAttribute('data-chapter')
         let url = new URL(window.location.href);
@@ -32,13 +32,13 @@ class CategoryBanner extends GHComponent {
         const items = await gudhub.getItems(ids.appId);
         const item = items.find(item => item.item_id == ids.itemId);
 
-        let description = await fetch(`https://gudhub.com/userdata/${ids.appId}/${item.fields.find(field => field.field_id == window.constants.chapters.blog.description_field_id).field_value}.html?t=${new Date().getTime()}`);
+        let description = await fetch(`https://gudhub.com/userdata/${ids.appId}/${item.fields.find(field => field.field_id == window.getConfig().chapters.blog.description_field_id).field_value}.html?t=${new Date().getTime()}`);
         description = await description.text();
 
         let div = document.createElement('div');
         div.innerHTML = description;
         this.description = div.querySelector('div').innerText;
-        this.title = item.fields.find(field => field.field_id == window.constants.chapters.blog.heading_field_id).field_value;
+        this.title = item.fields.find(field => field.field_id == window.getConfig().chapters.blog.heading_field_id).field_value;
 
         this.breadcrumbs = JSON.stringify([{"title": this.config.breadcrumbs.blog, "slug": "/blog/"},{"title": this.title}]);
         

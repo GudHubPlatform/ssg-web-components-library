@@ -17,8 +17,8 @@ class BlogSchema extends GHComponent {
             const app = await gudhub.getApp(ids.appId);
             const items = app.items_list;
             let item = items.find(findedItem => findedItem.item_id == ids.itemId);
-            const blogName = item.fields.find(field => field.field_id == window.constants.chapters[chapter].heading_field_id).field_value;
-            const blogDescription = item.fields.find(field => field.field_id == window.constants.chapters[chapter].description_field_id).field_value;
+            const blogName = item.fields.find(field => field.field_id == window.getConfig().chapters[chapter].heading_field_id).field_value;
+            const blogDescription = item.fields.find(field => field.field_id == window.getConfig().chapters[chapter].description_field_id).field_value;
             // Get all articles and slice 10 articles to show in blog-schema
             let articles = await gudhub.jsonConstructor(articlesObject);
             articles = articles.articles.slice(0, 10);
@@ -32,14 +32,14 @@ class BlogSchema extends GHComponent {
 
                 let authorObject = {
                     "@type": "Person",
-                    "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}${author.slug}`,
-                    "url": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}${author.slug}`,
+                    "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${author.slug}`,
+                    "url": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${author.slug}`,
                     "name": author.name
                 }
                 let post = {
                     "@type": "BlogPosting",
-                    "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}${articles[article].slug}`,
-                    "mainEntityOfPage": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}${articles[article].slug}`,
+                    "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${articles[article].slug}`,
+                    "mainEntityOfPage": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${articles[article].slug}`,
                     "headline": articles[article].title,
                     "name": articles[article].title,
                     "description": articles[article].description,
@@ -48,33 +48,33 @@ class BlogSchema extends GHComponent {
                     "author": authorObject,
                     "image": {
                         "@type": "ImageObject",
-                        "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}{articles[article].thumbnail_url}`,
-                        "url": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}{articles[article].thumbnail_url}`,
+                        "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}{articles[article].thumbnail_url}`,
+                        "url": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}{articles[article].thumbnail_url}`,
                         "height": "410",
                         "width": "950"
                     },
-                    "url": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}{articles[article].slug}`
+                    "url": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}{articles[article].slug}`
                 };
                 posts.push(post);
             }
 
-            const { name } = window.constants.generalInfo;
+            const { name } = window.getConfig().generalInfo;
             
             const schema = {
                 "@context": "https://schema.org/",
                 "@type": "Blog",
-                "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}/blog/`,
-                "mainEntityOfPage": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}/blog/`,
+                "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}/blog/`,
+                "mainEntityOfPage": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}/blog/`,
                 "name": blogName,
                 "description": blogDescription,
                 "publisher": {
                     "@type": "Organization",
-                    "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}`,
+                    "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}`,
                     "name": name,
                     "logo": {
                         "@type": "ImageObject",
-                        "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}` + blogImage,
-                        "url": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}` + blogImage,
+                        "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}` + blogImage,
+                        "url": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}` + blogImage,
                         "width": "1920",
                         "height": "700"
                     }

@@ -18,13 +18,13 @@ class AuthorPage extends GHComponent {
           type_field_id,
           status_field_id,
           slug_field_id
-        } = window.constants.chapters.blog;
+        } = window.getConfig().chapters.blog;
 
         this.author = await gudhub.jsonConstructor(
             {
                 "type": "array",
                 "id": 1,
-                "childs": generateAuthorPageScheme(window.constants.chapters.blog),
+                "childs": generateAuthorPageScheme(window.getConfig().chapters.blog),
                 "property_name": "author",
                 "app_id": app_id,
                 "filter": [
@@ -62,18 +62,18 @@ class AuthorPage extends GHComponent {
 
         const ogSiteImage = document.createElement('meta');
         ogSiteImage.setAttribute('property', 'og:image');
-        ogSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}${this.author.thumbnail_src}`);
+        ogSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${this.author.thumbnail_src}`);
         document.querySelector('head').prepend(ogSiteImage);
 
         const twitterSiteImage = document.createElement('meta');
         twitterSiteImage.setAttribute('name', 'twitter:image');
-        twitterSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}${this.author.thumbnail_src}`);
+        twitterSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${this.author.thumbnail_src}`);
         document.querySelector('head').prepend(twitterSiteImage);
 
         let readableCategories = [];
         for (let category in  this.author.categories) {
-            let slug = this.author.categories[category].fields.find(field => field.field_id == window.constants.chapters.blog.slug_field_id).field_value;
-            let title = this.author.categories[category].fields.find(field => field.field_id == window.constants.chapters.blog.heading_field_id).field_value;
+            let slug = this.author.categories[category].fields.find(field => field.field_id == window.getConfig().chapters.blog.slug_field_id).field_value;
+            let title = this.author.categories[category].fields.find(field => field.field_id == window.getConfig().chapters.blog.heading_field_id).field_value;
             let categoriesObject = {
                 "title": title,
                 "slug": slug
@@ -97,7 +97,7 @@ class AuthorPage extends GHComponent {
         // INTRO
         const promises = [];
         promises.push(new Promise(async (resolve) => {
-            let content = await gudhub.getInterpretationById(window.constants.chapters.blog.app_id, this.author.id.split('.')[1], this.author.intro_id, 'html');
+            let content = await gudhub.getInterpretationById(window.getConfig().chapters.blog.app_id, this.author.id.split('.')[1], this.author.intro_id, 'html');
             this.author.intro = content;
             resolve();
         }));

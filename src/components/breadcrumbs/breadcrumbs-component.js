@@ -25,7 +25,7 @@ class BreadcrumbsComponent extends GHComponent {
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}`
+                        "item": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}`
                     }
                 ]
             }
@@ -38,7 +38,7 @@ class BreadcrumbsComponent extends GHComponent {
                         "@type": "ListItem",
                         "position": (realIndex == 0 ? 1 : realIndex) + 1,
                         "name": bc.title,
-                        "item": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}` + bc.slug
+                        "item": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}` + bc.slug
                     })
                 } else {
                     schema.itemListElement.push({

@@ -17,8 +17,8 @@ class TitleTag extends GHComponent {
         const path = url.searchParams.get('path');
 
         if (!appId && !itemId && path.includes('/blog/')) {
-            appId = window.constants.chapters.pages.app_id;
-            itemId = window.constants.chapters.pages.blog_main_page_item_id;
+            appId = window.getConfig().chapters.pages.app_id;
+            itemId = window.getConfig().chapters.pages.blog_main_page_item_id;
         }
 
         if (appId && itemId) {

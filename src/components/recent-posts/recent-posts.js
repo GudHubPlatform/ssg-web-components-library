@@ -9,7 +9,7 @@ class RecentPosts extends GHComponent {
     }
     
     async onServerRender() {
-        let articlesAndComments = await gudhub.jsonConstructor(await generateArticlesAndCommentsObject(undefined, undefined, window.constants.chapters.blog));
+        let articlesAndComments = await gudhub.jsonConstructor(await generateArticlesAndCommentsObject(undefined, undefined, window.getConfig().chapters.blog));
         let articles = articlesAndComments.articlesAndComments.articles;
         let comments = articlesAndComments.articlesAndComments.comments;
         let categories = articlesAndComments.articlesAndComments.categories;
@@ -35,8 +35,8 @@ class RecentPosts extends GHComponent {
             post.category = [];
             
             for (let category in post.categories) {
-                let categoryName = this.articles[article].categories[category].fields.find(field => field.field_id == window.constants.chapters.blog.heading_field_id).field_value;
-                let categorySlug = this.articles[article].categories[category].fields.find(field => field.field_id == window.constants.chapters.blog.slug_field_id).field_value;
+                let categoryName = this.articles[article].categories[category].fields.find(field => field.field_id == window.getConfig().chapters.blog.heading_field_id).field_value;
+                let categorySlug = this.articles[article].categories[category].fields.find(field => field.field_id == window.getConfig().chapters.blog.slug_field_id).field_value;
                 let categoryObject = {
                     "name": categoryName,
                     "slug": categorySlug
@@ -59,7 +59,7 @@ class RecentPosts extends GHComponent {
         const promises = [];
         this.articles.forEach((article, index) => {
             promises.push(new Promise(async (resolve) => {
-                let content = await gudhub.getInterpretationById(window.constants.chapters.blog.app_id, article.id.split('.')[1], article.intro_id, 'html');
+                let content = await gudhub.getInterpretationById(window.getConfig().chapters.blog.app_id, article.id.split('.')[1], article.intro_id, 'html');
                 this.articles[index].intro = content;
                 resolve();
             }));

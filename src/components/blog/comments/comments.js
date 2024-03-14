@@ -15,7 +15,7 @@ class CommentsComponent extends GHComponent {
             {
                 "type":"array",
                 "id":1,
-                "childs": generateCommentsObjectScheme(window.constants.chapters.blog),
+                "childs": generateCommentsObjectScheme(window.getConfig().chapters.blog),
                 "property_name":"comments",
                 "app_id":"33960",
                 "filter":[
@@ -102,7 +102,7 @@ class CommentsComponent extends GHComponent {
         }
 
         if (comment.name && comment.text) {
-            const { api_app_id } = window.constants.chapters.blog;
+            const { api_app_id } = window.getConfig().chapters.blog;
             const response = await fetch(`https://gudhub.com/api/services/prod/api/${api_app_id}/add-comment`, {
                 method: 'POST',
                 headers: {

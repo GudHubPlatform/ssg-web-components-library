@@ -16,8 +16,8 @@ class CanonicalComponent extends GHComponent {
         const path = url.searchParams.get('path');
         
         if (!appId && !itemId && path == '/blog/') {
-            appId = window.constants.chapters.pages.app_id;
-            itemId = window.constants.chapters.pages.blog_main_page_item_id;
+            appId = window.getConfig().chapters.pages.app_id;
+            itemId = window.getConfig().chapters.pages.blog_main_page_item_id;
         }
 
         if (appId && itemId) {
@@ -76,10 +76,10 @@ class CanonicalComponent extends GHComponent {
         
         const link = document.createElement('link');
         link.setAttribute('rel', 'canonical');
-        link.setAttribute('href', `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}${value}`);
+        link.setAttribute('href', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${value}`);
 
         const ogUrl = document.createElement('meta');
-        ogUrl.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}${value}`);
+        ogUrl.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${value}`);
         ogUrl.setAttribute('property', 'og:url');
 
         document.querySelector('head').appendChild(link);

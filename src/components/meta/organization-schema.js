@@ -4,14 +4,14 @@ class OrganizationSchema extends GHComponent {
     }
 
     async onServerRender() {
-        const { generalInfo } = window.constants;
+        const { generalInfo } = window.getConfig();
         const schema = {
             "@context": "https://schema.org",
             "@type": "Organization",
             "name": generalInfo.name,
             "legalName": generalInfo.legalName,
-            "url": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}`,
-            "logo": `${window.MODE === 'production' ? 'https' : 'http'}://${window.constants.website}/assets/images/logo.svg`,
+            "url": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}`,
+            "logo": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}/assets/images/logo.svg`,
             "foundingDate": generalInfo.foundingDate,
             "founders": [
                 {
