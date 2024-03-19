@@ -22,7 +22,7 @@ class GridItemDefault extends GHComponent {
 
     onClientReady() {
         const clickableGridItem = this.querySelector('.primary-block.clickable');
-        clickableGridItem.addEventListener('mouseup', (e) => {
+        clickableGridItem?.addEventListener('mouseup', (e) => {
             if ("a" !== e.target.tagName.toLowerCase()) {
                 e.preventDefault();
                 const item = e.currentTarget.querySelector(".item-title");
