@@ -3,7 +3,7 @@ import './article-component.scss';
 import generateAuthorsObjectScheme from './authors-object-scheme.js';
 import generateAllArticlesScheme from './all-articles-scheme.js';
 
-import { generateArticlesAndCommentsObject } from '../../../generate-articles-and-comments-object.js';
+import { generateArticlesAndCommentsObject } from '../../generate-articles-and-comments-object.js';
 
 import {initBlogConfig} from '../initBlogConfig.js';
 

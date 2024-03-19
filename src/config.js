@@ -18,7 +18,7 @@ export {
     commentsComponent,
     contentsComponent,
     postsTemplate
-} from './components/blog/config.js';
+} from './components/blog-config.js';
 export {
     gridItemDefault,
     gridItemExpandableVertical,
