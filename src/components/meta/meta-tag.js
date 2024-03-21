@@ -80,7 +80,7 @@ class MetaTag extends GHComponent {
 
         // fieldId = app.field_list.find(findedField => findedField.name_space === this.type);
         const generalInfo = window.getConfig().generalInfo;
-        let titleId = window.getConfig().chapters[chapter].heading_field_id;
+        let titleId = window.getConfig().chapters[chapter].title_field_id;
         let descriptionId = window.getConfig().chapters[chapter].description_field_id;
         let slugId = window.getConfig().chapters[chapter].slug_field_id;
         let imageId = window.getConfig().chapters[chapter].image_field_id;
