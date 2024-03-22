@@ -1,4 +1,4 @@
-import defaultConfigs from './default-blog-config.json';
+import defaultConfigs from '../default-blog-config.json';
 export function initBlogConfig(blogConfig) {
     let config;
     try {

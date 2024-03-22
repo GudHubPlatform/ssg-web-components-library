@@ -4,7 +4,7 @@ import './posts-template.scss';
 import generateCategoriesScheme from './categories-scheme.js';
 import generateAuthorsObjectScheme from './authors-object-scheme.js';
 
-import { generateArticlesAndCommentsObject } from '../../generate-articles-and-comments-object.js';
+import { generateArticlesAndCommentsObject } from '../../../generate-articles-and-comments-object.js';
 
 import {initBlogConfig} from '../initBlogConfig.js';
 

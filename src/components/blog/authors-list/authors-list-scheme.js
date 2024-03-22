@@ -1,4 +1,9 @@
-{
+const generateAuthorsListScheme = ({
+    app_id,
+    type_field_id,
+    status_field_id,
+    intro_field_id
+}) => ({
     "type": "array",
     "id": 1,
     "childs": [
@@ -13,7 +18,7 @@
         {
             "type": "property",
             "id": 4,
-            "property_name": "name",
+            "property_name": "h1",
             "property_type": "field_value",
             "name_space": "h1",
             "interpretation": 1
@@ -27,18 +32,26 @@
         },
         {
             "type": "property",
-            "id": 16,
-            "property_name": "intro",
+            "id": 19,
+            "property_name": "thumbnail_alt",
             "property_type": "field_value",
-            "name_space": "intro",
+            "name_space": "thumbnail_alt",
+            "interpretation": 1
+        },
+        {
+            "type": "property",
+            "id": 18,
+            "property_name": "thumbnail_title",
+            "property_type": "field_value",
+            "name_space": "thumbnail_title",
             "interpretation": 1
         },
         {
             "type": "property",
             "id": 13,
             "property_name": "intro_id",
-            "property_type": "field_value",
-            "name_space": "intro"
+            "property_type": "field_id",
+            "field_id": intro_field_id
         },
         {
             "type": "property",
@@ -46,6 +59,14 @@
             "property_name": "description",
             "property_type": "field_value",
             "name_space": "description",
+            "interpretation": 1
+        },
+        {
+            "type": "property",
+            "id": 17,
+            "property_name": "thumbnail",
+            "property_type": "field_value",
+            "name_space": "thumbnail",
             "interpretation": 1
         },
         {
@@ -82,11 +103,10 @@
         }
     ],
     "property_name": "authors",
-    "app_id": "33959",
+    "app_id": app_id,
     "filter": [
         {
-            "field_id": 807604,
-            
+            "field_id": type_field_id,
             "data_type": "radio_button",
             "valuesArray": [
                 "1"
@@ -95,7 +115,7 @@
             "selected_search_option_variable": "Value"
         },
         {
-            "field_id": 807613,
+            "field_id": status_field_id,
             "data_type": "radio_button",
             "valuesArray": [
                 "1"
@@ -104,4 +124,6 @@
             "selected_search_option_variable": "Value"
         }
     ]
-}
+});
+
+export default generateAuthorsListScheme;

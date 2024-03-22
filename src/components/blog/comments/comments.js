@@ -11,34 +11,42 @@ class CommentsComponent extends GHComponent {
 
     async onServerRender() {
         this.articleReference = this.getAttribute('data-article-reference');
+        const blog_chapter = window.getConfig().chapters.blog;
+        const {
+            comments_app_id,
+            comments_status_field_id,
+            comments_replyToRef_field_id,
+            comments_articleRef_field_id,
+            comments_date_field_id
+        } = blog_chapter;
         const response = await gudhub.jsonConstructor(
             {
                 "type":"array",
                 "id":1,
-                "childs": generateCommentsObjectScheme(window.getConfig().chapters.blog),
+                "childs": generateCommentsObjectScheme(blog_chapter),
                 "property_name":"comments",
-                "app_id":"33960",
+                "app_id": comments_app_id,
                 "filter":[
                 {
-                    "field_id":807640,
+                    "field_id": comments_status_field_id,
                     "data_type":"radio_button",
                     "valuesArray":["1"],
                     "search_type":"equal_or",
                     "selected_search_option_variable":"Value"
                 },
                 {
-                    "field_id":807644,
+                    "field_id": comments_replyToRef_field_id,
                     "data_type":"item_ref",
                     "valuesArray":["false"],
                     "search_type":"value",
                     "selected_search_option_variable":"Value"
                 },{
-                    "field_id":807642,
+                    "field_id": comments_articleRef_field_id,
                     "data_type":"item_ref",
                     "valuesArray":[this.articleReference],
                     "search_type":"equal_or",
                     "selected_search_option_variable":"Value"
-                }],"isSortable":1,"field_id_to_sort":"807635","sortType":"desc"}
+                }],"isSortable":1,"field_id_to_sort": comments_date_field_id ,"sortType":"desc"}
         );
         
         

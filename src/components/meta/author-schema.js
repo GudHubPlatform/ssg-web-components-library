@@ -1,4 +1,4 @@
-import authorsObject from "./authors.json";
+import { generateAuthorsObject } from "./authors.js";
 
 class AuthorSchema extends GHComponent {
     constructor() {
@@ -8,7 +8,7 @@ class AuthorSchema extends GHComponent {
     async onServerRender() {
 
         if (!window.location.href.includes("/page/")) {
-            let authors = await gudhub.jsonConstructor(authorsObject);
+            let authors = await gudhub.jsonConstructor(generateAuthorsObject(window.getConfig().chapters.blog));
             authors = authors.authors;
 
             const url = new URL(window.location.href);

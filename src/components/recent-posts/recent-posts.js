@@ -1,6 +1,6 @@
 import html from './recent-posts.html';
 import { generateArticlesAndCommentsObject } from '../../generate-articles-and-comments-object.js';
-import authorObject from './author-object.json';
+import { generateAuthorObject } from './author-object.js';
 import './recent-posts.scss';
 
 class RecentPosts extends GHComponent {
@@ -14,7 +14,7 @@ class RecentPosts extends GHComponent {
         let comments = articlesAndComments.articlesAndComments.comments;
         let categories = articlesAndComments.articlesAndComments.categories;
 
-        const authors = await gudhub.jsonConstructor(authorObject);
+        const authors = await gudhub.jsonConstructor(generateAuthorObject(window.getConfig().chapters.blog));
         this.authors = authors.authors;
 
         this.articles = articles.slice(0, 2);
@@ -71,6 +71,7 @@ class RecentPosts extends GHComponent {
             })
         });
 
+console.log('articles', this.articles);
         super.render(html);
     }
 

@@ -1,5 +1,5 @@
-import authorsObject from "./authors.json";
-import articlesObject from "./articles.json";
+import { generateAuthorsObject } from "./authors.js";
+import { generateArticlesObject } from "./articles.js";
 class BlogSchema extends GHComponent {
     /*
      * data-chapter - chapter, default pages 
@@ -20,10 +20,10 @@ class BlogSchema extends GHComponent {
             const blogName = item.fields.find(field => field.field_id == window.getConfig().chapters[chapter].heading_field_id).field_value;
             const blogDescription = item.fields.find(field => field.field_id == window.getConfig().chapters[chapter].description_field_id).field_value;
             // Get all articles and slice 10 articles to show in blog-schema
-            let articles = await gudhub.jsonConstructor(articlesObject);
+            let articles = await gudhub.jsonConstructor(generateArticlesObject(window.getConfig().chapters.blog));
             articles = articles.articles.slice(0, 10);
             const blogImage = articles[0].thumbnail_url;
-            let authors = await gudhub.jsonConstructor(authorsObject);
+            let authors = await gudhub.jsonConstructor(generateAuthorsObject(window.getConfig().chapters.blog));
             authors = authors.authors;
 
             let posts = [];
