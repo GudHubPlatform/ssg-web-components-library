@@ -59,7 +59,7 @@ class RecentPosts extends GHComponent {
         const promises = [];
         this.articles.forEach((article, index) => {
             promises.push(new Promise(async (resolve) => {
-                let content = await gudhub.getInterpretationById(window.getConfig().chapters.blog.app_id, article.id.split('.')[1], article.intro_id, 'html');
+                let content = await gudhub.getInterpretationById(window.getConfig().chapters.blog.app_id, article.id.split('.')[1], window.getConfig().chapters.blog.intro_field_id, 'html');
                 this.articles[index].intro = content;
                 resolve();
             }));
@@ -71,7 +71,6 @@ class RecentPosts extends GHComponent {
             })
         });
 
-console.log('articles', this.articles);
         super.render(html);
     }
 
