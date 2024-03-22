@@ -3,6 +3,9 @@
         "id": "default",
         "title": "Досягайте цілей з GudHub CRM платформою!",
         "subtitle": "",
+        "titleSuccess": "Успішно",
+        "subtitleSuccess": "Ваша форма була успішно відправлена! Будь ласка, перевірте правильність вказаних даних:",
+        "titleFail": "Спробуйте Ще Раз!",
         "mailConfig": {
             "to": "gudhub",
             "from": "gudhub",
@@ -52,6 +55,9 @@
         "id": "default popup",
         "title": "Спробувати Безкоштовно",
         "subtitle": "Заповніть форму зараз і ми зв'яжемося з вами!",
+        "titleSuccess": "Успішно",
+        "subtitleSuccess": "Ваша форма була успішно відправлена! Будь ласка, перевірте правильність вказаних даних:",
+        "titleFail": "Спробуйте Ще Раз!",
         "mailConfig": {
             "to": "gudhub",
             "from": "gudhub",
@@ -84,15 +90,18 @@
         ]
     },
     {
-        "id":"small bottom-right popup",
-        "title":"Отримайте безкоштовну консультацію",
-        "subtitle":"",
-        "mailConfig":{
-            "to":"gudhub",
-            "from":"gudhub",
-            "subject":"Отримайте безкоштовну консультацію bottom-right popup"
+        "id": "small bottom-right popup",
+        "title": "Отримайте безкоштовну консультацію",
+        "subtitle": "",
+        "titleSuccess": "Успішно",
+        "subtitleSuccess": "Ваша форма була успішно відправлена! Будь ласка, перевірте правильність вказаних даних:",
+        "titleFail": "Спробуйте Ще Раз!",
+        "mailConfig": {
+            "to": "gudhub",
+            "from": "gudhub",
+            "subject": "Отримайте безкоштовну консультацію bottom-right popup"
         },
-        "inputs":[
+        "inputs" :[
             {
                 "name":"email",
                 "type":"email",
