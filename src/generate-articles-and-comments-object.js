@@ -1,11 +1,15 @@
 export async function generateArticlesAndCommentsObject(filter, value, blog) {
     const {
+        app_id,
         comments_status_field_id,
+        comments_app_id,
         type_field_id,
         status_field_id,
         slug_field_id,
         categories_list_field_id,
-        article_authorRef
+        article_authorRef,
+        article_post_date_field_id,
+        article_ratings_field_id
     } = blog;
     let comments = {
         "type": "array",
@@ -21,7 +25,7 @@ export async function generateArticlesAndCommentsObject(filter, value, blog) {
             }
         ],
         "property_name": "comments",
-        "app_id": "33960",
+        "app_id": comments_app_id,
         "filter": [
             {
                 "field_id": comments_status_field_id,
@@ -128,7 +132,7 @@ export async function generateArticlesAndCommentsObject(filter, value, blog) {
                 "id": 16,
                 "property_name": "categories",
                 "property_type": "function",
-                "function": "function(item, appId) {\n  const app = await gudhub.getApp(appId);\n  const categoryField = item.fields.find(field => field.field_id == 807622);\n  if(categoryField) {\n    const categoryItems = categoryField.field_value.split(',');\n    const categoryItemsIds = categoryItems.map(item => Number(item.split('.')[1]));\n    return app.items_list.filter(item => categoryItemsIds.includes(Number(item.item_id)));\n  }\n  return null;\n}"
+                "function": `function(item, appId) {\n  const app = await gudhub.getApp(appId);\n  const categoryField = item.fields.find(field => field.field_id == ${categories_list_field_id});\n  if(categoryField) {\n    const categoryItems = categoryField.field_value.split(',');\n    const categoryItemsIds = categoryItems.map(item => Number(item.split('.')[1]));\n    return app.items_list.filter(item => categoryItemsIds.includes(Number(item.item_id)));\n  }\n  return null;\n}`
             },
             {
                 "type": "property",
@@ -181,7 +185,7 @@ export async function generateArticlesAndCommentsObject(filter, value, blog) {
                 "id": 7,
                 "property_name": "rating",
                 "property_type": "function",
-                "function": "function(item, appId) {\n  const app = await gudhub.getApp(appId)\n  let ratings = item.fields.find(field => field.field_id == 807615);\n  let summ = 0;\n  if(ratings) {\n    ratings = ratings.field_value.split(',');\n    ratings.forEach(item => summ += Number(item));\n  }\n  return {\n    count: ratings.length || 0,\n    avg: summ / ratings.length\n  };\n}"
+                "function": `function(item, appId) {\n  const app = await gudhub.getApp(appId)\n  let ratings = item.fields.find(field => field.field_id == ${article_ratings_field_id});\n  let summ = 0;\n  if(ratings) {\n    ratings = ratings.field_value.split(',');\n    ratings.forEach(item => summ += Number(item));\n  }\n  return {\n    count: ratings.length || 0,\n    avg: summ / ratings.length\n  };\n}`
             },
             {
                 "type": "property",
@@ -193,7 +197,7 @@ export async function generateArticlesAndCommentsObject(filter, value, blog) {
             }
         ],
         "property_name": "articles",
-        "app_id": "33959",
+        "app_id": app_id,
         "filter": [
             //type
             {
@@ -215,7 +219,7 @@ export async function generateArticlesAndCommentsObject(filter, value, blog) {
             }
         ],
         "isSortable": 1,
-        "field_id_to_sort": "807620",
+        "field_id_to_sort": article_post_date_field_id,
         "sortType": "desc"
     };
 
