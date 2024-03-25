@@ -98,6 +98,15 @@ recent-posts {
             }
         }
     }
+    .bottom-button {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .btn {
+            width: 170px;
+        }
+    }
     @media screen and (max-width: 850px) {
         .posts_wrapper {
             flex-direction: column;
@@ -111,6 +120,13 @@ recent-posts {
         .post_read_more {
             margin-top: 10px;
             margin-bottom: 0;
+        }
+    }
+    @media screen and (max-width: 650px) {
+        .bottom-button {
+            .btn {
+                width: 300px;
+            }
         }
     }
     @media screen and (max-width: 550px) {

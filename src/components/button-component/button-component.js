@@ -8,7 +8,7 @@ class ButtonComponent extends GHComponent {
         this.popupId = this.hasAttribute('data-popup-id') ? this.getAttribute('data-popup-id') : null;
         this.placement = this.hasAttribute('data-placement') ? this.getAttribute('data-placement') : 'no-placement-attribute';
         this.link = this.hasAttribute('data-link') ? this.getAttribute('data-link') : null;
-        this.tag = this.link && !this.popupId ? `a href="${this.link}"` : 'div onclick="openPopup()"';
+        this.tag = this.link ? `a href="${this.link}"` : 'div onclick="openPopup()"';
     }
     
     async onServerRender() {

@@ -9,6 +9,11 @@ class RecentPosts extends GHComponent {
     }
     
     async onServerRender() {
+        this.ghId = this.getAttribute('data-gh-id') || null;
+        this.chapter = this.getAttribute('data-chapter') || 'pages';
+        
+        this.json = await super.getGhData(this.ghId, this.chapter);
+
         let articlesAndComments = await gudhub.jsonConstructor(await generateArticlesAndCommentsObject(undefined, undefined, window.getConfig().chapters.blog));
         let articles = articlesAndComments.articlesAndComments.articles;
         let comments = articlesAndComments.articlesAndComments.comments;
