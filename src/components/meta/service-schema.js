@@ -9,7 +9,7 @@ class ServiceSchema extends GHComponent {
     async onServerRender() {
         const chapter = this.hasAttribute('data-chapter') ? this.getAttribute('data-chapter') : 'pages';
 
-        const { generalInfo } = window.getConfig();
+        const generalInfo = window.getConfig().componentsConfigs.generalInfo[0];
 
         let ids = await super.findIds(chapter);
         const app = await gudhub.getApp(ids.appId);

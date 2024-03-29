@@ -37,7 +37,7 @@ class PostsTemplate extends GHComponent {
     
     async onServerRender() {
 
-        this.config = initBlogConfig(window.getConfig().blog_config);
+        this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config[0]);
 
         this.configCategories = JSON.stringify(this.config);
 
@@ -429,7 +429,7 @@ class PostsTemplate extends GHComponent {
         }
 
         if (!this.config) {
-            this.config = window.getConfig().blog_config;
+            this.config = window.getConfig().componentsConfigs.blog_config[0];
         }
 
 

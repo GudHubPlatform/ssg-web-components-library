@@ -16,7 +16,7 @@ class ArticleComponent extends GHComponent {
 
     async onServerRender() {
         
-        this.config = initBlogConfig(window.getConfig().blog_config);
+        this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config[0]);
         this.comments = JSON.stringify(this.config.comments);
 
         const url = new URL(window.location.href);
@@ -219,7 +219,7 @@ class ArticleComponent extends GHComponent {
             }
 
         if(!document.head.querySelector('#productSchema')) {
-            const { legalName } = window.getConfig().generalInfo;
+            const { legalName } = window.getConfig().componentsConfigs.generalInfo[0];
 
           const schema = {
             "@context": "https://schema.org/",

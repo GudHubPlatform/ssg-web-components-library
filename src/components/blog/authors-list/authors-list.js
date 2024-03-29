@@ -13,7 +13,7 @@ class AuthorsList extends GHComponent {
 
     async onServerRender() {
         
-        this.config = initBlogConfig(window.getConfig().blog_config);
+        this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config[0]);
         
         this.ghId = this.getAttribute('data-gh-id') || null;
         this.authors = await gudhub.jsonConstructor(generateAuthorsListScheme(window.getConfig().chapters.blog));

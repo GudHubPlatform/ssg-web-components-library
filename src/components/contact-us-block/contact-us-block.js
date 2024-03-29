@@ -13,7 +13,7 @@ class ContactUsBlock extends GHComponent {
     async onServerRender() {
         this.ghId = this.getAttribute('data-gh-id') || null;
         
-        this.info = window.getConfig().generalInfo;
+        this.info = window.getConfig().componentsConfigs.generalInfo[0];
 
         this.hrefPhone = this.info.phone.replace(/[ ()+-]/g, '');
         
