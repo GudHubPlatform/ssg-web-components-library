@@ -15,8 +15,13 @@
                 </ul>
                 <div class="flex_button">
                     ${json.buttons ? `
-						<button-component data-popup-id="${json.buttons.primary.popupId}" data-placement="${json.buttons.primary.placement}">${json.buttons.primary.text}</button-component>
-						<button-component data-popup-id="${json.buttons.secondary.popupId}" data-placement="${json.buttons.secondary.placement}" class="btn empty">${json.buttons.secondary.text}</button-component>
+                        ${
+                            Object.entries(json.buttons).reduce(function (acc, [buttonName, buttonConfig], index) {
+                                return acc + `
+                                    <button-component data-popup-id="${buttonConfig.popupId}" data-placement="${buttonConfig.placement}" class="btn ${buttonName}">${buttonConfig.text}</button-component>
+                                `
+                            }, '')
+                        }
 					` : ''}
                 </div>
             </div>
