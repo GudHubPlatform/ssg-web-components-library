@@ -18,14 +18,12 @@ class CategoriesList extends GHComponent {
         const blogChapter = clientConfig.chapters.blog;
 
         const categoriesListScheme = generateCategoriesListScheme(blogChapter);
-        
         if (clientConfig.multiLanguage) {
             const { slug_field_id } = blogChapter;
             categoriesListScheme.filter.push(generateSlugFilterByLanguage(slug_field_id));
         }
 
         this.categories = await gudhub.jsonConstructor(categoriesListScheme);
-
 
         this.categories = this.categories.categories;
         this.url = new URL (window.location.href);
