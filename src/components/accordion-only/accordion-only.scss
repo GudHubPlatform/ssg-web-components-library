@@ -2,6 +2,12 @@ accordion-only {
     --hover-transition-duration: .2s;
     --expand-transition-duration: .5s;
     --gap: 20px;
+    .subtitle {
+        max-width: 940px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
     .flex-wrapper {
         display: flex;
         gap: var(--gap);
@@ -18,9 +24,9 @@ accordion-only {
         border-radius: var(--block-primary-border-radius);
         box-shadow: var(--block-primary-box-shadow);
         cursor: pointer;
-        transition: box-shadow var(--hover-transition-duration) ease;
+        transition: all var(--hover-transition-duration) ease;
         &:hover, &.expand {
-            box-shadow: 0 3px 18px rgba(18,57,153,.2);
+            background-color: var(--block-primary-bg-hover-color);
         }
         .visible-content {
             display: flex;
@@ -42,7 +48,7 @@ accordion-only {
                     height: auto;
                     transition: transform var(--hover-transition-duration) linear;
                     path {
-                        stroke: #000;
+                        stroke: var(--h-color);
                         transition: stroke var(--hover-transition-duration) ease;
                     }
                 }
