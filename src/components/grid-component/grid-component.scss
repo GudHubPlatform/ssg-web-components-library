@@ -30,7 +30,10 @@ grid-component {
             max-width: calc((100% - (var(--grid-gap) * (var(--items-in-row) - 1))) / var(--items-in-row));
         }
         &[data-items-in-row="5"] .grid {
-            
+            --items-in-row: 5;
+            @media screen and (max-width: 1050px) {
+                --items-in-row: 2;
+            }
         }
         &[data-items-in-row="4"] .grid {
             --items-in-row: 4;

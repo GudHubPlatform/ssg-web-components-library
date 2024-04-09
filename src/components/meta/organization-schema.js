@@ -4,7 +4,7 @@ class OrganizationSchema extends GHComponent {
     }
 
     async onServerRender() {
-        const { generalInfo } = window.getConfig();
+        const { generalInfo } = window.getConfig().componentsConfigs;
         const schema = {
             "@context": "https://schema.org",
             "@type": "Organization",

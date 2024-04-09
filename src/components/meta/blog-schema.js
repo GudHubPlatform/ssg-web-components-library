@@ -58,7 +58,7 @@ class BlogSchema extends GHComponent {
                 posts.push(post);
             }
 
-            const { name } = window.getConfig().generalInfo;
+            const { name } = window.getConfig().componentsConfigs.generalInfo;
             
             const schema = {
                 "@context": "https://schema.org/",
