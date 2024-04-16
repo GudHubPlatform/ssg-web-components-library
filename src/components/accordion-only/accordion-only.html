@@ -1,7 +1,11 @@
 <section>
     <div class="container">
-        <h2 gh-id="${ghId}.title"></h2>
-        <p class="subtitle" gh-id="${ghId}.subtitle"></p>
+        ${json.title ? `
+            <h2 gh-id="${ghId}.title"> TITLE </h2>
+        ` : ''}
+        ${json.subtitle ? `
+            <p class="subtitle" gh-id="${ghId}.subtitle"> SUBTITLE </p>
+        ` : ''}
         <div class="flex-wrapper">
             ${(() => {
                     const halfLength = Math.ceil(json.items.length / 2);
