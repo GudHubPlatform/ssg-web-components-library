@@ -2,7 +2,9 @@
     <div class="container">
         <div class="flex-wrapper">
             <div class="left">
-                <h2 gh-id="${ghId}.title"> TITLE </h2>
+                ${json.title ? `
+                    <h2 gh-id="${ghId}.title"> TITLE </h2>
+                ` : ''}
                 ${json.subtitle ? `
                     <p class="subtitle" gh-id="${ghId}.subtitle"> SUBTITLE </p>
                 ` : ''}
