@@ -8,22 +8,25 @@ none
 {
     "title?": "Title",
     "subtitle?": "Subtitle",
-    "items": [
-        {
-            "title": "Item Title",
-            "text": "Item text",
-            "button": {
-                "link?": "#",
-                "popupId?": "popupId",
-                "text": "button text"
-            },
-            "image": {
-                "src": "",
-                "alt": "Item Alt",
-                "title": "Item Title"
-            }
+    "buttons?": {
+        "primary": {
+            "link?": "#",
+            "popupId?": "popupId",
+            "placement": "media-and-text",
+            "text": "button text"
+        },
+        "secondary": {
+            "link?": "#",
+            "popupId?": "popupId",
+            "placement": "media-and-text",
+            "text": "button text"
         }
-    ]
+    },
+    "image": {
+        "src": "/assets/images/homepage/interfejs-crm-systemy-dlja-byznesu-gud-hub.png",
+        "alt": "Огляд інтерфейсу CRM системи для бизнесу GudHub",
+        "title": "Інтерфейс CRM системи для бизнесу GudHub"
+    }
 }
 ```
 ## Button settings
