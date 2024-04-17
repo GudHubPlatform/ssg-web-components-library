@@ -15,7 +15,12 @@ class ContactUsBlock extends GHComponent {
         this.json = await super.getGhData(this.ghId);
         this.subtitle = this.json.subtitle;
         
-        this.info = window.getConfig().componentsConfigs.generalInfo;
+        const currentLanguage = window.getConfig().currentLanguage;
+        if (currentLanguage) {
+            this.info = window.getConfig().componentsConfigs.generalInfo.find(info => info.langCode === currentLanguage);
+        } else {
+            this.info = window.getConfig().componentsConfigs.generalInfo;
+        }
 
         this.manyPhones = Array.isArray(this.info.phone);
         
