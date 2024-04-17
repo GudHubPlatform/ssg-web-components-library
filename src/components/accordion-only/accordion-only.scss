@@ -63,13 +63,23 @@ accordion-only {
             transition: max-height var(--expand-transition-duration) ease;
             .content {
                 padding: 20px 15px;
-                .text {
+                .text, li {
                     font-size: var(--text-font-size);
                     font-weight: var(--text-font-weight);
                     color: var(--block-primary-text-color);
                     line-height: 140%;
                     letter-spacing: 0.01em;
                     text-align: inherit;
+                }
+                ul {
+                    padding-top: 10px;
+                    padding-left: 18px;
+                    list-style: disc;
+                }
+                ol {
+                    padding-top: 10px;
+                    padding-left: 18px;
+                    list-style: decimal;
                 }
             }
         }

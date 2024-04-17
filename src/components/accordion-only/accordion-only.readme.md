@@ -10,7 +10,15 @@ None
     "items": [
 		{
 			"title": "string",
-			"text": "string"
+			"text": "string",
+			"list?": {
+				"tag?": "string", // "ol" or "ul"
+				"items": [
+					"string",
+					"string",
+					"string"
+				]
+			}
 		}
 	]
 }
