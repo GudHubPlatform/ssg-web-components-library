@@ -12,10 +12,14 @@ class ContactUsBlock extends GHComponent {
 
     async onServerRender() {
         this.ghId = this.getAttribute('data-gh-id') || null;
+        this.json = await super.getGhData(this.ghId);
+        this.subtitle = this.json.subtitle;
         
-        this.info = window.getConfig().componentsConfigs.generalInfo[0];
+        this.info = window.getConfig().componentsConfigs.generalInfo;
 
-        this.hrefPhone = this.info.phone.replace(/[ ()+-]/g, '');
+        this.manyPhones = Array.isArray(this.info.phone);
+        
+        this.phones = this.manyPhones ? this.info.phone : new Array(this.info.phone);
         
         super.render(html);
     }

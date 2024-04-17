@@ -233,7 +233,7 @@ class ArticleComponent extends GHComponent {
             }
 
         if(!document.head.querySelector('#productSchema')) {
-            const { legalName } = window.getConfig().componentsConfigs.generalInfo[0];
+            const { legalName } = window.getConfig().componentsConfigs.generalInfo;
 
           const schema = {
             "@context": "https://schema.org/",
