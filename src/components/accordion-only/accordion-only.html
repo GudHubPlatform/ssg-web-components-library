@@ -27,6 +27,15 @@
                                     <div class="expandable-wrapper">
                                         <div class="content">
                                             ${item.title ? `<p class="text" gh-id="${ghId}.items.${indexOfAllItems}.text"></p>` : ''}
+                                            ${item.title && item.list ? `
+                                                <div class="list">
+                                                    <${item.list.tag ? item.list.tag === 'ul' || item.list.tag === 'ol' ? item.list.tag : 'ul' : 'ul'}>
+                                                        ${item.list.items.reduce((acc, listItem, itemIndex) => acc + `
+                                                            <li gh-id="${ghId}.items.${indexOfAllItems}.list.items.${itemIndex}"></li>
+                                                        `, '')}
+                                                    </${item.list.tag ? item.list.tag === 'ul' || item.list.tag === 'ol' ? item.list.tag : 'ul' : 'ul'}>
+                                                </div>
+                                            ` : ``}
                                         </div>
                                     </div>
                                 </div>
