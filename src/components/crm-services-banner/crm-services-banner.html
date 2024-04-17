@@ -1,8 +1,13 @@
 <section>
     <div class="container">
+        ${headingOuter ? `
+            <h${json.heading_level ? json.heading_level : 1} gh-id="${ghId}.title"></h${json.heading_level ? json.heading_level : 1}>
+        ` : ``}
         <div class="flex-wrapper">
             <div class="left">
-                <h1 gh-id="${ghId}.title"></h1>
+                ${headingOuter ? `` : `
+                    <h${json.heading_level ? json.heading_level : 1} gh-id="${ghId}.title"></h${json.heading_level ? json.heading_level : 1}>
+                `}
                 <div class="main-subtitle" gh-id="${ghId}.subtitle"></div>
                 <ul class="banner_list tick_list">
                     ${
@@ -13,6 +18,17 @@
                         }, '')
                     }
                 </ul>
+                ${texts ? `
+                    <div class="text">
+                        ${
+                            texts.reduce((acc, text, index) => {
+                                return acc + `
+                                   <p gh-id="${ghId}.texts.${index}"></p>
+                                `
+                            }, '')
+                        }
+                    </div>
+                ` : ``}
                 <div class="flex_button">
                     ${json.buttons ? `
                         ${
