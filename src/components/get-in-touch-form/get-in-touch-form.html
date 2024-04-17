@@ -7,7 +7,7 @@
             ${generateInput(config)}
         </div>
         <div class="btn_wrapper">
-            <button type="submit" class="btn">Замовити консультацію</button>
+            <button type="submit" class="btn">${config.button_text ? config.button_text : 'Get in touch'}</button>
             <div class="loader"></div>
         </div>
     </form>
