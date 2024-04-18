@@ -106,4 +106,41 @@ grid-component {
             }
         }
     }
+// additional classes for grid-items components
+    &.items_title_underline {
+        .primary-block {
+            .item-title {
+                font-size: var(--h3-font-size);
+                font-weight: var(--h3-font-weight);
+                line-height: 135%;
+                color: var(--block-primary-h-color);
+                margin-bottom: 0px;
+                position: relative;
+                padding-bottom: 10px;
+                &::after {
+                    background-color: #c7c6c6;
+                    bottom: 0;
+                    content: "";
+                    height: 1px;
+                    left: 0;
+                    position: absolute;
+                    transition: all var(--transition-duration) ease;
+                    width: 30px;
+                }
+            }
+    
+            &:hover {
+                .top {
+                    .item-title {
+                        color: var(--block-primary-accent-color);
+                    }
+                }
+    
+                .item-title::after {
+                    width: 100%;
+                    background-color: var(--block-primary-accent-color);
+                }
+            }
+        }
+    }
 }
