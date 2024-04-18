@@ -2,18 +2,29 @@
     <div class="container">
         <div class="flex-wrapper">
             <div class="left">
-                ${json.title ? `
+                ${title ? `
                     <h2 gh-id="${ghId}.title"> TITLE </h2>
                 ` : ''}
-                ${json.subtitle ? `
+                ${subtitle ? `
                     <p class="subtitle" gh-id="${ghId}.subtitle"> SUBTITLE </p>
                 ` : ''}
-                ${json.text ? `
+                ${text ? `
                     <div class="content">
                         <p gh-id="${ghId}.text"> TEXT </p>
                     </div>
                 ` : ''}
-                ${json.buttons ? `
+                ${list ? `
+                    <ul class="banner_list">
+                        ${
+                            list.reduce((acc, item, index) => {
+                                return acc + `
+                                   <li gh-id="${ghId}.list.${index}"> LIST </li>
+                                `
+                            }, '')
+                        }
+                    </ul> 
+                ` : ''}
+                ${buttons ? `
                     <div class="buttons">
                         ${
                             Object.entries(json.buttons).reduce(function (acc, [buttonName, buttonConfig], index) {
