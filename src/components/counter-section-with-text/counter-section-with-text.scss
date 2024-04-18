@@ -88,6 +88,28 @@ counter-section-with-text {
         }
     }
 
+    
+    &[data-items-in-row] {
+        &[data-items-in-row="5"] {
+            
+        }
+        &[data-items-in-row="4"] {
+            --items-in-row: 4;
+            @media screen and (max-width: 1050px) {
+                --items-in-row: 2;
+            }
+        }
+        &[data-items-in-row="3"] {
+            --items-in-row: 3;
+            @media screen and (max-width: 850px) {
+                --items-in-row: 2;
+            }
+        }
+        &[data-items-in-row="2"] {
+            --items-in-row: 2;
+        }
+    }
+
     @media screen and (max-width: 1025px) {
         .service_counter {
             .container {
