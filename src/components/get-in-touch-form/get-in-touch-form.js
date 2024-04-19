@@ -68,18 +68,52 @@ class GetInTouchForm extends GHComponent {
     async handleSubmit(element) {
         event.preventDefault();
 
-        this.addLoader();
+        const emailInput = this.querySelector('[name="email"]');
+        let email = emailInput ? emailInput.value : '';
         
-        const res = await sendEmail(element, this.config, this.placement);
-        this.removeLoader(element);
-        let email = this.querySelector('[name="email"]').value;
-        let phone = this.querySelector('[name="phone"]').value || '';
-        this.isFormSubmitted = true;
-        if (res) {
-            this.showSuccess({email, phone});
+        const phoneInput = this.querySelector('[name="phone"]');
+        let phone = phoneInput ? phoneInput.value || '' : '';
+        
+        const isValidFields = this.validation(email, phone);
+
+        if (isValidFields.phoneValid && isValidFields.emailValid) {
+            this.addLoader();
+
+            const res = await sendEmail(element, this.config, this.placement);
+            
+            this.removeLoader(element);
+            this.isFormSubmitted = true;
+            if (res) {
+                this.showSuccess({email, phone});
+            } else {
+                this.showFail();
+            }
         } else {
-            this.showFail();
+            isValidFields.emailValid ? emailInput.classList.remove('error') : emailInput.classList.add('error');
+
+            isValidFields.phoneValid ? phoneInput.classList.remove('error') : phoneInput.classList.add('error');
         }
+    }
+
+    validation (email = '', phone = '') {
+        const isPhoneRequired = this.config.inputs.find(input => input.name === "phone").required;
+        const isEmailRequired = this.config.inputs.find(input => input.name === "email").required;
+        
+        let emailValid;
+        if (email.length === 0 && isEmailRequired == 'false') {
+            emailValid = true;
+        } else {
+            emailValid = /\S+@\S+\.\S+/.test(email);
+        }
+        
+        let phoneValid;
+        if (phone.length === 0 && isPhoneRequired == 'false') {
+            phoneValid = true;
+        } else {
+            phoneValid = /^\+?[\d()-\s]+$/.test(phone);
+        }
+
+        return { phoneValid, emailValid };
     }
     async addLoader() {
         this.classList.add('loading');
