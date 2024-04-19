@@ -8,6 +8,7 @@ none
 {
     "title?": "Title",
     "subtitle?": "Subtitle",
+    "list?": ["first element", "second element", "third element"],
     "buttons?": {
         "primary": {
             "link?": "#",

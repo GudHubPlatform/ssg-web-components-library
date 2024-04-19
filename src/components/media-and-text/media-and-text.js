@@ -14,9 +14,11 @@ class MediaAndText extends GHComponent {
         
         this.json = await super.getGhData(this.ghId);
 
+        this.title = this.json.title;
         this.subtitle = this.json.subtitle;
         this.text = this.json.text;
         this.buttons = this.json.buttons;
+        this.list = this.json.list;
 
         super.render(html);
     }
