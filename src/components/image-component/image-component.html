@@ -18,8 +18,8 @@
         <source media="(min-width: 1200px)" srcset="${path}${extension}" type="image/${extension.substring(1, extension.length)}">
     ` : ''}
     ${ imageWidth <= 600 ? `
+        <source srcset="${src}.webp" type="image/webp">
         <source srcset="${src}" type="image/${src.split('.')[src.split('.').length - 1]}" />
     ` : ''}
-    <source srcset="${src}.webp" type="image/webp">
     <img src="${src}" ${ title ? `title="${title}"` : '' } ${ alt ? `alt="${alt}"` : '' } ${ lazyload ? 'loading="lazy"' : '' } ${ width ? `width="${width}"` : '' } ${ height ? `height="${height}"` : '' } >
 </picture>

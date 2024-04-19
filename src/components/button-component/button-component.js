@@ -7,7 +7,7 @@ class ButtonComponent extends GHComponent {
         super();
         this.popupId = this.hasAttribute('data-popup-id') ? this.getAttribute('data-popup-id') : null;
         this.placement = this.hasAttribute('data-placement') ? this.getAttribute('data-placement') : 'no-placement-attribute';
-        this.link = this.hasAttribute('data-link') ? this.getAttribute('data-link') : null;
+        this.link = this.hasAttribute('data-link') && this.getAttribute('data-link') !== "undefined" ? this.getAttribute('data-link') : false;
         this.tag = this.link ? `a href="${this.link}"` : 'div onclick="openPopup()"';
     }
     
@@ -21,6 +21,8 @@ class ButtonComponent extends GHComponent {
 
         super.render(html);
         this.removeAttribute('class');
+
+        this.removeUselessAttributes();
     }
 
     openPopup () {
@@ -34,6 +36,16 @@ class ButtonComponent extends GHComponent {
 
     removeLink() {
         this.removeAttribute('link');
+    }
+
+    removeUselessAttributes () {
+        const attributeNodeArray = [...this.attributes];
+        
+        attributeNodeArray.forEach((attribute) => {
+            if (!attribute.value || attribute.value === 'undefined' ) {
+                this.removeAttribute(attribute.name)
+            }
+        });
     }
 }
 window.customElements.define('button-component', ButtonComponent);

@@ -19,7 +19,7 @@ class OverflowCards extends GHComponent {
         this.jsonData = json;
 
         this.cards = json.cards;
-        this.button = json.button ? json.button : {"text": "Спробувати Безкоштовно", "class": 'btn'};
+        this.button = json.button ? json.button : {"text": "Спробувати Безкоштовно", "class": "btn", "popupId": "form", "placement": "Overflow Cards"};
 
         super.render(html);
     }
