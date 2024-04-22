@@ -69,30 +69,59 @@ class GetInTouchForm extends GHComponent {
         event.preventDefault();
 
         const emailInput = this.querySelector('[name="email"]');
-        let email = emailInput ? emailInput.value : '';
+        const email = emailInput ? emailInput.value : '';
         
         const phoneInput = this.querySelector('[name="phone"]');
-        let phone = phoneInput ? phoneInput.value || '' : '';
+        const phone = phoneInput ? phoneInput.value || '' : '';
         
         const isValidFields = this.validation(email, phone);
 
         if (isValidFields.phoneValid && isValidFields.emailValid) {
             this.addLoader();
 
-            const res = await sendEmail(element, this.config, this.placement);
-            
-            this.removeLoader(element);
-            this.isFormSubmitted = true;
-            if (res) {
-                this.showSuccess({email, phone});
-            } else {
+            const TIMEOUT_DURATION = 5000;
+
+            const sendEmailWithTimeout = (element, config, placement) => {
+                return new Promise((resolve, reject) => {
+                    const timer = setTimeout(() => {
+                        reject();
+                    }, TIMEOUT_DURATION);
+
+                    sendEmail(element, config, placement)
+                        .then((res) => {
+                            clearTimeout(timer);
+                            resolve(res);
+                        })
+                        .catch((error) => {
+                            clearTimeout(timer);
+                            reject(error);
+                        });
+                });
+            };
+
+            try {
+                const res = await sendEmailWithTimeout(element, this.config, this.placement);
+                this.removeLoader(element);
+                if (res) {
+                    this.showSuccess({ email, phone });
+                } else {
+                    this.showFail();
+                }
+            } catch (error) {
+                this.removeLoader(element);
                 this.showFail();
             }
-        } else {
-            isValidFields.emailValid ? emailInput.classList.remove('error') : emailInput.classList.add('error');
+            this.isFormSubmitted = true;
 
-            isValidFields.phoneValid ? phoneInput.classList.remove('error') : phoneInput.classList.add('error');
+        } else {
+            this.toggleErrors(isValidFields, emailInput, phoneInput);
         }
+    }
+
+    toggleErrors(isValidFields, emailInput, phoneInput) {
+        isValidFields.emailValid ? emailInput.classList.remove('error') : emailInput.classList.add('error');
+            
+        isValidFields.phoneValid ? phoneInput.classList.remove('error') : phoneInput.classList.add('error');
     }
 
     validation (email = '', phone = '') {
