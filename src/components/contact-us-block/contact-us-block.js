@@ -13,12 +13,16 @@ class ContactUsBlock extends GHComponent {
     async onServerRender() {
         this.ghId = this.getAttribute('data-gh-id') || null;
         
-        const currentLanguage = window.getConfig().currentLanguage;
-        if (currentLanguage) {
-            this.info = window.getConfig().componentsConfigs.generalInfo.find(info => info.langCode === currentLanguage);
-        } else {
-            this.info = window.getConfig().componentsConfigs.generalInfo;
-        }
+        this.info = window.getConfig().generalInfo;
+
+        // TODO: Migrate commented code to multilanguage branch
+
+        // const currentLanguage = window.getConfig().currentLanguage;
+        // if (currentLanguage) {
+        //     this.info = window.getConfig().componentsConfigs.generalInfo.find(info => info.langCode === currentLanguage);
+        // } else {
+        //     this.info = window.getConfig().componentsConfigs.generalInfo;
+        // }
 
         this.hrefPhone = this.info.phone.replace(/[ ()+-]/g, '');
         
