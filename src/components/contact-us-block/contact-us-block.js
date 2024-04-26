@@ -15,6 +15,15 @@ class ContactUsBlock extends GHComponent {
         
         this.info = window.getConfig().generalInfo;
 
+        // TODO: Migrate commented code to multilanguage branch
+
+        // const currentLanguage = window.getConfig().currentLanguage;
+        // if (currentLanguage) {
+        //     this.info = window.getConfig().componentsConfigs.generalInfo.find(info => info.langCode === currentLanguage);
+        // } else {
+        //     this.info = window.getConfig().componentsConfigs.generalInfo;
+        // }
+
         this.hrefPhone = this.info.phone.replace(/[ ()+-]/g, '');
         
         super.render(html);

@@ -1,12 +1,28 @@
 crm-services-banner {
     background-color: var(--bg-color);
     display: block;
+    &[data-heading-outer] {
+        .flex-wrapper .right {
+            align-items: flex-start;
+            image-component {
+                position: sticky;
+                top: 100px;
+            }
+        }
+    }
     .main-subtitle {
         margin-bottom: 40px;
     }
-    .banner_list {
+    .banner_list, .text {
         color: var(--subtitle-color);
         margin-bottom: 40px;
+    }
+    .text p {
+        margin-bottom: 10px;
+        font-size: var(--text-font-size);
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
     .flex_button {
         display: flex;
@@ -24,6 +40,7 @@ crm-services-banner {
             flex-shrink: 0;
             max-width: calc(100% / 2);
             img {
+                width: 100%;
                 max-width: 100%;
             }
         }

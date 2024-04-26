@@ -13,7 +13,13 @@ media-and-text {
             margin-bottom: 50px;
         }
     }
-    .right {
+    .banner_list {
+        li {
+            margin-bottom: 25px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
     }
     .buttons {
         display: flex;

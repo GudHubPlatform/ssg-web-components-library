@@ -16,8 +16,11 @@ data-form-id="form-id": determine id of config that will be applyed to form
 ```json
 {
         "id": "string",
+        "langCode": "string", //two or two-two symbols (en or en-GB)
+        "defaultLang": Boolean,
         "title?": "string",
         "subtitle?": "string",
+        "button_text?": "string",
         "mailConfig": {
             "to": "string",
             "from": "string",
@@ -30,7 +33,7 @@ data-form-id="form-id": determine id of config that will be applyed to form
                 "required": "boolean",
                 "placeholder": "Ім'я *",
                 "width": "number from 1 to 12"
-            }>
+            }
         ]
     },
 ```

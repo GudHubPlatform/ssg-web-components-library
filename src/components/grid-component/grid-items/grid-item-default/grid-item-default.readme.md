@@ -1,5 +1,7 @@
 # Attributes:
 
+# Classes
+	.items_title_underline: it works only for grid-item-default child component(add an underline with color transition on hover), if u need to change transition duration change --transition-duration in grid-component 
 
 # Component data-object: 
 ("?" means "unnecessary")

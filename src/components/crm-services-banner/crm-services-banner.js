@@ -10,10 +10,12 @@ class CrmServicesBanner extends GHComponent {
 
     async onServerRender() {
         this.ghId = this.getAttribute('data-gh-id') || null;
+        this.headingOuter = this.hasAttribute('data-heading-outer') || null;
 
         this.json = await super.getGhData(this.ghId);
 
         this.list = this.json.list;
+        this.texts = this.json.texts;
 
         this.image = this.json.image;
 
