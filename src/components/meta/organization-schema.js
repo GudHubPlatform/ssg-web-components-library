@@ -3,11 +3,9 @@ class OrganizationSchema extends GHComponent {
         super();
     }
 
-    async onServerRender() {
-        let language = window.constants.currentLanguage;
-        
-        const generalInfo = language ? window.getConfig().componentsConfigs.generalInfo.find(config => config.langCode === language) : window.getConfig().componentsConfigs.generalInfo;
-        
+    async onServerRender() {        
+        const generalInfo = window.getConfig().componentsConfigs.generalInfo[0];
+
         const schema = {
             "@context": "https://schema.org",
             "@type": "Organization",
