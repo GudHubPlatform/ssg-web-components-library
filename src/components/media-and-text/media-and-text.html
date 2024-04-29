@@ -1,8 +1,11 @@
 <section class="media-and-text">
     <div class="container">
+        ${headingOuter && title ? `
+            <h2 gh-id="${ghId}.title"></h2>
+        ` : ``}
         <div class="flex-wrapper">
             <div class="left">
-                ${title ? `
+                ${title && !headingOuter ? `
                     <h2 gh-id="${ghId}.title"> TITLE </h2>
                 ` : ''}
                 ${subtitle ? `

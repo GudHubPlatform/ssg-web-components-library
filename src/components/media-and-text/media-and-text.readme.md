@@ -1,6 +1,6 @@
 # Attributes:
 
-none
+```data-heading-outer``` - if this attribute exist - heading tag will placed above flex-wrapper
 
 # Component data-object: 
 ("?" means "unnecessary")
