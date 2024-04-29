@@ -131,15 +131,19 @@ class MetaTag extends GHComponent {
         
 
         if (!slugValue.includes('/blog/')) {
-            const twitterMetaSiteImage = document.createElement('meta');
-            twitterMetaSiteImage.setAttribute('name', 'twitter:image');
-            twitterMetaSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${imageValue}`);
-            document.querySelector('head').prepend(twitterMetaSiteImage);
+            if ( !document.querySelector('[name="twitter:image"]') ) {
+                const twitterMetaSiteImage = document.createElement('meta');
+                twitterMetaSiteImage.setAttribute('name', 'twitter:image');
+                twitterMetaSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${imageValue}`);
+                document.querySelector('head').prepend(twitterMetaSiteImage);
+            }
 
-            const metaSiteImage = document.createElement('meta');
-            metaSiteImage.setAttribute('property', 'og:image');
-            metaSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${imageValue}`);
-            document.querySelector('head').prepend(metaSiteImage);
+            if ( !document.querySelector('[property="og:image"]') ) {
+                const metaSiteImage = document.createElement('meta');
+                metaSiteImage.setAttribute('property', 'og:image');
+                metaSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${imageValue}`);
+                document.querySelector('head').prepend(metaSiteImage);
+            }
         }
 
         if ( !document.querySelector('[property="og:type"]') ) {
