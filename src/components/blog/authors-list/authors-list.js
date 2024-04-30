@@ -2,6 +2,7 @@ import html from './authors-list.html';
 import './authors-list.scss';
 
 import generateAuthorsListScheme from './authors-list-scheme.js';
+import { generateSlugFilterByLanguage } from '../schemeFilters.js';
 
 import {initBlogConfig} from '../initBlogConfig.js';
 
@@ -13,10 +14,24 @@ class AuthorsList extends GHComponent {
 
     async onServerRender() {
         
-        this.config = initBlogConfig(window.getConfig().blog_config);
+        this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config[0]);
         
         this.ghId = this.getAttribute('data-gh-id') || null;
-        this.authors = await gudhub.jsonConstructor(generateAuthorsListScheme(window.getConfig().chapters.blog));
+
+        const clientConfig = window.getConfig();
+        const { slug_field_id } = clientConfig.chapters.blog;
+
+        const filters = [];
+
+        if (clientConfig.multiLanguage) {
+            const langFilter = generateSlugFilterByLanguage(slug_field_id);
+            filters.push(langFilter);
+        }
+
+        const authorsScheme = generateAuthorsListScheme(window.getConfig().chapters.blog);
+        authorsScheme.filter.push(...filters);
+        this.authors = await gudhub.jsonConstructor(authorsScheme);
+
         this.authors = this.authors.authors;
         const getContent = (link) => {
             return new Promise(async (resolve) => {

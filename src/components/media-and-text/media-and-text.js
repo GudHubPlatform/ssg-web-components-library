@@ -11,6 +11,7 @@ class MediaAndText extends GHComponent {
 
     async onServerRender() {
         this.ghId = this.getAttribute('data-gh-id') || null;
+        this.headingOuter = this.hasAttribute('data-heading-outer') || null;
         
         this.json = await super.getGhData(this.ghId);
 

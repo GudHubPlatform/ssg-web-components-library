@@ -3,6 +3,11 @@ media-and-text {
     h2 {
         text-align: left;
     }
+    &.reverse {
+        .flex-wrapper {
+            flex-direction: row-reverse;
+        }
+    }
     .flex-wrapper {
         gap: 20px;
     }
@@ -33,6 +38,7 @@ media-and-text {
 
 @media screen and (max-width: 1024px) {
     media-and-text {
+        &.reverse .flex-wrapper,
         .flex-wrapper {
             flex-direction: column;
         }

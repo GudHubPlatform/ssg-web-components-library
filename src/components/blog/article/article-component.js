@@ -4,6 +4,7 @@ import generateAuthorsObjectScheme from './authors-object-scheme.js';
 import generateAllArticlesScheme from './all-articles-scheme.js';
 
 import { generateArticlesAndCommentsObject } from '../../../generate-articles-and-comments-object.js';
+import { generateSlugFilterByLanguage } from '../schemeFilters.js';
 
 import {initBlogConfig} from '../initBlogConfig.js';
 
@@ -16,13 +17,25 @@ class ArticleComponent extends GHComponent {
 
     async onServerRender() {
         
-        this.config = initBlogConfig(window.getConfig().blog_config);
+        this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config[0]);
         this.comments = JSON.stringify(this.config.comments);
+
+        const clientConfig = window.getConfig();
+        const { slug_field_id } = clientConfig.chapters.blog;
 
         const url = new URL(window.location.href);
         const articleSlug = url.searchParams.get('path');
 
-        let articleAndComments = await gudhub.jsonConstructor(await generateArticlesAndCommentsObject('slug', articleSlug, window.getConfig().chapters.blog));
+        const filters = [];
+
+        if (clientConfig.multiLanguage) {
+            const langFilter = generateSlugFilterByLanguage(slug_field_id);
+            filters.push(langFilter);
+        }
+
+        const articlesAndCommentsScheme = await generateArticlesAndCommentsObject('slug', articleSlug, window.getConfig().chapters.blog);
+        articlesAndCommentsScheme.childs.find(({ property_name }) => property_name === 'articles').filter.push(...filters);
+        let articleAndComments = await gudhub.jsonConstructor(articlesAndCommentsScheme);
 
         let comments = articleAndComments.articlesAndComments.comments;
         this.article = articleAndComments.articlesAndComments.articles[0];
@@ -47,7 +60,8 @@ class ArticleComponent extends GHComponent {
 
         this.articleReference = this.article.id;
 
-        const authors = await gudhub.jsonConstructor(generateAuthorsObjectScheme(window.getConfig().chapters.blog));
+        const authorsScheme = generateAuthorsObjectScheme(window.getConfig().chapters.blog);
+        const authors = await gudhub.jsonConstructor(authorsScheme);
         this.authors = authors.authors;
 
 
@@ -219,7 +233,7 @@ class ArticleComponent extends GHComponent {
             }
 
         if(!document.head.querySelector('#productSchema')) {
-            const { legalName } = window.getConfig().generalInfo;
+            const { legalName } = window.getConfig().componentsConfigs.generalInfo;
 
           const schema = {
             "@context": "https://schema.org/",

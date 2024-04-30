@@ -4,6 +4,8 @@ import './posts-template.scss';
 import generateCategoriesScheme from './categories-scheme.js';
 import generateAuthorsObjectScheme from './authors-object-scheme.js';
 
+import { generateSlugFilterByLanguage } from '../schemeFilters.js';
+
 import { generateArticlesAndCommentsObject } from '../../../generate-articles-and-comments-object.js';
 
 import {initBlogConfig} from '../initBlogConfig.js';
@@ -37,7 +39,7 @@ class PostsTemplate extends GHComponent {
     
     async onServerRender() {
 
-        this.config = initBlogConfig(window.getConfig().blog_config);
+        this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config[0]);
 
         this.configCategories = JSON.stringify(this.config);
 
@@ -46,21 +48,40 @@ class PostsTemplate extends GHComponent {
         let articlesAndComments;
         let articles;
 
-        let categories = await gudhub.jsonConstructor(generateCategoriesScheme(window.getConfig().chapters.blog));
+        const clientConfig = window.getConfig();
+        const { slug_field_id } = clientConfig.chapters.blog;
+
+        const filters = [];
+
+        if (clientConfig.multiLanguage) {
+            const langFilter = generateSlugFilterByLanguage(slug_field_id);
+            filters.push(langFilter);
+        }
+
+        const categoriesScheme = generateCategoriesScheme(window.getConfig().chapters.blog);
+        categoriesScheme.filter.push(...filters);
+
+        let categories = await gudhub.jsonConstructor(categoriesScheme);
         categories = categories.categories;
 
         this.empty = false;
 
-        const authors = await gudhub.jsonConstructor(generateAuthorsObjectScheme(window.getConfig().chapters.blog));
+        const authorsScheme = generateAuthorsObjectScheme(window.getConfig().chapters.blog);
+        authorsScheme.filter.push(...filters);
+        const authors = await gudhub.jsonConstructor(authorsScheme);
+        
         this.authors = authors.authors;
 
         if (this.type === "category") {
             // If this page type is category we fetch articles only of this category by using filter in jsonConstructor
             const url = new URL(window.location.href);
             const category = url.searchParams.get('category');
-            this.currentCategory = categories.find(iterationCategory => iterationCategory.slug == `/blog/${category}/`);
+            this.currentCategory = categories.find(iterationCategory => iterationCategory.slug.includes(`/blog/${category}/`));
             const categoryId = this.currentCategory.category_id;
-            articlesAndComments = await gudhub.jsonConstructor(await generateArticlesAndCommentsObject('category', categoryId, window.getConfig().chapters.blog));
+
+            const articlesAndCommentsScheme = await generateArticlesAndCommentsObject('category', categoryId, window.getConfig().chapters.blog);
+            articlesAndCommentsScheme.childs.find(({ property_name }) => property_name === 'articles').filter.push(...filters);
+            articlesAndComments = await gudhub.jsonConstructor(articlesAndCommentsScheme);
 
             articles = articlesAndComments.articlesAndComments;
 
@@ -74,7 +95,10 @@ class PostsTemplate extends GHComponent {
             const pageSlug = url.searchParams.get('path');
             let currentAuthor = this.authors.find(author => author.slug == pageSlug);
             let author_id = currentAuthor.author_id;
-            articlesAndComments = await gudhub.jsonConstructor(await generateArticlesAndCommentsObject('author', author_id, window.getConfig().chapters.blog));
+
+            const articlesAndCommentsScheme = await generateArticlesAndCommentsObject('author', author_id, window.getConfig().chapters.blog);
+            // articlesAndCommentsScheme.childs.find(({ property_name }) => property_name === 'articles').filter.push(...filters);
+            articlesAndComments = await gudhub.jsonConstructor(articlesAndCommentsScheme);
 
             articles = articlesAndComments.articlesAndComments;
 
@@ -85,7 +109,9 @@ class PostsTemplate extends GHComponent {
         else {
             // Fetch all articles
             this.currentCategory = false;
-            articlesAndComments = await gudhub.jsonConstructor(await generateArticlesAndCommentsObject(undefined, undefined, window.getConfig().chapters.blog));
+            const articlesAndCommentsScheme = await generateArticlesAndCommentsObject(undefined, undefined, window.getConfig().chapters.blog);
+            articlesAndCommentsScheme.childs.find(({ property_name }) => property_name === 'articles').filter.push(...filters);
+            articlesAndComments = await gudhub.jsonConstructor(articlesAndCommentsScheme);
 
             articles = articlesAndComments.articlesAndComments;
         }
@@ -429,7 +455,7 @@ class PostsTemplate extends GHComponent {
         }
 
         if (!this.config) {
-            this.config = window.getConfig().blog_config;
+            this.config = window.getConfig().componentsConfigs.blog_config[0];
         }
 
 

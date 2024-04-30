@@ -79,7 +79,7 @@ class MetaTag extends GHComponent {
         }
 
         // fieldId = app.field_list.find(findedField => findedField.name_space === this.type);
-        const generalInfo = window.getConfig().generalInfo;
+        const generalInfo = window.getConfig().componentsConfigs.generalInfo[0];
         let titleId = window.getConfig().chapters[chapter].title_field_id;
         let descriptionId = window.getConfig().chapters[chapter].description_field_id;
         let slugId = window.getConfig().chapters[chapter].slug_field_id;
@@ -122,7 +122,7 @@ class MetaTag extends GHComponent {
             document.querySelector('head').prepend(metaCard);
         }
         
-        if ( !document.querySelector('[name="twitter:site"]') ) {
+        if ( !document.querySelector('[name="twitter:site"]') && generalInfo.twitterName ) {
             const metaSite = document.createElement('meta');
             metaSite.setAttribute('name', 'twitter:site');
             metaSite.setAttribute('content', generalInfo.twitterName);
@@ -131,15 +131,19 @@ class MetaTag extends GHComponent {
         
 
         if (!slugValue.includes('/blog/')) {
-            const twitterMetaSiteImage = document.createElement('meta');
-            twitterMetaSiteImage.setAttribute('name', 'twitter:image');
-            twitterMetaSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${imageValue}`);
-            document.querySelector('head').prepend(twitterMetaSiteImage);
+            if ( !document.querySelector('[name="twitter:image"]') ) {
+                const twitterMetaSiteImage = document.createElement('meta');
+                twitterMetaSiteImage.setAttribute('name', 'twitter:image');
+                twitterMetaSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${imageValue}`);
+                document.querySelector('head').prepend(twitterMetaSiteImage);
+            }
 
-            const metaSiteImage = document.createElement('meta');
-            metaSiteImage.setAttribute('property', 'og:image');
-            metaSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${imageValue}`);
-            document.querySelector('head').prepend(metaSiteImage);
+            if ( !document.querySelector('[property="og:image"]') ) {
+                const metaSiteImage = document.createElement('meta');
+                metaSiteImage.setAttribute('property', 'og:image');
+                metaSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${imageValue}`);
+                document.querySelector('head').prepend(metaSiteImage);
+            }
         }
 
         if ( !document.querySelector('[property="og:type"]') ) {

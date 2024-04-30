@@ -49,6 +49,12 @@
             font-size: 16px;
             line-height: 25px;
             color: #4D555B;
+            p {
+                padding-bottom: 10px;
+                &:last-child {
+                    padding-bottom: 0;
+                }
+            }
             ul {
                 list-style: disc;
                 padding-left: 20px;
