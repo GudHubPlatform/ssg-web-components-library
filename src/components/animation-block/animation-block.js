@@ -1,4 +1,6 @@
-import html from './animation-block.html';
+,
+			"placement": "grid-component",
+			"text": "button text"import html from './animation-block.html';
 import './animation-block.scss';
 import jsonTemplate from './animation-block-data.json';
 import svgPlaceholder from '../svgPlaceholder.js';
