@@ -1,4 +1,5 @@
 {
   "title": "Lorem ipsum dolor sit amet",
+  "customNumber": "Крок  {{number}}",
   "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
 }
