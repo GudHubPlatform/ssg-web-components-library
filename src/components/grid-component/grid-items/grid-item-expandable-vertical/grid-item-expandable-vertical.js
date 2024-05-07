@@ -50,6 +50,7 @@ class GridItemExpandableVertical extends GHComponent {
             this.addEventListener('mouseenter', this.toggleExpand);
             this.addEventListener('mouseleave', this.toggleExpand);
         } else {
+            this.addEventListener('click', this.toggleExpand);
             this.parentGrid.addEventListener('grid-item-event', this.handleItemExpandEvent);
         }
     }
