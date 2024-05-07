@@ -1,17 +1,14 @@
 {
-    "title": "accordion-only",
-    "subtitle": "subtitle",
-    "items": [
+  "title": "accordion-only",
+  "subtitle": "subtitle",
+  "items": [
+    [
       {
         "title": "Expandable-vertical",
         "text": "Be certain that our website development agency will provide only first-rate web-based software and website programming. With constantly advancing progress and great competition in the web development field Quality Assurance (QA) became one of the important traits that clients seek in web development firms, and Atlasiko Inc. enables this feature. We also offer you our testing services to ensure that all developed solutions have functionalities adequate to your initial request. Be certain that our website development agency will provide only first-rate web-based software and website programming. With constantly advancing progress and great competition in the web development field Quality Assurance (QA) became one of the important traits that clients seek in web development firms, and Atlasiko Inc. enables this feature. We also offer you our testing services to ensure that all developed solutions have functionalities adequate to your initial request.",
         "list": {
-          "tag": "ol",
-          "items": [
-            "List item 1",
-            "List item 2",
-            "List item 3"
-          ]
+          "tag": "ul",
+          "items": ["List item 1", "List item 2", "List item 3"]
         }
       },
       {
@@ -21,10 +18,16 @@
       {
         "title": "Expandable-vertical",
         "text": "Be certain that our website development agency will provide only first-rate web-based software and website programming. With constantly advancing progress and great competition in the web development field Quality Assurance (QA) became one of the important traits that clients seek in web development firms, and Atlasiko Inc. enables this feature. We also offer you our testing services to ensure that all developed solutions have functionalities adequate to your initial request. Be certain that our website development agency will provide only first-rate web-based software and website programming. With constantly advancing progress and great competition in the web development field Quality Assurance (QA) became one of the important traits that clients seek in web development firms, and Atlasiko Inc. enables this feature. We also offer you our testing services to ensure that all developed solutions have functionalities adequate to your initial request."
-      },
+      }
+    ],
+    [
       {
         "title": "Expandable-vertical",
-        "text": "Be certain that our website development agency will provide only first-rate web-based software and website programming. With constantly advancing progress and great competition in the web development field Quality Assurance (QA) became one of the important traits that clients seek in web development firms, and Atlasiko Inc. enables this feature. We also offer you our testing services to ensure that all developed solutions have functionalities adequate to your initial request. Be certain that our website development agency will provide only first-rate web-based software and website programming. With constantly advancing progress and great competition in the web development field Quality Assurance (QA) became one of the important traits that clients seek in web development firms, and Atlasiko Inc. enables this feature. We also offer you our testing services to ensure that all developed solutions have functionalities adequate to your initial request."
+        "text": "Be certain that our website development agency will provide only first-rate web-based software and website programming. With constantly advancing progress and great competition in the web development field Quality Assurance (QA) became one of the important traits that clients seek in web development firms, and Atlasiko Inc. enables this feature. We also offer you our testing services to ensure that all developed solutions have functionalities adequate to your initial request. Be certain that our website development agency will provide only first-rate web-based software and website programming. With constantly advancing progress and great competition in the web development field Quality Assurance (QA) became one of the important traits that clients seek in web development firms, and Atlasiko Inc. enables this feature. We also offer you our testing services to ensure that all developed solutions have functionalities adequate to your initial request.",
+        "list": {
+          "tag": "ol",
+          "items": ["List item 1", "List item 2", "List item 3"]
+        }
       },
       {
         "title": "Expandable-vertical",
@@ -35,4 +38,5 @@
         "text": "Be certain that our website development agency will provide only first-rate web-based software and website programming. With constantly advancing progress and great competition in the web development field Quality Assurance (QA) became one of the important traits that clients seek in web development firms, and Atlasiko Inc. enables this feature. We also offer you our testing services to ensure that all developed solutions have functionalities adequate to your initial request. Be certain that our website development agency will provide only first-rate web-based software and website programming. With constantly advancing progress and great competition in the web development field Quality Assurance (QA) became one of the important traits that clients seek in web development firms, and Atlasiko Inc. enables this feature. We also offer you our testing services to ensure that all developed solutions have functionalities adequate to your initial request."
       }
     ]
-  }
+  ]
+}
