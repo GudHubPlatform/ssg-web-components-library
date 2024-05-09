@@ -9,7 +9,6 @@ class GetInTouchBlock extends GHComponent {
         super.setDefaultData(jsonTemplate);
     }
     
-
     async onServerRender() {
 
         this.ghId = this.getAttribute('data-gh-id') || null;
