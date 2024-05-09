@@ -13,7 +13,7 @@ media-and-text {
     }
     .left, .right {
         width: calc(50% - 10px);
-        & .content {
+        & .content > *:not(:last-child) {
             color: var(--text-color);
             margin-bottom: 50px;
         }
