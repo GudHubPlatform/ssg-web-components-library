@@ -4,7 +4,10 @@
             <div class="left">
                 <div class="text">
                     ${json.title ? `
-                        <h2 class="h2" gh-id="${ghId}.title"> TITLE </h2>
+                        ${json.titleTag 
+                            ? `<${titleTag} class="h2" gh-id="${ghId}.title"> TITLE WITH CUSTOM TAG </${titleTag}>` 
+                            : `<h2 class="h2" gh-id="${ghId}.title"> TITLE </h2>
+                        `}
                     ` : ''}
                     ${json.subtitle ? `
                         <p class="subtitle" gh-id="${ghId}.subtitle"> SUBTITLE </p>

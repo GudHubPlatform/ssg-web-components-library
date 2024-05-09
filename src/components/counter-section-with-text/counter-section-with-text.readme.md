@@ -8,6 +8,7 @@ none
 ```json
 {
     "title?": "string",
+    "titleTag?": "string",
     "subtitle?": "string",
     "button_text?": "string",
     "items": [ {
