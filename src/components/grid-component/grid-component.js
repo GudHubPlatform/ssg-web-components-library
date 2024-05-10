@@ -11,7 +11,11 @@ class GridComponent extends GHComponent {
 
     async onServerRender() {
         this.ghId = this.getAttribute('data-gh-id') || null;
-        this.json = await super.getGhData(this.ghId);
+
+        const getCurrentChapter = await window?.getCurrentChapter();
+        this.chapter = getCurrentChapter ? getCurrentChapter : 'pages';
+
+        this.json = await super.getGhData(this.ghId, this.chapter);
         
         this.svgPlaceholder = svgPlaceholder;
 
@@ -20,7 +24,15 @@ class GridComponent extends GHComponent {
         const gridItem = this.children[0];
         if (gridItem) {
             this.gridItemTag = gridItem.tagName.toLowerCase();
+            
+            this.gridItemAttributes = {};
+            // temporary fix
+            if (this.hasAttribute('application')) {
+                this.gridItemAttributes.application = this.getAttribute('application');
+            }
         }
+
+        this.setGridItemAttributes = this.setGridItemAttributes;
 
         if (this.ghId) {
             super.render(html);
@@ -126,6 +138,15 @@ class GridComponent extends GHComponent {
 
             this.querySelector('.navigation_wrapper').append(swiperPaginationNum);
         }
+    }
+
+    setGridItemAttributes = () => {
+        const attributes = Object.entries(this.gridItemAttributes);
+        const attributesString = attributes.reduce((acc, [key, value]) => acc + 
+        `${key}="${value}"` + ' '
+        , '');
+        
+        return attributesString;
     }
 }
 

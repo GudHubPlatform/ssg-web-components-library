@@ -9,24 +9,32 @@ class HtmlTemplate extends GHComponent {
         let chapter = await window.getCurrentChapter();
         let ids = await super.findIds(chapter);
 
-        const items = await gudhub.getItems(ids.appId);
-        const item = items.find(item => item.item_id == ids.itemId);
         let customHtml;
+
         try {
-            customHtml = await fetch(`https://gudhub.com/userdata/${ids.appId}/${item.fields.find(field => field.field_id == this.config.chapters[chapter].html_template_field_id).field_value}.html?t=${new Date().getTime()}`);
+            const fieldId = this.config.chapters[chapter].html_template_field_id;
+            const fileId = await gudhub.getFieldValue(ids.appId, ids.itemId, fieldId);
+
+            const fileInfo = await gudhub.getFile(ids.appId, fileId);
+            customHtml = await fetch(fileInfo.url);
             customHtml = await customHtml.text();
         } catch (error) {
             console.log(error)
             customHtml = false;
         }
         if (customHtml) {
-            let wrapperTag = document.createElement('div');
-            wrapperTag.classList.add('custom-html-template');
-            wrapperTag.innerHTML = customHtml;
-            document.querySelector('body').prepend(wrapperTag);
-        }
+            const body = document.querySelector('body');
+            body.innerHTML = customHtml;
 
-        this.remove();
+            const links = body.querySelectorAll('link');
+            this.attachLinks(links);
+        }
+    }
+
+    attachLinks(links) {
+        links.forEach(link => {
+            document.head.appendChild(link);
+        });
     }
 }
 

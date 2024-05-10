@@ -11,7 +11,11 @@ class AccordionOnly extends GHComponent {
     
     async onServerRender() {
         this.ghId = this.getAttribute('data-gh-id') || null;
-        this.json = await super.getGhData(this.ghId);
+
+        const getCurrentChapter = await window?.getCurrentChapter();
+        this.chapter = getCurrentChapter ? getCurrentChapter : 'pages';
+
+        this.json = await super.getGhData(this.ghId, this.chapter);
 
         if (this.ghId) {
             await super.render(html);
