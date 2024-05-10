@@ -13,7 +13,12 @@ class CounterSectionWithText extends GHComponent {
         this.ghId = this.getAttribute('data-gh-id') || null;
 
         this.json = await super.getGhData(this.ghId);
+        this.title = this.json.title;
         this.items = this.json.items;
+
+        if (this.title) {
+            this.titleTag = this.json.titleTag;
+        }
 
         super.render(html);
     }
