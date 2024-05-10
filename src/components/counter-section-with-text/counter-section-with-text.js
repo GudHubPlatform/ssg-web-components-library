@@ -12,7 +12,12 @@ class CounterSectionWithText extends GHComponent {
     async onServerRender() {
         this.ghId = this.getAttribute('data-gh-id') || null;
 
-        this.json = await super.getGhData(this.ghId);
+        const getCurrentChapter = await window?.getCurrentChapter();
+        console.log('sdf', getCurrentChapter);
+        this.chapter = getCurrentChapter ? getCurrentChapter : 'pages';
+
+        this.json = await super.getGhData(this.ghId, this.chapter);
+
         this.title = this.json.title;
         this.items = this.json.items;
 

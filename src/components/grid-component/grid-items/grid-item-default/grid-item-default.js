@@ -11,7 +11,12 @@ class GridItemDefault extends GHComponent {
         this.itemIndex = this.getAttribute('data-item-index') || null;
         this.generalGhId = this.getAttribute('data-gh-id') || null;
         this.ghId = `${this.generalGhId}.items.${this.itemIndex}`;
-        this.generalJson = await super.getGhData(this.generalGhId);
+
+
+        const getCurrentChapter = await window?.getCurrentChapter();
+        this.chapter = getCurrentChapter ? getCurrentChapter : 'pages';
+
+        this.generalJson = await super.getGhData(this.generalGhId, this.chapter);
         this.json = this.generalJson ? this.generalJson.items[this.itemIndex] : null;
         this.svgPlaceholder = svgPlaceholder;
 
