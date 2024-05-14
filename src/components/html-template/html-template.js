@@ -8,7 +8,6 @@ class HtmlTemplate extends GHComponent {
         
         let chapter = await window.getCurrentChapter();
         let ids = await super.findIds(chapter);
-
         let customHtml;
 
         try {
@@ -19,16 +18,21 @@ class HtmlTemplate extends GHComponent {
             customHtml = await fetch(fileInfo.url);
             customHtml = await customHtml.text();
         } catch (error) {
-            console.log(error)
             customHtml = false;
         }
         if (customHtml) {
             const body = document.querySelector('body');
-            body.innerHTML = customHtml;
+            const wrapper = document.createElement('div');
+            wrapper.id = 'layout';
+            wrapper.innerHTML = customHtml;
+
+            body.appendChild(wrapper);
 
             const links = body.querySelectorAll('link');
             this.attachLinks(links);
         }
+
+        this.remove();
     }
 
     attachLinks(links) {
