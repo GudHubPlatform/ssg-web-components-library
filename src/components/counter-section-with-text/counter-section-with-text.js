@@ -13,7 +13,6 @@ class CounterSectionWithText extends GHComponent {
         this.ghId = this.getAttribute('data-gh-id') || null;
 
         const getCurrentChapter = await window?.getCurrentChapter();
-        console.log('sdf', getCurrentChapter);
         this.chapter = getCurrentChapter ? getCurrentChapter : 'pages';
 
         this.json = await super.getGhData(this.ghId, this.chapter);
