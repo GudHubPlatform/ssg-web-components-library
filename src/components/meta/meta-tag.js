@@ -53,14 +53,19 @@ class MetaTag extends GHComponent {
                     let ids = await super.findIds('blog');
                     await this.addTag(ids.appId, ids.itemId, `/blog/${category}/${article}/`, 'blog');
                 } else {
-                    let ids = await super.findIds(chapter);
-                    await this.addTag(ids.appId, ids.itemId, false, chapter);
+                    debugger;
+                    const getCurrentChapter = await window?.getCurrentChapter();
+                    const currentChapter = getCurrentChapter ? getCurrentChapter : 'pages';
+
+                    let ids = await super.findIds(currentChapter);
+                    await this.addTag(ids.appId, ids.itemId, false, currentChapter);
                 }
             }
         }
             
     }
     async addTag (appId, itemId, slug, chapter) {
+        debugger;
         const app = await gudhub.getApp(appId);
         const items = app.items_list;
         let item;
