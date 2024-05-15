@@ -21,6 +21,10 @@ class ContactUsBlock extends GHComponent {
         
         this.phones = this.manyPhones ? this.info.phone : new Array(this.info.phone);
         
+        this.customPhoneIcon = this.json.customPhoneIcon;
+        this.customMailIcon = this.json.customMailIcon;
+        this.customAddressIcon = this.json.customAddressIcon;
+
         super.render(html);
     }
 }
