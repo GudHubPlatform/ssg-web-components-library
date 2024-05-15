@@ -1,6 +1,6 @@
 import html from './contact-us-block.html';
 import './contact-us-block.scss';
-import { defaultIcons } from './default-icons';
+import { defaultIcons } from './default-icons.js';
 
 import jsonTemplate from './contact-us-block-data.json';
 
