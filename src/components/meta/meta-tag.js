@@ -53,7 +53,6 @@ class MetaTag extends GHComponent {
                     let ids = await super.findIds('blog');
                     await this.addTag(ids.appId, ids.itemId, `/blog/${category}/${article}/`, 'blog');
                 } else {
-                    debugger;
                     const getCurrentChapter = await window?.getCurrentChapter();
                     const currentChapter = getCurrentChapter ? getCurrentChapter : 'pages';
 
@@ -65,7 +64,6 @@ class MetaTag extends GHComponent {
             
     }
     async addTag (appId, itemId, slug, chapter) {
-        debugger;
         const app = await gudhub.getApp(appId);
         const items = app.items_list;
         let item;
