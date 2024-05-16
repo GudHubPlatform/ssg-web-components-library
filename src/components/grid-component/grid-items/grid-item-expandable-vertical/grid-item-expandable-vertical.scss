@@ -31,6 +31,8 @@ grid-item-expandable-vertical {
                 background-color: var(--block-primary-bg-hover-color);
                 .title {
                     color: var(--block-primary-accent-color);
+                    font-size: var(--h3-font-size);
+                    font-weight: var(--h3-font-weight);
                 }
                 .text {
                     max-height: 500px;
@@ -63,6 +65,9 @@ grid-item-expandable-vertical {
             .title {
                 transition: color var(--transition-duration) ease;
                 margin-bottom: 15px;
+                font-size: var(--h3-font-size);
+                font-weight: var(--h3-font-weight);
+                color: var(--h-color);
             }
             .text {
                 height: 100%;
