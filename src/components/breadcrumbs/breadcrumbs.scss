@@ -12,9 +12,6 @@ breadcrumbs-component {
             font-weight: 300;
             height: 100%;
             white-space: nowrap;
-            &:hover:not(:last-child) {
-                color: var(--breadcrumbsAccentColor);
-            }
             a {
                 display: flex;
                 align-items: center;
@@ -30,9 +27,12 @@ breadcrumbs-component {
                     background-color: var(--breadcrumbsColor);
                     transition: all .2s ease;
                 }
-                &:hover::after {
-                    width: 100%;
-                    background-color: var(--breadcrumbsAccentColor);
+                &:hover {
+                    color: var(--breadcrumbsAccentColor);
+                    &::after {
+                        width: 100%;
+                        background-color: var(--breadcrumbsAccentColor);
+                    }
                 }
             }
             &:last-child {
