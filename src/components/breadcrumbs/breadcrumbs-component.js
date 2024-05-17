@@ -2,64 +2,52 @@ import html from './breadcrumbs.html';
 import './breadcrumbs.scss';
 
 class BreadcrumbsComponent extends GHComponent {
-    /**
-     * data-items - in this attribute need set stringified object with items of list of breadcrumbs
-     */
     constructor() {
         super();
     }
 
     async onServerRender() {
-        
-        let url = new URL(window.location.href);
-        url = url.searchParams.get('path');
-        if (url !== '/') {
-            this.items = this.getAttribute('data-items');
-            this.items = JSON.parse(this.items);
+        let currentUrl = new URL(window.location.href);
+        currentUrl = currentUrl.searchParams.get('path');
 
-            const schema = {
-                "@context": "https://schema.org",
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "Home",
-                        "item": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}`
-                    }
-                ]
-            }
+        this.breadcrumbsConfig = window.getConfig().componentsConfigs.breadcrumbsConfig;
+        this.initialRoute = this.breadcrumbsConfig[0].routesTree;
 
+        this.items = this.generateBreadcrumbs(this.initialRoute, currentUrl);
 
-            this.items.forEach((bc, index) => {
-                let realIndex = index + 1;
-                if(index < this.items.length - 1) {
-                    schema.itemListElement.push({
-                        "@type": "ListItem",
-                        "position": (realIndex == 0 ? 1 : realIndex) + 1,
-                        "name": bc.title,
-                        "item": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}` + bc.slug
-                    })
-                } else {
-                    schema.itemListElement.push({
-                        "@type": "ListItem",
-                        "position": (realIndex == 0 ? 1 : realIndex) + 1,
-                        "name": bc.title,
-                    })
-                }
-            });
-            if(!document.head.querySelector('#breadcrumbsSchema')) {
-
-                document.head.innerHTML += `
-                    <script id="breadcrumbsSchema" type="application/ld+json">${JSON.stringify(schema)}</script>
-                `;
-
-            }
-
-            super.render(html);
-        }
+        super.render(html);
     }
 
+    generateBreadcrumbs(route, currentUrl, breadcrumbs = []) {
+        if (route.image !== undefined) {
+            breadcrumbs.push({ 
+                title: route.title, 
+                link: route.link, 
+                image: route.image 
+            });
+        } else {
+            breadcrumbs.push({ title: route.title, link: route.link });
+        }
+
+        if (route.link === currentUrl) {
+            if (breadcrumbs.length > 0) {
+                const { link, ...lastBreadcrumb } = breadcrumbs.pop();
+                breadcrumbs.push(lastBreadcrumb);
+            }
+            return breadcrumbs;
+        }
+
+        if (route.childs) {
+            for (const childRoute of (route.childs)) {
+                const response = this.generateBreadcrumbs(childRoute, currentUrl, [...breadcrumbs]);
+                if (response) {
+                    return response;
+                }
+            }
+        }
+
+        return null;
+    }
 }
 
 window.customElements.define('breadcrumbs-component', BreadcrumbsComponent);
