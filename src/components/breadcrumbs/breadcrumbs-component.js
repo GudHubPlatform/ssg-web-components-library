@@ -15,11 +15,21 @@ class BreadcrumbsComponent extends GHComponent {
 
         this.items = this.generateBreadcrumbs(this.initialRoute, currentUrl);
 
-        super.render(html);
+        this.items === null ? console.error(`Didn't find current route in config, current URL: ${currentUrl}`) : null;
+
+        if (this.items) {
+            super.render(html);
+        }
+    }
+
+    onClientReady() {
+        if (!!this.innerHTML) {
+            console.error(`Didn't find current route in config`);
+        }
     }
 
     generateBreadcrumbs(route, currentUrl, breadcrumbs = []) {
-        if (route.image !== undefined) {
+        if (!!route.image) {
             breadcrumbs.push({ 
                 title: route.title, 
                 link: route.link, 
@@ -39,13 +49,13 @@ class BreadcrumbsComponent extends GHComponent {
 
         if (route.childs) {
             for (const childRoute of (route.childs)) {
-                const response = this.generateBreadcrumbs(childRoute, currentUrl, [...breadcrumbs]);
-                if (response) {
-                    return response;
+                const result = this.generateBreadcrumbs(childRoute, currentUrl, [...breadcrumbs]);
+                if (result) {
+                    return result;
                 }
             }
         }
-
+        
         return null;
     }
 }
