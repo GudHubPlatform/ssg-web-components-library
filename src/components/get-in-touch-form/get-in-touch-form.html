@@ -1,13 +1,13 @@
 <div class="get-in-touch-form">
     <form class="get-in-touch primary-block" action="#">
-        ${config.title ? `<div class="popup_text like_title">${config.title}</div>` : ''}
-        ${config.subtitle ? `<div class="popup_text subtitle">${config.subtitle}</div>` : ''}
+        ${titleName ? `<div class="popup_text like_title">${titleName}</div>` : ''}
+        ${subtitleName ? `<div class="popup_text subtitle">${subtitleName}</div>` : ''}
         
         <div class="form_wrap">
             ${generateInput(config)}
         </div>
         <div class="btn_wrapper">
-            <button type="submit" class="btn">${config.button_text ? config.button_text : 'Get in touch'}</button>
+            <button type="submit" class="btn">${buttonText ? buttonText : 'Get in touch'}</button>
             <div class="loader"></div>
         </div>
     </form>
