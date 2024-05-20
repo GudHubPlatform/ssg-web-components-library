@@ -112,7 +112,6 @@ article breadcrumbs-component .breadcrumbs_list {
             li {
                 font-size: 12px;
                 &::after {
-                    top: calc(50% - 6px);
                     right: -13px;
                 }
             }
