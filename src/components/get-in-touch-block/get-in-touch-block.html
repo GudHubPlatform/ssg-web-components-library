@@ -1,13 +1,15 @@
 <section class="get_in_touch_block">
     <div class="container">
         <div class="fet_in_touch_top">
-            <h2 gh-id="${ghId}.title">Lorem ipsum dolor sit amet consectetur?</h2>
+            ${json.title ? `
+                <h2 gh-id="${ghId}.title">Lorem ipsum dolor sit amet consectetur?</h2>
+            ` : ''}
             ${json.subtitle ? `
                 <p class="subtitle" gh-id="${ghId}.subtitle">Lorem ipsum dolor sit amet consectetur. Orci tempor bibendum sem.</p>
             ` : ''}
         </div>
         <div class="get_in_touch_bottom">
-            <get-in-touch-form data-form-id="main"></get-in-touch-form>
+            <get-in-touch-form ${getFormAttributes()}></get-in-touch-form>
         </div>
     </div>
 </section>
