@@ -1,7 +1,9 @@
 <div class="primary-block">
     <div class="expandable-wrapper">
         <div class="content">
-            ${json.title ? `<${titleTag} class="title" gh-id="${ghId}.title"></${titleTag}>` : ''}
+            <div class="title">
+                ${json.title ? `<${titleTag} class="title-text" gh-id="${ghId}.title"></${titleTag}>` : ''}
+            </div>
             ${json.text ? `<div><p class="text" gh-id="${ghId}.text"></p></div>` : ''}
         </div>
         <div class="bottom">

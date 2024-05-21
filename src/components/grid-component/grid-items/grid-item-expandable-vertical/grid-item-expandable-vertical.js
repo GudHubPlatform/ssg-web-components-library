@@ -11,7 +11,7 @@ class GridItemExpandableVertical extends GHComponent {
         this.generalGhId = this.getAttribute('data-gh-id') || null;
         this.ghId = `${this.generalGhId}.items.${this.itemIndex}`;
         this.generalJson = await super.getGhData(this.generalGhId);
-        this.json = this.generalJson ? this.generalJson.items[this.itemIndex] : null;
+        this.json = this.generalJson ? this.generalJson?.items[this.itemIndex] : null;
         this.titleTag = this.json?.titleLink ? `a href=${this.json.titleLink}`: `h3`;
 
         if (this.ghId && this.generalJson) {
