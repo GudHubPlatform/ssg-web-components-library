@@ -1,6 +1,7 @@
 import html from './get-in-touch-form.html';
 import './get-in-touch-form.scss';
 import defaultConfigs from './get-in-touch-form-data.json';
+import { validationCallbacks } from './validationCallbacks.js';
 
 class GetInTouchForm extends GHComponent {
 
@@ -62,60 +63,36 @@ class GetInTouchForm extends GHComponent {
             const defaultId = this.isInPopup ? 'default popup' : 'default';
             this.config = defaultConfigs.find(({ id }) => id === defaultId);
         }
-    }
+    };
 
-    validateInput(inputElement, regex, isRequired) {
-        const value = inputElement.value;
-        let isValid = true;
+    checkInputsValidations = (inputs) => {
+        const result = inputs.map((input) => {
+            const validationCallback = validationCallbacks[input.name];
+            if (!validationCallback) return {
+                input,
+                isValid: true
+            };
 
-        if (isRequired) {
-            isValid = regex.test(value);
-        } else if (value.length > 0) {
-            isValid = regex.test(value);
-        }
+            return {
+                input,
+                isValid: validationCallback(input)
+            };
+        });
 
-        if (!isValid) {
-            inputElement.classList.add('error');
-            inputElement.parentElement.classList.add('error-input');
-        } else {
-            inputElement.classList.remove('error');
-            inputElement.parentElement.classList.remove('error-input');
-        }
-        
-        return isValid;
-    }
-
-    async emailAndPhoneValidation(emailInput, phoneInput) {
-        const emailConfig = this.config.inputs.find(input => input.name === "email");
-        const phoneConfig = this.config.inputs.find(input => input.name === "phone");
-    
-        const isEmailRequired = emailConfig?.required === 'true';
-        const isPhoneRequired = phoneConfig?.required === 'true';
-
-        let emailValid = true;
-        let phoneValid = true;
-    
-        if (emailInput) emailValid = this.validateInput(emailInput, /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, isEmailRequired);
-        
-        if (phoneInput) phoneValid = this.validateInput(phoneInput, /^[0-9 ()+-]+$/, isPhoneRequired);
-        
-        const isValid = (emailInput && emailValid) || (phoneInput && phoneValid);
-    
-        if (isEmailRequired || isPhoneRequired) return emailValid && phoneValid;
-        
-        return isValid;
-    }
+        return result;
+    };
 
     async handleSubmit(event) {
         event.preventDefault();
-        const element = event.target;
+        const form = event.target;
     
+        const inputs = Array.from(form.querySelectorAll('input'));
         const emailInput = this.querySelector('[name="email"]');
         const phoneInput = this.querySelector('[name="phone"]');
-    
-        const isValidFields = await this.emailAndPhoneValidation(emailInput, phoneInput);
-    
-        if (isValidFields) {
+
+        const validationResults = this.checkInputsValidations(inputs);
+
+        if (validationResults.every((res) => res.isValid)) {
             this.addLoader();
             try {
                 const res = await new Promise((resolve, reject) => {
@@ -131,7 +108,7 @@ class GetInTouchForm extends GHComponent {
                     }, TIMEOUT_DURATION);
                 });
     
-                this.removeLoader(element);
+                this.removeLoader(form);
     
                 if (res) {
                     this.showSuccess({ email: emailInput ? emailInput.value : '', phone: phoneInput ? phoneInput.value : '' });
@@ -139,16 +116,16 @@ class GetInTouchForm extends GHComponent {
                     this.showFail();
                 }
             } catch (error) {
-                this.removeLoader(element);
+                this.removeLoader(form);
                 this.showFail();
             }
             this.isFormSubmitted = true;
-    
         } else {
-            this.toggleErrors(isValidFields, emailInput, phoneInput);
+            const validationResultsForErrors = validationResults.filter(item => typeof item === 'object')
+            validationResultsForErrors.forEach(({ input, isValid }) => this.toggleError(input, isValid));
         }
 
-        this.createDataObject(element, this.config, this.placement)
+        this.createDataObject(form, this.config, this.placement)
     }
     
     async createDataObject(form, formId, placement) {
@@ -170,10 +147,9 @@ class GetInTouchForm extends GHComponent {
 
         window.dispatchEvent(new CustomEvent('submitForm', { detail: { formDataObj } }));
     }
-    toggleErrors(isValidFields, emailInput, phoneInput) {
-        isValidFields.emailValid ? emailInput.classList.remove('error') : emailInput.classList.add('error');
-
-        isValidFields.phoneValid ? phoneInput.classList.remove('error') : phoneInput.classList.add('error');
+    toggleError(input, isValid) {
+        input.classList[isValid ? 'remove' : 'add']('error');
+        input.parentElement.classList[isValid ? 'remove' : 'add']('error-input');
     }
     async addLoader() {
         this.classList.add('loading');
