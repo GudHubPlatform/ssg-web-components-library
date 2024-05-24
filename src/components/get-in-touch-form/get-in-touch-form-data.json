@@ -14,7 +14,6 @@
             "from": "gudhub",
             "subject": "default main"
         },
-        "endpointForEmails": "https://gudhub.com/api/services/prod/api/00000/save-credits",
         "inputs": [
             {
                 "name": "name",
@@ -70,7 +69,6 @@
             "from": "gudhub",
             "subject": "default popup"
         },
-        "endpointForEmails": "https://gudhub.com/api/services/prod/api/00000/save-credits",
         "inputs": [
             {
                 "name": "email",
@@ -112,7 +110,6 @@
             "from": "gudhub",
             "subject": "Отримайте безкоштовну консультацію bottom-right popup"
         },
-        "endpointForEmails": "https://gudhub.com/api/services/prod/api/00000/save-credits",
         "inputs" :[
             {
                 "name":"email",

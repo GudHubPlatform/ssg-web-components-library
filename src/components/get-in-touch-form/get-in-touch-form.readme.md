@@ -81,7 +81,6 @@ FormId:
     // data from your form-config
     button_text:"text"
     defaultLang: "true or false"
-    endpointForEmails: "endpoint to gudhub app"
     id: "text"
     inputs: Array()
         0: {name: 'name', type: 'type', required: 'required', placeholder: "placeholder", width: 12}
