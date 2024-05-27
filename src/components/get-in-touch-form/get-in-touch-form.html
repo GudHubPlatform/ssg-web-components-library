@@ -21,14 +21,18 @@
             <div class="bold">${config.titleSuccess ? config.titleSuccess : 'Successfull'}</div>
             <div>${config.subtitleSuccess ? config.subtitleSuccess : 'Your form has been succesfully submitted! Please, check if info you provided is correct:'}</div>
             <div class="check">
-                <div class="check_entity">
-                    <span>Email:</span>
-                    <span class="email"></span>
-                </div>
-                <div class="check_entity phone_entity">
-                    <span>Phone:</span>
-                    <span class="phone"></span>
-                </div>
+                ${config.inputs.find(input => input.name === "email") ? `
+                    <div class="check_entity">
+                        <span>Email:</span>
+                        <span class="email"></span>
+                    </div>
+                ` : ''}
+                ${config.inputs.find(input => input.name === "phone") ? `
+                    <div class="check_entity phone_entity">
+                        <span>Phone:</span>
+                        <span class="phone"></span>
+                    </div>
+                ` : ''}
             </div>
         </div>
     </div>
