@@ -15,11 +15,6 @@ class GetInTouchForm extends GHComponent {
         
         this.placement = 'main';
         this.config = window.getConfig().componentsConfigs.formConfig;
-
-        this.titleName = this.hasAttribute('data-form-title') ? this.getAttribute('data-form-title') : this.config.title;
-        this.subtitleName = this.hasAttribute('data-form-subtitle') ? this.getAttribute('data-form-subtitle') : this.config.subtitle;
-        this.placement = this.hasAttribute('data-form-placement') ? this.getAttribute('data-form-placement') : "main";
-        this.buttonText = this.hasAttribute('data-form-button-text') ? this.getAttribute('data-form-button-text') : this.config.button_text;
     }
 
     onServerRender() {
@@ -68,6 +63,11 @@ class GetInTouchForm extends GHComponent {
             const defaultId = this.isInPopup ? 'default popup' : 'default';
             this.config = defaultConfigs.find(({ id }) => id === defaultId);
         }
+
+        this.titleName = this.hasAttribute('data-form-title') ? this.getAttribute('data-form-title') : this.config.title;
+        this.subtitleName = this.hasAttribute('data-form-subtitle') ? this.getAttribute('data-form-subtitle') : this.config.subtitle;
+        this.placement = this.hasAttribute('data-form-placement') ? this.getAttribute('data-form-placement') : "main";
+        this.buttonText = this.hasAttribute('data-form-button-text') ? this.getAttribute('data-form-button-text') : this.config.button_text;
     };
 
     checkInputsValidations = (inputs) => {
