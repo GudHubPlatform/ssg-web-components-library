@@ -13,6 +13,17 @@ class GridItemNumbered extends GHComponent {
         this.generalJson = await super.getGhData(this.generalGhId);
         this.json = this.generalJson ? this.generalJson.items[this.itemIndex] : null;
         this.number = this.getNumberFromGhId();
+        if (this.json?.customNumber) {
+            const removeZeroPrefix = (string) => {
+                if (string[0] === '0')  {
+                    return string.slice(1);
+                }
+                return string;
+            }
+
+            const numberFormatted = removeZeroPrefix(this.number);
+            this.number = this.json.customNumber.replace('{{number}}', numberFormatted);
+        }
         
         if (this.ghId && this.generalJson) {
             super.render(html);

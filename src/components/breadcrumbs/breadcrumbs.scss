@@ -18,21 +18,22 @@ breadcrumbs-component {
                 color: var(--breadcrumbsColor);
                 position: relative;
                 &::after {
-                    content: '';
+                    content: "";
                     position: absolute;
-                    bottom: -2px;
-                    left: 0;
-                    transition: all .2s ease;
                     height: 1px;
                     width: 0;
-                    background: var(--breadcrumbsColor);
+                    left: 0;
+                    bottom: 0;
+                    background-color: var(--breadcrumbsColor);
+                    transition: all .2s ease;
                 }
-                &:hover::after {
-                    width: 100%;
+                &:hover {
+                    color: var(--breadcrumbsAccentColor);
+                    &::after {
+                        width: 100%;
+                        background-color: var(--breadcrumbsAccentColor);
+                    }
                 }
-            }
-            a[href="/"] {
-                transform: translateY(-2px);
             }
             &:last-child {
                 color: var(--breadcrumbsLastColor);
@@ -48,7 +49,7 @@ breadcrumbs-component {
             &::after {
                 content: '';
                 position: absolute;
-                top: calc(50% - 5px);
+                top: calc(50% - 4px);
                 right: -17px;
                 width: 6px;
                 height: 6px;
@@ -111,7 +112,6 @@ article breadcrumbs-component .breadcrumbs_list {
             li {
                 font-size: 12px;
                 &::after {
-                    top: calc(50% - 6px);
                     right: -13px;
                 }
             }

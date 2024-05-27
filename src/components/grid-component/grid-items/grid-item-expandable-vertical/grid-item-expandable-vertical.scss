@@ -29,8 +29,10 @@ grid-item-expandable-vertical {
                 bottom: auto;
                 z-index: 3;
                 background-color: var(--block-primary-bg-hover-color);
-                .title {
+                .title-text {
                     color: var(--block-primary-accent-color);
+                    font-size: var(--h3-font-size);
+                    font-weight: var(--h3-font-weight);
                 }
                 .text {
                     max-height: 500px;
@@ -60,9 +62,12 @@ grid-item-expandable-vertical {
         .content {
             display: flex;
             flex-direction: column;
-            .title {
+            .title-text {
                 transition: color var(--transition-duration) ease;
                 margin-bottom: 15px;
+                font-size: var(--h3-font-size);
+                font-weight: var(--h3-font-weight);
+                color: var(--h-color);
             }
             .text {
                 height: 100%;
@@ -103,7 +108,7 @@ grid-item-expandable-vertical {
             }
         }
         &:hover {
-            .title {
+            .title-text {
                 color: var(--block-primary-accent-color);
             }
             .icon {

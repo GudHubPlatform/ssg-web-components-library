@@ -10,7 +10,7 @@
             ${json.items.reduce((acc, itemsColumn, indexColumn) => acc + `
                 <div class="accordion-column">
                     ${itemsColumn.reduce((acc, item, index) => acc + `
-                        <div class="primary-block" onclick="toggleExpand()">
+                        <div class="primary-block">
                             <div class="visible-content">
                                 ${item.title ? `<h3 class="title" gh-id="${ghId}.items.${indexColumn}.${index}.title"></h3>` : ''}
                                 <div class="icon">
@@ -29,13 +29,16 @@
                                                 }
                                                 return `
                                                     <${tag}>
-                                                        ${item.list.reduce((acc, listItem, itemIndex) => acc + `
+                                                        ${item.list.items.reduce((acc, listItem, itemIndex) => acc + `
                                                             <li gh-id="${ghId}.items.${indexColumn}.${index}.list.items.${itemIndex}"></li>
                                                         `, '')}
                                                     </${tag}>
                                                 `
                                             })()}
                                         </div>
+                                    ` : ''}
+                                    ${item.button ? `
+                                        <button-component class="btn" data-popup-id="${item.button.popupId}" data-placement="${item.button.placement}">${item.button.text}</button-component>    
                                     ` : ''}
                                 </div>
                             </div>

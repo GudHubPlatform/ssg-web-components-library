@@ -45,6 +45,9 @@ contact-us-block {
                 position: relative;
                 min-width: 64px;
                 height: 64px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 background-color: var(--accent-color);
                 border-radius: 50%;
                 svg {
