@@ -1,0 +1,29 @@
+<section>
+  <div class="container">
+    ${json.title ? `
+      <h2 class="h2" gh-id="${ghId}.title"></h2>
+    ` : ''}
+    ${json.subtitle ? `
+      <p class="subtitle" gh-id="${ghId}.subtitle"></p>
+  ` : ''}
+
+  <div class="masonry-grid"></div>
+
+  <div class="button-wrapper">
+    ${json.button ? `
+      <button id="grid-add-items" class="btn" gh-id="${ghId}.button"></button>
+    ` : ''}
+  </div>
+
+  <div id="modal">
+    <div class="modal-loader">
+      <svg viewBox="25 25 50 50">
+        <circle r="20" cy="50" cx="50"></circle>
+      </svg>
+    </div>
+    <div class="close-modal">
+      <span>&times;</span>
+    </div>
+    <img class="modal-img" src="">
+  </div>
+</section>
