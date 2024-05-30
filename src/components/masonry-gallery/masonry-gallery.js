@@ -10,7 +10,7 @@ class MasonryGallery extends GHComponent {
 
         this.ghId = this.getAttribute('data-gh-id') || null;
         this.contactUsButton = this.hasAttribute('data-modal-button') ? this.getAttribute('data-modal-button') : null;
-        this.contactUsButtonId = this.hasAttribute('data-modal-button-id') ? this.getAttribute('data-modal-button-id') : null
+        this.contactUsButtonId = this.hasAttribute('data-modal-button-id') ? this.getAttribute('data-modal-button-id') : null;
     }
 
     async onServerRender() {
