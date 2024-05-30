@@ -1,7 +1,8 @@
 # Attributes:
 
+    data-column-width: we need to pass column width value (number), for gap between grid items
     data-modal-button: we need to write text for button as a value, this attribute use for contact-us button in modal window 
-    contactUsButtonId: we need to write id for button popup-id as a value, this attribute use for contact-us button in modal window
+    data-modal-button-id: we need to write id for button popup-id as a value, this attribute use for contact-us button in modal window
 
 # Component data-object:
 

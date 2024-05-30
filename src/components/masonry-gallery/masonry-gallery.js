@@ -9,6 +9,7 @@ class MasonryGallery extends GHComponent {
         this.imagesContainer = this.querySelector('.masonry-grid');
 
         this.ghId = this.getAttribute('data-gh-id') || null;
+        this.columnWidthValue = this.hasAttribute('data-column-width') ? this.getAttribute('data-modal-button') : 25;
         this.contactUsButton = this.hasAttribute('data-modal-button') ? this.getAttribute('data-modal-button') : null;
         this.contactUsButtonId = this.hasAttribute('data-modal-button-id') ? this.getAttribute('data-modal-button-id') : null;
     }
@@ -34,7 +35,7 @@ class MasonryGallery extends GHComponent {
         
         this.msnry = new Masonry(grid, {
             itemSelector: '.masonry-grid-item',
-            columnWidth: 25,
+            columnWidth: this.columnWidthValue,
             fitWidth: true,
             transitionDuration: '0.5s'
         });
