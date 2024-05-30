@@ -112,7 +112,7 @@ class MasonryGallery extends GHComponent {
     addImages = (imagesSrcArray) => {
         // Iterate through each image source and add it to the grid
         imagesSrcArray.forEach(({ image }) => {
-            const { src, fullImage = null } = image;
+            const { src, fullImage } = image;
 
             this.addImage(src, fullImage);
         });
