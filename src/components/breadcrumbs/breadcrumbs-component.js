@@ -7,13 +7,21 @@ class BreadcrumbsComponent extends GHComponent {
     }
 
     async onServerRender() {
-        let currentUrl = new URL(window.location.href);
-        currentUrl = currentUrl.searchParams.get('path');
+        if (this.hasAttribute('data-items')) {
+            //manual mode when you passing items in JSON format through attribute "data-items"
+            try {
+                this.items = JSON.parse(this.getAttribute('data-items'));
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        else {
+            this.breadcrumbsConfig = window.getConfig().componentsConfigs.breadcrumbsConfig;
+            this.initialRoute = this.breadcrumbsConfig[0].routesTree;
 
-        this.breadcrumbsConfig = window.getConfig().componentsConfigs.breadcrumbsConfig;
-        this.initialRoute = this.breadcrumbsConfig[0].routesTree;
-
-        this.items = this.generateBreadcrumbs(this.initialRoute, currentUrl);
+            let currentUrl = new URL(window.location.href);
+            currentUrl = currentUrl.searchParams.get('path');
+        }
 
         this.items === null ? console.error(`Didn't find current route in config, current URL: ${currentUrl}`) : null;
 

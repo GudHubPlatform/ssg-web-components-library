@@ -87,12 +87,16 @@ class ArticleComponent extends GHComponent {
 
         this.breadcrumbs = JSON.stringify([
             {
+                "title": "Головна",
+                "link": "/blog/"
+            },
+            {
                 "title": "Блог",
-                "slug": "/blog/"
+                "link": "/blog/"
             },
             {
                 "title": this.article.categories[0].name,
-                "slug": this.article.categories[0].slug
+                "link": this.article.categories[0].slug
             },
             {
                 "title": this.article.h1

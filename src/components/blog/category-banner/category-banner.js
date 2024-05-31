@@ -40,7 +40,19 @@ class CategoryBanner extends GHComponent {
         this.description = div.querySelector('div').innerText;
         this.title = item.fields.find(field => field.field_id == window.getConfig().chapters.blog.heading_field_id).field_value;
 
-        this.breadcrumbs = JSON.stringify([{"title": this.config.breadcrumbs.blog, "slug": "/blog/"},{"title": this.title}]);
+        this.breadcrumbs = JSON.stringify([
+            {
+                "title": "Головна",
+                "link": "/"
+            },
+            {
+                "title": this.config.breadcrumbs.blog,
+                "link": "/blog/"
+            },
+            {
+                "title": this.title
+            }
+        ]);
         
         super.render(html);
     }
