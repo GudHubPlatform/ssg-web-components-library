@@ -53,26 +53,47 @@ class ImageComponent extends GHComponent {
             }
         })
         
-        await new Promise(async (resolve) => {
-            // Use new Image to have ability get params like from real image, for example naturalWidth
-            this.image = new Image();
-        
-            this.image.addEventListener('load', () => {
-                const srcHasParams = this.image.getAttribute('src').indexOf('?') !== -1;
-                let src = srcHasParams ? this.image.getAttribute('src').substring(0, image.getAttribute('src').indexOf('?')) : this.image.getAttribute('src');
-                if(src.indexOf('&') !== -1) {
-                    src = src.substring(0, src.indexOf('&'))
-                }
-                this.extension = src.substring(src.lastIndexOf('.'), src.length);
-                this.path = src.substring(0, src.length - this.extension.length);
-                
-                this.imageWidth = this.image.naturalWidth;
-                resolve();
-            });
-        
-            this.image.setAttribute('src', this.src);
-        })
-        super.render(html);
+        let attempts = 0;
+        let imageLoaded = false;
+
+        while (!imageLoaded && attempts < 5) {
+            try {
+                await new Promise(async (resolve, reject) => {
+                    // Use new Image to have ability get params like from real image, for example naturalWidth
+                    this.image = new Image();
+
+                    this.image.addEventListener('load', () => {
+                        const srcHasParams = this.image.getAttribute('src').indexOf('?') !== -1;
+                        let src = srcHasParams ? this.image.getAttribute('src').substring(0, this.image.getAttribute('src').indexOf('?')) : this.image.getAttribute('src');
+                        if (src.indexOf('&') !== -1) {
+                            src = src.substring(0, src.indexOf('&'))
+                        }
+                        this.extension = src.substring(src.lastIndexOf('.'), src.length);
+                        this.path = src.substring(0, src.length - this.extension.length);
+
+                        this.imageWidth = this.image.naturalWidth;
+
+                        imageLoaded = true;
+
+                        resolve();
+                    });
+
+                    this.image.onerror = () => {
+                        reject();
+                    };
+
+                    this.image.setAttribute('src', this.src);
+                });
+            } catch (error) {
+                console.error(`11111111111111111 Image load failed "${this.src}". Attempt "${attempts + 1}"`);
+                attempts++;
+            }
+        }
+        if (imageLoaded) {
+            super.render(html);
+        } else {
+            console.error(`11111111111111111 Image load failed "${this.src}".`);
+        }
         // caller == 'client' ? this.clientRender() : super.render(html);
     }
 

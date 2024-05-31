@@ -39,7 +39,15 @@ class BlogBanner extends GHComponent {
             let breadcrumbsTitle = document.createElement('div')
             breadcrumbsTitle.innerHTML = this.json.title;
             
-            this.breadcrumbs = JSON.stringify([{"title": breadcrumbsTitle.innerText}]);
+            this.breadcrumbs = JSON.stringify([
+                {
+                    title: 'Головна',
+                    link: '/'
+                },
+                {
+                    title: breadcrumbsTitle.innerText
+                }
+            ]);
             
             this.image = this.json.image || false;
         }
