@@ -60,3 +60,4 @@ export { aboutUsImageCounter } from './components/about-us-image-counter/config.
 export { aboutUsTeamMembers } from './components/about-us-team-members/config.js';
 export { contactUsBlock } from './components/contact-us-block/config.js';
 export { htmlTemplate } from './components/html-template/config.js';
+export { masonryGallery } from './components/masonry-gallery/config.js';
