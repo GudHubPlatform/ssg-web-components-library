@@ -8,8 +8,10 @@ class MasonryGallery extends GHComponent {
         this.addImages = this.addImages;
         this.imagesContainer = this.querySelector('.masonry-grid');
 
+        const defaultColumnWidth = 25;
+
         this.ghId = this.getAttribute('data-gh-id') || null;
-        this.columnWidthValue = this.hasAttribute('data-column-width') ? this.getAttribute('data-modal-button') : 25;
+        this.columnWidthValue = this.hasAttribute('data-column-width') ? this.getAttribute('data-modal-button') : defaultColumnWidth;
         this.contactUsButton = this.hasAttribute('data-modal-button') ? this.getAttribute('data-modal-button') : null;
         this.contactUsButtonId = this.hasAttribute('data-modal-button-id') ? this.getAttribute('data-modal-button-id') : null;
     }
@@ -18,9 +20,11 @@ class MasonryGallery extends GHComponent {
         this.ghId = this.getAttribute('data-gh-id') || null;
         this.json = await super.getGhData(this.ghId);
 
+        const isMoreItems = this.json.moreItems ? this.json.moreItems : null;
+        
         // Passing second array to client
         this.setAttribute('init-images', JSON.stringify(this.json.items));
-        this.setAttribute('add-array', JSON.stringify(this.json.moreItems));
+        this.setAttribute('add-array', JSON.stringify(isMoreItems));
 
         super.render(html);
     }
@@ -98,15 +102,11 @@ class MasonryGallery extends GHComponent {
         closeBtn.onclick = closeModal;
     
         window.onclick = function(event) {
-            if (event.target === modal) {
-                closeModal();
-            }
+            if (event.target === modal) closeModal();
         }
     
         window.onkeydown = function(event) {
-            if (event.key === "Escape") {
-                closeModal();
-            }
+            if (event.key === "Escape") closeModal();
         }
     }
 

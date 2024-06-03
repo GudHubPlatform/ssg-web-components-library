@@ -24,7 +24,7 @@
                 }
             }
         ],
-        "moreItems": [ // images which will be added to layout when you press the button
+        "moreItems?": [ // images which will be added to layout when you press the button
             {
                 "image": {
                     "src": "Path To File", // path should be like '/assets/...../photo1.png' and changing only the numbers for the others images in the end of name of the file
