@@ -171,6 +171,10 @@ class MasonryGallery extends GHComponent {
         const addImages = this.addImages;
         const images = this.moreImages;
 
+        if (!masonryGrid) return;
+        if (!button) return;
+        if (!buttonWrapper) return;
+
         // Add additional images to the grid
         button.addEventListener('click', async () => {
             // If we set max-height for block, this code remove styles which hide content, when we clicked show more
