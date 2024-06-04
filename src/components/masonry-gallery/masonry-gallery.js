@@ -171,9 +171,7 @@ class MasonryGallery extends GHComponent {
         const addImages = this.addImages;
         const images = this.moreImages;
 
-        if (!masonryGrid) return;
-        if (!button) return;
-        if (!buttonWrapper) return;
+        if (!masonryGrid || !button || !buttonWrapper) return;
 
         // Add additional images to the grid
         button.addEventListener('click', async () => {
