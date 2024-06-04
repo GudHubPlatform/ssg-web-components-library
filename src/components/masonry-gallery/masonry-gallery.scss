@@ -17,7 +17,6 @@ masonry-gallery {
     .masonry-grid-item {
         width: auto;
         margin-bottom: var(--grid-item-margin-bottom);
-        background-color: rgba(207, 209, 214, 0.37);
         border-radius: var(--border-radius);
         cursor: pointer;
         img {
@@ -146,32 +145,32 @@ masonry-gallery {
     }
 
     .masonry-grid-item img[data-image-loading="true"] {
-        animation: pulseLoading 1.5s cubic-bezier(0.4, 0, 0.6, 1) 5;
-        animation-fill-mode: none;  
+        animation: pulseLoading 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         opacity: 0;
     }
 
     @keyframes pulseLoading {
-        0%{
-          color: transparent;
-          background: rgba(229, 231, 235, 1);
-          border: none;
-          filter: brightness(0);;
-          background-image: none;
-          opacity: .06;
+        0% {
+            color: transparent;
+            background: rgb(255, 255, 255);
+            border: none;
+            filter: brightness(0);
+            background-image: none;
+            opacity: 0.07;
         }
-      
-        50%{
-          opacity: .3;
+    
+        50% {
+            background: rgb(211, 211, 211);
+            opacity: 0.4;
         }
-      
-        100%{
-          color: transparent;
-          background: rgba(229, 231, 235, 1);
-          border: none;
-          filter: brightness(0);;
-          background-image: none;
-          opacity: .06;
+    
+        100% {
+            color: transparent;
+            background: rgb(255, 255, 255);
+            border: none;
+            filter: brightness(0);
+            background-image: none;
+            opacity: 0.07;
         }
     }
 
