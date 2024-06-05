@@ -113,18 +113,20 @@ class MasonryGallery extends GHComponent {
     addImages = (imagesSrcArray) => {
         // Iterate through each image source and add it to the grid
         imagesSrcArray.forEach(({ image }) => {
-            const { src, fullImage } = image;
+            const { src, alt, title, fullImage } = image;
 
-            this.addImage(src, fullImage);
+            this.addImage(src, alt, title, fullImage);
         });
     }
 
-    addImage(imageSrc, fullImageSrc = null) {
+    addImage(imageSrc, imageAlt, imageTitle, fullImageSrc = null) {
         const msnry = this.msnry;
 
         const promise = new Promise((res, rej) => {
             const img = document.createElement('img');
             img.setAttribute('src', imageSrc);
+            img.setAttribute('alt', imageAlt);
+            img.setAttribute('title', imageTitle);
 
             if (fullImageSrc) {
                 img.classList.add('open-modal');
