@@ -8,8 +8,10 @@ class MasonryGallery extends GHComponent {
         this.addImages = this.addImages;
         this.imagesContainer = this.querySelector('.masonry-grid');
 
+        const defaultColumnWidth = 25;
+
         this.ghId = this.getAttribute('data-gh-id') || null;
-        this.columnWidthValue = this.hasAttribute('data-column-width') ? this.getAttribute('data-modal-button') : 25;
+        this.columnWidthValue = this.hasAttribute('data-column-width') ? this.getAttribute('data-column-width') : defaultColumnWidth;
         this.contactUsButton = this.hasAttribute('data-modal-button') ? this.getAttribute('data-modal-button') : null;
         this.contactUsButtonId = this.hasAttribute('data-modal-button-id') ? this.getAttribute('data-modal-button-id') : null;
     }
@@ -18,9 +20,11 @@ class MasonryGallery extends GHComponent {
         this.ghId = this.getAttribute('data-gh-id') || null;
         this.json = await super.getGhData(this.ghId);
 
+        const isMoreItems = this.json.moreItems ? this.json.moreItems : null;
+        
         // Passing second array to client
         this.setAttribute('init-images', JSON.stringify(this.json.items));
-        this.setAttribute('add-array', JSON.stringify(this.json.moreItems));
+        this.setAttribute('add-array', JSON.stringify(isMoreItems));
 
         super.render(html);
     }
@@ -98,33 +102,31 @@ class MasonryGallery extends GHComponent {
         closeBtn.onclick = closeModal;
     
         window.onclick = function(event) {
-            if (event.target === modal) {
-                closeModal();
-            }
+            if (event.target === modal) closeModal();
         }
     
         window.onkeydown = function(event) {
-            if (event.key === "Escape") {
-                closeModal();
-            }
+            if (event.key === "Escape") closeModal();
         }
     }
 
     addImages = (imagesSrcArray) => {
         // Iterate through each image source and add it to the grid
         imagesSrcArray.forEach(({ image }) => {
-            const { src, fullImage } = image;
+            const { src, alt, title, fullImage } = image;
 
-            this.addImage(src, fullImage);
+            this.addImage(src, alt, title, fullImage);
         });
     }
 
-    addImage(imageSrc, fullImageSrc = null) {
+    addImage(imageSrc, imageAlt, imageTitle, fullImageSrc = null) {
         const msnry = this.msnry;
 
         const promise = new Promise((res, rej) => {
             const img = document.createElement('img');
             img.setAttribute('src', imageSrc);
+            img.setAttribute('alt', imageAlt);
+            img.setAttribute('title', imageTitle);
 
             if (fullImageSrc) {
                 img.classList.add('open-modal');
@@ -170,6 +172,8 @@ class MasonryGallery extends GHComponent {
         const button = buttonWrapper.querySelector('#grid-add-items');
         const addImages = this.addImages;
         const images = this.moreImages;
+
+        if (!masonryGrid || !button || !buttonWrapper) return;
 
         // Add additional images to the grid
         button.addEventListener('click', async () => {
