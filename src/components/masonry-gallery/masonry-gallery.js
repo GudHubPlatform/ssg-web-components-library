@@ -11,7 +11,7 @@ class MasonryGallery extends GHComponent {
         const defaultColumnWidth = 25;
 
         this.ghId = this.getAttribute('data-gh-id') || null;
-        this.columnWidthValue = this.hasAttribute('data-column-width') ? this.getAttribute('data-modal-button') : defaultColumnWidth;
+        this.columnWidthValue = this.hasAttribute('data-column-width') ? this.getAttribute('data-column-width') : defaultColumnWidth;
         this.contactUsButton = this.hasAttribute('data-modal-button') ? this.getAttribute('data-modal-button') : null;
         this.contactUsButtonId = this.hasAttribute('data-modal-button-id') ? this.getAttribute('data-modal-button-id') : null;
     }
