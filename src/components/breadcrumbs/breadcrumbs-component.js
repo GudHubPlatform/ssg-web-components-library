@@ -14,8 +14,7 @@ class BreadcrumbsComponent extends GHComponent {
             } catch (error) {
                 console.error(error);
             }
-        }
-        else {
+        } else {
             this.breadcrumbsConfig = window.getConfig().componentsConfigs.breadcrumbsConfig;
             this.initialRoute = this.breadcrumbsConfig[0].routesTree;
 
