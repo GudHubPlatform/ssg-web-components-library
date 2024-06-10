@@ -1,3 +1,26 @@
+export const checkInputsValidations = (inputs) => {
+    const validationCallbacks = {
+        email: emailValidation,
+        phone: phoneValidation
+    };
+
+    const result = inputs.map((input) => {
+        const validationCallback = validationCallbacks[input.name];
+        if (!validationCallback) return {
+            input,
+            isValid: true
+        };
+
+        return {
+            input,
+            isValid: validationCallback(input)
+        };
+    });
+
+    return result;
+};
+
+
 const emailValidation = (input) => {
     const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -28,9 +51,4 @@ const phoneValidation = (input) => {
     }
 
     return isValid;
-};
-
-export const validationCallbacks = {
-    email: emailValidation,
-    phone: phoneValidation
 };

@@ -1,7 +1,7 @@
 import html from './get-in-touch-form.html';
 import './get-in-touch-form.scss';
 import defaultConfigs from './get-in-touch-form-data.json';
-import { validationCallbacks } from './validationCallbacks.js';
+import { checkInputsValidations } from './inputsValidation.js';
 
 class GetInTouchForm extends GHComponent {
 
@@ -70,96 +70,102 @@ class GetInTouchForm extends GHComponent {
         this.buttonText = this.hasAttribute('data-form-button-text') ? this.getAttribute('data-form-button-text') : this.config.button_text;
     };
 
-    checkInputsValidations = (inputs) => {
-        const result = inputs.map((input) => {
-            const validationCallback = validationCallbacks[input.name];
-            if (!validationCallback) return {
-                input,
-                isValid: true
-            };
-
-            return {
-                input,
-                isValid: validationCallback(input)
-            };
-        });
-
-        return result;
-    };
-
     async handleSubmit(event) {
         event.preventDefault();
         const form = event.target;
     
-        const inputs = Array.from(form.querySelectorAll('input'));
-        const emailInput = this.querySelector('[name="email"]');
-        const phoneInput = this.querySelector('[name="phone"]');
+        const validationResults = await this.inputsValidation(form);  //await because we can make async check (for example: email verify for send opportunity)
 
-        const validationResults = this.checkInputsValidations(inputs);
-
-        if (validationResults.every((res) => res.isValid)) {
+        if (validationResults.every(({ isValid }) => isValid)) {
             this.addLoader();
             try {
-                const res = await new Promise((resolve, reject) => {
-                    const TIMEOUT_DURATION = 2000;
-    
-                    setTimeout(() => {
-                        const isSuccess = true; 
-                        if (isSuccess) {
-                            resolve(true);
-                        } else {
-                            reject(new Error('Failed to send email'));
-                        }
-                    }, TIMEOUT_DURATION);
-                });
-    
-                this.removeLoader(form);
-    
-                if (res) {
-                    this.showSuccess({ email: emailInput ? emailInput.value : '', phone: phoneInput ? phoneInput.value : '' });
-                } else {
-                    this.showFail();
-                }
+                await this.fetchExample();
+
+                this.handleSuccessFormValidation(form);
             } catch (error) {
-                this.removeLoader(form);
+                console.error(error);
                 this.showFail();
             }
-            this.isFormSubmitted = true;
+
+            this.removeLoader(form);
+
         } else {
+            //show error on correspond input
             const validationResultsForErrors = validationResults.filter(item => typeof item === 'object')
             validationResultsForErrors.forEach(({ input, isValid }) => this.toggleError(input, isValid));
         }
-
-        this.createDataObject(form, this.config, this.placement)
     }
-    
-    async createDataObject(form, formId, placement) {
-        const formData = {};
-        for (const [name, value] of (new FormData(form)).entries()) {
-            formData[name] = value;
-        }
 
-        const formDataObj = {
-            Website: window.location.hostname,
-            Url: window.location.pathname,
-            FormId: formId,
-            FormPlacement: placement,
-            FormData: {
-                ...formData
-            },
-            Referrer: localStorage.getItem('referrer'),
-        };
+    handleSuccessFormValidation = (form) => {
+        const emailInput = form.querySelector('[name="email"]');
+        const phoneInput = form.querySelector('[name="phone"]');
+
+        this.showSuccess({ email: emailInput ? emailInput.value : '', phone: phoneInput ? phoneInput.value : '' });
+
+        const formDataObj = this.createDataObject(form, this.placement)
 
         window.dispatchEvent(new CustomEvent('submitForm', { detail: { formDataObj } }));
+
+        this.isFormSubmitted = true;
+        this.removeLoader();
+    };
+
+    inputsValidation = async (form) => {
+        const inputs = Array.from(form.querySelectorAll('input'));
+
+        const validationResults = checkInputsValidations(inputs);
+
+        return validationResults;
     }
+
+    fetchExample = () => {
+        const isSuccess = true;
+
+        return new Promise((resolve, reject) => {
+            const TIMEOUT_DURATION = 2000;
+
+            setTimeout(() => {
+                if (isSuccess) {
+                    resolve();
+                } else {
+                    reject();
+                }
+            }, TIMEOUT_DURATION);
+        });
+    }
+    
+    createDataObject(form, placement) {
+        const inputs = {};
+
+        for (const [name, value] of (new FormData(form)).entries()) {
+            inputs[name] = value;
+        }
+
+        const { id, mailConfig } = this.config;
+
+        const formDataObj = {
+            inputs,
+            mailConfig,
+            website: window.location.hostname,
+            url: window.location.pathname,
+            formId: id,
+            formPlacement: placement,
+            referrer: localStorage.getItem('referrer'),
+        };
+
+        return formDataObj;
+    }
+
     toggleError(input, isValid) {
         input.classList[isValid ? 'remove' : 'add']('error');
         input.parentElement.classList[isValid ? 'remove' : 'add']('error-input');
     }
+
     async addLoader() {
         this.classList.add('loading');
         this.querySelector('button[type="submit"]').disabled = true;
     }
+
     async removeLoader() {
         this.classList.remove('loading');
         const submitButton = this.querySelector('button[type="submit"]');
@@ -167,6 +173,7 @@ class GetInTouchForm extends GHComponent {
             submitButton.disabled = false;
         }, 500);
     }
+
     async showSuccess({email, phone}) {
         if (email) {
             this.querySelector('.check_entity').classList.add('provided');
@@ -179,15 +186,18 @@ class GetInTouchForm extends GHComponent {
         }
         this.classList.add('success');
     }
+
     async showFail() {
         this.classList.add('fail');
     }
+
     async hideSuccess() {
         this.getElementsByClassName('email')[0].innerText = '';
         this.getElementsByClassName('phone')[0].innerText = '';
         this.querySelector('.check_entity.phone_entity').classList.remove('provided');
         this.classList.remove('success');
     }
+
     async hideFail() {
         const overflowFail = this.querySelector('.overflow.fail');
         overflowFail.style.opacity = 0;
@@ -196,6 +206,7 @@ class GetInTouchForm extends GHComponent {
             overflowFail.style.opacity = '';
         }, 500);
     }
+
     generateInput(config) {
         return config.inputs.reduce((acc, input) => {
             const maxSymbols = {
