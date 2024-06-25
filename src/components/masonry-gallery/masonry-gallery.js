@@ -49,15 +49,26 @@ class MasonryGallery extends GHComponent {
         if (this.hasAttribute('images-url')) {
             try {
                 const url = this.getAttribute('images-url');
+
                 const response = await fetch(url);
                 const data = await response.json();
-                console.log(data);
-                this.fetchedImages = data;
+
+                const { images } = data;
+
+                const initCountImages = this.getAttribute('init-count');
+
+                const initImages = images.slice(0, initCountImages);
+                const initMoreImages = images.slice(initCountImages);
+                
+                this.setAttribute('init-images', JSON.stringify(initImages));
+                this.setAttribute('add-array', JSON.stringify(initMoreImages));
+
+                this.initImages = JSON.parse(this.getAttribute('init-images'));
+                this.moreImages = JSON.parse(this.getAttribute('add-array'));
             } catch (error) {
                 console.error(error);
             }
-        }
-        else {
+        } else {
             this.initImages = JSON.parse(this.getAttribute('init-images'));
             this.moreImages = JSON.parse(this.getAttribute('add-array'));
         }
@@ -139,14 +150,18 @@ class MasonryGallery extends GHComponent {
 
     addImages = (imagesSrcArray) => {
         // Iterate through each image source and add it to the grid
-        imagesSrcArray.forEach(({ image }) => {
-            const { src, alt, title, fullImage } = image;
-
-            this.addImage(src, alt, title, fullImage);
-        });
+        if (this.hasAttribute('images-url')) {
+            imagesSrcArray.forEach(({ src, fullImage }) => this.addImage(src, null, null, fullImage));
+        } else {
+            imagesSrcArray.forEach(({ image }) => {
+                const { src, alt, title, fullImage } = image;
+    
+                this.addImage(src, alt, title, fullImage);
+            });
+        }
     }
 
-    addImage(imageSrc, imageAlt, imageTitle, fullImageSrc = null) {
+    addImage(imageSrc, imageAlt = '', imageTitle = '', fullImageSrc = null) {
         const msnry = this.msnry;
 
         const promise = new Promise((res, rej) => {
@@ -198,28 +213,39 @@ class MasonryGallery extends GHComponent {
         const buttonWrapper = document.querySelector('.button-wrapper');
         const button = buttonWrapper.querySelector('#grid-add-items');
         const addImages = this.addImages;
-        const images = this.moreImages;
 
-        if (!masonryGrid || !button || !buttonWrapper) return;
+        // Make a copy of moreImages to avoid modifying the original array
+        let images = [...this.moreImages]; 
 
-        // Add additional images to the grid
+        if (!masonryGrid || !button || !buttonWrapper || !this.moreImages) return;
+
+        // Get more-count attribute value
+        const moreCountImages = parseInt(this.getAttribute('more-count')) || 0;
+
         button.addEventListener('click', async () => {
-            // If we set max-height for block, this code remove styles which hide content, when we clicked show more
+            // If we set max-height for block, this code removes styles which hide content, when we click show more
             masonryGrid.style.maxHeight = 'none';
             masonryGrid.style.overflowY = 'visible';
-            masonryGrid.style.scrollbarWidth = 'auto'; 
-            masonryGrid.style.msOverflowStyle = 'auto'; 
-            
-            const styleSheet = document.styleSheets[0]; 
+            masonryGrid.style.scrollbarWidth = 'auto';
+            masonryGrid.style.msOverflowStyle = 'auto';
+
+            const styleSheet = document.styleSheets[0];
             styleSheet.insertRule('.masonry-grid::-webkit-scrollbar { display: auto; }', styleSheet.cssRules.length);
 
-            // For animation, when we open full block of images
-            setTimeout(() => {
-                addImages(images);
+            // Get the next batch of images
+            const imagesToAdd = images.slice(0, moreCountImages); 
 
-                button.disabled = true;
-                button.style.display = 'none';
-            }, 100)
+            setTimeout(() => {
+                addImages(imagesToAdd);
+
+                // Update the images array to remove added images
+                images = images.slice(moreCountImages); 
+
+                if (images.length === 0) {
+                    button.disabled = true;
+                    button.style.display = 'none';
+                }
+            }, 100);
         });
     }
 }
