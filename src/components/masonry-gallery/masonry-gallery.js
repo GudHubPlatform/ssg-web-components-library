@@ -233,7 +233,7 @@ class MasonryGallery extends GHComponent {
             styleSheet.insertRule('.masonry-grid::-webkit-scrollbar { display: auto; }', styleSheet.cssRules.length);
 
             // Get the next batch of images
-            const imagesToAdd = images.slice(0, moreCountImages); 
+            const imagesToAdd = images.slice(0, moreCountImages);
 
             setTimeout(() => {
                 addImages(imagesToAdd);
