@@ -20,11 +20,25 @@ class MasonryGallery extends GHComponent {
         this.ghId = this.getAttribute('data-gh-id') || null;
         this.json = await super.getGhData(this.ghId);
 
-        const isMoreItems = this.json.moreItems ? this.json.moreItems : null;
-        
-        // Passing second array to client
-        this.setAttribute('init-images', JSON.stringify(this.json.items));
-        this.setAttribute('add-array', JSON.stringify(isMoreItems));
+        if (Array.isArray(this.json.items)) {
+            const isMoreItems = this.json.moreItems ? this.json.moreItems : null;
+
+            // Passing second array to client
+            this.setAttribute('init-images', JSON.stringify(this.json.items));
+            this.setAttribute('add-array', JSON.stringify(isMoreItems));
+        } else if (typeof this.json.items === 'object' && this.json.items !== null) {
+            const {
+                initCount,
+                moreCount,
+                url
+            } = this.json.items;
+
+            this.setAttribute('images-url', url);
+            this.setAttribute('init-count', initCount);
+            this.setAttribute('more-count', moreCount);
+        } else {
+            console.error('const "images" is neither an array nor an object');
+        }
 
         super.render(html);
     }
@@ -32,8 +46,21 @@ class MasonryGallery extends GHComponent {
     async onClientReady() {
         const modal = document.getElementById('modal');
 
-        const initImages = JSON.parse(this.getAttribute('init-images'));
-        this.moreImages = JSON.parse(this.getAttribute('add-array'));
+        if (this.hasAttribute('images-url')) {
+            try {
+                const url = this.getAttribute('images-url');
+                const response = await fetch(url);
+                const data = await response.json();
+                console.log(data);
+                this.fetchedImages = data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        else {
+            this.initImages = JSON.parse(this.getAttribute('init-images'));
+            this.moreImages = JSON.parse(this.getAttribute('add-array'));
+        }
 
         const grid = this.imagesContainer;
         
@@ -45,7 +72,7 @@ class MasonryGallery extends GHComponent {
         });
 
         // Add initial images to the grid
-        this.addImages(initImages);
+        this.addImages(this.initImages);
 
         // Add more images to the grid
         this.buttonMoreInit();
