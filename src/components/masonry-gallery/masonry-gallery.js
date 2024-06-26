@@ -59,12 +59,9 @@ class MasonryGallery extends GHComponent {
 
                 const initImages = images.slice(0, initCountImages);
                 const initMoreImages = images.slice(initCountImages);
-                
-                this.setAttribute('init-images', JSON.stringify(initImages));
-                this.setAttribute('add-array', JSON.stringify(initMoreImages));
 
-                this.initImages = JSON.parse(this.getAttribute('init-images'));
-                this.moreImages = JSON.parse(this.getAttribute('add-array'));
+                this.initImages = initImages;
+                this.moreImages = initMoreImages;
             } catch (error) {
                 console.error(error);
             }
@@ -213,14 +210,14 @@ class MasonryGallery extends GHComponent {
         const buttonWrapper = document.querySelector('.button-wrapper');
         const button = buttonWrapper.querySelector('#grid-add-items');
         const addImages = this.addImages;
-
-        // Make a copy of moreImages to avoid modifying the original array
-        let images = [...this.moreImages]; 
-
+        
         if (!masonryGrid || !button || !buttonWrapper || !this.moreImages) return;
 
+        // Make a copy of moreImages to avoid modifying the original array
+        let images = [...this.moreImages];
+
         // Get more-count attribute value
-        const moreCountImages = parseInt(this.getAttribute('more-count')) || 0;
+        const moreCountImages = parseInt(this.getAttribute('more-count')) || images.length;
 
         button.addEventListener('click', async () => {
             // If we set max-height for block, this code removes styles which hide content, when we click show more
@@ -235,6 +232,7 @@ class MasonryGallery extends GHComponent {
             // Get the next batch of images
             const imagesToAdd = images.slice(0, moreCountImages);
 
+            // Delay use to prevent masonry async bugs 
             setTimeout(() => {
                 addImages(imagesToAdd);
 
