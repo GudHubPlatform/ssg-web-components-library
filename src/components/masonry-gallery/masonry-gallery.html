@@ -1,7 +1,7 @@
 <section>
   <div class="container">
     ${json.title ? `
-      <h1 class="h1" gh-id="${ghId}.title"></h1>
+      <h${json?.hLevel ?? 2} class="h1" gh-id="${ghId}.title"></h${json?.hLevel ?? 2}>
     ` : ''}
     ${json.subtitle ? `
       <p class="subtitle" gh-id="${ghId}.subtitle"></p>
