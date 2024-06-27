@@ -20,11 +20,25 @@ class MasonryGallery extends GHComponent {
         this.ghId = this.getAttribute('data-gh-id') || null;
         this.json = await super.getGhData(this.ghId);
 
-        const isMoreItems = this.json.moreItems ? this.json.moreItems : null;
-        
-        // Passing second array to client
-        this.setAttribute('init-images', JSON.stringify(this.json.items));
-        this.setAttribute('add-array', JSON.stringify(isMoreItems));
+        if (Array.isArray(this.json.items)) {
+            const isMoreItems = this.json.moreItems ? this.json.moreItems : null;
+
+            // Passing second array to client
+            this.setAttribute('init-images', JSON.stringify(this.json.items));
+            this.setAttribute('add-array', JSON.stringify(isMoreItems));
+        } else if (typeof this.json.items === 'object' && this.json.items !== null) {
+            const {
+                initCount = null,
+                moreCount = null,
+                url
+            } = this.json.items;
+
+            this.setAttribute('images-url', url);
+            this.setAttribute('init-count', initCount);
+            this.setAttribute('more-count', moreCount);
+        } else {
+            console.error('const "images" is neither an array nor an object');
+        }
 
         super.render(html);
     }
@@ -32,8 +46,34 @@ class MasonryGallery extends GHComponent {
     async onClientReady() {
         const modal = document.getElementById('modal');
 
-        const initImages = JSON.parse(this.getAttribute('init-images'));
-        this.moreImages = JSON.parse(this.getAttribute('add-array'));
+        if (this.hasAttribute('images-url')) {
+            try {
+                const url = this.getAttribute('images-url');
+
+                const response = await fetch(url);
+                const data = await response.json();
+
+                const { images } = data;
+
+                const isInitImagesEqualNull = this.getAttribute('init-count') === 'null';
+                
+                const initCountImages = this.hasAttribute('init-count') && !isInitImagesEqualNull ? this.getAttribute('init-count') : images.length;
+
+                const initImages = images.slice(0, initCountImages);
+                const initMoreImages = images.slice(initCountImages);
+
+                this.allImagesArrayLength = images.length;
+                this.initCountImages = initCountImages;
+
+                this.initImages = initImages;
+                this.moreImages = initMoreImages;
+            } catch (error) {
+                console.error(error);
+            }
+        } else {
+            this.initImages = JSON.parse(this.getAttribute('init-images'));
+            this.moreImages = JSON.parse(this.getAttribute('add-array'));
+        }
 
         const grid = this.imagesContainer;
         
@@ -45,11 +85,12 @@ class MasonryGallery extends GHComponent {
         });
 
         // Add initial images to the grid
-        this.addImages(initImages);
+        this.addImages(this.initImages);
 
         // Add more images to the grid
         this.buttonMoreInit();
 
+        // Button for modal window which open form
         if (this.contactUsButton && this.contactUsButtonId) {
             const contactUsHTML = `
                 <div class='contact-us-wrapper'>
@@ -112,14 +153,19 @@ class MasonryGallery extends GHComponent {
 
     addImages = (imagesSrcArray) => {
         // Iterate through each image source and add it to the grid
-        imagesSrcArray.forEach(({ image }) => {
-            const { src, alt, title, fullImage } = image;
-
-            this.addImage(src, alt, title, fullImage);
-        });
+        if (this.hasAttribute('images-url')) {
+            // TODO: need to add alt and title for images in case when we fetch them from endpoint
+            imagesSrcArray.forEach(({ src, fullImage }) => this.addImage(src, null, null, fullImage));
+        } else {
+            imagesSrcArray.forEach(({ image }) => {
+                const { src, alt, title, fullImage } = image;
+    
+                this.addImage(src, alt, title, fullImage);
+            });
+        }
     }
 
-    addImage(imageSrc, imageAlt, imageTitle, fullImageSrc = null) {
+    addImage(imageSrc, imageAlt = '', imageTitle = '', fullImageSrc = null) {
         const msnry = this.msnry;
 
         const promise = new Promise((res, rej) => {
@@ -171,28 +217,45 @@ class MasonryGallery extends GHComponent {
         const buttonWrapper = document.querySelector('.button-wrapper');
         const button = buttonWrapper.querySelector('#grid-add-items');
         const addImages = this.addImages;
-        const images = this.moreImages;
 
-        if (!masonryGrid || !button || !buttonWrapper) return;
+        const isInitCountEqualAllLength = this.initCountImages === this.allImagesArrayLength;
+        
+        if (!masonryGrid || !button || !buttonWrapper || !this.moreImages || isInitCountEqualAllLength) {
+            if (button) button.remove();
+            return;
+        };
 
-        // Add additional images to the grid
+        // Make a copy of moreImages to avoid modifying the original array
+        let images = [...this.moreImages];
+
+        // Get more-count attribute value
+        const moreCountImages = parseInt(this.getAttribute('more-count')) || images.length;
+
         button.addEventListener('click', async () => {
-            // If we set max-height for block, this code remove styles which hide content, when we clicked show more
+            // If we set max-height for block, this code removes styles which hide content, when we click show more
             masonryGrid.style.maxHeight = 'none';
             masonryGrid.style.overflowY = 'visible';
-            masonryGrid.style.scrollbarWidth = 'auto'; 
-            masonryGrid.style.msOverflowStyle = 'auto'; 
-            
-            const styleSheet = document.styleSheets[0]; 
+            masonryGrid.style.scrollbarWidth = 'auto';
+            masonryGrid.style.msOverflowStyle = 'auto';
+
+            const styleSheet = document.styleSheets[0];
             styleSheet.insertRule('.masonry-grid::-webkit-scrollbar { display: auto; }', styleSheet.cssRules.length);
 
-            // For animation, when we open full block of images
-            setTimeout(() => {
-                addImages(images);
+            // Get the next batch of images
+            const imagesToAdd = images.slice(0, moreCountImages);
 
-                button.disabled = true;
-                button.style.display = 'none';
-            }, 100)
+            // Delay use to prevent masonry async bugs 
+            setTimeout(() => {
+                addImages(imagesToAdd);
+
+                // Update the images array to remove added images
+                images = images.slice(moreCountImages); 
+
+                if (images.length === 0) {
+                    button.disabled = true;
+                    button.style.display = 'none';
+                }
+            }, 100);
         });
     }
 }
