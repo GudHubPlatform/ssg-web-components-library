@@ -1,3 +1,13 @@
+# Description
+
+    To implement the functionality of the "Load more" button, we need to pass two values ​​to the JSON: `initCount` and `moreCount`, or just `initCount`.
+        1. If only `initCount` is passed in the JSON, clicking the "Load more" button will open all photos at once.
+        
+        2. If only `moreCount` without `initCount` is passed in the JSON, the Load More button will not appear and all images will be displayed at once.
+
+        3. If both values ​​are passed in JSON, then the number of images specified in `initCount` will be displayed first. 
+           Clicking the "Upload more" button will load additional images, the number of which corresponds to the `moreCount' value.
+
 # Variants
 
     We have two options how you can use this component:

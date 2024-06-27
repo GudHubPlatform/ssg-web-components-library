@@ -28,8 +28,8 @@ class MasonryGallery extends GHComponent {
             this.setAttribute('add-array', JSON.stringify(isMoreItems));
         } else if (typeof this.json.items === 'object' && this.json.items !== null) {
             const {
-                initCount,
-                moreCount,
+                initCount = null,
+                moreCount = null,
                 url
             } = this.json.items;
 
@@ -55,10 +55,15 @@ class MasonryGallery extends GHComponent {
 
                 const { images } = data;
 
-                const initCountImages = this.getAttribute('init-count');
+                const isInitImagesEqualNull = this.getAttribute('init-count') === 'null';
+                
+                const initCountImages = this.hasAttribute('init-count') && !isInitImagesEqualNull ? this.getAttribute('init-count') : images.length;
 
                 const initImages = images.slice(0, initCountImages);
                 const initMoreImages = images.slice(initCountImages);
+
+                this.allImagesArrayLength = images.length;
+                this.initCountImages = initCountImages;
 
                 this.initImages = initImages;
                 this.moreImages = initMoreImages;
@@ -85,6 +90,7 @@ class MasonryGallery extends GHComponent {
         // Add more images to the grid
         this.buttonMoreInit();
 
+        // Button for modal window which open form
         if (this.contactUsButton && this.contactUsButtonId) {
             const contactUsHTML = `
                 <div class='contact-us-wrapper'>
@@ -148,6 +154,7 @@ class MasonryGallery extends GHComponent {
     addImages = (imagesSrcArray) => {
         // Iterate through each image source and add it to the grid
         if (this.hasAttribute('images-url')) {
+            // TODO: need to add alt and title for images in case when we fetch them from endpoint
             imagesSrcArray.forEach(({ src, fullImage }) => this.addImage(src, null, null, fullImage));
         } else {
             imagesSrcArray.forEach(({ image }) => {
@@ -210,8 +217,13 @@ class MasonryGallery extends GHComponent {
         const buttonWrapper = document.querySelector('.button-wrapper');
         const button = buttonWrapper.querySelector('#grid-add-items');
         const addImages = this.addImages;
+
+        const isInitCountEqualAllLength = this.initCountImages === this.allImagesArrayLength;
         
-        if (!masonryGrid || !button || !buttonWrapper || !this.moreImages) return;
+        if (!masonryGrid || !button || !buttonWrapper || !this.moreImages || isInitCountEqualAllLength) {
+            if (button) button.remove();
+            return;
+        };
 
         // Make a copy of moreImages to avoid modifying the original array
         let images = [...this.moreImages];
