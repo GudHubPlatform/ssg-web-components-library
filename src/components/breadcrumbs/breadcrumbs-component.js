@@ -20,6 +20,8 @@ class BreadcrumbsComponent extends GHComponent {
 
             let currentUrl = new URL(window.location.href);
             currentUrl = currentUrl.searchParams.get('path');
+
+            this.items = this.generateBreadcrumbs(this.initialRoute, currentUrl);
         }
 
         this.items === null ? console.error(`Didn't find current route in config, current URL: ${currentUrl}`) : null;
