@@ -8,11 +8,11 @@
  ```                   
                 js: this.breadcrumbs = JSON.stringify([
                         {
-                            title: 'Головна',
+                            title: 'string',
                             link: '/'
                         },
                         {
-                            title: breadcrumbsTitle.innerText
+                            title: "string"
                         }
                     ]);
  ```                   
