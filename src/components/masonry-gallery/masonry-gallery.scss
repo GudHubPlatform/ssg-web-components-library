@@ -2,6 +2,7 @@ masonry-gallery {
     --border-radius: 7px;
     --max-grid-height: none;
     --grid-item-margin-bottom: 10px;
+    background-color: var(--bg-color);
     .masonry-grid {
         width: 100%;
         height: 100%;
