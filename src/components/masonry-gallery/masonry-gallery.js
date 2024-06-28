@@ -17,8 +17,11 @@ class MasonryGallery extends GHComponent {
     }
 
     async onServerRender() {
+        // If this.application is null, and then getGhData is called, the null value is passed as an argument to the chapter parameter of the getGhData method, which causes an error.
+        // If this.application is null, we pass undefined instead, so the parameter can be set to the default value specified in getGhData.
+        this.application = this.hasAttribute('application') ? this.getAttribute('application') : undefined;
         this.ghId = this.getAttribute('data-gh-id') || null;
-        this.json = await super.getGhData(this.ghId);
+        this.json = await super.getGhData(this.ghId, this.application);
 
         if (Array.isArray(this.json.items)) {
             const isMoreItems = this.json.moreItems ? this.json.moreItems : null;
