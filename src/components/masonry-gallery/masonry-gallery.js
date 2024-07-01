@@ -11,7 +11,10 @@ class MasonryGallery extends GHComponent {
         const defaultColumnWidth = 25;
 
         this.ghId = this.getAttribute('data-gh-id') || null;
-        this.columnWidthValue = this.hasAttribute('data-column-width') ? this.getAttribute('data-column-width') : defaultColumnWidth;
+        // Must be a number type
+        this.columnWidthValue = this.hasAttribute('data-column-width') ? +this.getAttribute('data-column-width') : defaultColumnWidth;
+        // When we have a single image in a row, the width should be set to 100%. For multiple images, the masonry layout will automatically adjust their widths accordingly.
+        this.fitWidthValue = !!this.columnWidthValue;
         this.contactUsButton = this.hasAttribute('data-modal-button') ? this.getAttribute('data-modal-button') : null;
         this.contactUsButtonId = this.hasAttribute('data-modal-button-id') ? this.getAttribute('data-modal-button-id') : null;
     }
@@ -82,8 +85,8 @@ class MasonryGallery extends GHComponent {
         
         this.msnry = new Masonry(grid, {
             itemSelector: '.masonry-grid-item',
-            columnWidth: +this.columnWidthValue,
-            fitWidth: true,
+            columnWidth: this.columnWidthValue,
+            fitWidth: this.fitWidthValue,
             transitionDuration: '0.5s'
         });
 
