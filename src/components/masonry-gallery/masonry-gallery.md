@@ -8,6 +8,8 @@
         3. If both values ​​are passed in JSON, then the number of images specified in `initCount` will be displayed first. 
            Clicking the "Upload more" button will load additional images, the number of which corresponds to the `moreCount' value.
 
+    If you need to stretch image on full width of screen, you can set "data-column-width" attribute equal to 0 (zero).
+
 # Variants
 
     We have two options how you can use this component:

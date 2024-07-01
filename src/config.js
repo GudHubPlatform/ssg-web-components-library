@@ -61,3 +61,4 @@ export { aboutUsTeamMembers } from './components/about-us-team-members/config.js
 export { contactUsBlock } from './components/contact-us-block/config.js';
 export { htmlTemplate } from './components/html-template/config.js';
 export { masonryGallery } from './components/masonry-gallery/config.js';
+export { videoComponent } from './components/video-component/config.js';

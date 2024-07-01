@@ -82,7 +82,7 @@ class MasonryGallery extends GHComponent {
         
         this.msnry = new Masonry(grid, {
             itemSelector: '.masonry-grid-item',
-            columnWidth: this.columnWidthValue,
+            columnWidth: +this.columnWidthValue,
             fitWidth: true,
             transitionDuration: '0.5s'
         });

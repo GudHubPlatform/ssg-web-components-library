@@ -1,0 +1,12 @@
+<section>
+    ${json.title ? `<h2 class="title" gh-id="${ghId}.title"></h2>` : ''}
+    ${json.text ? `<p class="subtitle" gh-id="${ghId}.text"></p>` : ''}
+    
+    <div class="video-container">
+        <image-component class="initial-image" src="${poster}"></image-component>
+
+        <video class="hidden" ${getVideoAttributes()}>
+            <source src="${video}" />
+        </video>
+    </div>
+</section>
