@@ -9,7 +9,7 @@ masonry-gallery {
         margin: 0 auto;
         padding: 7px;
         max-height: var(--max-grid-height);
-        overflow-y: hidden;
+        overflow: unset !important;
         &::-webkit-scrollbar {
             display: none;
         }
@@ -22,6 +22,7 @@ masonry-gallery {
         cursor: pointer;
         img {
             opacity: 1;
+            height: auto !important;
             transition: all 0.3s ease;
             border-radius: var(--border-radius);
             &:hover {
