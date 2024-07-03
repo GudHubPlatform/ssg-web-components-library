@@ -9,6 +9,7 @@ masonry-gallery {
         margin: 0 auto;
         padding: 7px;
         max-height: var(--max-grid-height);
+        // If we need to do images in one column, for hover animation effect you need to change 'overflow-y: hidden' to 'overflow-y: unset !important' 
         overflow-y: hidden;
         &::-webkit-scrollbar {
             display: none;
