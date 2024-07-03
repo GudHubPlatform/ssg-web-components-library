@@ -9,7 +9,7 @@ masonry-gallery {
         margin: 0 auto;
         padding: 7px;
         max-height: var(--max-grid-height);
-        overflow: hidden;
+        overflow-y: hidden;
         &::-webkit-scrollbar {
             display: none;
         }
