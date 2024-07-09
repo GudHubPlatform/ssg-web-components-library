@@ -6,6 +6,8 @@ import './recent-posts.scss';
 class RecentPosts extends GHComponent {
     constructor() {
         super();
+
+        this.config = window.getConfig();
     }
     
     async onServerRender() {
@@ -13,6 +15,27 @@ class RecentPosts extends GHComponent {
         this.chapter = this.getAttribute('data-chapter') || 'pages';
         
         this.json = await super.getGhData(this.ghId, this.chapter);
+
+        // Set the current language and blog configuration
+        this.currentLanguage = this.config.currentLanguage;
+        this.blogConfig = this.config.blog_config;
+
+        let blogTitle = '';
+        let blogSubtitle = '';
+
+        // Find the blog configuration for the current language
+        const currentBlogConfig = this.blogConfig.find(item => item.langCode === this.currentLanguage);
+
+        if (currentBlogConfig) {
+            blogTitle = currentBlogConfig.title;
+            blogSubtitle = currentBlogConfig.subtitle;
+        } else {
+            blogTitle = 'Блог';
+            blogSubtitle = 'Використовуйте CRM платформу для бізнесу, налаштовуйте роботу компанії легко, здійснюйте успішні угоди та будьте на зв‘язку з клієнтами!';
+        }
+
+        this.blogTitle = blogTitle;
+        this.blogSubtitle = blogSubtitle;
 
         let articlesAndComments = await gudhub.jsonConstructor(await generateArticlesAndCommentsObject(undefined, undefined, window.getConfig().chapters.blog));
         let articles = articlesAndComments.articlesAndComments.articles;
