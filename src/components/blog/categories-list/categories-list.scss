@@ -5,6 +5,7 @@ categories-list {
     .categories_list.flex-wrapper {
         gap: 15px;
         flex-wrap: wrap;
+        list-style: none;
         a {
             display: block;
             padding: 12px 30px;
