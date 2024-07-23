@@ -162,8 +162,14 @@ class EditMode extends GHComponent {
 
                     editor.ui.registry.addButton('cacheButton', {
                         text: 'Update cache',
-                        onAction: function() {
-                            window.location.href = window.location.href + '?mode=ssr'
+                        onAction: function () {
+                            if (!window.location.href.includes('mode=ssr')) {
+                                const url = new URL(window.location.href);
+                                url.searchParams.append('mode', 'ssr');
+                                window.location.href = url.toString();
+                            } else {
+                                window.location.reload();
+                            }
                         }
                     });
 
