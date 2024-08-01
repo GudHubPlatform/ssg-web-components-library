@@ -38,9 +38,11 @@ const emailValidation = (input) => {
 };
 
 const phoneValidation = (input) => {
-    const regex = /^\d{10}$/;
+    // const regex = /^\d{10}$/; // Default strict regex for checking phone number
 
-    let isValid = regex.test(input.value);
+    // let isValid = regex.test(input.value);
+
+    let isValid = /^\+?\d+$/; // We can write only numbers without special symbols besides "+" sign
 
     if (!isValid) {
         input.classList.add('error');
