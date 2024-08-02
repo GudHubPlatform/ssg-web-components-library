@@ -10,9 +10,9 @@ class PricesCards extends GHComponent {
 
     async onServerRender() {
         this.ghId = this.getAttribute('data-gh-id') || null;
-        this.chapter = this.getAttribute('data-chapter') || 'pages';
+        this.application = this.hasAttribute('application') ? this.getAttribute('application') : undefined;
         
-        const json = await super.getGhData(this.ghId, this.chapter);
+        const json = await super.getGhData(this.ghId, this.application);
 
         this.cards = json.cards;
 
