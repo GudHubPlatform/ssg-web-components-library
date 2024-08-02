@@ -2,6 +2,7 @@ accordion-only {
     --hover-transition-duration: .2s;
     --expand-transition-duration: .5s;
     --gap: 20px;
+    background: var(--bg-color);
     .subtitle {
         max-width: 940px;
         margin-left: auto;
