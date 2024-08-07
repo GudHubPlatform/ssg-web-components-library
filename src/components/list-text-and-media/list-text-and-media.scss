@@ -83,6 +83,11 @@ list-text-and-media {
                             transition: all .2s ease;
                         }
                     }
+                    .btn {
+                        padding: 10px 0;
+                        background: transparent;
+                        border: unset;
+                    }
                 }
             }
             .media-block {
