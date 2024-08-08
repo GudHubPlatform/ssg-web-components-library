@@ -16,12 +16,14 @@ prices-cards {
             text-align: center;
         }
         .card {
+            width: calc(100% / 3);
             background: var(--block-primary-bg-color);
             border-radius: var(--block-primary-border-radius);
             box-shadow: var(--block-primary-box-shadow);
             padding: 30px 20px;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             align-items: center;
             .title_card {
                 color: var(--block-primary-h-color);
@@ -44,7 +46,7 @@ prices-cards {
                 font-size: 18px;
                 font-weight: 400;
                 line-height: 30px;
-                margin-bottom: 43px;
+                margin-bottom: 20px;
                 text-align: center;
             }
             .list_button {
