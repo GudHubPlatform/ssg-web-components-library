@@ -54,7 +54,7 @@ prices-cards {
                 border-radius: var(--block-secondary-border-radius);
                 display: flex;
                 flex-direction: column;
-                align-items: center;
+                width: 100%;
             }
             .feature_list {
                 list-style: none;
