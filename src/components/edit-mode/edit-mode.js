@@ -23,7 +23,7 @@ class EditMode extends GHComponent {
         if (!document.querySelector('script#gudhub-library')) {
             let gudhubLibraryScript = document.createElement('script');
             gudhubLibraryScript.id = 'gudhub-library';
-            gudhubLibraryScript.setAttribute('src', 'https://unpkg.com/@gudhub/core/umd/library.min.js');
+            gudhubLibraryScript.setAttribute('src', 'https://unpkg.com/@gudhub/core@1.2.0/umd/library.min.js');
             document.body.append(gudhubLibraryScript);
         }
         this.editModeActive = !this.editModeActive;
