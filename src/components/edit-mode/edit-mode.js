@@ -126,12 +126,7 @@ class EditMode extends GHComponent {
                             }
                             let ids = await self.findIds();
 
-                            let currentChapter;
-                            if (document.querySelector('html').hasAttribute('data-current-chapter')) {
-                                currentChapter = document.querySelector('html').getAttribute('data-current-chapter');
-                            } else {
-                                currentChapter = 'pages';
-                            }
+                            const currentChapter = window?.constants?.currentChapter || 'pages';
 
                             const data = await gudhub.getDocument({app_id: ids.appId, item_id: ids.itemId, element_id: document.querySelector('html').getAttribute(`data-${currentChapter}-json_field_id`)});
                             const json = JSON.parse(data.data);
