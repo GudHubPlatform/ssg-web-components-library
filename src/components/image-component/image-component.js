@@ -85,14 +85,14 @@ class ImageComponent extends GHComponent {
                     this.image.setAttribute('src', this.src);
                 });
             } catch (error) {
-                console.error(`11111111111111111 Image load failed "${this.src}". Attempt "${attempts + 1}"`);
+                console.error(`Image load failed "${this.src}". Attempt "${attempts + 1}"`);
                 attempts++;
             }
         }
         if (imageLoaded) {
             super.render(html);
         } else {
-            console.error(`11111111111111111 Image load failed "${this.src}".`);
+            console.error(`Image load failed "${this.src}".`);
         }
         // caller == 'client' ? this.clientRender() : super.render(html);
     }

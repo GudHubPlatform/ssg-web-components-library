@@ -51,8 +51,15 @@ class CanonicalComponent extends GHComponent {
                 const getCurrentChapter = await window?.getCurrentChapter();
                 const currentChapter = getCurrentChapter ? getCurrentChapter : 'pages';
 
-                let ids = await super.findIds(currentChapter);
-                await this.findCanonical(ids.appId, ids.itemId, false);
+                let slug = false;
+
+                // this code fix problem with blog pagination page ("/blog/page/${index}"), findIds was trying to search item with "slug", but as we know paginaton slug is computed (doesnt exist in gudhub)
+                if (chapter == 'pages' && path.includes("/blog/page/")) {
+                    slug = "/blog/";
+                }
+
+                let ids = await super.findIds(currentChapter, slug);
+                await this.findCanonical(ids.appId, ids.itemId, slug);
             }
         }
 
