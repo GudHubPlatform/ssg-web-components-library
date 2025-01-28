@@ -178,13 +178,13 @@ class MasonryGallery extends GHComponent {
 
         const promise = new Promise((res, rej) => {
             const img = document.createElement('img');
-            img.setAttribute('src', imageSrc);
+            img.setAttribute('src', typeof(+imageSrc) === 'number' ? `https://gudhub.com/userdata/35113/${imageSrc}.jpg` : imageSrc);
             img.setAttribute('alt', imageAlt);
             img.setAttribute('title', imageTitle);
 
             if (fullImageSrc) {
                 img.classList.add('open-modal');
-                img.setAttribute('data-modal-image', fullImageSrc);
+                img.setAttribute('data-modal-image', typeof(+imageSrc) === 'number' ? `https://gudhub.com/userdata/35113/${fullImageSrc}.jpg` : fullImageSrc);
             }
 
             img.setAttribute('data-image-loading', 'true');
