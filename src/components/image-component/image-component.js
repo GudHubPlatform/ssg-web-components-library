@@ -6,12 +6,12 @@ class ImageComponent extends GHComponent {
      * alt - alternative text
      * title - title
      * lazyload - if image must have loading="lazy" 
-     * dataSrc - url to image on gudhub (for dynamic images like a thumbnail of articles)
-     * dataUrl - path to place where image from dataSrc will be save (for dynamic images like a thumbnail of articles)
+     * dataSrc - path to file in which image from dataUrl will be saved  || example: data-src="/asserts/blog/top-web-development-books.jpg"
+     * dataUrl - url to image || example: data-url="https://gudhub.com/userdata/29883/1083204.jpg"
      * data-rerender - for rerendering this component on client
      * width - width
      * height - height
-     */
+    */
     constructor() {
         super();
     }
@@ -74,6 +74,8 @@ class ImageComponent extends GHComponent {
                         this.imageWidth = this.image.naturalWidth;
 
                         imageLoaded = true;
+
+                        this.dispatchEvent(new Event('loaded'));
 
                         resolve();
                     });
