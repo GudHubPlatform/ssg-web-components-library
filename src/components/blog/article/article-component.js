@@ -195,13 +195,15 @@ class ArticleComponent extends GHComponent {
         const h2 = this.querySelector('.content').querySelectorAll('h2');
 
         h2.forEach(title => {
-            title.id = title.innerText.toLowerCase().replace(/[^\w\s]/g, '-').replace(/ /g, '-').replace(/-$/, '').replace(/^-/, '');
+            title.id = title.innerText.replace(/ /g, '-');
+            // title.id = title.innerText.toLowerCase().replace(/[^\w\s]/g, '-').replace(/ /g, '-').replace(/-$/, '').replace(/^-/, '');
         });
 
         const h3 = this.querySelector('.content').querySelectorAll('h3');
 
         h3.forEach(title => {
-            title.id = title.innerText.toLowerCase().replace(/[^\w\s]/g, '-').replace(/ /g, '-').replace(/-$/, '').replace(/^-/, '');
+            title.id = title.innerText.replace(/ /g, '-');
+            // title.id = title.innerText.toLowerCase().replace(/[^\w\s]/g, '-').replace(/ /g, '-').replace(/-$/, '').replace(/^-/, '');
         });
 
         // SCHEMAS

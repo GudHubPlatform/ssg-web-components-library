@@ -17,15 +17,14 @@ class ContentsComponent extends GHComponent {
             let div = document.createElement('div');
             div.innerHTML = this.headings[h].text;
             let text = div.querySelector('a') ? div.querySelector('a').innerText : this.headings[h].text;
+            let textId = text.match(/>(.*?)</)[1].replace(/ /g, '-');
             let iterationH = {
                 "text": text,
                 "level": this.headings[h].level,
-                "link": `${url}#${text.toLowerCase().replace(/[^\w\s]/g, '-').replace(/ /g, '-').replace(/-$/, '').replace(/^-/, '')}`,
+                "link": `${url}#${textId}`,
             };
             this.newHeadings.push(iterationH)
         }
-
-        
 
         super.render(html);
     }
