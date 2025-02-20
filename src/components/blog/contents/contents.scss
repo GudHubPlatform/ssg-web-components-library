@@ -14,7 +14,8 @@ contents-component {
     ul {
         list-style: none;
     }
-    .active-anchor a {
+    .active-anchor a,
+    .active-anchor a span {
         color: var(--block-secondary-accent-color);
     }
     li {
