@@ -23,7 +23,6 @@ prices-cards {
             padding: 30px 20px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             align-items: center;
             .title_card {
                 color: var(--block-primary-h-color);
@@ -54,9 +53,11 @@ prices-cards {
                 padding: 30px;
                 margin: 0;
                 border-radius: var(--block-secondary-border-radius);
-                display: flex;
-                flex-direction: column;
                 width: 100%;
+                height: 100%; 
+                display: flex;
+                justify-content: space-between;
+                flex-direction: column;
             }
             .feature_list {
                 list-style: none;
