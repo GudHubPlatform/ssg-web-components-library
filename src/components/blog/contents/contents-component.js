@@ -13,17 +13,20 @@ class ContentsComponent extends GHComponent {
         this.newHeadings = [];
         const fullUrl = new URL('http://website.com' + window.location.search);
         const url = fullUrl.searchParams.get('path');
-        for (let h in this.headings) {
+        for (const heading of this.headings) {
             let div = document.createElement('div');
-            div.innerHTML = this.headings[h].text;
-            let text = div.querySelector('a') ? div.querySelector('a').innerText : this.headings[h].text;
+            div.innerHTML = heading.text;
+
+            const linkInside = div.querySelector('a');
+            let text = linkInside ? `<span>${linkInside.innerText}</span>` : heading.text;
+
             let textId = text.match(/>(.*?)</)[1].replace(/ /g, '-');
-            let iterationH = {
-                "text": text,
-                "level": this.headings[h].level,
-                "link": `${url}#${textId}`,
-            };
-            this.newHeadings.push(iterationH)
+
+            this.newHeadings.push({
+                text: text,
+                level: heading.level,
+                link: `${url}#${textId}`,
+            });
         }
 
         super.render(html);
