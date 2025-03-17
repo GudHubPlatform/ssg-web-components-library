@@ -39,19 +39,19 @@ class ImageComponent extends GHComponent {
             super.render(placeholderHtml);
             return
         }
-        // Download image from gudhub (this.dataUrl ) to cache (this.dataSrc)
+        // Download image from GudHub (this.dataUrl) to cache (this.dataSrc)
         await new Promise(async (resolve) => {
-            if(this.dataSrc && this.dataUrl && !window.disableImagesRegeneration) {
-                await fetch(this.dataSrc + '?source=' + this.dataUrl + '&mode=ssr');
+            if (this.dataSrc && this.dataUrl && !window.disableImagesRegeneration) {
+                await fetch(`${this.dataSrc}?source=${this.dataUrl}&mode=ssr`);
                 this.src = this.dataSrc;
                 resolve();
             } else {
-                if(this.src) {
-                    await fetch(this.src + '?mode=ssr');
-                    resolve();
+                if (this.src) {
+                    await fetch(`${this.src}?mode=ssr`);
                 }
+                resolve();
             }
-        })
+        });
         
         let attempts = 0;
         let imageLoaded = false;
