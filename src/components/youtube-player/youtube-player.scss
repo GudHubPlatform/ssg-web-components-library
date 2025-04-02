@@ -1,10 +1,10 @@
-video-player {
+youtube-player {
     --minimum-block-height: 850px;
     --loader-color: #000;
     --loader-size: 48px;
     --youtube-icon-size: 70px;
 
-    .video-player {
+    .youtube-player {
         position: relative;
         height: 100%;
         width: 100%;
@@ -79,17 +79,17 @@ video-player {
 }
 
 @media screen and (min-width: 1250px) and (max-width: 1649px) {
-    video-player {
+    youtube-player {
         --minimum-block-height: 650px;
     }
 }
 @media screen and (min-width: 800px) and (max-width: 1250px) {
-    video-player {
+    youtube-player {
         --minimum-block-height: 500px;
     }
 }
 @media screen and (max-width: 799px) {
-    video-player {
+    youtube-player {
         --minimum-block-height: 350px;
     }
 }

@@ -1,7 +1,7 @@
-import html from './video-player.html';
-import './video-player.scss';
+import html from './youtube-player.html';
+import './youtube-player.scss';
 
-class VideoPlayer extends GHComponent {
+class YoutubePlayer extends GHComponent {
     constructor() {
         super();
     }
@@ -31,7 +31,7 @@ class VideoPlayer extends GHComponent {
         this.addEventListeners();
     }
     addEventListeners() {
-        const poster = this.querySelector('.video-player image-component');
+        const poster = this.querySelector('.youtube-player image-component');
         const loader = this.querySelector('.loader')
         const videoWrapper = this.querySelector('.video-wrapper')
         
@@ -49,4 +49,4 @@ class VideoPlayer extends GHComponent {
     }
 }
 
-customElements.define('video-player', VideoPlayer);
+customElements.define('youtube-player', YoutubePlayer);
