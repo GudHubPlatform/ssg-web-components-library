@@ -178,7 +178,7 @@ class MasonryGallery extends GHComponent {
 
         const promise = new Promise((res, rej) => {
             const img = document.createElement('img');
-            img.setAttribute('src', typeof(+imageSrc) === 'number' ? `https://gudhub.com/userdata/35113/${imageSrc}.jpg` : imageSrc);
+            img.setAttribute('src', imageSrc);
             img.setAttribute('alt', imageAlt);
             img.setAttribute('title', imageTitle);
 

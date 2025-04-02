@@ -1,0 +1,36 @@
+<section class="page-banner-with-video">
+    <div class="video-player">
+        <image-component src="${json.video.poster}" alt="video poster" title=" "></image-component>
+        <div class="video-wrapper">
+            <video class="video" autoplay muted loop playsinline>
+                <source src="${json.video.link}" type="video/${type}">
+            </video>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="flex-wrapper">
+            ${breadcrumbs ?
+                `<breadcrumbs-component data-items='${breadcrumbs}'></breadcrumbs-component>`
+                : ''
+            }
+
+            <h1 gh-id="${ghId}.title">Title</h1>
+
+            ${json.subtitle ?
+                `<p class="subtitle" gh-id="${ghId}.subtitle">Subtitle</p>`
+                : ''
+            }
+            ${json.button ?
+                `<button-component 
+                    ${json.button.link ? `data-link="${json.button.link}"` : ''} 
+                    ${json.button.popupId ? `data-popup-id="${json.button.popupId}"` : ''} 
+                    data-placement="${json.button.placement}"
+                >
+                    ${json.button.text}
+                </button-component>
+                ` : ''
+            }
+        </div>
+    </div>
+</section>
