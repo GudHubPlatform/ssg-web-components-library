@@ -6,8 +6,6 @@ data-items-shadow: to turn on grid_item shadows;
 
 data-border-top-on-hover: to add grid_item border top on hover
 
-
-
 # Component data-object: 
 ("?" means "unnecessary")
 ```json

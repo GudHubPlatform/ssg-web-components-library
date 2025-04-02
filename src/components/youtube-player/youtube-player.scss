@@ -1,0 +1,104 @@
+youtube-player {
+    --minimum-block-height: 850px;
+    --loader-color: #000;
+    --loader-size: 48px;
+    --youtube-icon-size: 70px;
+
+    .youtube-player {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        min-height: var(--minimum-block-height);
+    }
+
+    image-component {
+        display: inline-block;
+        position: relative;
+        cursor: pointer;
+        transition: opacity 0.3s ease-in-out;
+
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: var(--youtube-icon-size);
+            height: var(--youtube-icon-size);
+            background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 width%3D%2224%22 height%3D%2224%22 viewBox%3D%220 0 24 24%22%3E%3Crect x%3D%225%22 y%3D%225%22 width%3D%2215%22 height%3D%2215%22 fill%3D%22%23ffffff%22/%3E%3Cpath d%3D%22M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z%22 fill%3D%22%23ff0000%22/%3E%3C/svg%3E");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            transition: all 0.5s ease-in;
+
+        }
+
+        &:hover::after {
+            transform: translate(-50%, -50%) scale(1.15);
+        }
+    }
+    image-component img {
+        height: var(--minimum-block-height);
+        object-fit: cover;
+    }
+    image-component.hidden {
+        visibility: hidden;
+        display: block;
+        height: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    iframe {
+        min-height: var(--minimum-block-height);
+        width: 100%;
+    }
+
+    .loader {
+        visibility: hidden;
+        width: var(--loader-size);
+        height: 0;
+        border: 5px solid var(--loader-color);
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .loader.visible {
+        height: var(--loader-size);
+        visibility: visible;
+    }
+}
+
+@media screen and (min-width: 1250px) and (max-width: 1649px) {
+    youtube-player {
+        --minimum-block-height: 650px;
+    }
+}
+@media screen and (min-width: 800px) and (max-width: 1250px) {
+    youtube-player {
+        --minimum-block-height: 500px;
+    }
+}
+@media screen and (max-width: 799px) {
+    youtube-player {
+        --minimum-block-height: 350px;
+    }
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+} 
