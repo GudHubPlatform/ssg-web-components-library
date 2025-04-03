@@ -40,11 +40,7 @@ class YoutubePlayer extends GHComponent {
             loader.classList.add('visible');
 
             videoWrapper.innerHTML = this.video;
-            const iframe = videoWrapper.querySelector('iframe');
-
-            iframe.onload = () => {
-                loader.classList.remove('visible');
-            }
+            loader.classList.remove('visible');
         })
     }
 }
