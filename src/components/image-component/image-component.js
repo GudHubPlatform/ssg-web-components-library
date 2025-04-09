@@ -16,13 +16,26 @@ class ImageComponent extends GHComponent {
 
     constructor() {
         super();
+        this.placeholder = "data:image/gif+xml;base64,R0lGODlhAwADAJEAAMCZTW0zDCoaGgAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgOS4xLWMwMDIgNzkuYjdjNjRjY2Y5LCAyMDI0LzA3LzE2LTEyOjM5OjA0ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjYuMCAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTY4Q0M3MUExNTI0MTFGMEI2NDZGMTVGMjU0Mzc4MkYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTY4Q0M3MUIxNTI0MTFGMEI2NDZGMTVGMjU0Mzc4MkYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1NjhDQzcxODE1MjQxMUYwQjY0NkYxNUYyNTQzNzgyRiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1NjhDQzcxOTE1MjQxMUYwQjY0NkYxNUYyNTQzNzgyRiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgH//v38+/r5+Pf29fTz8vHw7+7t7Ovq6ejn5uXk4+Lh4N/e3dzb2tnY19bV1NPS0dDPzs3My8rJyMfGxcTDwsHAv769vLu6ubi3trW0s7KxsK+urayrqqmop6alpKOioaCfnp2cm5qZmJeWlZSTkpGQj46NjIuKiYiHhoWEg4KBgH9+fXx7enl4d3Z1dHNycXBvbm1sa2ppaGdmZWRjYmFgX15dXFtaWVhXVlVUU1JRUE9OTUxLSklIR0ZFRENCQUA/Pj08Ozo5ODc2NTQzMjEwLy4tLCsqKSgnJiUkIyIhIB8eHRwbGhkYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAAAAAAALAAAAAADAAMAAAIEVABmUAA7";
     }
 
     async onServerRender() {
         await this.render('server')
     }
 
+    scriptForImproveLCP() {
+        const sources = this.querySelectorAll('picture source');
+        sources.forEach(element => {
+            const trueSource = element.getAttribute('data-srcset');
+            element.setAttribute('srcset', trueSource);
+        });
+    }
+
     async onClientReady() {
+        window.addEventListener('load', () => {
+            this.scriptForImproveLCP();
+        });
+
         if (this.hasAttribute('data-rerender')) {
             await this.render('client')
         }
@@ -90,7 +103,7 @@ class ImageComponent extends GHComponent {
     
                 this.image.src = this.src;
             });
-    
+
             super.render(html);
         } catch (error) {
             console.error(`Rendering failed for ${this.src}.`);
