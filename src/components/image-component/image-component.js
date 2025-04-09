@@ -33,7 +33,12 @@ class ImageComponent extends GHComponent {
 
     async onClientReady() {
         window.addEventListener('load', () => {
-            this.scriptForImproveLCP();
+            let timeout;
+            clearTimeout(timeout);
+
+            timeout = setTimeout(() => {
+                this.scriptForImproveLCP();
+            }, 3000);
         });
 
         if (this.hasAttribute('data-rerender')) {
