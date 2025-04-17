@@ -1,9 +1,11 @@
 import html from './page-banner-with-video.html';
 import './page-banner-with-video.scss';
+import jsonTemplate from './page-banner-with-video-data.json'
 
 class PageBannerWithVideo extends GHComponent {
     constructor() {
         super();
+        super.setDefaultData(jsonTemplate);
     }
 
     async onServerRender() {
@@ -11,7 +13,8 @@ class PageBannerWithVideo extends GHComponent {
         this.json = await super.getGhData(this.ghId);
         this.breadcrumbs = this.getAttribute('data-breadcrumbs') || null;
 
-        this.type = this.json.video.link.split('.')[1] || null;
+        this.video = this.json.video.link || "https://www.w3schools.com/html/mov_bbb.mp4";
+        this.type = this.json.video.link.split('.').slice(-1) || null;
 
         super.render(html);
     }

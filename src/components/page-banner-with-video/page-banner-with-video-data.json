@@ -1,0 +1,14 @@
+{
+  "title": "Title",
+  "subtitle?": "Subtitle",
+  "button?": {
+      "link?": "link",
+      "popupId?": "popupId",
+      "placement": "media-and-accordion",
+      "text": "button text"
+  },
+  "video": {
+      "poster": "https://picsum.photos/800/600",
+      "link": "https://www.w3schools.com/html/mov_bbb.mp4"
+  }
+}

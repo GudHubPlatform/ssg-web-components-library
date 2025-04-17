@@ -3,7 +3,9 @@
         <div class="flex-wrapper">
             <div class="text">
                 <${hLvl} class="title" gh-id="${ghId}.title"></${hLvl}>
-                <div class="subtitle" gh-id="${ghId}.subtitle"></div>
+                ${json.subtitle ? `
+                    <div class="subtitle" gh-id="${ghId}.subtitle"></div>
+                ` : ''}
                 <div class="flex_button">
                     ${json.buttons ? `
                         ${

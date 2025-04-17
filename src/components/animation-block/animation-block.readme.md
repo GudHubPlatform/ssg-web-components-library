@@ -1,7 +1,16 @@
+# Attributes:
+
+None
+
+# Component data-object:
+
+("?" means "unnecessary")
+
+```json
 {
   "title": "Інтеграції CRM для Бізнесу",
   "subtitle": "Поєднайте інструменти, якими ви користуєтеся разом з вашим бізнесом для максимальної продуктивності та ефективності компанії.",
-  "buttons": {
+  "buttons?": {
     "primary": {
       "popupId": "form",
       "placement": "integrations",
@@ -69,3 +78,4 @@
     }
   ]
 }
+```

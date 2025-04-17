@@ -1,3 +1,12 @@
+# Attributes:
+
+data-chapter
+
+# Component data-object:
+
+("?" means "unnecessary")
+
+```json
 {
   "title": "Title Ac accumsan",
   "offer": "Offer pulvinar ultricies",
@@ -22,3 +31,4 @@
     "title": "image title"
   }
 }
+```
