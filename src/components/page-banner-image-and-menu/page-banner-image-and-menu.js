@@ -24,7 +24,7 @@ class PageBannerImageAndMenu extends GHComponent {
         if (!document.querySelector('script#swiper_script')) {
             const script = document.createElement('script');
             
-            script.setAttribute('src', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js');
+            script.setAttribute('src', '/assets/js/swiper.js');
             script.setAttribute('id', 'swiper_script');
 
             document.querySelector('head').appendChild(script);
@@ -78,7 +78,6 @@ class PageBannerImageAndMenu extends GHComponent {
 
         const updateActiveLink = () => {
             renderLinks.forEach(link => {
-                console.log(link)
                 if (window.location.href.includes(link.getAttribute('href'))) {
                     renderLinks.forEach(l => l.classList.remove('active'));
                     link.classList.add('active');

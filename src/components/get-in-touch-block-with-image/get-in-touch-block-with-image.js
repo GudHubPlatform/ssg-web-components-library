@@ -1,9 +1,12 @@
 import html from './get-in-touch-block-with-image.html';
 import './get-in-touch-block-with-image.scss';
+import jsonTemplate from './get-in-touch-block-with-image-data.json';
+
 
 class GetInTouchBlockWithImage extends GHComponent {
     constructor() {
         super();
+        super.setDefaultData(jsonTemplate);
         this.getFormAttributes = this.getFormAttributes;
     }
 
@@ -14,8 +17,6 @@ class GetInTouchBlockWithImage extends GHComponent {
         this.json = this.currentPage
             ? await super.getGhData(this.ghId, 'pages', this.currentPage)
             : await super.getGhData(this.ghId);
-
-        this.image = this.json.image;
 
         this.getFormAttributes = this.getFormAttributes.bind(this);
 
