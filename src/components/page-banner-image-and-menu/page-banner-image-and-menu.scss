@@ -1,23 +1,21 @@
 page-banner-image-and-menu {
-    --breadcrumbsColor: #FFFFFF;
-    --breadcrumbsLastColor: #FFFFFF;
-    --breadcrumbsAccentColor: #C6E76C;
+    --brightnessLevel: 0.5;
+    --gapInContainer: 50px;
+    --maxWidthForMenu: 90%;
+    --thicknessOfActiveElementBorder: 3px;
+    --arrowColor: #000;
+    --heightOfFirstVisibleContent: 150px;
+
+    --swiper-navigation-size: 17px;
+    --swiper-navigation-color: #fff;
+    --swiper-navigation-background-color: #FFFFFF4D;
+    --swiper-navigation-sides-offset: 15px;
+
 
     .page-banner-image-and-menu {
-        padding: 150px 0 80px;
         position: relative;
 
-        breadcrumbs-component .breadcrumbs_list {
-            margin-bottom: 0;
-        }
-
-        h1 {
-            text-align: center;
-            text-transform: uppercase;
-            max-width: 1210px;
-            margin-bottom: 0;
-        }
-
+        //background-image
         image-component {
             position: absolute;
             top: 0;
@@ -29,7 +27,7 @@ page-banner-image-and-menu {
                 height: 100%;
                 width: 100%;
                 object-fit: cover;
-                filter: brightness(0.5);
+                filter: brightness(var(--brightnessLevel));
             }
         }
 
@@ -40,49 +38,46 @@ page-banner-image-and-menu {
 
             .flex-wrapper {
                 height: 100%;
+
+                gap: var(--gapInContainer);
                 flex-direction: column;
-                gap: 50px;
-                align-items: center;
                 justify-content: center;
-
-                .subtitle {
-                    text-align: center;
-                }
-
+                align-items: center;
             }
 
         }
 
+        // plain menu
         .render-links {
-            max-width: 90%;
-            border-bottom: 1px solid #fff;
+            max-width: var(--maxWidthForMenu);
+            border-bottom: var(--block-primary-border) var(--block-primary-border-color);
 
-            button {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 50px;
-                min-width: 50px;
-                border-radius: 100%;
-                background: #FFFFFF4D;
-                margin-bottom: 18px;
-                margin-right: 3px;
-                cursor: pointer;
+            // button {
+            //     display: flex;
+            //     justify-content: center;
+            //     align-items: center;
+            //     min-height: 50px;
+            //     min-width: 50px;
+            //     border-radius: 100%;
+            //     background: #FFFFFF4D;
+            //     margin-bottom: 18px;
+            //     margin-right: 3px;
+            //     cursor: pointer;
 
-                &:hover {
-                    background-color: #fff;
-                    svg path {
-                        stroke: #0E1011;
-                    }
-                }
-            }
+            //     &:hover {
+            //         background-color: #fff;
+            //         svg path {
+            //             stroke: #0E1011;
+            //         }
+            //     }
+            // }
 
             .render-links-wrapper {
                 padding: 20px 30px;
                 width: max-content;
 
                 &:has(.render-link.active) {
-                    border-bottom: 3px solid #C6E76C;
+                    border-bottom: var(--thicknessOfActiveElementBorder) solid var(--accent-color);
                 }
 
                 .render-link {
@@ -90,32 +85,28 @@ page-banner-image-and-menu {
                     font-size: 18px;
 
                     &.active {
-                        color: #C6E76C;
+                        color: var(--accent-color);
                     }
 
                     &:hover {
-                        color: #C6E76C;
+                        color: var(--accent-color);
                     }
                 }
             }
 
             .navigation_wrapper {
-                --swiper-navigation-size: 17px;
-                --swiper-navigation-color: #fff;
-                --swiper-navigation-sides-offset: 15px;
-
                 display: block;
 
                 .swiper-button-next,
                 .swiper-button-prev {
                     height: 50px;
                     width: 50px;
-                    background: #FFFFFF4D;
+                    background: var(--swiper-navigation-background-color);
                     border-radius: 100%;
                     top: 91%;
 
                     &:hover {
-                        background: #fff;
+                        --swiper-navigation-background-color: #fff;
                         --swiper-navigation-color: #0E1011;
                     }
                 }
@@ -148,15 +139,16 @@ page-banner-image-and-menu {
 
         }
     }
+    // vertical menu
     page-banner-image-and-menu .page-banner-image-and-menu .services-dropdown-wrapper {
         display: block;
         position: relative;
-        z-index: 10;
+        z-index: 0;
         color: var(--text-color);
         margin-top: 15px;
 
         .services-dropdown {
-            height: 150px;
+            height: var(--heightOfFirstVisibleContent);
             overflow: hidden;
 
             &.open {
@@ -164,7 +156,7 @@ page-banner-image-and-menu {
             }
 
             li {
-                border-bottom: 1px solid #ffffff;
+                border-bottom: 1px solid var(--block-primary-border-color);
                 margin-bottom: 10px;
 
                 &.active {
@@ -187,7 +179,7 @@ page-banner-image-and-menu {
             }
         }
         .read-more {
-            padding: 10px 0 45px;
+            padding: 10px 0;
 
             span {
                 display: flex;
@@ -195,7 +187,19 @@ page-banner-image-and-menu {
                 gap: 10px;
                 width: fit-content;
                 cursor: pointer;
-                color: var(--accent-color);
+                color: var(--text-color);
+            }
+            svg path {
+                fill: var(--arrowColor);
+            }
+
+            &:hover {
+                span {
+                    color: var(--accent-color);
+                }
+                svg path {
+                    fill: var(--accent-color);
+                }
             }
         }
 

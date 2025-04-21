@@ -64,28 +64,31 @@ class PageBannerImageAndMenu extends GHComponent {
             },
         });
 
-        // const renderLinks = document.querySelectorAll('.render-links-wrapper .render-link');
-        // if (window.innerWidth < 651) return;
-        // const slideToActive = () => {
-        //     const activeLink = document.querySelector('.render-link.active');
-        //     if (activeLink) {
-        //         const slide = activeLink.closest('.swiper-slide').getAttribute('aria-label').split('/')[0];
-        //         swiper.slideTo(slide - 1);
-        //     }
-        // };
+        if (window.innerWidth < 651) return;
 
-        // const updateActiveLink = () => {
-        //     renderLinks.forEach(link => {
-        //         if (window.location.href.includes(link.getAttribute('href'))) {
-        //             renderLinks.forEach(l => l.classList.remove('active'));
-        //             link.classList.add('active');
-        //         }
-        //     });
-        // };
+        const renderLinks = document.querySelectorAll('.render-links-wrapper .render-link');
 
-        // updateActiveLink();
-        // slideToActive();
-        // window.addEventListener('hashchange', updateActiveLink);
+        const slideToActive = () => {
+            const activeLink = document.querySelector('.render-link.active');
+            if (activeLink) {
+                const slide = activeLink.closest('.swiper-slide').getAttribute('aria-label').split('/')[0];
+                swiper.slideTo(slide - 1);
+            }
+        };
+
+        const updateActiveLink = () => {
+            renderLinks.forEach(link => {
+                console.log(link)
+                if (window.location.href.includes(link.getAttribute('href'))) {
+                    renderLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                }
+            });
+        };
+
+        updateActiveLink();
+        slideToActive();
+        window.addEventListener('hashchange', updateActiveLink);
 
     }
 
@@ -109,7 +112,6 @@ class PageBannerImageAndMenu extends GHComponent {
     }
 
     addEventListener() {
-        console.log(3)
         const servicesDropdown = document.querySelector('.services-dropdown-wrapper');
         if (!!servicesDropdown) {
             const list = servicesDropdown.querySelector('.services-dropdown');
