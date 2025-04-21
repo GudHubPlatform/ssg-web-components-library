@@ -3,7 +3,7 @@ import './page-banner-image-and-menu.scss';
 import jsonTemplate from './page-banner-image-and-menu-data.json';
 
 
-class PageBannerSimple extends GHComponent {
+class PageBannerImageAndMenu extends GHComponent {
     constructor() {
         super();
         super.setDefaultData(jsonTemplate);
@@ -17,17 +17,16 @@ class PageBannerSimple extends GHComponent {
         this.menuList = this.json.menu;
 
         super.render(html);
-
-        this.shouldRender3DList && this.initServicesDropdown(this.renderList)
+        this.initServicesDropdown(this.menuList)
     }
     
     onClientReady() {
-        if(!document.querySelector('script#swiper_script')) {
+        if (!document.querySelector('script#swiper_script')) {
             const script = document.createElement('script');
             
-            script.setAttribute('src', '/assets/js/swiper.js');
+            script.setAttribute('src', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js');
             script.setAttribute('id', 'swiper_script');
-            
+
             document.querySelector('head').appendChild(script);
         }
         if(!document.querySelector('link#swiper_style')) {
@@ -52,8 +51,8 @@ class PageBannerSimple extends GHComponent {
     initSlider() {
         this.ghId = this.getAttribute('data-gh-id') || null;
 
-        let swiper = new Swiper(`.swiper.page-banner-swiper`, {
-            slidesPerView: 1,
+        let swiper = new Swiper(`.render-links .swiper`, {
+            slidesPerView: "auto",
             navigation: {
                 nextEl: ".reviews_slider_next",
                 prevEl: ".reviews_slider_prev",
@@ -65,28 +64,28 @@ class PageBannerSimple extends GHComponent {
             },
         });
 
-        const renderLinks = document.querySelectorAll('.render-links-wrapper .render-link');
-        if (window.innerWidth < 651) return;
-        const slideToActive = () => {
-            const activeLink = document.querySelector('.render-link.active');
-            if (activeLink) {
-                const slide = activeLink.closest('.swiper-slide').getAttribute('aria-label').split('/')[0];
-                swiper.slideTo(slide - 1);
-            }
-        };
+        // const renderLinks = document.querySelectorAll('.render-links-wrapper .render-link');
+        // if (window.innerWidth < 651) return;
+        // const slideToActive = () => {
+        //     const activeLink = document.querySelector('.render-link.active');
+        //     if (activeLink) {
+        //         const slide = activeLink.closest('.swiper-slide').getAttribute('aria-label').split('/')[0];
+        //         swiper.slideTo(slide - 1);
+        //     }
+        // };
 
-        const updateActiveLink = () => {
-            renderLinks.forEach(link => {
-                if (window.location.href.includes(link.getAttribute('href'))) {
-                    renderLinks.forEach(l => l.classList.remove('active'));
-                    link.classList.add('active');
-                }
-            });
-        };
+        // const updateActiveLink = () => {
+        //     renderLinks.forEach(link => {
+        //         if (window.location.href.includes(link.getAttribute('href'))) {
+        //             renderLinks.forEach(l => l.classList.remove('active'));
+        //             link.classList.add('active');
+        //         }
+        //     });
+        // };
 
-        updateActiveLink();
-        slideToActive();
-        window.addEventListener('hashchange', updateActiveLink);
+        // updateActiveLink();
+        // slideToActive();
+        // window.addEventListener('hashchange', updateActiveLink);
 
     }
 
@@ -110,6 +109,7 @@ class PageBannerSimple extends GHComponent {
     }
 
     addEventListener() {
+        console.log(3)
         const servicesDropdown = document.querySelector('.services-dropdown-wrapper');
         if (!!servicesDropdown) {
             const list = servicesDropdown.querySelector('.services-dropdown');
@@ -133,4 +133,4 @@ class PageBannerSimple extends GHComponent {
     }
 }
 
-window.customElements.define('page-banner-image-and-menu', PageBannerSimple);
+window.customElements.define('page-banner-image-and-menu', PageBannerImageAndMenu);

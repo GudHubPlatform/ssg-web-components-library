@@ -35,7 +35,7 @@ page-banner-image-and-menu {
 
         .container {
             position: relative;
-            z-index: 2;
+            z-index: 0;
             height: 100%;
 
             .flex-wrapper {
@@ -49,11 +49,77 @@ page-banner-image-and-menu {
                     text-align: center;
                 }
 
-                button-component .btn {
-                    font-size: 22px;
+            }
+
+        }
+
+        .render-links {
+            max-width: 90%;
+            border-bottom: 1px solid #fff;
+
+            button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 50px;
+                min-width: 50px;
+                border-radius: 100%;
+                background: #FFFFFF4D;
+                margin-bottom: 18px;
+                margin-right: 3px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #fff;
+                    svg path {
+                        stroke: #0E1011;
+                    }
                 }
             }
 
+            .render-links-wrapper {
+                padding: 20px 30px;
+                width: max-content;
+
+                &:has(.render-link.active) {
+                    border-bottom: 3px solid #C6E76C;
+                }
+
+                .render-link {
+                    color: #FFFFFF;
+                    font-size: 18px;
+
+                    &.active {
+                        color: #C6E76C;
+                    }
+
+                    &:hover {
+                        color: #C6E76C;
+                    }
+                }
+            }
+
+            .navigation_wrapper {
+                --swiper-navigation-size: 17px;
+                --swiper-navigation-color: #fff;
+                --swiper-navigation-sides-offset: 15px;
+
+                display: block;
+
+                .swiper-button-next,
+                .swiper-button-prev {
+                    height: 50px;
+                    width: 50px;
+                    background: #FFFFFF4D;
+                    border-radius: 100%;
+                    top: 91%;
+
+                    &:hover {
+                        background: #fff;
+                        --swiper-navigation-color: #0E1011;
+                    }
+                }
+            }
         }
 
         .button-more {
@@ -66,9 +132,22 @@ page-banner-image-and-menu {
     }
 }
 
-
 @media screen and (max-width: 650px) {
+    page-banner-image-and-menu .page-banner-image-and-menu {
 
+        .render-links {
+            display: none;
+        }
+
+        .container .flex-wrapper {
+            gap: 20px;
+
+            button-component {
+                width: 100%;
+            }
+
+        }
+    }
     page-banner-image-and-menu .page-banner-image-and-menu .services-dropdown-wrapper {
         display: block;
         position: relative;
