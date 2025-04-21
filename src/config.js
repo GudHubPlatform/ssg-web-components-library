@@ -63,6 +63,10 @@ export { htmlTemplate } from './components/html-template/config.js';
 export { masonryGallery } from './components/masonry-gallery/config.js';
 export { pageBannerWithVideo } from './components/page-banner-with-video/config.js';
 export { youtubePlayer } from './components/youtube-player/config.js';
+export { getInTouchBlockWithImage } from './components/get-in-touch-block-with-image/config.js'
+export { PageBannerImageAndMenu } from './components/page-banner-image-and-menu/config.js'
+
+
 // export { liqPayComponent } from './components/liqpay-component/config.js';
 // export { htmlTextFromEditorJs } from './components/html-text-from-editor-js/config.js';
 // export { toggleReadMoreButtonComponent } from './components/html-text-from-editor-js/toggle-read-more-button-component/config.js';

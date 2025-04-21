@@ -1,0 +1,32 @@
+get-in-touch-block-with-image {
+    --brightness-level: 0.5;
+    --photo-position: bottom;
+
+    .get-in-touch-block-with-image {
+        position: relative;
+
+        image-component img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            object-position: var(--photo-position);
+            height: 100%;
+            width: 100%;
+            filter: brightness(var(--brightness-level));
+        }
+        .container {
+            position: relative;
+            z-index: 0;
+        }
+        .get_in_touch_top {
+            .subtitle {
+                text-align: center;
+            }
+        }
+        .get_in_touch_bottom {
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

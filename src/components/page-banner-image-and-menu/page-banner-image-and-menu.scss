@@ -1,0 +1,124 @@
+page-banner-image-and-menu {
+    --breadcrumbsColor: #FFFFFF;
+    --breadcrumbsLastColor: #FFFFFF;
+    --breadcrumbsAccentColor: #C6E76C;
+
+    .page-banner-image-and-menu {
+        padding: 150px 0 80px;
+        position: relative;
+
+        breadcrumbs-component .breadcrumbs_list {
+            margin-bottom: 0;
+        }
+
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            max-width: 1210px;
+            margin-bottom: 0;
+        }
+
+        image-component {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                filter: brightness(0.5);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+
+            .flex-wrapper {
+                height: 100%;
+                flex-direction: column;
+                gap: 50px;
+                align-items: center;
+                justify-content: center;
+
+                .subtitle {
+                    text-align: center;
+                }
+
+                button-component .btn {
+                    font-size: 22px;
+                }
+            }
+
+        }
+
+        .button-more {
+            display: none;
+        }
+    }
+
+    .services-dropdown-wrapper {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 650px) {
+
+    page-banner-image-and-menu .page-banner-image-and-menu .services-dropdown-wrapper {
+        display: block;
+        position: relative;
+        z-index: 10;
+        color: var(--text-color);
+        margin-top: 15px;
+
+        .services-dropdown {
+            height: 150px;
+            overflow: hidden;
+
+            &.open {
+                height: 100%;
+            }
+
+            li {
+                border-bottom: 1px solid #ffffff;
+                margin-bottom: 10px;
+
+                &.active {
+                    a {
+                        color: var(--accent-color);
+                    }
+                }
+
+                &:hover {
+                    a {
+                        color: var(--accent-color);
+                    }
+                }
+
+                a {
+                    display: block;
+                    padding: 5px;
+                    color: var(--text-color);
+                }
+            }
+        }
+        .read-more {
+            padding: 10px 0 45px;
+
+            span {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                width: fit-content;
+                cursor: pointer;
+                color: var(--accent-color);
+            }
+        }
+
+    }
+}
