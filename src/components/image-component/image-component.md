@@ -14,6 +14,8 @@ We have two different ways to use this component:
     lazyload
     width="400"
     height="300"
+    data-max-width="1200"
+    data-crop
 ></image-component>
 ```
 
@@ -26,6 +28,8 @@ We have two different ways to use this component:
     title="{Image title here}"
     data-rerender
     lazyload
+    data-max-width="1200"
+    data-crop
 ></image-component>
 ```
 
@@ -42,25 +46,32 @@ We have two different ways to use this component:
 | `data-src`       | Local path to save image fetched from `data-url`                       | `string`<br>`/assets/blog/top-web-development-books.jpg`    |
 | `data-url`       | Remote image URL                                                       | `string`<br>`https://gudhub.com/userdata/29883/1083204.jpg` |
 | `data-rerender`  | Enables client-side rerendering after SSR *(currently not working❗❗❗)* | `boolean` (just include the attribute)                      |
-| `width`          | Image width *(currently not working❗❗❗)*                               | `string`<br>`"300"`                                         |
-| `height`         | Image height *(currently not working❗❗❗)*                              | `string`<br>`"200"`                                         |
-| `data-max-width` | Optional maximum width configuration                                   | `string`<br>`"800px"`                                       |
-| `data-crop`      | Optional crop configuration                                            | `string`<br>`"center"`                                      |
+| `width`          | Image width                                                            | `string`<br>`"300"`                                         |
+| `height`         | Image height                                                           | `string`<br>`"200"`                                         |
+| `data-max-width` | Optional maximum width configuration                                   | `number`<br>`"600"`                                         |
+| `data-crop`      | Optional crop configuration                                            | `boolean` (just include the attribute)                      |
 
 ---
 
 # Image processing behavior:
 
-If you're using `data-url` + `data-src`, the image will be downloaded and processed using these rules:
+#### 1. `data-crop`  
+If the `data-crop` attribute is present:
+- The image is **cropped** to fit exactly the target resolutions (`600w`, `1200w`, and original).
+- Cropping uses a `cover` strategy — the image fills the space and is centered.
 
-1. If **`data-crop` = `1200x1200`**  
-   → Image will be cropped to exactly `1200x1200` pixels (centered crop).
+✅ **Combination with `data-max-width`:**  
+If `data-max-width` is also set (e.g., `data-max-width="600"`), **only** the responsive sizes **up to that max width** will be cropped.  
+If `data-max-width` is **not** set, **all** predefined sizes (`600w`, `1200w`, original) will be cropped.
 
-2. If only **`data-max-width` = `1200`**  
-   → Image will be resized proportionally to width `1200px`.
+#### 2. `data-max-width="600"`  
+If the `data-max-width` attribute is set:
+- The image is **resized proportionally** to the specified width (e.g., `600px`).
+- Aspect ratio is preserved, and no cropping is applied (unless combined with `data-crop`, see above).
 
-3. If **no `data-crop` or `data-max-width`** is provided  
-   → Image will be scaled by width to `1920px` by default (preserving aspect ratio).
+#### 3. No Attributes  
+If neither `data-crop` nor `data-max-width` is set:
+- The image is **resized proportionally** to a **default width of `1920px`**, maintaining the original aspect ratio.
 
 ---
 
@@ -79,7 +90,7 @@ If you're using `data-url` + `data-src`, the image will be downloaded and proces
     data-rerender?: boolean,
     width?: "number|string",
     height?: "number|string",
-    data-max-width?: "string",
-    data-crop?: "string"
+    data-max-width?: number,
+    data-crop?: boolean
 }
 ```

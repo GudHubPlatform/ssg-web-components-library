@@ -13,16 +13,12 @@ class ImageComponent extends GHComponent {
 
     async onClientReady() {
         window.addEventListener('load', () => {
-<<<<<<< Updated upstream
-            this.scriptForImproveLCP();
-=======
             let timeout;
             clearTimeout(timeout);
 
             timeout = setTimeout(() => {
                 this.generateSources();
             }, 3000);
->>>>>>> Stashed changes
         });
 
         if (this.hasAttribute('data-rerender')) {
@@ -41,8 +37,8 @@ class ImageComponent extends GHComponent {
         this.width = this.hasAttribute('width') ? this.getAttribute('width') : false;
         this.height = this.hasAttribute('height') ? this.getAttribute('height') : false;
 
-        this.maxWidth = this.hasAttribute('data-max-width') ? this.this.getAttribute('data-max-width') : false;
-        this.crop = this.hasAttribute('data-crop') ? this.getAttribute('data-crop') : false;
+        this.maxWidth = this.hasAttribute('data-max-width') ? this.getAttribute('data-max-width') : false;
+        this.isCrop = this.hasAttribute('data-crop') ? this.hasAttribute('data-crop') : false;
 
         // If no valid src or data URL is provided, render a placeholder
         if (!this.src && !this.dataUrl && !this.dataSrc) {
@@ -114,7 +110,7 @@ class ImageComponent extends GHComponent {
             const response = await fetch(path, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ imagePath })
+                body: JSON.stringify({ imagePath, maxWidth: Number(this.maxWidth), isCrop: this.isCrop })
             });
             const data = await response.json();
             this.placeholder = data?.base64_placeholder;
@@ -122,67 +118,88 @@ class ImageComponent extends GHComponent {
             return this.placeholder;
         } catch (error) {
             console.error('Error:', error);
-            // return imagePath;
+            return imagePath;
         }
     }
 
     generateSources() {
-        console.log("this:", this);
-
-        const picture = this.querySelector('picture');
-        console.log("picture:", picture);
-
-        const imageFromPicture = this.querySelector('picture img');
-        // const ext = this.extension.startsWith('.') ? this.extension.substring(1) : this.extension;
+        const picture = this?.querySelector('picture');
+        const imageFromPicture = picture?.querySelector('img');
+    
+        if (!imageFromPicture) {
+            console.warn('No image found inside <picture>.');
+            return;
+        }
+    
+        const dataSrc = this.getAttribute('data-src');
+        const dataUrl = this.getAttribute('data-url');
+        const fallbackSrc = this.getAttribute('src');
+        const dataMaxWidth = parseInt(this.getAttribute('data-max-width'), 10);
+    
+        const src = dataSrc && dataUrl ? dataSrc : fallbackSrc;
+    
+        if (!src) {
+            console.warn('No valid image source found.');
+            return;
+        }
+    
+        const lastDotIndex = src.lastIndexOf('.');
+        if (lastDotIndex === -1) {
+            console.warn('Invalid image source format.');
+            return;
+        }
+    
+        const extension = src.substring(lastDotIndex);
+        const mimeType = `image/${extension.slice(1)}`;
+        const path = src.substring(0, lastDotIndex);
     
         const sources = [];
     
-        // if (this.imageWidth < 1200 && this.imageWidth > 600) {
-        //     sources.push(this.createSource(`(min-width: 600px)`, `${this.path}${this.extension}.webp`, 'image/webp'));
-        //     sources.push(this.createSource(`(min-width: 600px)`, `${this.path}${this.extension}`, `image/${ext}`));
-        // }
+        const createResponsiveSources = (media, suffix = '') => {
+            sources.push(this.createSource(media, `${path}${suffix}${extension}.webp`, 'image/webp'));
+            sources.push(this.createSource(media, `${path}${suffix}${extension}`, mimeType));
+        };
     
-        // if (this.imageWidth > 1200) {
-        //     sources.push(this.createSource(`(max-width: 1200px) and (min-width: 600px)`, `${this.path}-1200${this.extension}.webp`, 'image/webp'));
-        //     sources.push(this.createSource(`(max-width: 1200px) and (min-width: 600px)`, `${this.path}-1200${this.extension}`, `image/${ext}`));
-        //     sources.push(this.createSource(`(min-width: 1200px)`, `${this.path}${this.extension}.webp`, 'image/webp'));
-        //     sources.push(this.createSource(`(min-width: 1200px)`, `${this.path}${this.extension}`, `image/${ext}`));
-        // }
-    
-        // if (this.imageWidth > 600) {
-        //     sources.push(this.createSource(`(max-width: 600px)`, `${this.path}-600${this.extension}.webp`, 'image/webp'));
-        //     sources.push(this.createSource(`(max-width: 600px)`, `${this.path}-600${this.extension}`, `image/${ext}`));
-        // }
-    
-        // if (this.imageWidth <= 600) {
-        //     const srcExt = this.src.split('.').pop();
-        //     sources.push(this.createSource(null, `${this.src}.webp`, 'image/webp'));
-        //     sources.push(this.createSource(null, `${this.src}`, `image/${srcExt}`));
-        // }
-    
-        // picture.prepend(...sources.reverse());
-
-        if (picture) {
-            const dataSrc = this.getAttribute('src');
-
-            const source = document.createElement('source');
-            // if (media) source.setAttribute('media', media);
-            source.setAttribute('srcset', dataSrc);
-            source.setAttribute('type', "image/jpg");
-
-            picture.prepend(source);
+        // Add sources based on available size information
+        if (!isNaN(dataMaxWidth)) {
+            // Largest case: original image ≥ 1200px
+            if (dataMaxWidth >= 1200) {
+                createResponsiveSources('(max-width: 600px)', '-600');
+                createResponsiveSources('(min-width: 600px) and (max-width: 1200px)', '-1200');
+                createResponsiveSources('(min-width: 1200px)', '');
+            }
+            // Medium case: original image ≥ 600px but < 1200px
+            else if (dataMaxWidth >= 600) {
+                createResponsiveSources('(max-width: 600px)', '-600');
+                createResponsiveSources('(min-width: 600px)', '');
+            }
+            // Small image: only original is available
+            else {
+                createResponsiveSources(null, '');
+            }
+        } else {
+            // If max width is not known, assume all variants exist
+            createResponsiveSources('(max-width: 600px)', '-600');
+            createResponsiveSources('(min-width: 600px) and (max-width: 1200px)', '-1200');
+            createResponsiveSources('(min-width: 1200px)', '');
         }
-
-        // if (imageFromPicture) {
-            // imageFromPicture.src = `${this.path}${this.extension}`;
-        // }
-    }
+    
+        // Add sources to the <picture> element
+        if (picture && sources.length) {
+            picture.prepend(...sources.reverse());
+        }
+    
+        // Set fallback <img> source
+        if (imageFromPicture) {
+            imageFromPicture.src = `${path}${extension}`;
+        }
+    }       
     
     createSource(media, srcset, type) {
         const source = document.createElement('source');
         if (media) source.setAttribute('media', media);
-        source.setAttribute('srcset', dataSrc);
-        source.setAttribute('type', "image/jpg");
+        source.setAttribute('srcset', srcset);
+        source.setAttribute('type', type);
         return source;
     }
 
