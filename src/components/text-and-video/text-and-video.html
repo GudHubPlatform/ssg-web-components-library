@@ -1,0 +1,35 @@
+<section class="text-and-video">
+    <div class="container">
+        <div class="flex-wrapper">
+            <h2 gh-id="${ghId}.title">${json.title}</h2>
+            ${json.text 
+                ? `<div class="text-wrapper">
+                    <p class="text" gh-id="${ghId}.text"></p>
+
+                    ${json.moreText
+                        ? ` <p class="text more" gh-id="${ghId}.moreText"></p>
+                            <p class="button-more">
+                                <span>More</span> 
+                                <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.75261 13.8977L12.9671 13.8712L12.9936 3.65668C13.008 3.55027 12.9994 3.44199 12.9683 3.33919C12.9372 3.2364 12.8844 3.14148 12.8135 3.06086C12.7426 2.98024 12.6551 2.91581 12.5571 2.87192C12.4591 2.82804 12.3528 2.80572 12.2454 2.80649C12.138 2.80726 12.032 2.83109 11.9347 2.87637C11.8373 2.92165 11.7508 2.98733 11.681 3.06895C11.6112 3.15057 11.5598 3.24624 11.5302 3.34947C11.5006 3.4527 11.4935 3.56108 11.5094 3.66729L11.4776 11.3215L1.33732 1.18124C1.19673 1.04066 1.00606 0.961682 0.807246 0.961682C0.608431 0.961683 0.417756 1.04066 0.277172 1.18124C0.136588 1.32183 0.0576102 1.5125 0.0576098 1.71132C0.0576091 1.91013 0.136588 2.10081 0.277173 2.24139L10.4175 12.3817L2.76321 12.4135C2.56429 12.4142 2.37379 12.4939 2.23362 12.635C2.09346 12.7762 2.01511 12.9673 2.01581 13.1662C2.01651 13.3651 2.09621 13.5556 2.23737 13.6958C2.37853 13.8359 2.56959 13.9143 2.76851 13.9136L2.75261 13.8977Z" fill="#0E1011"/>
+                                </svg>
+                            </p>`
+                        : ''
+                    }
+
+                  </div>`
+                : ''
+            }
+            ${json.button
+                ? ` <div class="button-wrapper">
+                        <button-component data-placement="${json.button.placement}" data-popup-id="${json.button.popupId}" data-link="${json.button.link}">${json.button.text}</button-component>
+                    </div>`
+                : ''
+            }
+
+        </div>
+        <div class="video-wrapper">
+            <youtube-player data-poster="${json.video.poster}" data-link="${json.video.link}"></youtube-player>
+        </div>
+    </div>
+</section>

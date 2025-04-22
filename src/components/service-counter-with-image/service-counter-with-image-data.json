@@ -1,0 +1,40 @@
+{
+  "title": "Our impact in numbers",
+  "button": {
+    "text": "Button text",
+    "placement": "service-counter-with-image",
+    "popupId": "form"
+  },
+  "image": {
+    "src": "https://picsum.photos/800/600",
+    "alt": "background photo",
+    "title": " "
+  },
+  "items": [
+    {
+      "number": "4000",
+      "symbol": "+",
+      "text": "Renders"
+    },
+    {
+      "number": "10",
+      "symbol": "+",
+      "text": "Years"
+    },
+    {
+      "number": "550",
+      "symbol": "+",
+      "text": "Clients"
+    },
+    {
+      "number": "550",
+      "symbol": "+",
+      "text": "Clients"
+    },
+    {
+      "number": "1460",
+      "symbol": "+",
+      "text": "Projects"
+    }
+  ]
+}

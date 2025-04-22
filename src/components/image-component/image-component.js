@@ -1,5 +1,6 @@
 import html from './image-component.html';
 import brokenImageHtml from './image-component-broken-image.html';
+import placeholderImageHtml from './image-component-placeholder.html';
 
 class ImageComponent extends GHComponent {
     constructor() {
@@ -42,7 +43,7 @@ class ImageComponent extends GHComponent {
 
         // If no valid src or data URL is provided, render a placeholder
         if (!this.src && !this.dataUrl && !this.dataSrc) {
-            super.render(brokenImageHtml);
+            super.render(placeholderImageHtml);
             return;
         }
 
