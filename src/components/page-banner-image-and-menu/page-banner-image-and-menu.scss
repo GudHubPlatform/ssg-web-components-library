@@ -1,0 +1,207 @@
+page-banner-image-and-menu {
+    --brightnessLevel: 0.5;
+    --gapInContainer: 50px;
+    --maxWidthForMenu: 90%;
+    --thicknessOfActiveElementBorder: 3px;
+    --arrowColor: #000;
+    --heightOfFirstVisibleContent: 150px;
+
+    --swiper-navigation-size: 17px;
+    --swiper-navigation-color: #fff;
+    --swiper-navigation-background-color: #FFFFFF4D;
+    --swiper-navigation-sides-offset: 15px;
+
+
+    .page-banner-image-and-menu {
+        position: relative;
+
+        //background-image
+        image-component {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                filter: brightness(var(--brightnessLevel));
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 0;
+            height: 100%;
+
+            .flex-wrapper {
+                height: 100%;
+
+                gap: var(--gapInContainer);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+        }
+
+        // plain menu
+        .render-links {
+            max-width: var(--maxWidthForMenu);
+            border-bottom: var(--block-primary-border) var(--block-primary-border-color);
+
+            // button {
+            //     display: flex;
+            //     justify-content: center;
+            //     align-items: center;
+            //     min-height: 50px;
+            //     min-width: 50px;
+            //     border-radius: 100%;
+            //     background: #FFFFFF4D;
+            //     margin-bottom: 18px;
+            //     margin-right: 3px;
+            //     cursor: pointer;
+
+            //     &:hover {
+            //         background-color: #fff;
+            //         svg path {
+            //             stroke: #0E1011;
+            //         }
+            //     }
+            // }
+
+            .render-links-wrapper {
+                padding: 20px 30px;
+                width: max-content;
+
+                &:has(.render-link.active) {
+                    border-bottom: var(--thicknessOfActiveElementBorder) solid var(--accent-color);
+                }
+
+                .render-link {
+                    color: #FFFFFF;
+                    font-size: 18px;
+
+                    &.active {
+                        color: var(--accent-color);
+                    }
+
+                    &:hover {
+                        color: var(--accent-color);
+                    }
+                }
+            }
+
+            .navigation_wrapper {
+                display: block;
+
+                .swiper-button-next,
+                .swiper-button-prev {
+                    height: 50px;
+                    width: 50px;
+                    background: var(--swiper-navigation-background-color);
+                    border-radius: 100%;
+                    top: 91%;
+
+                    &:hover {
+                        --swiper-navigation-background-color: #fff;
+                        --swiper-navigation-color: #0E1011;
+                    }
+                }
+            }
+        }
+
+        .button-more {
+            display: none;
+        }
+    }
+
+    .services-dropdown-wrapper {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    page-banner-image-and-menu .page-banner-image-and-menu {
+
+        .render-links {
+            display: none;
+        }
+
+        .container .flex-wrapper {
+            gap: 20px;
+
+            button-component {
+                width: 100%;
+            }
+
+        }
+    }
+    // vertical menu
+    page-banner-image-and-menu .page-banner-image-and-menu .services-dropdown-wrapper {
+        display: block;
+        position: relative;
+        z-index: 0;
+        color: var(--text-color);
+        margin-top: 15px;
+
+        .services-dropdown {
+            height: var(--heightOfFirstVisibleContent);
+            overflow: hidden;
+
+            &.open {
+                height: 100%;
+            }
+
+            li {
+                border-bottom: 1px solid var(--block-primary-border-color);
+                margin-bottom: 10px;
+
+                &.active {
+                    a {
+                        color: var(--accent-color);
+                    }
+                }
+
+                &:hover {
+                    a {
+                        color: var(--accent-color);
+                    }
+                }
+
+                a {
+                    display: block;
+                    padding: 5px;
+                    color: var(--text-color);
+                }
+            }
+        }
+        .read-more {
+            padding: 10px 0;
+
+            span {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                width: fit-content;
+                cursor: pointer;
+                color: var(--text-color);
+            }
+            svg path {
+                fill: var(--arrowColor);
+            }
+
+            &:hover {
+                span {
+                    color: var(--accent-color);
+                }
+                svg path {
+                    fill: var(--accent-color);
+                }
+            }
+        }
+
+    }
+}

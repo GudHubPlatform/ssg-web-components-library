@@ -1,0 +1,48 @@
+{
+    "title": "Title",
+    "subtitle": "Subtitle",
+    "image": {
+        "src": "https://picsum.photos/800/600",
+        "alt": "back photo",
+        "title": " "
+    },
+    "button": {
+        "popupId": "form",
+        "placement": "here",
+        "text": "Button Text"
+    },
+    "menu": [
+      {
+        "title": "Example link",
+        "link": "/components/#1"
+      },
+      {
+        "title": "Example link",
+        "link": "/components/#2"
+      },      {
+        "title": "Example link",
+        "link": "/components/#3"
+      },      {
+        "title": "Example link",
+        "link": "/components/#4"
+      },      {
+        "title": "Example link",
+        "link": "/components/#5"
+      },      {
+        "title": "Example link",
+        "link": "/components/#6"
+      },      {
+        "title": "Example link",
+        "link": "/components/#7"
+      },      {
+        "title": "Example link",
+        "link": "/components/#8"
+      },      {
+        "title": "Example link",
+        "link": "/components/#9"
+      },      {
+        "title": "Example link",
+        "link": "/components/#10"
+      }
+    ]
+}

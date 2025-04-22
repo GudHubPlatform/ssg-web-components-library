@@ -1,0 +1,43 @@
+# Attributes:
+
+data-heading-outer
+
+# Component data-object:
+
+("?" means "unnecessary")
+
+```json
+{
+  "title": "Title Lorem ipsum",
+  "subtitle": "Subtitle Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  "heading_level": "1",
+  "buttons": {
+    "primary": {
+      "popupId": "form",
+      "placement": "banner",
+      "text": "Primary"
+    },
+    "secondary": {
+      "popupId": "form",
+      "placement": "banner",
+      "text": "Secondary"
+    }
+  },
+  "list": [
+    "Lorem ipsum dolor sit amet",
+    "Donec ut placerat velit",
+    "Morbi euismod elementum nibh",
+    "Phasellus venenatis volutpat lectus",
+    "In hac habitasse platea dictumst"
+  ],
+  "texts": [
+    "Lorem ipsum dolor sit amet",
+    "Donec ut placerat velit"
+  ],
+  "image": {
+    "src": "",
+    "alt": "image alt",
+    "title": "image title"
+  }
+}
+```

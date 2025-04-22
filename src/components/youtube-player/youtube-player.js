@@ -1,5 +1,7 @@
 import html from './youtube-player.html';
 import './youtube-player.scss';
+const placeholder = "https://picsum.photos/800/600"
+
 
 class YoutubePlayer extends GHComponent {
     constructor() {
@@ -7,12 +9,12 @@ class YoutubePlayer extends GHComponent {
     }
 
     onServerRender() {
-        this.poster = this.getAttribute('data-poster') || null
+        this.poster = this.getAttribute('data-poster') || placeholder;
 
         super.render(html);
     }
     onClientRender() {
-        const link = this.getAttribute('data-link') || null
+        const link = this.getAttribute('data-link') || "https://www.youtube-nocookie.com/embed/rbl_OZrO_9o?si=RI2SOpBgc3wgr7fQ&autoplay=1"
         this.video = `
             <iframe 
                 src="${link}"

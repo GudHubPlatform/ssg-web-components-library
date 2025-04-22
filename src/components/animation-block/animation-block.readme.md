@@ -1,0 +1,81 @@
+# Attributes:
+
+None
+
+# Component data-object:
+
+("?" means "unnecessary")
+
+```json
+{
+  "title": "Інтеграції CRM для Бізнесу",
+  "subtitle": "Поєднайте інструменти, якими ви користуєтеся разом з вашим бізнесом для максимальної продуктивності та ефективності компанії.",
+  "buttons?": {
+    "primary": {
+      "popupId": "form",
+      "placement": "integrations",
+      "text": "Спробувати CRM"
+    },
+    "secondary": {
+      "popupId": "form",
+      "placement": "integrations",
+      "text": "Більше Інтеграцій"
+    }
+  },
+  "rows": [
+    {
+      "row": [
+        {
+          "image": {
+            "src": "",
+            "title": "Facebook - іконка",
+            "alt": "Facebook"
+          },
+          "title": "Facebook",
+          "subtitle": "Комунікації"
+        },
+        {
+          "image": {
+            "src": "",
+            "title": "Slack - іконка",
+            "alt": "Slack"
+          },
+          "title": "Slack",
+          "subtitle": "Комунікації"
+        },
+        {
+          "image": {
+            "src": "",
+            "title": "Telegram - іконка",
+            "alt": "Telegram"
+          },
+          "title": "Telegram",
+          "subtitle": "Комунікації"
+        }
+      ]
+    },
+    {
+      "row": [
+        {
+          "image": {
+            "src": "",
+            "title": "Turbo-sms - іконка",
+            "alt": "Turbo-sms"
+          },
+          "title": "Turbo-sms",
+          "subtitle": "Комунікації"
+        },
+        {
+          "image": {
+            "src": "",
+            "title": "Viber - іконка",
+            "alt": "Viber"
+          },
+          "title": "Viber",
+          "subtitle": "Комунікації"
+        }
+      ]
+    }
+  ]
+}
+```

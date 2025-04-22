@@ -1,0 +1,62 @@
+<section class="page-banner-image-and-menu">
+    <image-component src="${json.image.src}" alt="${json.image.alt}" title=" "></image-component>
+    <div class="container">
+        <div class="flex-wrapper">
+
+            ${breadcrumbs
+                ? `<breadcrumbs-component data-items='${breadcrumbs}'></breadcrumbs-component>` 
+                : ''
+            }
+
+            <h1 gh-id="${ghId}.title">${json.title}</h1>
+
+            ${json.subtitle ? 
+                `<p class="subtitle" gh-id="${ghId}.subtitle">${json.subtitle}</p>`
+                : ''
+            }
+
+            ${json.button ? 
+                `<button-component data-link="${json.button.link}" data-popup-id="${json.button.popupId}" data-placement="${json.button.placement}">${json.button.text}</button-component>`
+                : ''
+            }
+
+            ${menuList ?
+                `<div class="render-links">
+                    <div class="relative_wrapper">
+                        <div class="swiper">
+                            <div class="swiper-wrapper">
+                                ${menuList.reduce((acc, item) => {
+                                    return acc + `
+                                        <div class="render-links-wrapper swiper-slide">
+                                            <a class="render-link" href="${item.link}">${item.title}</a>
+                                        </div>
+                                    `;
+                                }, '')}
+                            </div>
+                        </div>
+                        <div class="navigation_wrapper">
+                            <div class="reviews_slider_prev swiper-button-prev"></div>
+                            <div class="reviews_slider_next swiper-button-next"></div>
+                        </div>
+                    </div>
+                </div>` 
+                : ''
+            }
+
+        </div>
+    </div>
+    ${menuList ?
+        `<div class="services-dropdown-wrapper container">
+                <ul class="services-dropdown"></ul>
+                <p class="read-more">
+                    <span>
+                        <span class="text">More Services</span>
+                        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.20206 10.4367L10.3737 10.4155L10.3949 2.24393C10.4064 2.15879 10.3995 2.07217 10.3746 1.98993C10.3498 1.9077 10.3075 1.83176 10.2508 1.76727C10.194 1.70277 10.1241 1.65123 10.0457 1.61612C9.96724 1.58101 9.8822 1.56316 9.79629 1.56377C9.71038 1.56438 9.62561 1.58345 9.54771 1.61967C9.4698 1.6559 9.4006 1.70844 9.34476 1.77374C9.28893 1.83904 9.24779 1.91557 9.2241 1.99815C9.20042 2.08074 9.19476 2.16745 9.2075 2.25241L9.18206 8.3758L1.06983 0.263575C0.957362 0.151108 0.804824 0.0879247 0.645772 0.0879246C0.48672 0.087925 0.334181 0.151107 0.221713 0.263575C0.109246 0.376042 0.0460634 0.528581 0.046063 0.687634C0.0460627 0.846686 0.109246 0.999223 0.221713 1.11169L8.33394 9.22392L2.21055 9.24936C2.0514 9.24993 1.899 9.31368 1.78687 9.42661C1.67474 9.53954 1.61206 9.69238 1.61262 9.85153C1.61319 10.0107 1.67694 10.1631 1.78987 10.2752C1.9028 10.3873 2.05564 10.45 2.21479 10.4494L2.20206 10.4367Z" fill="#000"/>
+                        </svg>
+                    </span>
+                </p>
+        </div>`
+        : ''
+    }
+</section>

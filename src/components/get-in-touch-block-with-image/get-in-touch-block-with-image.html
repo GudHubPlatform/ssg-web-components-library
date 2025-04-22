@@ -1,0 +1,18 @@
+<section class="get-in-touch-block-with-image">
+    <image-component src="${json.image.src}" alt="${json.image.alt}" title="${json.image.title}"></image-component>
+    <div class="container">
+        <div class="get_in_touch_top">
+            ${json.title 
+                ? `<h2 gh-id="${ghId}.title">${json.title}</h2>` 
+                : ''
+            }
+            ${json.subtitle 
+                ? `<p class="subtitle" gh-id="${ghId}.subtitle">${json.subtitle}</p>` 
+                : ''
+            }
+        </div>
+        <div class="get_in_touch_bottom">
+            <get-in-touch-form ${getFormAttributes()}></get-in-touch-form>
+        </div>
+    </div>
+</section>

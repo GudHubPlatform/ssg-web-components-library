@@ -1,7 +1,9 @@
 <section class="animation-block">
     <div class="container">
         <h2 gh-id="${ghId}.title"></h2>
-        <p class="subtitle" gh-id="${ghId}.subtitle"></p>
+        ${json.subtitle ? `
+            <p gh-id="${ghId}.subtitle" class="subtitle"> SUBTITLE </p>
+        ` : ''}
         <div class="rows-wrapper">
             ${ rows.reduce((acc, row, rowIndex) => {
                     return acc + `
