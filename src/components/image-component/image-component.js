@@ -2,46 +2,31 @@ import html from './image-component.html';
 import brokenImageHtml from './image-component-broken-image.html';
 
 class ImageComponent extends GHComponent {
-    /*
-        * src - path to static image 
-        * alt - alternative text
-        * title - title
-        * lazyload - if image must have loading="lazy" 
-        * dataSrc - path to file in which image from dataUrl will be saved  || example: data-src="/asserts/blog/top-web-development-books.jpg"
-        * dataUrl - url to image || example: data-url="https://gudhub.com/userdata/29883/1083204.jpg"
-        * data-rerender - for rerendering this component on client
-        * width - width
-        * height - height
-    */
-
     constructor() {
         super();
-        this.placeholder = "data:image/gif+xml;base64,R0lGODlhAwADAJEAAMCZTW0zDCoaGgAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgOS4xLWMwMDIgNzkuYjdjNjRjY2Y5LCAyMDI0LzA3LzE2LTEyOjM5OjA0ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjYuMCAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTY4Q0M3MUExNTI0MTFGMEI2NDZGMTVGMjU0Mzc4MkYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTY4Q0M3MUIxNTI0MTFGMEI2NDZGMTVGMjU0Mzc4MkYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1NjhDQzcxODE1MjQxMUYwQjY0NkYxNUYyNTQzNzgyRiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1NjhDQzcxOTE1MjQxMUYwQjY0NkYxNUYyNTQzNzgyRiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgH//v38+/r5+Pf29fTz8vHw7+7t7Ovq6ejn5uXk4+Lh4N/e3dzb2tnY19bV1NPS0dDPzs3My8rJyMfGxcTDwsHAv769vLu6ubi3trW0s7KxsK+urayrqqmop6alpKOioaCfnp2cm5qZmJeWlZSTkpGQj46NjIuKiYiHhoWEg4KBgH9+fXx7enl4d3Z1dHNycXBvbm1sa2ppaGdmZWRjYmFgX15dXFtaWVhXVlVUU1JRUE9OTUxLSklIR0ZFRENCQUA/Pj08Ozo5ODc2NTQzMjEwLy4tLCsqKSgnJiUkIyIhIB8eHRwbGhkYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAAAAAAALAAAAAADAAMAAAIEVABmUAA7";
+        this.placeholder = null;
     }
 
     async onServerRender() {
-        await this.render('server')
-    }
-
-    scriptForImproveLCP() {
-        const sources = this.querySelectorAll('picture source');
-        sources.forEach(element => {
-            const trueSource = element.getAttribute('data-srcset');
-            element.setAttribute('srcset', trueSource);
-        });
+        await this.render('server');
     }
 
     async onClientReady() {
         window.addEventListener('load', () => {
-            this.scriptForImproveLCP();
+            let timeout;
+            clearTimeout(timeout);
+
+            timeout = setTimeout(() => {
+                this.generateSources();
+            }, 3000);
         });
 
         if (this.hasAttribute('data-rerender')) {
-            await this.render('client')
+            await this.render('client');
         }
     }
 
-    async render (caller) {
+    async render(caller) {
         this.src = this.getAttribute('src');
         this.alt = this.getAttribute('alt');
         this.title = this.getAttribute('title');
@@ -51,6 +36,9 @@ class ImageComponent extends GHComponent {
         
         this.width = this.hasAttribute('width') ? this.getAttribute('width') : false;
         this.height = this.hasAttribute('height') ? this.getAttribute('height') : false;
+
+        this.maxWidth = this.hasAttribute('data-max-width') ? this.getAttribute('data-max-width') : false;
+        this.isCrop = this.hasAttribute('data-crop') ? this.hasAttribute('data-crop') : false;
 
         // If no valid src or data URL is provided, render a placeholder
         if (!this.src && !this.dataUrl && !this.dataSrc) {
@@ -75,43 +63,147 @@ class ImageComponent extends GHComponent {
                 }
             }
         }
-        
+
         try {
+            const imageSrc = await this.uploadImagePath(this.src);
+        
             await new Promise((resolve, reject) => {
                 this.image = new Image();
-    
+        
                 this.image.addEventListener('load', () => {
                     const srcHasParams = this.image.getAttribute('src').includes('?');
                     let src = srcHasParams ? this.image.getAttribute('src').split('?')[0] : this.image.getAttribute('src');
                     if (src.includes('&')) {
                         src = src.split('&')[0];
                     }
-                    
+        
                     this.extension = src.substring(src.lastIndexOf('.'));
                     this.path = src.substring(0, src.length - this.extension.length);
                     this.imageWidth = this.image.naturalWidth;
-                    
+        
                     this.dispatchEvent(new Event('loaded'));
                     resolve();
                 });
-    
+        
                 this.image.addEventListener('error', () => {
                     console.error(`Image load failed: ${this.src}`);
                     super.render(brokenImageHtml);
                     reject();
                 });
-    
-                this.image.src = this.src;
+        
+                this.image.src = imageSrc;
             });
-
+        
             super.render(html);
         } catch (error) {
             console.error(`Rendering failed for ${this.src}.`);
         }
 
+        // TODO: need to fix CSR
         // caller == 'client' ? this.clientRender() : super.render(html);
     }
 
+    async uploadImagePath(imagePath) {
+        const path = `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}/upload-image-path`;
+
+        try {
+            const response = await fetch(path, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ imagePath, maxWidth: Number(this.maxWidth), isCrop: this.isCrop })
+            });
+            const data = await response.json();
+            this.placeholder = data?.base64_placeholder;
+
+            return this.placeholder;
+        } catch (error) {
+            console.error('Error:', error);
+            return imagePath;
+        }
+    }
+
+    generateSources() {
+        const picture = this?.querySelector('picture');
+        const imageFromPicture = picture?.querySelector('img');
+    
+        if (!imageFromPicture) {
+            console.warn('No image found inside <picture>.');
+            return;
+        }
+    
+        const dataSrc = this.getAttribute('data-src');
+        const dataUrl = this.getAttribute('data-url');
+        const fallbackSrc = this.getAttribute('src');
+        const dataMaxWidth = parseInt(this.getAttribute('data-max-width'), 10);
+    
+        const src = dataSrc && dataUrl ? dataSrc : fallbackSrc;
+    
+        if (!src) {
+            console.warn('No valid image source found.');
+            return;
+        }
+    
+        const lastDotIndex = src.lastIndexOf('.');
+        if (lastDotIndex === -1) {
+            console.warn('Invalid image source format.');
+            return;
+        }
+    
+        const extension = src.substring(lastDotIndex);
+        const mimeType = `image/${extension.slice(1)}`;
+        const path = src.substring(0, lastDotIndex);
+    
+        const sources = [];
+    
+        const createResponsiveSources = (media, suffix = '') => {
+            sources.push(this.createSource(media, `${path}${suffix}${extension}.webp`, 'image/webp'));
+            sources.push(this.createSource(media, `${path}${suffix}${extension}`, mimeType));
+        };
+    
+        // Add sources based on available size information
+        if (!isNaN(dataMaxWidth)) {
+            // Largest case: original image ≥ 1200px
+            if (dataMaxWidth >= 1200) {
+                createResponsiveSources('(max-width: 600px)', '-600');
+                createResponsiveSources('(min-width: 600px) and (max-width: 1200px)', '-1200');
+                createResponsiveSources('(min-width: 1200px)', '');
+            }
+            // Medium case: original image ≥ 600px but < 1200px
+            else if (dataMaxWidth >= 600) {
+                createResponsiveSources('(max-width: 600px)', '-600');
+                createResponsiveSources('(min-width: 600px)', '');
+            }
+            // Small image: only original is available
+            else {
+                createResponsiveSources(null, '');
+            }
+        } else {
+            // If max width is not known, assume all variants exist
+            createResponsiveSources('(max-width: 600px)', '-600');
+            createResponsiveSources('(min-width: 600px) and (max-width: 1200px)', '-1200');
+            createResponsiveSources('(min-width: 1200px)', '');
+        }
+    
+        // Add sources to the <picture> element
+        if (picture && sources.length) {
+            picture.prepend(...sources.reverse());
+        }
+    
+        // Set fallback <img> source
+        if (imageFromPicture) {
+            imageFromPicture.src = `${path}${extension}`;
+        }
+    }       
+    
+    createSource(media, srcset, type) {
+        const source = document.createElement('source');
+        if (media) source.setAttribute('media', media);
+        source.setAttribute('srcset', srcset);
+        source.setAttribute('type', type);
+        return source;
+    }
+
+    // TODO: need to fix CSR
     // clientRender() {
     //     this.innerHTML = /*html*/`
     //     <picture data-natural-width="${this.imageWidth}">
