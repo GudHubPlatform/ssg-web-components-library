@@ -24,7 +24,6 @@ export {
     gridItemExpandableVertical,
     gridItemNumbered
 } from './components/grid-component/grid-items/config.js';
-export { topBanner } from './components/top-banner/config.js';
 export { counterSection } from './components/counter-section/config.js';
 export { getInTouchBlock } from './components/get-in-touch-block/config.js';
 export { buttonComponent } from './components/button-component/config.js';
@@ -36,7 +35,6 @@ export { editMode } from './components/edit-mode/config.js';
 export { imageComponent } from './components/image-component/config.js';
 export { fullscreenImageAndText } from './components/fullscreen-image-and-text/config.js';
 export { tabsComponent } from './components/tabs/config.js';
-export { faqComponent } from './components/faq/config.js';
 export { breadcrumbsComponent } from './components/breadcrumbs/config.js';
 export { textOnly } from './components/text-only/config.js';
 export { reviewsSlider } from './components/reviews-slider/config.js';

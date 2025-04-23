@@ -15,6 +15,12 @@ None
       {
         "title": "string",
         "text": "string",
+        "button?": {
+          "link": "/link/",
+          "popupId": "form",
+          "placement": "accordion-only",
+          "text": "Button Text"
+        },
         "list?": {
           "tag?": "string", // "ol" or "ul"
           "items": ["string", "string", "string"]
@@ -25,6 +31,12 @@ None
       {
         "title": "string",
         "text": "string",
+        "button?": {
+          "link": "/link/",
+          "popupId": "form",
+          "placement": "accordion-only",
+          "text": "Button Text"
+        },
         "list?": {
           "tag?": "string", // "ol" or "ul"
           "items": ["string", "string", "string"]

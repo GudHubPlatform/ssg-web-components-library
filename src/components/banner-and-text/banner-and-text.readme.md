@@ -9,11 +9,14 @@ data-chapter
 ```json
 {
   "title": "Title Ac accumsan",
+  "subtitle": "Subtitle",
   "offer": "Offer pulvinar ultricies",
   "offer_subtitle": "subtitle Nulla ac accumsan arcu, eget ullamcorper ipsum. Fusce ultricies pulvinar ultricies. Donec lacinia orci sed tellus condimentum hendrerit.",
-  "button": {
-    "class": "btn",
-    "text": "Спробуй Зараз"
+  "button?": {
+    "link": "/link/",
+    "popupId": "form",
+    "placement": "about-us-image-counter",
+    "text": "Button Text"
   },
   "items": [
     {
@@ -26,7 +29,7 @@ data-chapter
     }
   ],
   "image": {
-    "src": "",
+    "src": "path to image",
     "alt": "image alt",
     "title": "image title"
   }

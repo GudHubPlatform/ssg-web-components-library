@@ -11,6 +11,7 @@ None
   "title": "Title Lorem ipsum",
   "subtitle?": "Subtitle Etiam sed ullamcorper tortor, sit amet dictum est. Ut posuere dolor sodales euismod feugiat",
   "button?": {
+    "link": "/link/",
     "popupId": "form",
     "placement": "about-us-image-counter",
     "text": "Button Text"

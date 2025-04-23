@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/GudHubPlatform/ssg-web-components-library/issues"
   },
-  "homepage": "https://github.com/GudHubPlatform/ssg-web-components-library#readme"
+  "homepage": "https://github.com/GudHubPlatform/ssg-web-components-library#readme",
+  "dependencies": {
+    "swiper": "^11.2.6"
+  }
 }

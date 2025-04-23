@@ -14,6 +14,9 @@ class ContactUsBlock extends GHComponent {
     async onServerRender() {
         this.ghId = this.getAttribute('data-gh-id') || null;
         this.json = await super.getGhData(this.ghId);
+        this.listTitles = this.getAttribute('data-list-titles') || null;
+        this.listTitles = JSON.parse(this.listTitles) || {address: "Address", email: "Email", phone: "Phone"};
+
         this.subtitle = this.json.subtitle;
         
         this.info = window.getConfig().componentsConfigs.generalInfo[0];

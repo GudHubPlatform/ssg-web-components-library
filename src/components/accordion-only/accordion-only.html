@@ -1,11 +1,13 @@
 <section>
     <div class="container">
-        ${json.title ? `
-            <h2 gh-id="${ghId}.title"> TITLE </h2>
-        ` : ''}
-        ${json.subtitle ? `
-            <p class="subtitle" gh-id="${ghId}.subtitle"> SUBTITLE </p>
-        ` : ''}
+        <div class="top-wrapper">
+            ${json.title ? `
+                <h2 gh-id="${ghId}.title"> TITLE </h2>
+            ` : ''}
+            ${json.subtitle ? `
+                <p class="subtitle" gh-id="${ghId}.subtitle"> SUBTITLE </p>
+            ` : ''}
+        </div>
         <div class="flex-wrapper">
             ${json.items.reduce((acc, itemsColumn, indexColumn) => acc + `
                 <div class="accordion-column">
@@ -38,7 +40,7 @@
                                         </div>
                                     ` : ''}
                                     ${item.button ? `
-                                        <button-component class="btn" data-popup-id="${item.button.popupId}" data-placement="${item.button.placement}">${item.button.text}</button-component>    
+                                        <button-component class="btn" data-link="${item.button.link}" data-popup-id="${item.button.popupId}" data-placement="${item.button.placement}">${item.button.text}</button-component>    
                                     ` : ''}
                                 </div>
                             </div>

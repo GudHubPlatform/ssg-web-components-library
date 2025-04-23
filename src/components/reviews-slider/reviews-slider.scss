@@ -63,11 +63,14 @@ reviews-slider {
         .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after, .swiper-button-next:after, .swiper-rtl .swiper-button-prev:after {
             content: none;
         }
-        .swiper-button-next, .swiper-button-prev {
+        .swiper-button-next,
+        .swiper-button-prev {
+            cursor: pointer;
             position: static;
             width: 40px;
             height: 40px;
             margin-top: 0;
+
             svg circle {
                 transition: all .2s ease;
             }

@@ -2,17 +2,17 @@
     <div class="container">
         <h2 gh-id="${ghId}.title">Title</h2>
         ${json.subtitle ? `
-            <div class="subtitle" gh-id="${ghId}.subtitle">Subtitle</div>    
+            <div class="subtitle" gh-id="${ghId}.subtitle">Subtitle</div>
         ` : ''}
         <div class="flex-wrapper">
             <div class="left primary-block">
                 <div class="image">
-                    <img src="${image.src ? image.src : svgPlaceholder}" alt="${image.alt}" title="${image.title}">
+                    <image-component lazyload src="${image.src}" alt="${image.alt}" title="${image.title}"></image-component>
                 </div>
                 <div class="offer" gh-id="${ghId}.offer"></div>
                 <div class="offer_subtitle text" gh-id="${ghId}.offer_subtitle"></div>
                 ${json.button ? `
-                    <button-component data-popup-id="${json.button.popupId}" data-placement="${json.button.placement}">${json.button.text}</button-component>
+                    <button-component data-link="${json.button.link}" data-popup-id="${json.button.popupId}" data-placement="${json.button.placement}">${json.button.text}</button-component>
                 ` : ''}
             </div>
             <div class="right">

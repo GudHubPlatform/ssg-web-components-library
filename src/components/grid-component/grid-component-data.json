@@ -1,35 +1,102 @@
 {
-    "title": "Title",
-    "subtitle": "Subtitle",
-    "button": {
-      "popupId": "form",
-      "placement": "grid-component",
-      "text": "Button Text"
-    },
-    "items": [
-      {
-        "title": "Lorem ipsum dolor sit amet",
-        "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
+  "title": "Готові CRM для Навчання",
+  "subtitle": "Використовуючи GudHub, ви зможете керувати будь-якими робочими процесами, не витрачаючи на це багато часу та зусиль. Готові CRM рішення допоможуть вам розвивати компанію та досягати поставлених цілей.",
+  "button": {
+    "popupId": "form",
+    "placement": "ready-for-business",
+    "text": "Замовити Консультацію"
+  },
+  "items": [
+    {
+      "letter": "G",
+      "title": "CRM Для Дитячих Центрів",
+      "button": {
+        "link": "/crm-dytjachogo-tsentru/",
+        "text": "Дізнатись Більше"
       },
-      {
-        "title": "Lorem ipsum dolor sit amet",
-        "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
-      },
-      {
-        "title": "Lorem ipsum dolor sit amet",
-        "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
-      },
-      {
-        "title": "Lorem ipsum dolor sit amet",
-        "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
-      },
-      {
-        "title": "Lorem ipsum dolor sit amet",
-        "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
-      },
-      {
-        "title": "Lorem ipsum dolor sit amet",
-        "text": "Aliquam ullamcorper nunc tempus molestie venenatis."
+      "list": [
+        "Оптимізація робочого часу операторів;",
+        "Формування статистики;",
+        "Збільшення кількості продажів."
+      ],
+      "icon": {
+        "src": "/assets/images/icons/beach-ball.svg",
+        "alt": "CRM Для Кол Центру - іконка",
+        "title": "CRM Для Кол Центру"
       }
-    ]
+    },
+    {
+      "letter": "U",
+      "title": "CRM для Навчального Центру",
+      "button": {
+        "link": "/crm-navchalnyj-tsentr/",
+        "text": "Дізнатись Більше"
+      },
+      "list": [
+        "Ведення бази лідів компанії;",
+        "Зберігання документів в одному місці;",
+        "Зручне відслідковування проєктів."
+      ],
+      "icon": {
+        "src": "/assets/images/icons/book.svg",
+        "alt": "CRM для Навчального Центру - іконка",
+        "title": "CRM для Навчального Центру"
+      }
+    },
+    {
+      "letter": "D",
+      "title": "CRM Система для Школи",
+      "button": {
+        "link": "/crm-shkola/",
+        "text": "Дізнатись Більше"
+      },
+      "list": [
+        "Ведення цифрового журналу;",
+        "Створення розкладу занять;",
+        "Контроль роботи дітей в особистому кабінеті."
+      ],
+      "icon": {
+        "src": "/assets/images/icons/graduate.svg",
+        "alt": "CRM Система для Школи - іконка",
+        "title": "CRM Система для Школи"
+      }
+    },
+    {
+      "letter": "H",
+      "title": "CRM для школи танців",
+      "button": {
+        "link": "/crm-shkola-tanciv/",
+        "text": "Дізнатись Більше"
+      },
+      "list": [
+        "Електронна Телефонія;",
+        "Взаємодія з Співробітниками;",
+        "Звітність та Аналітика;",
+        "Інвентаризація."
+      ],
+      "icon": {
+        "src": "/assets/images/icons/ballet-shoes.svg",
+        "alt": "CRM Система для рекрутера - іконка",
+        "title": "CRM Система для рекрутера"
+      }
+    },
+    {
+      "letter": "U",
+      "title": "CRM Для Школи Англійського",
+      "button": {
+        "link": "/crm-shkola-anglijskogo/",
+        "text": "Дізнатись Більше"
+      },
+      "list": [
+        "Облік відвідуваності та абонементів;",
+        "Онлайн запис на заняття;",
+        "Організація складських обліків."
+      ],
+      "icon": {
+        "src": "/assets/images/icons/conversation.svg",
+        "alt": "CRM Система Для Фітнес Центру - іконка",
+        "title": "CRM Система Для Фітнес Центру"
+      }
+    }
+  ]
 }
