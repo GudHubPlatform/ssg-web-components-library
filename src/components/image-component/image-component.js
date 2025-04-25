@@ -66,8 +66,14 @@ class ImageComponent extends GHComponent {
         }
 
         try {
-            const imageSrc = await this.uploadImagePath(this.src);
-        
+            let imageSrc = null;
+
+            if (this.dataSrc && this.dataUrl) {
+                imageSrc = await this.uploadImagePath(this.dataSrc, this.dataUrl);
+            } else if (this.src) {
+                imageSrc = await this.uploadImagePath(this.src);
+            }
+
             await new Promise((resolve, reject) => {
                 this.image = new Image();
         
@@ -104,14 +110,19 @@ class ImageComponent extends GHComponent {
         // caller == 'client' ? this.clientRender() : super.render(html);
     }
 
-    async uploadImagePath(imagePath) {
+    async uploadImagePath(imagePath, imageUrl = null) {
         const path = `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}/upload-image-path`;
 
         try {
             const response = await fetch(path, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ imagePath, maxWidth: Number(this.maxWidth), isCrop: this.isCrop })
+                body: JSON.stringify({
+                    imagePath,
+                    imageUrl,
+                    maxWidth: Number(this.maxWidth),
+                    isCrop: this.isCrop
+                })
             });
             const data = await response.json();
             this.placeholder = data?.base64_placeholder;
