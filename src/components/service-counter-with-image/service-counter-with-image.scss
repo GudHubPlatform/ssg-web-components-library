@@ -1,0 +1,91 @@
+service-counter-with-image {
+
+    .service-counter-with-image {
+
+        .top {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+        .counters-wrapper {
+            position: relative;
+        }
+        .counters {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .counter_item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            max-width: 230px;
+            text-align: center;
+            position: relative;
+            z-index: 0;
+            padding: 50px 15px;
+        }
+        .counter {
+            &_top {
+                display: flex;
+                font-size: 46px;
+                font-weight: 700;
+                line-height: 120%;
+                color: var(--block-primary-h-color);
+                margin-bottom: 10px;
+            }
+            &_bottom {
+                text-align: center;
+                color: var(--block-primary-text-color);
+            }
+        }
+        image-component {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            
+            img {
+                width: 100%;
+                height: 100%;
+                max-height: 100%;
+
+                object-fit: cover;
+                object-position: center center;
+                filter: brightness(50%);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    service-counter-with-image {
+        .service-counter-with-image .counters {
+            align-items: center;
+            flex-direction: column;
+        }
+    }
+}
+
+
+@media screen and (max-width: 400px) {
+    service-counter-with-image .service-counter-with-image {
+        .counters {
+            .counter_item {
+                .counter_top {
+                    font-size: 32px;
+                    line-height: 35px;
+                }
+                .counter_bottom {
+                    font-size: 14px;
+                    line-height: 18px;
+                    max-width: 140px;
+                }
+            }
+        }
+    }
+}

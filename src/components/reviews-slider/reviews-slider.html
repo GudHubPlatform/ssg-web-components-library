@@ -5,27 +5,26 @@
         <div class="relative_wrapper">
             <div class="reviews_slider ${ghId} swiper">
                 <div class="swiper-wrapper reviews_wrapper">
-                    ${
-                    items.reduce((acc, item, index) => {
-                    return acc + `
-                    <div class="review_item swiper-slide" >
-                        <div class="author_position">
-                            <div class="author" gh-id="${ghId}.items.${index}.author"> AUTHOR </div>
-                            <div class="position" gh-id="${ghId}.items.${index}.position"> POSITION </div>
-                        </div>
-                        <div class="review_text">
-                            <p gh-id="${ghId}.items.${index}.review"> REVIEW </p>
-                        </div>
-                        <div class="stars">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none"><path d="M7.9 0.262695L10.0748 4.60986L14.9378 5.30696L11.4189 8.69076L12.2496 13.4688L7.9 11.2129L3.55039 13.4688L4.38109 8.69076L0.862182 5.30696L5.72519 4.60986L7.9 0.262695Z" fill="#05183A"/></svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none"><path d="M7.9 0.262695L10.0748 4.60986L14.9378 5.30696L11.4189 8.69076L12.2496 13.4688L7.9 11.2129L3.55039 13.4688L4.38109 8.69076L0.862182 5.30696L5.72519 4.60986L7.9 0.262695Z" fill="#05183A"/></svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none"><path d="M7.9 0.262695L10.0748 4.60986L14.9378 5.30696L11.4189 8.69076L12.2496 13.4688L7.9 11.2129L3.55039 13.4688L4.38109 8.69076L0.862182 5.30696L5.72519 4.60986L7.9 0.262695Z" fill="#05183A"/></svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none"><path d="M7.9 0.262695L10.0748 4.60986L14.9378 5.30696L11.4189 8.69076L12.2496 13.4688L7.9 11.2129L3.55039 13.4688L4.38109 8.69076L0.862182 5.30696L5.72519 4.60986L7.9 0.262695Z" fill="#05183A"/></svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none"><path d="M7.9 0.262695L10.0748 4.60986L14.9378 5.30696L11.4189 8.69076L12.2496 13.4688L7.9 11.2129L3.55039 13.4688L4.38109 8.69076L0.862182 5.30696L5.72519 4.60986L7.9 0.262695Z" fill="#05183A"/></svg>
-                        </div>
-                    </div>
-                    `
-                    }, '')
+                    ${items.reduce((acc, item, index) => {
+                        return acc + `
+                            <div class="review_item swiper-slide" >
+                                <div class="author_position">
+                                    <div class="author" gh-id="${ghId}.items.${index}.author"> AUTHOR </div>
+                                    <div class="position" gh-id="${ghId}.items.${index}.position"> POSITION </div>
+                                </div>
+                                <div class="review_text">
+                                    <p gh-id="${ghId}.items.${index}.review"> REVIEW </p>
+                                </div>
+                                <div class="stars">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none"><path d="M7.9 0.262695L10.0748 4.60986L14.9378 5.30696L11.4189 8.69076L12.2496 13.4688L7.9 11.2129L3.55039 13.4688L4.38109 8.69076L0.862182 5.30696L5.72519 4.60986L7.9 0.262695Z" fill="#05183A"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none"><path d="M7.9 0.262695L10.0748 4.60986L14.9378 5.30696L11.4189 8.69076L12.2496 13.4688L7.9 11.2129L3.55039 13.4688L4.38109 8.69076L0.862182 5.30696L5.72519 4.60986L7.9 0.262695Z" fill="#05183A"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none"><path d="M7.9 0.262695L10.0748 4.60986L14.9378 5.30696L11.4189 8.69076L12.2496 13.4688L7.9 11.2129L3.55039 13.4688L4.38109 8.69076L0.862182 5.30696L5.72519 4.60986L7.9 0.262695Z" fill="#05183A"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none"><path d="M7.9 0.262695L10.0748 4.60986L14.9378 5.30696L11.4189 8.69076L12.2496 13.4688L7.9 11.2129L3.55039 13.4688L4.38109 8.69076L0.862182 5.30696L5.72519 4.60986L7.9 0.262695Z" fill="#05183A"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none"><path d="M7.9 0.262695L10.0748 4.60986L14.9378 5.30696L11.4189 8.69076L12.2496 13.4688L7.9 11.2129L3.55039 13.4688L4.38109 8.69076L0.862182 5.30696L5.72519 4.60986L7.9 0.262695Z" fill="#05183A"/></svg>
+                                </div>
+                            </div>
+                        `
+                        }, '')
                     }
                 </div>
             </div>

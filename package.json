@@ -1,6 +1,6 @@
 {
   "name": "@gudhub/ssg-web-components-library",
-  "version": "1.0.57",
+  "version": "1.0.58",
   "description": "",
   "main": "index.js",
   "type": "module",
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/GudHubPlatform/ssg-web-components-library/issues"
   },
-  "homepage": "https://github.com/GudHubPlatform/ssg-web-components-library#readme"
+  "homepage": "https://github.com/GudHubPlatform/ssg-web-components-library#readme",
+  "dependencies": {
+    "swiper": "^11.2.6"
+  }
 }

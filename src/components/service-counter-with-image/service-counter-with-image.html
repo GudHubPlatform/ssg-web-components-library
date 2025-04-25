@@ -1,0 +1,31 @@
+<section class="service-counter-with-image">
+    <div class="container">
+        <div class="top">
+            ${json.title
+                ? `<p class="h2" gh-id="${ghId}.title">${json.title}</p>`
+                : ''}
+            ${json.button
+                ? `<button-component data-placement="${json.button.placement}" data-popup-id="${json.button.popupId}" data-link="${json.button.link}">${json.button.text}</button-component>`
+                : ''
+            }
+        </div>
+    </div>
+    <div class="counters-wrapper">
+        <image-component src="${json.image.src}" alt="${json.image.alt}" title=" " ></image-component>
+        <div class="container counters">
+            ${
+                json.items.reduce((acc, item, index) => {
+                    return acc + `
+                    <div class="counter_item">
+                        <div class="counter_top">
+                            <span class="counter_num" gh-id="${ghId}.items.${index}.number">44</span>
+                            <span class="counter_symbol" gh-id="${ghId}.items.${index}.symbol">+</span>
+                        </div>
+                        <div class="counter_bottom" gh-id="${ghId}.items.${index}.text">Custom Software Development</div>
+                    </div>
+                    `
+                }, '')
+            }
+        </div>
+    </div>
+</section>

@@ -13,7 +13,7 @@
                                 ${phoneIcon}
                             </div>
                             <div class="flex-wrapper">
-                                <h3>Phone:</h3>
+                                <h3>${listTitles.phone}:</h3>
                                 <span>${phone}</span>
                             </div>
                         </a>
@@ -25,7 +25,7 @@
                         ${phoneIcon}
                     </div>
                     <div class="left_side">
-                        <h3>Phone:</h3>
+                        <h3>${listTitles.phone}:</h3>
                         <div class="phones_wrapper">
                             ${phones.reduce((acc, phone, index) => acc + `
                                 <a href="tel:${phone.replace(/[ ()+-]/g, '')}"> 
@@ -42,7 +42,7 @@
                         ${mailIcon}
                     </div>
                     <div class="flex-wrapper">
-                        <h3>Email:</h3>
+                        <h3>${listTitles.email}:</h3>
                         <span>${info.email}</span>
                     </div>
                 </a>
@@ -53,7 +53,7 @@
                        ${addressIcon}
                     </div>
                     <div class="flex-wrapper">
-                        <h3>Address:</h3>
+                        <h3>${listTitles.address}:</h3>
                         <span>${info.fullAddress}</span>
                     </div>
                 </a>

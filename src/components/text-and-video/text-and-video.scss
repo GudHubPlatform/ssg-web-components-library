@@ -1,0 +1,87 @@
+text-and-video {
+    .flex-wrapper {
+        display: flex;
+        gap: 24px;
+        margin-bottom: 50px;
+    }
+
+    h2, 
+    .text-wrapper {
+        width: 50%;
+    }
+
+    h2 {
+        text-align: start;
+    }
+
+    .text-wrapper {
+        .text {
+            color: var(--text-color);
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+        }
+        .button-more {
+            margin-top: 10px;
+            font-size: 22px;
+            line-height: 25.3px;
+            color: var(--accent-color);
+            width: fit-content;
+            position: relative;
+            cursor: pointer;
+            
+            svg path {
+                fill: var(--accent-color);
+            }
+        }
+    }
+    .flex-wrapper:has(.button-wrapper) h2 {
+        width: 100%;
+    }
+    .button-wrapper {
+        display: flex;
+        justify-content: end;
+        width: 50%;
+    }
+
+    .hidden {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+    }
+    .visible {
+        max-height: 500px;
+        opacity: 1;
+    }
+    .text.more.visible + .button-more svg {
+        transform: rotateX(-190deg);
+    }
+}
+
+@media screen and (max-width: 950px) {
+    text-and-video {
+        .text-and-video .container .flex-wrapper {
+            flex-direction: column;
+
+            h2,
+            .text-wrapper {
+                width: 100%;
+            }
+            h2 {
+                text-align: center;
+            }
+            .button-wrapper {
+                justify-content: center;
+                width: 100%;
+            }
+        }
+    }
+}
+@media screen and (max-width: 650px) {
+    text-and-video .text-and-video {
+        .video-wrapper iframe {
+            height: 300px;
+        }
+        .button-wrapper {
+            display: block;
+        }
+    }
+}
