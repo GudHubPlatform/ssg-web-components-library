@@ -66,12 +66,10 @@ class ImageComponent extends GHComponent {
         }
 
         try {
-            let imageSrc = null;
-
             if (this.dataSrc && this.dataUrl) {
-                imageSrc = await this.uploadImagePath(this.dataSrc, this.dataUrl);
+                await this.uploadImagePath(this.dataSrc, this.dataUrl);
             } else if (this.src) {
-                imageSrc = await this.uploadImagePath(this.src);
+                await this.uploadImagePath(this.src);
             }
 
             await new Promise((resolve, reject) => {
@@ -98,7 +96,7 @@ class ImageComponent extends GHComponent {
                     reject();
                 });
         
-                this.image.src = imageSrc;
+                this.image.src = this.placeholder || this.src;
             });
         
             super.render(html);
@@ -126,8 +124,6 @@ class ImageComponent extends GHComponent {
             });
             const data = await response.json();
             this.placeholder = data?.base64_placeholder;
-
-            return this.placeholder;
         } catch (error) {
             console.error('Error:', error);
             return imagePath;
