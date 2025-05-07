@@ -19,7 +19,7 @@ class ImageComponent extends GHComponent {
 
             timeout = setTimeout(() => {
                 this.generateSources();
-            }, 2000);
+            }, 1000);
         });
 
         if (this.hasAttribute('data-rerender')) {
@@ -164,8 +164,8 @@ class ImageComponent extends GHComponent {
         const sources = [];
     
         const createResponsiveSources = (media, suffix = '') => {
-            sources.push(this.createSource(media, `${path}${suffix}${extension}.webp`, 'image/webp'));
             sources.push(this.createSource(media, `${path}${suffix}${extension}`, mimeType));
+            sources.push(this.createSource(media, `${path}${suffix}${extension}.webp`, 'image/webp'));
         };
     
         // Add sources based on available size information
