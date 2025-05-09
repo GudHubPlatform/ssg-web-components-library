@@ -14,15 +14,15 @@ class ImageComponent extends GHComponent {
 
     async onClientReady() {
         window.addEventListener('load', () => {
-            // TODO: need to uncomment this when the image load delay is be done
-            // const timeoutForBase = this.hasAttribute('image-load-delay') ? this.getAttribute('image-load-delay') : 0;
+            // We delay image loading to improve LCP Google PageSpeed
+            const timeoutForBase = this.hasAttribute('image-load-delay') ? this.getAttribute('image-load-delay') : 500;
 
             let timeout;
             clearTimeout(timeout);
 
             timeout = setTimeout(() => {
                 this.generateSources();
-            }, 3000);
+            }, timeoutForBase);
         });
 
         if (this.hasAttribute('data-rerender')) {
