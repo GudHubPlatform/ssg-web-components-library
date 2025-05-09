@@ -19,7 +19,7 @@ class ImageComponent extends GHComponent {
 
             timeout = setTimeout(() => {
                 this.generateSources();
-            }, 1000);
+            }, 1500);
         });
 
         if (this.hasAttribute('data-rerender')) {
