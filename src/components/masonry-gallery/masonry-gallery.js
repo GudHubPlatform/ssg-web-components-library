@@ -184,7 +184,7 @@ class MasonryGallery extends GHComponent {
 
             if (fullImageSrc) {
                 img.classList.add('open-modal');
-                img.setAttribute('data-modal-image', typeof(+imageSrc) === 'number' ? `https://gudhub.com/userdata/35113/${fullImageSrc}.jpg` : fullImageSrc);
+                img.setAttribute('data-modal-image', fullImageSrc);
             }
 
             img.setAttribute('data-image-loading', 'true');
