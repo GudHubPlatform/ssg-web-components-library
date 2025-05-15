@@ -48,6 +48,7 @@ class ImageComponent extends GHComponent {
         this.dataSrc = this.getAttribute('data-src');
         this.dataUrl = this.getAttribute('data-url');
         this.isHighPriority = this.getAttribute('data-high-priority');
+        this.isRenderOnServer = this.hasAttribute('data-render-on-server');
 
         this.width = this.hasAttribute('width') ? this.getAttribute('width') : false;
         this.height = this.hasAttribute('height') ? this.getAttribute('height') : false;
@@ -128,7 +129,7 @@ class ImageComponent extends GHComponent {
     
                 super.render(html);
                 
-                if (this.isHighPriority) {
+                if (this.isRenderOnServer) {
                     this.generateSources();
                 }
             } catch (error) {
