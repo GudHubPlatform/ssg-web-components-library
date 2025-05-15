@@ -2,6 +2,8 @@ import html from './image-component.html';
 import brokenImageHtml from './image-component-broken-image.html';
 import placeholderImageHtml from './image-component-placeholder.html';
 
+import highPriorityQueue from './highPriorityQueue.js';
+
 class ImageComponent extends GHComponent {
     constructor() {
         super();
@@ -9,47 +11,68 @@ class ImageComponent extends GHComponent {
     }
 
     async onServerRender() {
-        await this.render('server');
+        await this.render();
     }
 
     async onClientReady() {
-        window.addEventListener('load', () => {
-            // We delay image loading to improve LCP Google PageSpeed
-            const timeoutForBase = this.hasAttribute('image-load-delay') ? this.getAttribute('image-load-delay') : 500;
+        const isHighPriority = this.getAttribute('data-high-priority');
+        if (isHighPriority) {
+            const img = new Image();
+            img.src = "/assets/images/homepage-banner-1200.jpg.webp";
 
-            let timeout;
-            clearTimeout(timeout);
+            const imageLoadPromise = new Promise((resolve, reject) => {
+                img.onload = () => {
+                    this.generateSources();
 
-            timeout = setTimeout(() => {
-                this.generateSources();
-            }, timeoutForBase);
-        });
+                    resolve();
+                };
+            });
+            
+            highPriorityQueue.add(imageLoadPromise);
+            return;
+        }
+    
+        await highPriorityQueue.wait();
+        this.generateSources();
 
         if (this.hasAttribute('data-rerender')) {
             await this.render('client');
         }
     }
 
-    async render(caller) {
+    async render() {
         this.src = this.getAttribute('src');
         this.alt = this.getAttribute('alt');
         this.title = this.getAttribute('title');
         this.lazyload = this.hasAttribute('lazyload');
         this.dataSrc = this.getAttribute('data-src');
         this.dataUrl = this.getAttribute('data-url');
-        
+        this.isHighPriority = this.getAttribute('data-high-priority');
+
         this.width = this.hasAttribute('width') ? this.getAttribute('width') : false;
         this.height = this.hasAttribute('height') ? this.getAttribute('height') : false;
-
+    
         this.maxWidth = this.hasAttribute('data-max-width') ? this.getAttribute('data-max-width') : false;
         this.isCrop = this.hasAttribute('data-crop') ? this.hasAttribute('data-crop') : false;
-
+    
         // If no valid src or data URL is provided, render a placeholder
         if (!this.src && !this.dataUrl && !this.dataSrc) {
             super.render(placeholderImageHtml);
             return;
         }
-
+    
+        // // Add the current image to high-priority queue if it has the attribute
+        // if (this.isHighPriority) {
+        //     highPriorityQueue.add(this.renderImage());
+        //     return; // Skip rendering for now, will continue after high-priority queue finishes
+        // }
+    
+        // // If no high-priority images are pending, proceed with regular rendering
+        // await highPriorityQueue.wait(); // Wait for all high-priority images to finish
+        await this.renderImage();
+    }
+    
+    async renderImage() {
         // Download image from GudHub (this.dataUrl) to cache (this.dataSrc)
         if (!window.disableImagesRegeneration) {
             if (this.dataSrc && this.dataUrl) {
@@ -67,49 +90,54 @@ class ImageComponent extends GHComponent {
                 }
             }
         }
+    
+        const renderLogic = async () => {
+            try {
+                if (this.dataSrc && this.dataUrl) {
+                    await this.uploadImagePath(this.dataSrc, this.dataUrl);
+                } else if (this.src) {
+                    await this.uploadImagePath(this.src);
+                }
+    
+                await new Promise((resolve, reject) => {
+                    this.image = new Image();
+            
+                    this.image.addEventListener('load', () => {
+                        const srcHasParams = this.image.getAttribute('src').includes('?');
+                        let src = srcHasParams ? this.image.getAttribute('src').split('?')[0] : this.image.getAttribute('src');
+                        if (src.includes('&')) {
+                            src = src.split('&')[0];
+                        }
+            
+                        this.extension = src.substring(src.lastIndexOf('.'));
+                        this.path = src.substring(0, src.length - this.extension.length);
+                        this.imageWidth = this.image.naturalWidth;
 
-        try {
-            if (this.dataSrc && this.dataUrl) {
-                await this.uploadImagePath(this.dataSrc, this.dataUrl);
-            } else if (this.src) {
-                await this.uploadImagePath(this.src);
+                        this.dispatchEvent(new Event('loaded'));
+                        resolve();
+                    });
+            
+                    this.image.addEventListener('error', () => {
+                        console.error(`Image load failed: ${this.src}`);
+                        super.render(brokenImageHtml);
+                        reject();
+                    });
+            
+                    this.image.src = this.placeholder || this.src;
+                });
+    
+                super.render(html);
+                
+                if (this.isHighPriority) {
+                    this.generateSources();
+                }
+            } catch (error) {
+                console.error(`Rendering failed for ${this.src}.`);
             }
-
-            await new Promise((resolve, reject) => {
-                this.image = new Image();
-        
-                this.image.addEventListener('load', () => {
-                    const srcHasParams = this.image.getAttribute('src').includes('?');
-                    let src = srcHasParams ? this.image.getAttribute('src').split('?')[0] : this.image.getAttribute('src');
-                    if (src.includes('&')) {
-                        src = src.split('&')[0];
-                    }
-        
-                    this.extension = src.substring(src.lastIndexOf('.'));
-                    this.path = src.substring(0, src.length - this.extension.length);
-                    this.imageWidth = this.image.naturalWidth;
-        
-                    this.dispatchEvent(new Event('loaded'));
-                    resolve();
-                });
-        
-                this.image.addEventListener('error', () => {
-                    console.error(`Image load failed: ${this.src}`);
-                    super.render(brokenImageHtml);
-                    reject();
-                });
-        
-                this.image.src = this.placeholder || this.src;
-            });
-        
-            super.render(html);
-        } catch (error) {
-            console.error(`Rendering failed for ${this.src}.`);
-        }
-
-        // TODO: need to fix CSR
-        // caller == 'client' ? this.clientRender() : super.render(html);
-    }
+        };
+    
+        await renderLogic();
+    }    
 
     async uploadImagePath(imagePath, imageUrl = null) {
         const path = `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}/upload-image-path`;
@@ -136,7 +164,7 @@ class ImageComponent extends GHComponent {
     generateSources() {
         const picture = this?.querySelector('picture');
         const imageFromPicture = picture?.querySelector('img');
-    
+
         if (!imageFromPicture) {
             console.warn('No image found inside <picture>.');
             return;
