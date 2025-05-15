@@ -37,6 +37,7 @@ class ImageComponent extends GHComponent {
         this.lazyload = this.hasAttribute('lazyload');
         this.dataSrc = this.getAttribute('data-src');
         this.dataUrl = this.getAttribute('data-url');
+        this.isRenderOnServer = this.getAttribute('data-render-on-server');
         
         this.width = this.hasAttribute('width') ? this.getAttribute('width') : false;
         this.height = this.hasAttribute('height') ? this.getAttribute('height') : false;
@@ -103,6 +104,10 @@ class ImageComponent extends GHComponent {
             });
         
             super.render(html);
+
+            if (this.isRenderOnServer) {
+                this.generateSources();
+            }
         } catch (error) {
             console.error(`Rendering failed for ${this.src}.`);
         }
