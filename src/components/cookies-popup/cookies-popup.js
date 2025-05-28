@@ -4,8 +4,7 @@ import "./cookies-popup.scss";
 class CookiesPopup extends GHComponent {
     constructor() {
         super();
-        this.inEU = false;
-        fetch("https://ipapi.co/json/").then((response) => response.json()).then((data) => this.inEU = data.in_eu);
+        this.linkToPage = this.getAttribute('data-page') || "/privacy-policy/";
     }
 
     async onServerRender() {
@@ -13,9 +12,20 @@ class CookiesPopup extends GHComponent {
     }
 
     async onClientReady() {
-        if (this.inEU) {
-            if (localStorage.getItem("agreeWithCookies") === false) {
+        let inEU = localStorage.getItem("inEU");
 
+        if (inEU == null) {
+            await fetch("https://ipapi.co/json/").then((response) => response.json()).then((data) => inEU = data.in_eu);
+            localStorage.setItem("inEU", inEU)
+        }
+
+        inEU = true; // для теста
+
+        if (inEU) {
+            let hasDayPassed = this.checkTime();
+            let showPopup = (localStorage.getItem("agreeWithCookies") == null) || (localStorage.getItem("agreeWithCookies") === "false" && hasDayPassed);
+
+            if (showPopup) {
                 this.classList.add("show");
 
                 const script = document.createElement('script');
@@ -32,38 +42,73 @@ class CookiesPopup extends GHComponent {
                 `;
 
                 document.querySelector('head').prepend(script);
-
-            } else {
-                setTimeout(() => {
-
-                    gtag('consent', 'update', {
-                        'ad_storage': 'granted',
-                        'analytics_storage': 'granted',
-                        'functionality_storage': 'granted',
-                        'security_storage': 'granted',
-                        'personalization_storage': 'granted',
-                        'wait_for_update': 500
-                    });
-
-                }, 3500);
             }
         }
-
     }
 
-    gotIt() {
+    async gotIt() {
         localStorage.setItem("agreeWithCookies", "true");
         this.classList.add("hide");
 
-        gtag('consent', 'update', {
-            'ad_storage': 'granted',
-            'analytics_storage': 'granted',
-            'functionality_storage': 'granted',
-            'security_storage': 'granted',
-            'personalization_storage': 'granted',
-            'wait_for_update': 500
-        });
+        let ifGtagExist = await this.checkGtag();
+        if (ifGtagExist) {
+            gtag('consent', 'update', {
+                'ad_storage': 'granted',
+                'analytics_storage': 'granted',
+                'functionality_storage': 'granted',
+                'security_storage': 'granted',
+                'personalization_storage': 'granted',
+                'wait_for_update': 500
+            });
+        }
 
+    }
+    decline() {
+        const now = Date.now();
+        localStorage.setItem("cookieConsentTime", now.toString());
+
+        localStorage.setItem("agreeWithCookies", "false");
+        this.classList.add("hide");
+
+    }
+    close() {
+        this.classList.add("hide");
+    }
+
+    checkGtag() {
+        return new Promise((resolve) => {
+            const interval = setInterval(() => {
+                if (typeof gtag === 'function') {
+                    clearInterval(interval);
+                    resolve(true);
+                }
+            }, 1000);
+
+            setTimeout(() => {
+                clearInterval(interval);
+                resolve(false);
+            }, 5100);
+        });
+    }
+    checkTime() {
+        const savedTime = localStorage.getItem("cookieConsentTime");
+
+        if (savedTime) {
+            const savedTimestamp = parseInt(savedTime, 10);
+            const now = Date.now();
+
+            const oneDayInMs = 24 * 60 * 60 * 1000;
+
+            const hasDayPassed = now - savedTimestamp > oneDayInMs;
+
+            if (hasDayPassed) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
     }
 }
 
