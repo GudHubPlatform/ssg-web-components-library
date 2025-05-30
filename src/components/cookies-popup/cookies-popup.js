@@ -52,6 +52,8 @@ class CookiesPopup extends GHComponent {
 
                 document.querySelector('head').prepend(script);
             }
+
+            if(localStorage.getItem("agreeWithCookies") === "true") this.gotIt();
         }
     }
 
