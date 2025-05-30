@@ -40,6 +40,8 @@ class CookiesPopup extends GHComponent {
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('consent', 'default', {
+                        'ad_personalization': 'denied',
+                        'ad_user_data': 'denied',
                         'ad_storage': 'denied',
                         'analytics_storage': 'denied',
                         'functionality_storage': 'denied',
@@ -60,6 +62,8 @@ class CookiesPopup extends GHComponent {
         let ifGtagExist = await this.checkGtag();
         if (ifGtagExist) {
             gtag('consent', 'update', {
+                'ad_personalization': 'granted',
+                'ad_user_data': 'granted',
                 'ad_storage': 'granted',
                 'analytics_storage': 'granted',
                 'functionality_storage': 'granted',
