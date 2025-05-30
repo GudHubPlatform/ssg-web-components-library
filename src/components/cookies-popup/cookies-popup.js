@@ -10,16 +10,17 @@ class CookiesPopup extends GHComponent {
     async onServerRender() {
         super.render(html);
     }
-
     async onClientReady() {
         let inEU = localStorage.getItem("inEU");
 
-        if (inEU == null) {
-            await fetch("https://ipapi.co/json/").then((response) => response.json()).then((data) => inEU = data.in_eu);
-            localStorage.setItem("inEU", inEU)
+        try {
+            if (inEU == null) {
+                await fetch("https://ipapi.co/json/").then((response) => response.json()).then((data) => inEU = data.in_eu);
+                localStorage.setItem("inEU", inEU)
+            }
+        } catch (error) {
+            inEU = true; // This was done because the API had a limited number of requests.
         }
-
-        inEU = true; // для теста
 
         if (inEU) {
             let hasDayPassed = this.checkTime();
