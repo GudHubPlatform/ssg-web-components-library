@@ -15,17 +15,21 @@ class CookiesPopup extends GHComponent {
 
         try {
             if (inEU == null) {
-                await fetch("https://ipapi.co/json/").then((response) => response.json()).then((data) => {
-                    if (data.country === "UA") {
-                        inEU = true;
-                    } else {
-                        inEU = data.in_eu
-                    }
-                });
-                localStorage.setItem("inEU", inEU)
+                await fetch("https://ipapi.co/json/")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.country === "UA") {
+                            inEU = true;
+                        } else {
+                            inEU = data.in_eu;
+                        }
+                        localStorage.setItem("inEU", inEU.toString());
+                    });
+            } else {
+                inEU = (inEU === "true");
             }
         } catch (error) {
-            inEU = true; // This was done because the API had a limited number of requests.
+            inEU = true;
         }
 
         if (inEU) {
