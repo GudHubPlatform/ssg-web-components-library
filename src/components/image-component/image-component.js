@@ -13,17 +13,7 @@ class ImageComponent extends GHComponent {
     }
 
     async onClientReady() {
-        window.addEventListener('load', () => {
-            // We delay image loading to improve LCP Google PageSpeed
-            const timeoutForBase = this.hasAttribute('image-load-delay') ? this.getAttribute('image-load-delay') : 500;
-
-            let timeout;
-            clearTimeout(timeout);
-
-            timeout = setTimeout(() => {
-                this.generateSources();
-            }, timeoutForBase);
-        });
+        this.generateSources();
 
         if (this.hasAttribute('data-rerender')) {
             await this.render('client');
