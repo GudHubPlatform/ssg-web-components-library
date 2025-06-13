@@ -220,7 +220,8 @@ class GetInTouchForm extends GHComponent {
             const maxLength = tag === 'textarea' ? maxSymbols.long : maxSymbols[input.type];
             return acc + `
                 <div class="input-wrap col-${input.width}">
-                    <${tag} type="text" name=${input.name} placeholder="${input.placeholder}" ${JSON.parse(input.required) ? 'required' : ''} ${maxLength ? `maxlength=${maxLength}` : ''}></${tag}>
+                    ${input.title ? `<label for="${input.name}">${input.title}</label>` : ''}
+                    <${tag} type="text" name=${input.name} ${input.placeholder ? `placeholder="${input.placeholder}"` : ''} ${JSON.parse(input.required) ? 'required' : ''} ${maxLength ? `maxlength=${maxLength}` : ''}></${tag}>
                     ${input.type === 'email' || input.type === 'phone' ? `<span class="${input.type}-error">${input.errorText}</span>` : ''}
                 </div>
             `;
