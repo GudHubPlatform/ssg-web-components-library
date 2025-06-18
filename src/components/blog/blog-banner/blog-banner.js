@@ -7,10 +7,16 @@ class BlogBanner extends GHComponent {
 
     constructor() {
         super();
+        const homepageAttr = this.getAttribute('data-homepage');
+        try {
+            this.homepageObj = homepageAttr && JSON.parse(homepageAttr);
+        } catch (e) {
+            console.warn('Invalid data-homepage JSON:', `data-homepage='{"title": "Головна", "link": "/"}'`);
+            this.homepageObj = { title: 'Головна', link: '/' };
+        }
     }
 
     async onServerRender() {
-
         this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config[0]);
 
         let url = new URL(window.location.href);
@@ -40,10 +46,7 @@ class BlogBanner extends GHComponent {
             breadcrumbsTitle.innerHTML = this.json.title;
             
             this.breadcrumbs = JSON.stringify([
-                {
-                    title: 'Головна',
-                    link: '/'
-                },
+                this.homepageObj,
                 {
                     title: breadcrumbsTitle.innerText
                 }

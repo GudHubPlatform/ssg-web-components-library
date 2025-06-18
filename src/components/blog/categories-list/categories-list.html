@@ -2,8 +2,8 @@
     <div class="button text" onclick="openList()">${config.general_settings.categories}</div>
     <div class="list_wrapper">
         <ul class="categories_list flex-wrapper">
-            <li ${url == '/blog/' ? 'class="active"' : ''}>
-                <a href="/blog/" class="text btn empty">${config.general_settings.all_articles_button}</a>
+            <li ${url == `${allArticlesButtonLink}` ? 'class="active"' : ''}>
+                <a href="${allArticlesButtonLink}" class="text btn empty">${config.general_settings.all_articles_button}</a>
             </li>
             ${
                 categories.reduce((acc, category, index) => {
