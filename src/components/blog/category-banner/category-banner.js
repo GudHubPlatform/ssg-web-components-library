@@ -42,12 +42,12 @@ class CategoryBanner extends GHComponent {
 
         this.breadcrumbs = JSON.stringify([
             {
-                "title": "Головна",
-                "link": "/"
+                "title": this.config.breadcrumbs.homepage || "Головна",
+                "link": this.config.breadcrumbs.homepageLink || "/"
             },
             {
-                "title": this.config.breadcrumbs.blog,
-                "link": "/blog/"
+                "title": this.config.breadcrumbs.blog || "Блог",
+                "link": this.config.breadcrumbs.blogLink || "/blog/"
             },
             {
                 "title": this.title

@@ -110,7 +110,7 @@ class CommentsComponent extends GHComponent {
         }
 
         if (comment.name && comment.text) {
-            const { api_app_id } = window.getConfig().componentsConfigs.chapters.blog || window.getConfig().chapters.blog;
+            const { api_app_id } = window.getConfig().chapters.blog;
             const response = await fetch(`https://gudhub.com/api/services/prod/api/${api_app_id}/add-comment`, {
                 method: 'POST',
                 headers: {

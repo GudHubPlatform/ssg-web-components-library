@@ -28,6 +28,7 @@ class CategoriesList extends GHComponent {
         this.categories = this.categories.categories;
         this.url = new URL (window.location.href);
         this.url = this.url.searchParams.get('path');
+        this.allArticlesButtonLink = this.config.general_settings.all_articles_button_link || '/blog/'
         super.render(html);
     }
 
