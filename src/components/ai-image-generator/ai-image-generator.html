@@ -1,0 +1,43 @@
+<section>
+    <div class="container">
+        <div class="flex-wrapper start">
+            <ai-image-content data-gh-id="${ghId}"></ai-image-content>
+            <ai-image-compare data-before="${json.compare.before}" data-after="${json.compare.after}"></ai-image-compare>
+        </div>
+        <div class="result hidden">
+            <div class="images-wrapper">
+                <button class="btn download" onclick="downloadLatestBlobImage()">
+                    ${json.result.downloadButton}
+                    <svg width="15" height="17" viewBox="0 0 15 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.89435 1.29334C6.89435 0.989316 7.1408 0.74286 7.44482 0.742859C7.74884 0.742859 7.9953 0.989316 7.9953 1.29333L6.89435 1.29334ZM7.83407 11.5911C7.6191 11.8061 7.27056 11.8061 7.05558 11.5911L3.55238 8.08794C3.3374 7.87296 3.3374 7.52442 3.55238 7.30945C3.76735 7.09447 4.11589 7.09447 4.33087 7.30945L7.44483 10.4234L10.5588 7.30944C10.7738 7.09447 11.1223 7.09447 11.3373 7.30944C11.5523 7.52442 11.5523 7.87296 11.3373 8.08793L7.83407 11.5911ZM7.44482 1.29333L7.9953 1.29333L7.9953 11.2019L7.44483 11.2019L6.89435 11.2019L6.89435 1.29334L7.44482 1.29333Z" fill="#6CBE02"/>
+                        <path d="M0.839355 11.2019L0.839355 14.5048C0.839355 15.1128 1.33227 15.6057 1.94031 15.6057H12.9498C13.5579 15.6057 14.0508 15.1128 14.0508 14.5048V11.2019" stroke="#6CBE02" stroke-width="1.10095" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <ai-image-compare data class="generated hidden"></ai-image-compare>
+                <button-component data-placement="${json.result.popupButton.placement}" data-popup-id="${json.result.popupButton.popupId}">${json.result.popupButton.text}</button-component>
+                <img id="placeholder" src="" alt="placeholder" class="placeholder-image" />
+                <div id="loader" class="loader">
+                    <div class="spinner-circle"></div>
+                </div>
+            </div>
+
+            <div class="actions-wrapper">
+                <div class="input-wrapper">
+                    <textarea name="textarea" id="prompt">House, grass, trees, flowerbeds</textarea>
+                </div>
+                <div class="flex-buttons">
+                    <button class="btn primary regenerate-btn">${json.result.regenerate}</button>
+                    <button class="btn empty upload-image-button">
+                        ${json.result.new}
+                        <svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 19C12 19.5523 12.4477 20 13 20C13.5523 20 14 19.5523 14 19L12 19ZM13.7071 0.292894C13.3166 -0.0976315 12.6834 -0.0976314 12.2929 0.292892L5.92894 6.65685C5.53841 7.04738 5.53841 7.68054 5.92894 8.07107C6.31946 8.46159 6.95263 8.46159 7.34315 8.07107L13 2.41421L18.6569 8.07107C19.0474 8.46159 19.6805 8.46159 20.0711 8.07107C20.4616 7.68055 20.4616 7.04738 20.0711 6.65686L13.7071 0.292894ZM14 19L14 1L12 1L12 19L14 19Z" fill="#0E1011"/>
+                            <path d="M1 18L1 24C1 25.1046 1.89543 26 3 26H23C24.1046 26 25 25.1046 25 24V18" stroke="#0E1011" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <input type="file" id="imageUpload" class="hidden" accept="image/*" />
+            </div>
+        </div>
+    </div>
+ </section>
