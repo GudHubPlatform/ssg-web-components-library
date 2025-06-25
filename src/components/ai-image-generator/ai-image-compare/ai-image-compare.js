@@ -24,7 +24,15 @@ class AiImageCompare extends GHComponent {
             return;
         }
 
-        new window.ImageCompare(element).mount();
+        const options = {
+            smoothing: false,
+            controlColor: "#73c781",
+            controlShadow: false,
+            addCircle: true,
+            addCircleBlur: true,
+            hoverStart: true
+        }
+        new window.ImageCompare(element, options).mount();
     }
 
     addScripts() {

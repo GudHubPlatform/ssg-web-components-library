@@ -14,7 +14,7 @@ ai-image-generator {
         .images-wrapper {
             position: relative;
             max-width: 1058px;
-            max-height: 566px;
+            // max-height: 566px;
             width: 100%;
             height: 100%;
             overflow: hidden;
@@ -47,6 +47,7 @@ ai-image-generator {
                     cursor: pointer;
                 }
             }
+
             button-component div.btn {
                 bottom: 15px;
                 left: 50%;
@@ -75,7 +76,6 @@ ai-image-generator {
                 height: 52px;
                 max-width: 580px;
                 width: 100%;
-
 
                 textarea {
                     border-radius: 6px;
@@ -162,10 +162,12 @@ ai-image-generator {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-
-        z-index: 100;
-        width: 140px;
-        height: 140px;
+        height: 100%;
+        width: 100%;
+        display: grid;
+        place-items: center;
+        background: rgba(255, 255, 255, 0.7);
+        z-index: 10;
 
         .spinner-circle {
             width: 100%;
@@ -174,10 +176,10 @@ ai-image-generator {
             border-top: 20px solid #6CBE02;
             border-radius: 50%;
             animation: spin 1s linear infinite;
+            width: 140px;
+            height: 140px;
         }
     }
-
-
 
     .hidden {
         display: none;
@@ -205,6 +207,7 @@ ai-image-generator {
                     right: 5px;
                 }
             }
+
             .actions-wrapper {
                 flex-direction: column;
 
@@ -229,6 +232,7 @@ ai-image-generator {
         .loader {
             width: 70px;
             height: 70px;
+
             .spinner-circle {
                 border: 8px solid #DADADA;
                 border-top: 8px solid #6CBE02;
