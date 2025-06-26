@@ -254,11 +254,4 @@ ai-image-generator {
     ai-image-generator .result .images-wrapper button-component div.btn {
         width: 80%;
     }
-
-    ai-image-generator .result .images-wrapper {
-        .icv__img.icv__img-a,
-        .icv__img.icv__img-b {
-            max-height: 50vh;
-        }
-    }
 }
