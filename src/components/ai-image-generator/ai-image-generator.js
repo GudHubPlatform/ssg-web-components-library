@@ -10,6 +10,7 @@ class AiImageGenerator extends GHComponent {
         this.imageBefore = this.querySelector('ai-image-compare.generated img#image-before');
         this.imageAfter = this.querySelector('ai-image-compare.generated img#image-after');
         this.placeholderImage = this.querySelector('.result img#placeholder');
+        this.actionButtons = this.querySelectorAll('.images-wrapper .btn');
     }
 
     async onServerRender() {
@@ -35,6 +36,7 @@ class AiImageGenerator extends GHComponent {
         });
     
         fileInput.addEventListener("change", async () => {
+            this.toggleButtonsVision('hide');
             this.startContainer.classList.add("hidden");
             this.resultContainer.classList.remove("hidden");
             this.imageBefore.src = '';
@@ -42,16 +44,18 @@ class AiImageGenerator extends GHComponent {
             const file = fileInput.files[0];
             if (!file) return;
             this.imageBefore.src = this.createBlobImageElement(file);
+            this.imageCompareGenerated.classList.add("hidden");
+            this.placeholderImage.classList.remove("hidden");
             this.placeholderImage.src = this.createBlobImageElement(file);
     
             this.lastFile = file;
             const promptText = document.getElementById("prompt").value;
-    
+            
             await this.sendToServer(file, promptText);
-
+            
             this.placeholderImage.classList.add("hidden");
             this.imageCompareGenerated.classList.remove("hidden");
-
+            this.toggleButtonsVision('show');
         });
     
         regenerateBtn.addEventListener("click", async () => {
@@ -59,9 +63,11 @@ class AiImageGenerator extends GHComponent {
                 console.warn("No image has been uploaded yet.");
                 return;
             }
-    
+
+            this.toggleButtonsVision('hide');
             const promptText = document.getElementById("prompt").value;
             await this.sendToServer(this.lastFile, promptText);
+            this.toggleButtonsVision('show');
         });
     }
     
@@ -106,7 +112,7 @@ class AiImageGenerator extends GHComponent {
             loader.classList.add("hidden");
         }
     }
-      
+
     downloadLatestBlobImage() {
         const imageAfter = document.getElementById("image-after");
         const imgElement = imageAfter.querySelector("img");
@@ -134,9 +140,14 @@ class AiImageGenerator extends GHComponent {
             console.error("Failed to download image:", err);
           });
     }
-    
+
     createBlobImageElement(blob) {
         return URL.createObjectURL(blob);
+    }
+
+    toggleButtonsVision(vision) {
+        this.actionButtons.forEach(btn => btn.classList.toggle('hidden', vision === 'hide'));
+        this.actionButtons.forEach(btn => console.log(btn.classList));
     }
 }
 
