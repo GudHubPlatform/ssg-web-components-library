@@ -19,6 +19,8 @@ class AiImageCompare extends GHComponent {
 
     initImageCompare() {
         const element = this.querySelector("div#image-compare");
+        const imageAfter = element.querySelector('#image-after')
+
         if (!element || typeof window.ImageCompare === 'undefined') {
             console.error("ImageCompare is not available or element not found.");
             return;
@@ -33,6 +35,7 @@ class AiImageCompare extends GHComponent {
             hoverStart: true
         }
         new window.ImageCompare(element, options).mount();
+        imageAfter.classList.remove('hidden');
     }
 
     addScripts() {
