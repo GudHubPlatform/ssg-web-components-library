@@ -82,7 +82,7 @@ class AiImageGenerator extends GHComponent {
         loader.classList.remove("hidden");
     
         try {
-            const response = await fetch("https://ai.applet3d.com/api/image-upload", {
+            const response = await fetch("https://ai.applet3d.com/api/sketch-to-render-ai/image-upload", {
                 method: "POST",
                 body: formData,
             });
