@@ -36,23 +36,24 @@ class AiImageGenerator extends GHComponent {
         });
     
         fileInput.addEventListener("change", async () => {
+            const file = fileInput.files[0];
+            if (!file) return;
+
             this.toggleButtonsVision('hide');
             this.startContainer.classList.add("hidden");
             this.resultContainer.classList.remove("hidden");
             this.imageBefore.src = '';
 
-            const file = fileInput.files[0];
-            if (!file) return;
             this.imageBefore.src = this.createBlobImageElement(file);
             this.imageCompareGenerated.classList.add("hidden");
             this.placeholderImage.classList.remove("hidden");
             this.placeholderImage.src = this.createBlobImageElement(file);
-    
+
             this.lastFile = file;
             const promptText = document.getElementById("prompt").value;
-            
+
             await this.sendToServer(file, promptText);
-            
+
             this.placeholderImage.classList.add("hidden");
             this.imageCompareGenerated.classList.remove("hidden");
             this.toggleButtonsVision('show');
