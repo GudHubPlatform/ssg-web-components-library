@@ -1,11 +1,9 @@
 ai-image-compare {
     height: 100%;
-    width: fit-content;
     position: relative;
 
     #image-compare {
         height: 100%;
-        max-width: 920px;
     }
 
     &.generated {

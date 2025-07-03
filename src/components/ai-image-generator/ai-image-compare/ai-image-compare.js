@@ -15,6 +15,7 @@ class AiImageCompare extends GHComponent {
 
     async onClientRender() {
         this.initImageCompare();
+        this.applyCalculatedStylesFromImage();
     }
 
     initImageCompare() {
@@ -65,6 +66,34 @@ class AiImageCompare extends GHComponent {
 
         loadStyle();
         return loadScript();
+    }
+
+    applyCalculatedStylesFromImage() {
+        const imageCompare = this.querySelector('#image-compare');
+        const imageBefore = this.querySelector('#image-before');
+        const header = document.querySelector('header-component header');
+
+        if (!imageCompare || !imageBefore || !header) return;
+
+        const apply = () => {
+            const imageWidth = imageBefore.naturalWidth;
+            const imageHeight = imageBefore.naturalHeight;
+            const headerHeight = header.offsetHeight;
+
+            const viewportHeight = window.innerHeight;
+            const scale = viewportHeight / imageHeight;
+            const calculatedWidth = imageWidth * scale - headerHeight;
+            const calculatedMarginLeft = (calculatedWidth - window.innerWidth) / 2;
+
+            imageCompare.style.width = `${calculatedWidth}px`;
+            imageCompare.style.marginLeft = `-${calculatedMarginLeft}px`;
+        };
+
+        if (imageBefore.complete) {
+            apply();
+        } else {
+            imageBefore.addEventListener('load', apply);
+        }
     }
 }
 
