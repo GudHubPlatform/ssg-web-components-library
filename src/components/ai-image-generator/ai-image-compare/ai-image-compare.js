@@ -85,7 +85,7 @@ class AiImageCompare extends GHComponent {
             const calculatedWidth = imageWidth * scale - headerHeight;
             const calculatedMarginLeft = (calculatedWidth - window.innerWidth) / 2;
 
-            imageCompare.style.width = `${calculatedWidth}px`;
+            imageCompare.style.minWidth = `${calculatedWidth}px`;
             imageCompare.style.marginLeft = `-${calculatedMarginLeft}px`;
         };
 
