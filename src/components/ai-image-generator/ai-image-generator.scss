@@ -1,8 +1,15 @@
 ai-image-generator {
-    .flex-wrapper {
-        gap: 64px;
-        justify-content: center;
-        align-items: center;
+    section {
+        padding-top: 0px;
+    }
+
+    .container {
+        padding: 0px;
+    }
+
+    .generator-parts-wrapper {
+        position: relative;
+        overflow: hidden;
     }
 
     .result {
@@ -248,6 +255,7 @@ ai-image-generator {
         }
     }
 }
+
 @media screen and (max-width: 600px){
     ai-image-generator .result .images-wrapper button-component div.btn {
         width: 80%;
