@@ -117,29 +117,33 @@ class AiImageGenerator extends GHComponent {
     downloadLatestBlobImage() {
         const imageAfter = document.getElementById("image-after");
         const imgElement = imageAfter.querySelector("img");
-      
+
         if (!imgElement || !imgElement.src.startsWith("blob:")) {
             console.error("No blob image found to download.");
             return;
         }
-      
-        fetch(imgElement.src)
-          .then(response => response.blob())
-          .then(blob => {
-            const objectUrl = URL.createObjectURL(blob);
-        
-            const link = document.createElement("a");
-            link.href = objectUrl;
-            link.download = "downloaded-image.png";
-            document.body.appendChild(link);
-            link.click();
-        
-            document.body.removeChild(link);
-            URL.revokeObjectURL(objectUrl);
-          })
-          .catch(err => {
-            console.error("Failed to download image:", err);
-          });
+
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.onload = () => {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+
+            canvas.toBlob((blob) => {
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                link.download = "downloaded-image.jpg";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(link.href);
+            }, "image/jpeg", 1);
+        };
+        img.src = imgElement.src;
     }
 
     createBlobImageElement(blob) {
