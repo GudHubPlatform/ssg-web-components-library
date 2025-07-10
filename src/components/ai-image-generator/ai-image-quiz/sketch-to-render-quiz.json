@@ -1,0 +1,51 @@
+{
+    "title": "Select sketch type",
+    "variants": [
+        {
+            "name": "Exterior",
+            "thumbnail": "./assets/images/ai-tools/3d-image-of-interior-design.jpg",
+            "next_step": {
+                "title": "Select exterior style",
+                "variants": [
+                    {
+                        "name": "Traditional",
+                        "thumbnail": "./assets/images/ai-tools/3d-image-of-interior-design.jpg",
+                        "prompt": "traditional house, grass, trees, flowerbeds, photo, realistic photo, hdr image"
+                    },
+                    {
+                        "name": "Modern",
+                        "thumbnail": "./assets/images/ai-tools/3d-image-of-interior-design.jpg",
+                        "prompt": "modern house, grass, trees, flowerbeds, photo, realistic photo, hdr image"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Interior",
+            "thumbnail": "./assets/images/ai-tools/3d-image-of-interior-design.jpg",
+            "next_step": {
+                "title": "Select interior style",
+                "variants": [
+                    {
+                        "name": "Traditional",
+                        "thumbnail": "./assets/images/ai-tools/3d-image-of-interior-design.jpg",
+                        "prompt": "traditional interior, grass, trees, flowerbeds, photo, realistic photo, hdr image"
+                    },
+                    {
+                        "name": "Modern",
+                        "thumbnail": "./assets/images/ai-tools/3d-image-of-interior-design.jpg",
+                        "prompt": "modern interior, grass, trees, flowerbeds, photo, realistic photo, hdr image"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Floor Plan",
+            "thumbnail": "./assets/images/ai-tools/3d-image-of-interior-design.jpg"
+        },
+        {
+            "name": "Site Plan",
+            "thumbnail": "./assets/images/ai-tools/3d-image-of-interior-design.jpg"
+        }
+    ]
+}

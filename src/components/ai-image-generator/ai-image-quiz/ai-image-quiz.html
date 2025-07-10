@@ -1,0 +1,16 @@
+<div class="quiz">
+    <h2 class="quiz__title">${quizTitle}</h2>
+    <div class="quiz__grid">
+        ${ quizCardsData.reduce((acc, card, index) => (acc + `
+                <div class="quiz__question question" data-index="${index}">
+                    <div class="question__image">
+                        <img src="${card?.thumbnail}" alt="card-image" title="card-image" />
+                    </div>
+                    <div class="question__description">
+                        <p>${card?.name}</p>
+                    </div>
+                </div>
+            `
+        ), '')}
+    </div>
+</div>

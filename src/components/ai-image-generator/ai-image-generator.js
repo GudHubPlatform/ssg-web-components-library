@@ -21,6 +21,12 @@ class AiImageGenerator extends GHComponent {
     }
 
     async onClientRender() {
+        const quiz = this.querySelector("ai-image-quiz");
+        quiz.addEventListener("quizFinished", () => {
+            quiz.classList.add("hidden");
+            this.resultContainer.classList.remove("hidden");
+        });
+
         await this.uploadAndProcess();
     }
 
@@ -41,8 +47,14 @@ class AiImageGenerator extends GHComponent {
 
             this.toggleButtonsVision('hide');
             this.startContainer.classList.add("hidden");
-            this.resultContainer.classList.remove("hidden");
-            this.imageBefore.src = '';
+
+            const quiz = this.querySelector("ai-image-quiz");
+            quiz.classList.remove("hidden");
+
+            quiz.addEventListener("quizFinished", () => {
+                quiz.classList.add("hidden");
+                this.resultContainer.classList.remove("hidden");
+            });
 
             this.imageBefore.src = this.createBlobImageElement(file);
             this.imageCompareGenerated.classList.add("hidden");
