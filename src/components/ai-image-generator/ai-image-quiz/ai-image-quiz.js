@@ -28,7 +28,12 @@ class AiImageQuiz extends GHComponent {
                 if (selected?.next_step) {
                     this.loadStep(selected.next_step);
                 } else {
-                    this.dispatchEvent(new CustomEvent("quizFinished", { bubbles: true }));
+                    this.dispatchEvent(new CustomEvent("quizFinished", {
+                        bubbles: true,
+                        detail: {
+                            prompt: selected.prompt || ''
+                        }
+                    }));
                 }
             });
         });

@@ -4,6 +4,8 @@ import './ai-image-generator.scss';
 class AiImageGenerator extends GHComponent {
     constructor() {
         super();
+
+        // Element references
         this.startContainer = this.querySelector('.start');
         this.resultContainer = this.querySelector('.result');
         this.imageCompareGenerated = this.querySelector('ai-image-compare.generated');
@@ -11,20 +13,37 @@ class AiImageGenerator extends GHComponent {
         this.imageAfter = this.querySelector('ai-image-compare.generated img#image-after');
         this.placeholderImage = this.querySelector('.result img#placeholder');
         this.actionButtons = this.querySelectorAll('.images-wrapper .btn');
+
+        // State
+        this.selectedPrompt = '';
+        this.lastFile = null;
     }
 
     async onServerRender() {
         this.ghId = this.getAttribute('data-gh-id') || null;
         this.json = await super.getGhData(this.ghId);
-
         super.render(html);
     }
 
     async onClientRender() {
         const quiz = this.querySelector("ai-image-quiz");
-        quiz.addEventListener("quizFinished", () => {
+        quiz.addEventListener("quizFinished", async (event) => {
+            this.selectedPrompt = event.detail?.prompt || '';
+
             quiz.classList.add("hidden");
             this.resultContainer.classList.remove("hidden");
+
+            const promptTextarea = document.getElementById("prompt");
+            if (promptTextarea) {
+                promptTextarea.value = this.selectedPrompt;
+            }
+
+            if (this.lastFile) {
+                await this.sendToServer(this.lastFile, this.selectedPrompt);
+                this.placeholderImage.classList.add("hidden");
+                this.imageCompareGenerated.classList.remove("hidden");
+                this.toggleButtonsVision('show');
+            }
         });
 
         await this.uploadAndProcess();
@@ -40,10 +59,12 @@ class AiImageGenerator extends GHComponent {
                 fileInput.click();
             });
         });
-    
+
         fileInput.addEventListener("change", async () => {
             const file = fileInput.files[0];
             if (!file) return;
+
+            this.lastFile = file;
 
             this.toggleButtonsVision('hide');
             this.startContainer.classList.add("hidden");
@@ -51,26 +72,12 @@ class AiImageGenerator extends GHComponent {
             const quiz = this.querySelector("ai-image-quiz");
             quiz.classList.remove("hidden");
 
-            quiz.addEventListener("quizFinished", () => {
-                quiz.classList.add("hidden");
-                this.resultContainer.classList.remove("hidden");
-            });
-
             this.imageBefore.src = this.createBlobImageElement(file);
             this.imageCompareGenerated.classList.add("hidden");
             this.placeholderImage.classList.remove("hidden");
             this.placeholderImage.src = this.createBlobImageElement(file);
-
-            this.lastFile = file;
-            const promptText = document.getElementById("prompt").value;
-
-            await this.sendToServer(file, promptText);
-
-            this.placeholderImage.classList.add("hidden");
-            this.imageCompareGenerated.classList.remove("hidden");
-            this.toggleButtonsVision('show');
         });
-    
+
         regenerateBtn.addEventListener("click", async () => {
             if (!this.lastFile) {
                 console.warn("No image has been uploaded yet.");
@@ -78,41 +85,43 @@ class AiImageGenerator extends GHComponent {
             }
 
             this.toggleButtonsVision('hide');
+
             const promptText = document.getElementById("prompt").value;
             await this.sendToServer(this.lastFile, promptText);
+
             this.toggleButtonsVision('show');
         });
     }
-    
+
     async sendToServer(file, promptText) {
         const loader = document.getElementById("loader");
         const imageAfter = document.getElementById("image-after");
-    
+
         const formData = new FormData();
         formData.append("image", file);
         formData.append("prompt", promptText);
-    
+
         loader.classList.remove("hidden");
-    
+
         try {
             const response = await fetch("https://ai.applet3d.com/api/sketch-to-render-ai/image-upload", {
                 method: "POST",
                 body: formData,
             });
-    
+
             if (response.ok) {
                 const blob = await response.blob();
                 const objectURL = this.createBlobImageElement(blob);
                 this.imageAfter.src = objectURL;
-    
+
                 const imgElement = document.createElement("img");
                 imgElement.src = objectURL;
                 imgElement.style.maxWidth = "1920px";
                 imgElement.dataset.blob = "true";
-    
+
                 imageAfter.innerHTML = "";
                 imageAfter.appendChild(imgElement);
-    
+
                 imgElement.onload = () => {
                     loader.classList.add("hidden");
                 };
@@ -164,7 +173,6 @@ class AiImageGenerator extends GHComponent {
 
     toggleButtonsVision(vision) {
         this.actionButtons.forEach(btn => btn.classList.toggle('hidden', vision === 'hide'));
-        this.actionButtons.forEach(btn => console.log(btn.classList));
     }
 }
 
