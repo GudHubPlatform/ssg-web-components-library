@@ -66,9 +66,6 @@ export { PageBannerImageAndMenu } from './components/page-banner-image-and-menu/
 export { GoogleAnalytics } from './components/google-analytics/config.js';
 export { GoogleTag } from './components/google-tag/config.js';
 export { cookiesPopup } from './components/cookies-popup/config.js';
-export { AiImageGenerator } from './components/ai-image-generator/config.js';
-export { AiImageContent } from './components/ai-image-generator/ai-image-content/config.js';
-export { AiImageCompare } from './components/ai-image-generator/ai-image-compare/config.js';
 
 // export { liqPayComponent } from './components/liqpay-component/config.js';
 // export { htmlTextFromEditorJs } from './components/html-text-from-editor-js/config.js';
