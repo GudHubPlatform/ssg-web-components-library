@@ -176,21 +176,22 @@ class MasonryGallery extends GHComponent {
     async temporaryImage(imageId) {
         const baseUrl = `https://gudhub.com/userdata/35113/${imageId}`;
 
-        let url = `${baseUrl}.jpg`;
-        let response = await fetch(url, { method: "HEAD" });
+        return new Promise((resolve) => {
+            const jpgUrl = `${baseUrl}.jpg`;
+            const pngUrl = `${baseUrl}.png`;
 
-        if (response.ok) {
-            return url;
-        }
-
-        url = `${baseUrl}.png`;
-        response = await fetch(url, { method: "HEAD" });
-
-        if (response.ok) {
-            return url;
-        }
-
-        return null;
+            // пробуємо jpg
+            const img = new Image();
+            img.onload = () => resolve(jpgUrl);
+            img.onerror = () => {
+                // якщо jpg нема -> пробуємо png
+                const img2 = new Image();
+                img2.onload = () => resolve(pngUrl);
+                img2.onerror = () => resolve(null); // обидва не існують
+                img2.src = pngUrl;
+            };
+            img.src = jpgUrl;
+        });
     }
 
     addImage(imageSrc, imageAlt = '', imageTitle = '', fullImageSrc = null) {
@@ -200,6 +201,7 @@ class MasonryGallery extends GHComponent {
             const img = document.createElement('img');
 
             const tempoImageSrc = await this.temporaryImage(imageSrc);
+
             img.setAttribute('src', tempoImageSrc);
             img.setAttribute('alt', imageAlt);
             img.setAttribute('title', imageTitle);
@@ -226,9 +228,9 @@ class MasonryGallery extends GHComponent {
             // Create image wrapper and append the image to it
             const imageWrapper = document.createElement('div');
             imageWrapper.classList.add('masonry-grid-item')
-            img.onload = () => {
+            // img.onload = () => {
                 img.removeAttribute('data-image-loading');
-            }
+            // }
             imageWrapper.appendChild(img);
             this.imagesContainer.appendChild(imageWrapper);
         });
