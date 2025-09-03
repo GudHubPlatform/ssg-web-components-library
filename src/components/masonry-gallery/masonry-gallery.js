@@ -173,18 +173,42 @@ class MasonryGallery extends GHComponent {
         }
     }
 
+    async temporaryImage(imageId) {
+        const baseUrl = `https://gudhub.com/userdata/35113/${imageId}`;
+
+        let url = `${baseUrl}.jpg`;
+        let response = await fetch(url, { method: "HEAD" });
+
+        if (response.ok) {
+            return url;
+        }
+
+        url = `${baseUrl}.png`;
+        response = await fetch(url, { method: "HEAD" });
+
+        if (response.ok) {
+            return url;
+        }
+
+        return null;
+    }
+
     addImage(imageSrc, imageAlt = '', imageTitle = '', fullImageSrc = null) {
         const msnry = this.msnry;
 
-        const promise = new Promise((res, rej) => {
+        const promise = new Promise(async (res, rej) => {
             const img = document.createElement('img');
-            img.setAttribute('src', imageSrc);
+
+            const tempoImageSrc = await this.temporaryImage(imageSrc);
+            img.setAttribute('src', tempoImageSrc);
             img.setAttribute('alt', imageAlt);
             img.setAttribute('title', imageTitle);
 
             if (fullImageSrc) {
+                const tempoFullImageSrc = await this.temporaryImage(fullImageSrc);
+
                 img.classList.add('open-modal');
-                img.setAttribute('data-modal-image', fullImageSrc);
+                img.setAttribute('data-modal-image', tempoFullImageSrc);
             }
 
             img.setAttribute('data-image-loading', 'true');
