@@ -42,8 +42,14 @@ class Popup extends GHComponent {
     renderChild() {
         const childContainer = this.getChildContainer();
         this.child = childContainer.children[0];
-        if (this.child) {
-            this.child.clientRender();
+        if (this.child && this.child.tagName) {
+            customElements.whenDefined(this.child.tagName.toLowerCase()).then(() => {
+                if (typeof this.child.clientRender === 'function') {
+                    this.child.clientRender();
+                } else {
+                    console.warn('clientRender is not a function on', this.child);
+                }
+            });
         }
     }
 
