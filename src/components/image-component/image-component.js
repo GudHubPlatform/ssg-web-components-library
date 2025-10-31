@@ -42,7 +42,7 @@ class ImageComponent extends GHComponent {
         }
 
         // Download image from GudHub (this.dataUrl) to cache (this.dataSrc)
-        if (!window.disableImagesRegeneration) {
+        if (window?.imagesRegeneration) {
             if (this.dataSrc && this.dataUrl) {
                 try {
                     await fetch(`${this.dataSrc}?source=${this.dataUrl}&mode=ssr`);
@@ -108,6 +108,7 @@ class ImageComponent extends GHComponent {
 
     async uploadImagePath(imagePath, imageUrl = null) {
         const path = `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}/upload-image-path`;
+        const isImagesRegeneration = window?.imagesRegeneration;
 
         try {
             const response = await fetch(path, {
@@ -117,7 +118,8 @@ class ImageComponent extends GHComponent {
                     imagePath,
                     imageUrl,
                     maxWidth: Number(this.maxWidth),
-                    isCrop: this.isCrop
+                    isCrop: this.isCrop,
+                    isImagesRegeneration
                 })
             });
             const data = await response.json();
