@@ -173,12 +173,12 @@ class MasonryGallery extends GHComponent {
         }
     }
 
-    async temporaryImage(imageId) {
-        const baseUrl = `https://gudhub.com/userdata/35113/${imageId}`;
+    async temporaryImage(imageUrl) {
+        const baseUrl = `${imageUrl}`;
 
         return new Promise((resolve) => {
-            const jpgUrl = `${baseUrl}.jpg`;
-            const pngUrl = `${baseUrl}.png`;
+            const jpgUrl = `${baseUrl}`;
+            const pngUrl = `${baseUrl}`;
 
             // пробуємо jpg
             const img = new Image();
