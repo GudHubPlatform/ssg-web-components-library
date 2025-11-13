@@ -93,7 +93,8 @@ class MetaTag extends GHComponent {
         let titleId = window.getConfig().chapters[chapter].title_field_id;
         let descriptionId = window.getConfig().chapters[chapter].description_field_id;
         let slugId = window.getConfig().chapters[chapter].slug_field_id;
-        let imageId = window.getConfig().chapters[chapter].image_field_id;
+        // let imageId = window.getConfig().chapters[chapter].image_field_id;
+        let imageUrl = window.getConfig().chapters[chapter].image_field_id;
         // fieldId = fieldId.field_id;
         // value = item.fields.find(findedField => findedField.field_id == fieldId).field_value;
 
@@ -101,7 +102,7 @@ class MetaTag extends GHComponent {
         let titleValue = item.fields.find(findedField => findedField.field_id == titleId).field_value;
         let descriptionValue = item.fields.find(findedField => findedField.field_id == descriptionId).field_value;
         let slugValue = item.fields.find(findedField => findedField.field_id == slugId).field_value;
-        let imageValue = !slugValue.includes('/blog/') ? item.fields.find(findedField => findedField.field_id == imageId).field_value : false;
+        let imageValue = !slugValue.includes('/blog/') ? item.fields.find(findedField => findedField.field_id == imageUrl).field_value : false;
 
         // value = isNaN(value) ? value : await this.getContent(`https://gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${value}.html`);
         titleValue = isNaN(titleValue) ? titleValue : await this.getContent(`https://gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${titleValue}.html`);
