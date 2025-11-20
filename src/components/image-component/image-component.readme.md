@@ -2,7 +2,7 @@
 
 We have two different ways to use this component:
 
-1. Automatically: pass `data-src` and `data-url` attributes – the image will be fetched, saved, and loaded automatically (SSR supported).
+1. Automatically: pass `data-url` attribute – the image will be fetched, saved, and loaded automatically (SSR supported).
 2. Manually: use `src` to provide a static image path.
 
 **Manually example:**
@@ -22,7 +22,6 @@ We have two different ways to use this component:
 **Automatically example:**
 ```html
 <image-component
-    data-src="/assets/cache/example.jpg"
     data-url="https://example.com/image.jpg"
     alt="{Image alt here}"
     title="{Image title here}"
@@ -43,7 +42,6 @@ We have two different ways to use this component:
 | `alt`            | Alternative text for the image                                         | `string`<br>`"Description of image"`                        |
 | `title`          | Image title (shown as tooltip)                                         | `string`<br>`"My Image Title"`                              |
 | `lazyload`       | Enables native browser lazy loading (`loading="lazy"`)                 | `boolean` (just include the attribute)                      |
-| `data-src`       | Local path to save image fetched from `data-url`                       | `string`<br>`/assets/blog/top-web-development-books.jpg`    |
 | `data-url`       | Remote image URL                                                       | `string`<br>`https://gudhub.com/userdata/29883/1083204.jpg` |
 | `data-rerender`  | Enables client-side rerendering after SSR *(currently not working❗❗❗)* | `boolean` (just include the attribute)                      |
 | `width`          | Image width                                                            | `string`<br>`"300"`                                         |
@@ -85,7 +83,6 @@ If neither `data-crop` nor `data-max-width` is set:
     alt?: "string",
     title?: "string",
     lazyload?: boolean,
-    data-src?: "string",
     data-url?: "string",
     data-rerender?: boolean,
     width?: "number|string",

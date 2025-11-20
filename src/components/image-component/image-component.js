@@ -6,65 +6,101 @@ class ImageComponent extends GHComponent {
     constructor() {
         super();
         this.placeholder = null;
+        this.generatedImageSrc = null;
     }
 
     async onServerRender() {
-        await this.render('server');
+        await this.render();
     }
 
     async onClientReady() {
-        this.generateSources();
-
+        // If the element has "data-rerender" we repeat render, but already on client side
         if (this.hasAttribute('data-rerender')) {
-            await this.render('client');
+            await this.render();
         }
+
+        this.generateSources();
     }
 
-    async render(caller) {
+    async render() {
         this.src = this.getAttribute('src');
         this.alt = this.getAttribute('alt');
         this.title = this.getAttribute('title');
-        this.lazyload = this.hasAttribute('lazyload');
-        this.dataSrc = this.getAttribute('data-src');
         this.dataUrl = this.getAttribute('data-url');
-        this.isRenderOnServer = this.getAttribute('data-render-on-server');
+        this.lazyload = this.hasAttribute('lazyload');
         
         this.width = this.hasAttribute('width') ? this.getAttribute('width') : false;
         this.height = this.hasAttribute('height') ? this.getAttribute('height') : false;
 
-        this.maxWidth = this.hasAttribute('data-max-width') ? this.getAttribute('data-max-width') : false;
         this.isCrop = this.hasAttribute('data-crop') ? this.hasAttribute('data-crop') : false;
+        this.maxWidth = this.hasAttribute('data-max-width') ? this.getAttribute('data-max-width') : false;
 
         // If no valid src or data URL is provided, render a placeholder
-        if (!this.src && !this.dataUrl && !this.dataSrc) {
+        if (!this.src && !this.dataUrl) {
             super.render(placeholderImageHtml);
             return;
         }
 
-        // Download image from GudHub (this.dataUrl) to cache (this.dataSrc)
-        if (window?.imagesRegeneration) {
-            if (this.dataSrc && this.dataUrl) {
-                try {
-                    await fetch(`${this.dataSrc}?source=${this.dataUrl}&mode=ssr`);
-                    this.src = this.dataSrc;
-                } catch (error) {
-                    console.error('Failed to fetch dataSrc:', error);
-                }
-            } else if (this.src) {
-                try {
-                    await fetch(`${this.src}?mode=ssr`);
-                } catch (error) {
-                    console.error('Failed to fetch src:', error);
-                }
-            }
-        }
+        const getAppAndFileIds = (url) => {
+            if (!url) return;
+
+            const cleanUrl = url.split('?')[0].replace(/\/+$/, ''); // remove query & trailing slash
+            const parts = cleanUrl.split('/');
+
+            const appId = parts[parts.length - 2];
+            const fileName = parts[parts.length - 1];
+            const fileId = fileName.split('.')[0];
+
+            return { appId, fileId };
+        };
+
+        const buildImagePath = (meta, route) => {
+            const url = new URL(meta.url);
+            const extension = url.pathname.split('.').pop();
+            return `/assets/images${route}/${meta.file_name}.${extension}`;
+        };
 
         try {
-            if (this.dataSrc && this.dataUrl) {
-                await this.uploadImagePath(this.dataSrc, this.dataUrl);
-            } else if (this.src) {
-                await this.uploadImagePath(this.src);
+            let relativeImagePath = this.src;
+
+            if (this.dataUrl) {
+                const { appId, fileId } = getAppAndFileIds(this.dataUrl);
+                const imageMetaData = await gudhub.getFile(appId, fileId);
+
+                if (imageMetaData?.url && imageMetaData?.file_name) {
+                    const currentRoute = new URL(window.location.href).searchParams.get('path') || '';
+                    const normalizedRoute = currentRoute.startsWith('/') ? currentRoute : `/${currentRoute}`;
+
+                    relativeImagePath = buildImagePath(imageMetaData, normalizedRoute);
+                }
             }
+
+            this.generatedImageSrc = relativeImagePath;
+
+            // Download image from GudHub (this.dataUrl) to cache (this.generatedImageSrc)
+            if (window?.imagesRegeneration) {
+                if (this.generatedImageSrc && this.dataUrl) {
+                    try {
+                        await fetch(`${this.generatedImageSrc}?source=${this.dataUrl}&mode=ssr`);
+                        this.src = this.generatedImageSrc;
+                    } catch (error) {
+                        console.error('Failed to fetch generatedImageSrc:', error);
+                    }
+                } else if (this.src) {
+                    try {
+                        await fetch(`${this.src}?mode=ssr`);
+                    } catch (error) {
+                        console.error('Failed to fetch src:', error);
+                    }
+                }
+            }
+
+            const payload = {
+                imageSrc: this.generatedImageSrc,
+                imageUrl: this.dataUrl ?? null
+            };
+
+            await this.uploadImagePath(payload);
 
             await new Promise((resolve, reject) => {
                 this.image = new Image();
@@ -79,6 +115,7 @@ class ImageComponent extends GHComponent {
                     this.extension = src.substring(src.lastIndexOf('.'));
                     this.path = src.substring(0, src.length - this.extension.length);
                     this.imageWidth = this.image.naturalWidth;
+                    this.dataSrc = this.generatedImageSrc;
         
                     this.dispatchEvent(new Event('loaded'));
                     resolve();
@@ -94,19 +131,12 @@ class ImageComponent extends GHComponent {
             });
         
             super.render(html);
-
-            if (this.isRenderOnServer) {
-                this.generateSources();
-            }
         } catch (error) {
             console.error(`Rendering failed for ${this.src}.`);
         }
-
-        // TODO: need to fix CSR
-        // caller == 'client' ? this.clientRender() : super.render(html);
     }
 
-    async uploadImagePath(imagePath, imageUrl = null) {
+    async uploadImagePath({ imageSrc = null, imageUrl = null }) {
         const path = `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}/upload-image-path`;
         const isImagesRegeneration = window?.imagesRegeneration;
 
@@ -115,7 +145,7 @@ class ImageComponent extends GHComponent {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    imagePath,
+                    imageSrc,
                     imageUrl,
                     maxWidth: Number(this.maxWidth),
                     isCrop: this.isCrop,
@@ -126,7 +156,7 @@ class ImageComponent extends GHComponent {
             this.placeholder = data?.base64_placeholder;
         } catch (error) {
             console.error('Error:', error);
-            return imagePath;
+            return imageSrc;
         }
     }
 
@@ -139,13 +169,12 @@ class ImageComponent extends GHComponent {
             return;
         }
     
-        const dataSrc = this.getAttribute('data-src');
+        const dataSrc = imageFromPicture.getAttribute('data-src');
         const dataUrl = this.getAttribute('data-url');
         const fallbackSrc = this.getAttribute('src');
         const dataMaxWidth = parseInt(this.getAttribute('data-max-width'), 10);
     
         const src = dataSrc && dataUrl ? dataSrc : fallbackSrc;
-    
         if (!src) {
             console.warn('No valid image source found.');
             return;
@@ -210,37 +239,6 @@ class ImageComponent extends GHComponent {
         source.setAttribute('type', type);
         return source;
     }
-
-    // TODO: need to fix CSR
-    // clientRender() {
-    //     this.innerHTML = /*html*/`
-    //     <picture data-natural-width="${this.imageWidth}">
-    //         ${ (this.imageWidth < 1200) && (this.imageWidth > 600) ? `
-    //             <source media="(min-width: 600px)" srcset="${this.path}${this.extension}.webp" type="image/webp">
-    //             <source media="(min-width: 600px)" srcset="${this.path}${this.extension}" type="image/${this.extension.substring(1, this.extension.length)}">
-    //         ` : ''}
-    //         ${ this.imageWidth > 600 ? `
-    //             <source media="(max-width: 600px)" srcset="${this.path}-600${this.extension}.webp" type="image/webp">
-    //         ` : ''}
-    //         ${ this.imageWidth > 1200 ? `
-    //             <source media="(max-width: 1200px)" srcset="${this.path}-1200${this.extension}.webp" type="image/webp">
-    //             <source media="(min-width: 1200px)" srcset="${this.path}${this.extension}.webp" type="image/webp">
-    //         ` : ''}
-    //         ${ this.imageWidth > 600 ? `
-    //             <source media="(max-width: 600px)" srcset="${this.path}-600${this.extension}" type="image/${this.extension.substring(1, this.extension.length)}">
-    //         ` : ''}
-    //         ${ this.imageWidth > 1200 ? `
-    //             <source media="(max-width: 1200px)" srcset="${this.path}-1200${this.extension}" type="image/${this.extension.substring(1, this.extension.length)}">
-    //             <source media="(min-width: 1200px)" srcset="${this.path}${this.extension}" type="image/${this.extension.substring(1, this.extension.length)}">
-    //         ` : ''}
-    //         ${ this.imageWidth <= 600 ? `
-    //             <source srcset="${this.src}" type="image/${this.src.split('.')[this.src.split('.').length - 1]}" />
-    //         ` : ''}
-    //         <source srcset="${this.src}.webp" type="image/webp">
-    //         <img src="${this.src}" ${ this.title ? `title="${this.title}"` : '' } ${ this.alt ? `alt="${this.alt}"` : '' } ${ this.lazyload ? 'loading="lazy"' : '' } ${ this.width ? `width="${this.width}"` : '' } ${ this.height ? `height="${this.height}"` : '' } >
-    //     </picture>
-    //     `;
-    // }
 }
 
 if (!window.customElements.get('image-component')) {
