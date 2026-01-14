@@ -1,12 +1,12 @@
 import html from './blog-banner.html';
 import './blog-banner.scss';
 
-import {initBlogConfig} from '../initBlogConfig.js';
+import { initBlogConfig } from '../initBlogConfig.js';
 
 class BlogBanner extends GHComponent {
-
     constructor() {
         super();
+
         const homepageAttr = this.getAttribute('data-homepage');
         try {
             this.homepageObj = homepageAttr && JSON.parse(homepageAttr);
@@ -31,7 +31,6 @@ class BlogBanner extends GHComponent {
             // this.json = await super.getGhData(this.ghId, 'pages', window.getConfig().chapters.pages.app_id, window.getConfig().chapters.pages.blog_main_page_item_id);
             const response = await gudhub.getDocument({ app_id: window.getConfig().chapters.pages.app_id, item_id: window.getConfig().chapters.pages.blog_main_page_item_id, element_id: window.getConfig().chapters.pages.json_field_id });
             this.json = JSON.parse(response.data)[this.ghId];
-
         } else {
             this.page = false;
             this.ghId = this.getAttribute('data-gh-id') || null;
@@ -46,7 +45,10 @@ class BlogBanner extends GHComponent {
             breadcrumbsTitle.innerHTML = this.json.title;
             
             this.breadcrumbs = JSON.stringify([
-                this.homepageObj,
+                this.homepageObj ?? {
+                    title: 'Головна',
+                    link: '/'
+                },
                 {
                     title: breadcrumbsTitle.innerText
                 }
