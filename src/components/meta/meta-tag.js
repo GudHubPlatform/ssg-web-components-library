@@ -27,6 +27,7 @@ class MetaTag extends GHComponent {
         if (!appId && !itemId && path === ('/blog/')) { //blog/authors/
             appId = window.getConfig().chapters.pages.app_id;
             itemId = window.getConfig().chapters.pages.blog_main_page_item_id;
+
             this.addTag(appId, itemId, false, chapter);
         } else {
             const url = new URL(window.location.href);
@@ -105,10 +106,10 @@ class MetaTag extends GHComponent {
         let imageValue = !slugValue.includes('/blog/') ? item.fields.find(findedField => findedField.field_id == imageUrl).field_value : false;
 
         // value = isNaN(value) ? value : await this.getContent(`https://gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${value}.html`);
-        titleValue = isNaN(titleValue) ? titleValue : await this.getContent(`https://gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${titleValue}.html`);
-        descriptionValue = isNaN(descriptionValue) ? descriptionValue : await this.getContent(`https://gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${descriptionValue}.html`);
-        slugValue = isNaN(slugValue) ? slugValue : await this.getContent(`https://gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${slugValue}.html`);
-        imageValue = !slugValue.includes('/blog/') ? isNaN(imageValue) ? imageValue : await this.getContent(`https://gudhub.com/userdata/${window.getConfig() .chapters[chapter].app_id}/${imageValue}.html`) : false;
+        titleValue = isNaN(titleValue) ? titleValue : await this.getContent(`https://app.gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${titleValue}.html`);
+        descriptionValue = isNaN(descriptionValue) ? descriptionValue : await this.getContent(`https://app.gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${descriptionValue}.html`);
+        slugValue = isNaN(slugValue) ? slugValue : await this.getContent(`https://app.gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${slugValue}.html`);
+        imageValue = !slugValue.includes('/blog/') ? isNaN(imageValue) ? imageValue : await this.getContent(`https://app.gudhub.com/userdata/${window.getConfig() .chapters[chapter].app_id}/${imageValue}.html`) : false;
 
         
         //TITLE

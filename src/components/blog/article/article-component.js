@@ -42,12 +42,12 @@ class ArticleComponent extends GHComponent {
 
         const ogSiteImage = document.createElement('meta');
         ogSiteImage.setAttribute('property', 'og:image');
-        ogSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${this.article.thumbnail_src}`);
+        ogSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${this.article?.thumbnail_src}`);
         document.querySelector('head').prepend(ogSiteImage);
 
         const twitterSiteImage = document.createElement('meta');
         twitterSiteImage.setAttribute('name', 'twitter:image');
-        twitterSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${this.article.thumbnail_src}`);
+        twitterSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${this.article?.thumbnail_src}`);
         document.querySelector('head').prepend(twitterSiteImage);
         
         let commentsQuantity = 0;
@@ -56,6 +56,7 @@ class ArticleComponent extends GHComponent {
                 commentsQuantity++;
             }
         }
+
         this.article.commentsQuantity = commentsQuantity;
 
         this.articleReference = this.article.id;
@@ -274,7 +275,7 @@ class ArticleComponent extends GHComponent {
 
         const { api_app_id } = window.getConfig().chapters.blog;
 
-        fetch(`https://gudhub.com/api/services/prod/api/${api_app_id}/views`, {
+        fetch(`https://app.gudhub.com/api/services/api/${api_app_id}/views`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -313,7 +314,7 @@ class ArticleComponent extends GHComponent {
             
             const { api_app_id } = window.getConfig().chapters.blog;
 
-            fetch(`https://gudhub.com/api/services/prod/api/${api_app_id}/rating`, {
+            fetch(`https://app.gudhub.com/api/services/api/${api_app_id}/rating`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
