@@ -1,8 +1,22 @@
 body.edit-mode-enabled {
-    [gh-id] {
-        &:hover {
-            outline: 1px solid #2b61fa;
-        }
+    .gh-item-hovered {
+        outline: 2px solid rgba(43, 97, 250, 0.6);
+        outline-offset: 2px;
+    }
+
+    [gh-id]:hover {
+        outline: 1px dashed rgba(43, 97, 250, 0.5);
+        cursor: text;
+    }
+
+    [gh-id].gh-id-editing {
+        outline: 2px solid #2b61fa;
+        outline-offset: 2px;
+        background: rgba(43, 97, 250, 0.05);
+    }
+
+    .gh-item-hovered:has(.gh-id-editing) {
+        outline-color: transparent;
     }
 }
 
@@ -74,4 +88,65 @@ edit-mode {
         font-size: 24px;
         color: #fff;
     }
+}
+
+#gh-array-panel {
+    position: fixed;
+    z-index: 999;
+    display: none;
+    gap: 6px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.92);
+    color: black;
+    border: 1px solid lightgrey;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    user-select: none;
+}
+
+.gh-panel-btn {
+    all: unset;
+    cursor: pointer;
+
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.12);
+    background: rgba(255,255,255,0.7);
+
+    font: 14px system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #000;
+
+    transition:
+        transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 0.3s ease-in-out,
+        opacity 0.3s ease-in-out;
+
+    box-shadow:
+        0 1px 1px rgba(0,0,0,0.04),
+        0 4px 10px rgba(0,0,0,0.08);
+
+    will-change: transform;
+}
+
+.gh-panel-btn:hover {
+    transform: translateY(-1px) scale(1.001);
+    background: rgba(255,255,255,0.9);
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.12),
+        0 8px 18px rgba(0,0,0,0.16);
+}
+
+.gh-panel-btn:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow:
+        0 2px 6px rgba(0,0,0,0.18);
+    opacity: 0.9;
+}
+
+.gh-panel-btn:focus-visible {
+    outline: none;
+    box-shadow:
+        0 0 0 3px rgba(0, 125, 250, 0.35),
+        0 6px 16px rgba(0,0,0,0.15);
 }

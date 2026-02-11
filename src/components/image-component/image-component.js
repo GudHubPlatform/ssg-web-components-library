@@ -57,7 +57,7 @@ class ImageComponent extends GHComponent {
         const buildImagePath = (meta, route) => {
             const url = new URL(meta.url);
             const extension = url.pathname.split('.').pop();
-            return `/assets/images${route}/${meta.file_name}.${extension}`;
+            return `/assets/images${route}${meta.file_name}.${extension}`;
         };
 
         try {
