@@ -75,13 +75,16 @@ class ImageComponent extends GHComponent {
                 }
             }
 
-            this.generatedImageSrc = relativeImagePath;
+            const normalizeUrlPath = (value) =>
+                value ? value.trim().replace(/\s+/g, '-') : value;
+
+            this.generatedImageSrc = normalizeUrlPath(relativeImagePath);
 
             // Download image from GudHub (this.dataUrl) to cache (this.generatedImageSrc)
             if (window?.imagesRegeneration) {
                 if (this.generatedImageSrc && this.dataUrl) {
                     try {
-                        await fetch(`${this.generatedImageSrc}?source=${this.dataUrl}&mode=ssr`);
+                        await fetch(`${this.generatedImageSrc}?source=${normalizeUrlPath(this.dataUrl)}&mode=ssr`);
                         this.src = this.generatedImageSrc;
                     } catch (error) {
                         console.error('Failed to fetch generatedImageSrc:', error);
