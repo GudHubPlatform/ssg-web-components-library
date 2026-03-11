@@ -44,7 +44,10 @@ class ImageComponent extends GHComponent {
         const getAppAndFileIds = (url) => {
             if (!url) return;
 
-            const cleanUrl = url.split('?')[0].replace(/\/+$/, ''); // remove query & trailing slash
+            const cleanUrl = decodeURIComponent(url)
+                .split('?')[0]
+                .replace(/\/+$/, ''); // remove query & trailing slash
+
             const parts = cleanUrl.split('/');
 
             const appId = parts[parts.length - 2];
@@ -75,16 +78,13 @@ class ImageComponent extends GHComponent {
                 }
             }
 
-            const normalizeUrlPath = (value) =>
-                value ? value.trim().replace(/\s+/g, '-') : value;
-
-            this.generatedImageSrc = normalizeUrlPath(relativeImagePath);
+            this.generatedImageSrc = this.normalizeUrlPath(relativeImagePath);
 
             // Download image from GudHub (this.dataUrl) to cache (this.generatedImageSrc)
             if (window?.imagesRegeneration) {
                 if (this.generatedImageSrc && this.dataUrl) {
                     try {
-                        await fetch(`${this.generatedImageSrc}?source=${normalizeUrlPath(this.dataUrl)}&mode=ssr`);
+                        await fetch(`${this.generatedImageSrc}?source=${encodeURIComponent(this.dataUrl)}&mode=ssr`);
                         this.src = this.generatedImageSrc;
                     } catch (error) {
                         console.error('Failed to fetch generatedImageSrc:', error);
@@ -177,7 +177,7 @@ class ImageComponent extends GHComponent {
         const fallbackSrc = this.getAttribute('src');
         const dataMaxWidth = parseInt(this.getAttribute('data-max-width'), 10);
     
-        const src = dataSrc && dataUrl ? dataSrc : fallbackSrc;
+        const src = this.normalizeUrlPath(dataSrc && dataUrl ? dataSrc : fallbackSrc);
         if (!src) {
             console.warn('No valid image source found.');
             return;
@@ -242,6 +242,20 @@ class ImageComponent extends GHComponent {
         source.setAttribute('type', type);
         return source;
     }
+
+    normalizeUrlPath = (value) => {
+        if (!value) return value;
+
+        return value
+            .normalize('NFD')                    // separate diacritics
+            .replace(/[\u0300-\u036f]/g, '')     // remove diacritics
+            .replace(/[()]/g, '')                // remove brackets
+            .replace(/[^a-zA-Z0-9/._-]+/g, '-')  // replace special chars with -
+            .replace(/-+/g, '-')                 // collapse multiple -
+            .replace(/\/-+/g, '/')               // avoid "/-"
+            .replace(/^-|-$/g, '')               // trim -
+            .toLowerCase();
+    };
 }
 
 if (!window.customElements.get('image-component')) {
