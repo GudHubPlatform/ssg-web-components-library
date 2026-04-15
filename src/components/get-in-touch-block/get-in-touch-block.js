@@ -26,6 +26,7 @@ class GetInTouchBlock extends GHComponent {
         this.subtitleName = this.hasAttribute('data-form-subtitle') ? this.getAttribute('data-form-subtitle') : null;
         this.placement = this.hasAttribute('data-form-placement') ? this.getAttribute('data-form-placement') : "main";
         this.buttonText = this.hasAttribute('data-form-button-text') ? this.getAttribute('data-form-button-text') : null;
+        this.recaptchaSiteKey = this.hasAttribute('data-recaptcha-site-key') ? this.getAttribute('data-recaptcha-site-key') : null;
         
         const attributes = [{
             'data-form-id': this.formId,
@@ -33,6 +34,7 @@ class GetInTouchBlock extends GHComponent {
             'data-form-subtitle': this.subtitleName,
             'data-form-placement': this.placement,
             'data-form-button-text': this.buttonText,
+            'data-recaptcha-site-key': this.recaptchaSiteKey,
         }];
         
         const attributesString = attributes.reduce((acc, obj) => {
@@ -47,4 +49,5 @@ class GetInTouchBlock extends GHComponent {
         return attributesString;
     }
 }
+
 window.customElements.define('get-in-touch-block', GetInTouchBlock);
