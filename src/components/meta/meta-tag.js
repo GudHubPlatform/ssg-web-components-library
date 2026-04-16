@@ -102,13 +102,13 @@ class MetaTag extends GHComponent {
         let titleValue = item.fields.find(findedField => findedField.field_id == titleId).field_value;
         let descriptionValue = item.fields.find(findedField => findedField.field_id == descriptionId).field_value;
         let slugValue = item.fields.find(findedField => findedField.field_id == slugId).field_value;
-        let imageValue = (!slugValue.includes('/blog/') && !slugValue.includes('/service-areas/')) ? item.fields.find(findedField => findedField.field_id == imageUrl).field_value : false;
+        let imageValue = (!slugValue.includes('/blog/') && !slugValue.includes('/service-areas/') && !slugValue.includes('/courses/')) ? item.fields.find(findedField => findedField.field_id == imageUrl).field_value : false;
 
         // value = isNaN(value) ? value : await this.getContent(`https://gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${value}.html`);
         titleValue = isNaN(titleValue) ? titleValue : await this.getContent(`https://app.gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${titleValue}.html`);
         descriptionValue = isNaN(descriptionValue) ? descriptionValue : await this.getContent(`https://app.gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${descriptionValue}.html`);
         slugValue = isNaN(slugValue) ? slugValue : await this.getContent(`https://app.gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${slugValue}.html`);
-        imageValue = (!slugValue.includes('/blog/') && !slugValue.includes('/service-areas/')) ? isNaN(imageValue) ? imageValue : await this.getContent(`https://app.gudhub.com/userdata/${window.getConfig() .chapters[chapter].app_id}/${imageValue}.html`) : false;
+        imageValue = (!slugValue.includes('/blog/') && !slugValue.includes('/service-areas/') && !slugValue.includes('/courses/')) ? isNaN(imageValue) ? imageValue : await this.getContent(`https://app.gudhub.com/userdata/${window.getConfig() .chapters[chapter].app_id}/${imageValue}.html`) : false;
         
         //TITLE
         if ( !document.querySelector('title') ) {
@@ -140,7 +140,7 @@ class MetaTag extends GHComponent {
         }
         
 
-        if ((!slugValue.includes('/blog/') && !slugValue.includes('/service-areas/'))) {
+        if ((!slugValue.includes('/blog/') && !slugValue.includes('/service-areas/') && !slugValue.includes('/courses/'))) {
             if ( !document.querySelector('[name="twitter:image"]') ) {
                 const twitterMetaSiteImage = document.createElement('meta');
                 twitterMetaSiteImage.setAttribute('name', 'twitter:image');
