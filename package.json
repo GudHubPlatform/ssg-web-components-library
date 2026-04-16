@@ -1,6 +1,6 @@
 {
   "name": "@gudhub/ssg-web-components-library",
-  "version": "1.0.103",
+  "version": "1.0.105",
   "description": "",
   "main": "index.js",
   "type": "module",
