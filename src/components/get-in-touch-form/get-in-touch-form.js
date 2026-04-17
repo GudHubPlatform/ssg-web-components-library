@@ -7,6 +7,10 @@ import { checkInputsValidations } from './inputsValidation.js';
 let recaptchaPromise = null;
 
 function loadRecaptcha(siteKey) {
+    if (!siteKey) {
+        return Promise.reject(new Error('reCAPTCHA site key is missing'));
+    }
+
     if (window.grecaptcha) return Promise.resolve(window.grecaptcha);
 
     if (recaptchaPromise) return recaptchaPromise;
@@ -19,10 +23,10 @@ function loadRecaptcha(siteKey) {
 
         script.onload = () => {
             if (window.grecaptcha) resolve(window.grecaptcha);
-            else reject('grecaptcha not available');
+            else reject(new Error('grecaptcha not available'));
         };
 
-        script.onerror = reject;
+        script.onerror = () => reject(new Error('Failed to load reCAPTCHA script'));
 
         document.head.appendChild(script);
     });
@@ -68,6 +72,8 @@ class GetInTouchForm extends GHComponent {
         this.initConfig(this.config);
         super.render(html);
         this.attachEventListeners();
+
+        loadRecaptcha(this.recaptcha_site_key).catch(console.error);
     }
 
     attachEventListeners() {
@@ -103,6 +109,10 @@ class GetInTouchForm extends GHComponent {
     }
 
     async getRecaptchaToken(action = 'submit') {
+        if (!this.recaptcha_site_key) {
+            throw new Error('reCAPTCHA site key is missing');
+        }
+
         const grecaptcha = await loadRecaptcha(this.recaptcha_site_key);
 
         return new Promise((resolve, reject) => {
@@ -126,7 +136,7 @@ class GetInTouchForm extends GHComponent {
             try {
                 const token = await this.getRecaptchaToken();
 
-                await this.fetchExample(token);
+                await this.verifyRecaptcha(token);
 
                 this.handleSuccessFormValidation(form, token);
 
@@ -158,7 +168,6 @@ class GetInTouchForm extends GHComponent {
         window.dispatchEvent(new CustomEvent('submitForm', { detail: { formDataObj } }));
 
         this.isFormSubmitted = true;
-        this.removeLoader();
     };
 
     inputsValidation = async (form) => {
@@ -166,16 +175,25 @@ class GetInTouchForm extends GHComponent {
         return checkInputsValidations(inputs);
     }
 
-    fetchExample = (recaptchaToken) => {
-        const isSuccess = true;
-
-        return new Promise((resolve, reject) => {
-            console.log('reCAPTCHA token:', recaptchaToken);
-
-            setTimeout(() => {
-                isSuccess ? resolve() : reject();
-            }, 2000);
+    verifyRecaptcha = async (recaptchaToken) => {
+        const response = await fetch('/api/verify-recaptcha', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                token: recaptchaToken,
+                action: 'submit'
+            })
         });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(data?.error || 'reCAPTCHA verification failed');
+        }
+
+        return data;
     }
 
     createDataObject(form, placement, recaptchaToken) {
@@ -215,15 +233,20 @@ class GetInTouchForm extends GHComponent {
         setTimeout(() => btn.disabled = false, 500);
     }
 
-    showSuccess({email, phone}) {
-        if (email) {
-            this.querySelector('.check_entity').classList.add('provided');
-            this.getElementsByClassName('email')[0].innerText = email;
+    showSuccess({ email, phone }) {
+        const emailEntity = this.querySelector('.check_entity');
+        const phoneEntity = this.querySelector('.phone_entity');
+        const emailEl = this.getElementsByClassName('email')[0];
+        const phoneEl = this.getElementsByClassName('phone')[0];
+
+        if (email && emailEntity && emailEl) {
+            emailEntity.classList.add('provided');
+            emailEl.innerText = email;
         }
 
-        if (phone) {
-            this.querySelector('.phone_entity').classList.add('provided');
-            this.getElementsByClassName('phone')[0].innerText = phone;
+        if (phone && phoneEntity && phoneEl) {
+            phoneEntity.classList.add('provided');
+            phoneEl.innerText = phone;
         }
 
         this.classList.add('success');
@@ -234,9 +257,16 @@ class GetInTouchForm extends GHComponent {
     }
 
     hideSuccess() {
-        this.getElementsByClassName('email')[0].innerText = '';
-        this.getElementsByClassName('phone')[0].innerText = '';
-        this.querySelector('.phone_entity').classList.remove('provided');
+        const emailEl = this.getElementsByClassName('email')[0];
+        const phoneEl = this.getElementsByClassName('phone')[0];
+        const phoneEntity = this.querySelector('.phone_entity');
+        const emailEntity = this.querySelector('.check_entity');
+
+        if (emailEl) emailEl.innerText = '';
+        if (phoneEl) phoneEl.innerText = '';
+        if (phoneEntity) phoneEntity.classList.remove('provided');
+        if (emailEntity) emailEntity.classList.remove('provided');
+
         this.classList.remove('success');
     }
 
