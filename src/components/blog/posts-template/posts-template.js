@@ -309,7 +309,7 @@ class PostsTemplate extends GHComponent {
 
         const { api_app_id } = window.getConfig().chapters.blog;
 
-        const response = await fetch(`https://gudhub.com/api/services/prod/api/${api_app_id}/articles`);
+        const response = await fetch(`https://app.gudhub.com/api/services/api/${api_app_id}/articles`);
         const data = await response.json();
         let articles = data.articlesAndComments.articles;
         let comments = data.articlesAndComments.comments;
@@ -334,7 +334,7 @@ class PostsTemplate extends GHComponent {
         }
 
         if (this.type === 'category') {
-            const categoriesResponse = await fetch(`https://gudhub.com/api/services/prod/api/${api_app_id}/categories`)
+            const categoriesResponse = await fetch(`https://app.gudhub.com/api/services/api/${api_app_id}/categories`)
             let categories = await categoriesResponse.json();
             categories = categories.categories;
             let category = window.location.pathname;
@@ -364,7 +364,7 @@ class PostsTemplate extends GHComponent {
             return articles;
         }
         if (this.type === 'author') {
-            const authorsResponse = await fetch(`https://gudhub.com/api/services/prod/api/${api_app_id}/authors`)
+            const authorsResponse = await fetch(`https://app.gudhub.com/api/services/api/${api_app_id}/authors`)
             let authors = await authorsResponse.json();
             authors = authors.authors;
             const author = window.location.pathname;
@@ -409,7 +409,7 @@ class PostsTemplate extends GHComponent {
     async fetchIntro(posts) {
         const { api_app_id, intro_field_id, app_id } = window.getConfig().chapters.blog;
         const fetchData = async (index, item_id) => {
-            const responseIntro = await fetch(`https://gudhub.com/api/services/prod/api/${api_app_id}/get-intro?app_id=${app_id}&item_id=${item_id}&element_id=${intro_field_id}`);
+            const responseIntro = await fetch(`https://app.gudhub.com/api/services/api/${api_app_id}/get-intro?app_id=${app_id}&item_id=${item_id}&element_id=${intro_field_id}`);
             const dataIntro = await responseIntro.json();
             let introItems = JSON.parse(dataIntro.data).blocks[0].data;
             posts[index].intro = introItems;
@@ -473,7 +473,7 @@ class PostsTemplate extends GHComponent {
             if (!articles[0].author_slug) {
                 
                 const { api_app_id } = window.getConfig().chapters.blog;
-                const authorsResponse = await fetch(`https://gudhub.com/api/services/prod/api/${api_app_id}/authors`)
+                const authorsResponse = await fetch(`https://app.gudhub.com/api/services/api/${api_app_id}/authors`)
                 authors = await authorsResponse.json();
                 authors = authors.authors;
             }

@@ -42,7 +42,7 @@ We have two different ways to use this component:
 | `alt`            | Alternative text for the image                                         | `string`<br>`"Description of image"`                        |
 | `title`          | Image title (shown as tooltip)                                         | `string`<br>`"My Image Title"`                              |
 | `lazyload`       | Enables native browser lazy loading (`loading="lazy"`)                 | `boolean` (just include the attribute)                      |
-| `data-url`       | Remote image URL                                                       | `string`<br>`https://gudhub.com/userdata/29883/1083204.jpg` |
+| `data-url`       | Remote image URL                                                       | `string`<br>`https://app.gudhub.com/userdata/29883/1083204.jpg` |
 | `data-rerender`  | Enables client-side rerendering after SSR *(currently not working❗❗❗)* | `boolean` (just include the attribute)                      |
 | `width`          | Image width                                                            | `string`<br>`"300"`                                         |
 | `height`         | Image height                                                           | `string`<br>`"200"`                                         |

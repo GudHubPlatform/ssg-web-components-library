@@ -111,7 +111,7 @@ class CommentsComponent extends GHComponent {
 
         if (comment.name && comment.text) {
             const { api_app_id } = window.getConfig().chapters.blog;
-            const response = await fetch(`https://gudhub.com/api/services/prod/api/${api_app_id}/add-comment`, {
+            const response = await fetch(`https://app.gudhub.com/api/services/api/${api_app_id}/add-comment`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
