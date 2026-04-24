@@ -7,6 +7,8 @@ import { checkInputsValidations } from './inputsValidation.js';
 let recaptchaPromise = null;
 
 function loadRecaptcha(siteKey) {
+    if (!siteKey) return Promise.resolve(null);
+
     if (window.grecaptcha) return Promise.resolve(window.grecaptcha);
 
     if (recaptchaPromise) return recaptchaPromise;
@@ -60,7 +62,9 @@ class GetInTouchForm extends GHComponent {
             this.initConfig(this.config);
             this.attachEventListeners();
 
-            loadRecaptcha(this.recaptcha_site_key).catch(console.error);
+            if (this.recaptcha_site_key) {
+                loadRecaptcha(this.recaptcha_site_key).catch(console.error);
+            }
         }
     }
 
@@ -103,6 +107,8 @@ class GetInTouchForm extends GHComponent {
     }
 
     async getRecaptchaToken(action = 'submit') {
+        if (!this.recaptcha_site_key) return null;
+
         const grecaptcha = await loadRecaptcha(this.recaptcha_site_key);
 
         return new Promise((resolve, reject) => {
