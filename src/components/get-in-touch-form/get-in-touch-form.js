@@ -128,19 +128,22 @@ class GetInTouchForm extends GHComponent {
         });
     }
 
-    async handleSubmit(event) {
-        event.preventDefault();
-        const form = event.target;
+    async handleSubmit(e) {
+        e.preventDefault();
 
+        const form = e.target;
         const validationResults = await this.inputsValidation(form);
 
         if (validationResults.every(({ isValid }) => isValid)) {
             this.addLoader();
 
             try {
-                const token = await this.getRecaptchaToken();
+                let token = null;
 
-                await this.verifyRecaptcha(token);
+                if (this.recaptcha_site_key) {
+                    token = await this.getRecaptchaToken();
+                    await this.verifyRecaptcha(token);
+                }
 
                 this.handleSuccessFormValidation(form, token);
 
@@ -150,7 +153,6 @@ class GetInTouchForm extends GHComponent {
             }
 
             this.removeLoader();
-
         } else {
             validationResults
                 .filter(item => typeof item === 'object')
