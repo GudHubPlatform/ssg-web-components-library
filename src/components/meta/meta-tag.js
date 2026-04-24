@@ -104,7 +104,7 @@ class MetaTag extends GHComponent {
         let slugValue = item.fields.find(findedField => findedField.field_id == slugId).field_value;
         let imageValue = (!slugValue.includes('/blog/') && !slugValue.includes('/service-areas/') && !slugValue.includes('/courses/')) ? item.fields.find(findedField => findedField.field_id == imageUrl).field_value : false;
 
-        // value = isNaN(value) ? value : await this.getContent(`https://gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${value}.html`);
+        // value = isNaN(value) ? value : await this.getContent(`https://app.gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${value}.html`);
         titleValue = isNaN(titleValue) ? titleValue : await this.getContent(`https://app.gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${titleValue}.html`);
         descriptionValue = isNaN(descriptionValue) ? descriptionValue : await this.getContent(`https://app.gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${descriptionValue}.html`);
         slugValue = isNaN(slugValue) ? slugValue : await this.getContent(`https://app.gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${slugValue}.html`);
