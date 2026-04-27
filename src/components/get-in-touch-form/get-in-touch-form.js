@@ -304,8 +304,8 @@ class GetInTouchForm extends GHComponent {
                     <${tag} name="${input.name}"
                         ${input.placeholder ? `placeholder="${input.placeholder}"` : ''}
                         ${JSON.parse(input.required) ? 'required' : ''}
-                        ${maxLength ? `maxlength="${maxLength}"` : ''}>
-                    </${tag}>
+                        ${maxLength ? `maxlength="${maxLength}"` : ''}
+                    ></${tag}>
                     ${input.type === 'email' || input.type === 'phone' ? `<span class="${input.type}-error">${input.errorText}</span>` : ''}
                 </div>
             `;
