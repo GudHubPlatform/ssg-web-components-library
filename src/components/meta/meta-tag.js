@@ -10,6 +10,8 @@ class MetaTag extends GHComponent {
      */
     constructor() {
         super();
+
+        this.config = null;
     }
     
     async onServerRender() {
@@ -24,9 +26,15 @@ class MetaTag extends GHComponent {
         const url = new URL(window.location.href);
         const path = url.searchParams.get('path');
 
+        this.config = window.getConfig?.();
+        if (!this.config) {
+            console.warn('Config not available');
+            return;
+        }
+
         if (!appId && !itemId && path === ('/blog/')) { //blog/authors/
-            appId = window.getConfig().chapters.pages.app_id;
-            itemId = window.getConfig().chapters.pages.blog_main_page_item_id;
+            appId = this.config.chapters.pages.app_id;
+            itemId = this.config.chapters.pages.blog_main_page_item_id;
 
             this.addTag(appId, itemId, false, chapter);
         } else {
@@ -34,12 +42,14 @@ class MetaTag extends GHComponent {
             const author = url.searchParams.get('author');
             const category = url.searchParams.get('category');
             const article = url.searchParams.get('article');
+            
             if (appId && itemId) {
                 this.addTag(appId, itemId, false, chapter);
             } else {
                 if (chapter == 'blog' && !itemId) {
                     const url = new URL(window.location.href);
                     const path = url.searchParams.get('path');
+                    
                     if (path.includes('/page/')) {
                         let slug = `/blog/${category}/`;
                         await this.addTag(appId, false, slug, chapter);
@@ -69,19 +79,20 @@ class MetaTag extends GHComponent {
                 }
             }
         }
-            
     }
+
     async addTag (appId, itemId, slug, chapter) {
         const app = await gudhub.getApp(appId);
         const items = app.items_list;
+        
         let item;
         let fieldId;
         let value;
+        
         if (!slug) {
             item = items.find(findedItem => findedItem.item_id == itemId);
         } else {
             for (let findedItem in items) {
-                
                 let iterationItem = items[findedItem].fields.find(field => field.field_value == slug)
                 if (iterationItem) {
                     item = items[findedItem];
@@ -89,157 +100,211 @@ class MetaTag extends GHComponent {
             }   
         }
 
-        // fieldId = app.field_list.find(findedField => findedField.name_space === this.type);
-        const generalInfo = window.getConfig().componentsConfigs.generalInfo[0];
-        let titleId = window.getConfig().chapters[chapter].title_field_id;
-        let descriptionId = window.getConfig().chapters[chapter].description_field_id;
-        let slugId = window.getConfig().chapters[chapter].slug_field_id;
-        // let imageId = window.getConfig().chapters[chapter].image_field_id;
-        let imageUrl = window.getConfig().chapters[chapter].image_field_id;
-        // fieldId = fieldId.field_id;
-        // value = item.fields.find(findedField => findedField.field_id == fieldId).field_value;
+        const chapterConfig = this.config?.chapters?.[chapter];
+        if (!chapterConfig) {
+            console.warn('Invalid chapter:', chapter);
+            return;
+        }
 
-        let titleValue = item.fields.find(findedField => findedField.field_id == titleId).field_value;
-        let descriptionValue = item.fields.find(findedField => findedField.field_id == descriptionId).field_value;
-        let slugValue = item.fields.find(findedField => findedField.field_id == slugId).field_value;
-        let imageValue = (!slugValue.includes('/blog/') && !slugValue.includes('/service-areas/') && !slugValue.includes('/courses/')) ? item.fields.find(findedField => findedField.field_id == imageUrl).field_value : false;
+        const chapterItemId = item?.item_id;
+        const fields = item?.fields ?? [];
+        const generalInfo = this.config.componentsConfigs?.generalInfo?.[0];
 
-        // value = isNaN(value) ? value : await this.getContent(`https://app.gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${value}.html`);
-        titleValue = isNaN(titleValue) ? titleValue : await this.getContent(`https://app.gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${titleValue}.html`);
-        descriptionValue = isNaN(descriptionValue) ? descriptionValue : await this.getContent(`https://app.gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${descriptionValue}.html`);
-        slugValue = isNaN(slugValue) ? slugValue : await this.getContent(`https://app.gudhub.com/userdata/${window.getConfig().chapters[chapter].app_id}/${slugValue}.html`);
-        imageValue = (!slugValue.includes('/blog/') && !slugValue.includes('/service-areas/') && !slugValue.includes('/courses/')) ? isNaN(imageValue) ? imageValue : await this.getContent(`https://app.gudhub.com/userdata/${window.getConfig() .chapters[chapter].app_id}/${imageValue}.html`) : false;
-        
-        //TITLE
-        if ( !document.querySelector('title') ) {
+        const {
+            title_field_id: titleId,
+            description_field_id: descriptionId,
+            slug_field_id: slugId,
+            image_field_id: imageId,
+            meta_image_field_id: metaImageIdRaw,
+            app_id: chapterAppId
+        } = chapterConfig;
+
+        const metaImageId = metaImageIdRaw || imageId;
+
+        const getFieldValue = (fieldId) => {
+            return fields.find(field => field.field_id === fieldId)?.field_value ?? null;
+        };
+
+        const isNumeric = (val) => {
+            return typeof val === 'number' || 
+                (typeof val === 'string' && val.trim() !== '' && !isNaN(val));
+        };
+
+        const resolveValue = async (value, fieldType) => {
+            if (!isNumeric(value)) return value;
+
+            if (fieldType === 'image') return value;
+
+            try {
+                return await this.getContent(
+                    `https://app.gudhub.com/userdata/${chapterAppId}/${value}.html`
+                );
+            } catch (e) {
+                console.error('Failed to load content:', value, e);
+                return null;
+            }
+        };
+
+        let titleValue = getFieldValue(titleId);
+        let descriptionValue = getFieldValue(descriptionId);
+        let slugValue = getFieldValue(slugId);
+        let imageValue = getFieldValue(metaImageId);
+
+        [titleValue, descriptionValue, slugValue, imageValue] = await Promise.all([
+            resolveValue(titleValue, 'text'),
+            resolveValue(descriptionValue, 'text'),
+            resolveValue(slugValue, 'text'),
+            resolveValue(imageValue, 'image'),
+        ]);
+
+        let imageUrl = imageValue;
+
+        if (!metaImageIdRaw) {
+            const itemFields = await gudhub.getItem(chapterAppId, chapterItemId);
+
+            const currentFieldData = itemFields?.fields?.find(
+                field => String(field?.field_id) === String(imageId)
+            );
+
+            if (currentFieldData?.field_value) {
+                const imageData = await gudhub.getFile(
+                    chapterAppId,
+                    currentFieldData.field_value
+                );
+
+                imageUrl = imageData?.url || imageUrl;
+            }
+        }
+
+        if (metaImageIdRaw && imageUrl) {
+            const protocol = window.MODE === 'production' ? 'https' : 'http';
+            const website = window.getConfig()?.website;
+            imageUrl = `${protocol}://${website}${imageUrl}`
+        }
+
+        // TITLE
+        if (!document.querySelector('title')) {
             const title = document.createElement('title');
             title.innerText = titleValue;
             document.querySelector('head').prepend(title);
         }
 
-        if ( !document.querySelector('[property="og:site_name"]') ) {
+        if (!document.querySelector('[property="og:site_name"]')) {
             const metaSiteName = document.createElement('meta');
             metaSiteName.setAttribute('property', 'og:site_name');
             metaSiteName.setAttribute('content', generalInfo.name);
             document.querySelector('head').prepend(metaSiteName);
         }
 
-
-        if ( !document.querySelector('[name="twitter:card"]') ) {
+        if (!document.querySelector('[name="twitter:card"]')) {
             const metaCard = document.createElement('meta');
             metaCard.setAttribute('name', 'twitter:card');
             metaCard.setAttribute('content', 'summary_large_image');
             document.querySelector('head').prepend(metaCard);
         }
         
-        if ( !document.querySelector('[name="twitter:site"]') && generalInfo.twitterName ) {
+        if (!document.querySelector('[name="twitter:site"]') && generalInfo.twitterName) {
             const metaSite = document.createElement('meta');
             metaSite.setAttribute('name', 'twitter:site');
             metaSite.setAttribute('content', generalInfo.twitterName);
             document.querySelector('head').prepend(metaSite);
         }
-        
 
-        if ((!slugValue.includes('/blog/') && !slugValue.includes('/service-areas/') && !slugValue.includes('/courses/'))) {
-            if ( !document.querySelector('[name="twitter:image"]') ) {
-                const twitterMetaSiteImage = document.createElement('meta');
-                twitterMetaSiteImage.setAttribute('name', 'twitter:image');
-                twitterMetaSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${imageValue}`);
-                document.querySelector('head').prepend(twitterMetaSiteImage);
-            }
-
-            if ( !document.querySelector('[property="og:image"]') ) {
-                const metaSiteImage = document.createElement('meta');
-                metaSiteImage.setAttribute('property', 'og:image');
-                metaSiteImage.setAttribute('content', `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${imageValue}`);
-                document.querySelector('head').prepend(metaSiteImage);
-            }
+        if (!document.querySelector('[name="twitter:image"]')) {
+            const twitterMetaSiteImage = document.createElement('meta');
+            twitterMetaSiteImage.setAttribute('name', 'twitter:image');
+            twitterMetaSiteImage.setAttribute('content', imageUrl);
+            document.querySelector('head').prepend(twitterMetaSiteImage);
         }
 
-        if ( !document.querySelector('[property="og:type"]') ) {
+        if (!document.querySelector('[property="og:image"]')) {
+            const metaSiteImage = document.createElement('meta');
+            metaSiteImage.setAttribute('property', 'og:image');
+            metaSiteImage.setAttribute('content', imageUrl);
+            document.querySelector('head').prepend(metaSiteImage);
+        }
+
+        if (!document.querySelector('[property="og:type"]')) {
             const metaWebsite = document.createElement('meta');
             metaWebsite.setAttribute('property', 'og:type');
             metaWebsite.setAttribute('content', 'website');
             document.querySelector('head').prepend(metaWebsite);
         }
 
-        if ( !document.querySelector('[property="og:locale"]') ) {
+        if (!document.querySelector('[property="og:locale"]')) {
             const metaLocale = document.createElement('meta');
             metaLocale.setAttribute('property', 'og:locale');
             metaLocale.setAttribute('content', document.documentElement.lang);
             document.querySelector('head').prepend(metaLocale);
         }
 
-        if ( !document.querySelector('[property="og:title"]') ) {
-            const meta = document.createElement('meta');
-            meta.setAttribute('property', 'og:title');
-            meta.setAttribute('content', titleValue);
-            document.querySelector('head').prepend(meta);
-        }
-
-        if ( !document.querySelector('[property="og:description"]') ) {
+        if (!document.querySelector('[property="og:description"]')) {
             const metaDescription = document.createElement('meta');
             metaDescription.setAttribute('property', 'og:description');
             metaDescription.setAttribute('content', descriptionValue);
             document.querySelector('head').prepend(metaDescription);
         }
 
-        if ( !document.querySelector('[name="twitter:title"]') ) {
+        if (!document.querySelector('[name="twitter:title"]')) {
             const metaTwitter = document.createElement('meta');
             metaTwitter.setAttribute('name', 'twitter:title');
             metaTwitter.setAttribute('content', titleValue);
             document.querySelector('head').prepend(metaTwitter);
         }
 
-        if ( !document.querySelector('[name="twitter:description"]') ) {
+        if (!document.querySelector('[name="twitter:description"]')) {
             const metaTwitterDescription = document.createElement('meta');
             metaTwitterDescription.setAttribute('name', 'twitter:description');
             metaTwitterDescription.setAttribute('content', descriptionValue);
             document.querySelector('head').prepend(metaTwitterDescription);
         }
 
-        if ( !document.querySelector('[name="description"]') ) {
+        if (!document.querySelector('[name="description"]')) {
             const metaSimpleDescription = document.createElement('meta');
             metaSimpleDescription.setAttribute('name', 'description');
             metaSimpleDescription.setAttribute('content', descriptionValue);
             document.querySelector('head').prepend(metaSimpleDescription);
         }
 
-        // if (this.og) {
-        //     if (this.type != 'meta_image_src') {
+        if (this.og) {
+            if (this.type != 'meta_image_src') {
         
-        //     }
-        // } else if (this.twitter) {
-        //     if (this.type != 'meta_image_src') {
-        //         
-        //     }
+            }
+        } else if (this.twitter) {
+            if (this.type != 'meta_image_src') {
+                
+            }
            
-        // } else {
-        //     const meta = document.createElement('meta');
-        //     let name;
-        //     if (this.type == "title") {
-        //         name = "title"
-        //     } else if (this.type == "meta_image_src") {
-        //         name = "image"
-        //     } else {
-        //         name = this.type
-        //     }
-        //     meta.setAttribute('name', name);
-        //     meta.setAttribute('content', value);
-        //     document.querySelector('head').prepend(meta);
-        // }
+        } else {
+            const meta = document.createElement('meta');
+            let name;
+            if (this.type == "title") {
+                name = "title"
+            } else if (this.type == "meta_image_src") {
+                name = "image"
+            } else {
+                name = this.type
+            }
+            meta.setAttribute('name', name);
+            meta.setAttribute('content', value);
+            document.querySelector('head').prepend(meta);
+        }
 
         this.remove();
     }
 
     getContent(link) {
-        return new Promise(async (resolve) => {
-            const response = await fetch(link);
-            const content = await response.text();
-            const div = document.createElement('div');
-            div.insertAdjacentHTML('beforeend', content);
-            resolve(div.innerText);
-        });
+        return fetch(link)
+            .then(res => res.text())
+            .then(content => {
+                const div = document.createElement('div');
+                div.innerHTML = content;
+                return div.innerText;
+            })
+            .catch(err => {
+                console.error('getContent error:', err);
+                return null;
+            });
     }
 }
 
