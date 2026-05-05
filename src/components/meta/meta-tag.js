@@ -61,10 +61,27 @@ class MetaTag extends GHComponent {
                     let ids = await super.findIds('blog');
                     await this.addTag(ids.appId, ids.itemId, `/blog/authors/${author}/`, 'blog');
                 } else if (article != null) {
-                    let ids = await super.findIds('blog');
-                    await this.addTag(ids.appId, ids.itemId, `/blog/${category}/${article}/`, 'blog');
+                    const chapter = document.querySelector('[data-chapter]')
+                        ? document.querySelector('[data-chapter]').getAttribute('data-chapter')
+                        : 'blog';
+
+                    let ids = await super.findIds(chapter);
+
+                    let slug;
+
+                    if (category) {
+                        slug = `/${chapter}/${category}/${article}/`;
+                    } else {
+                        const path = url.searchParams.get('path');
+                        slug = path || false;
+                    }
+
+                    await this.addTag(ids.appId, ids.itemId, slug, chapter);
+
                 } else {
-                    const getCurrentChapter = await window?.getCurrentChapter();
+                    const getCurrentChapter = document.querySelector('meta-tag') 
+                        ? document.querySelector('meta-tag').getAttribute('data-chapter') 
+                        : await window?.getCurrentChapter();
                     const currentChapter = getCurrentChapter ? getCurrentChapter : 'pages';
 
                     let slug = false;

@@ -45,8 +45,22 @@ class CanonicalComponent extends GHComponent {
                 let ids = await super.findIds('blog');
                 await this.findCanonical(ids.appId, ids.itemId, `/blog/authors/${author}/`);
             } else if (article != null) {
-                let ids = await super.findIds('blog');
-                await this.findCanonical(ids.appId, ids.itemId, `/blog/${category}/${article}/`);
+                const chapter = document.querySelector('[data-chapter]')
+                    ? document.querySelector('[data-chapter]').getAttribute('data-chapter')
+                    : 'blog';
+
+                let ids = await super.findIds(chapter);
+
+                let slug;
+
+                if (category) {
+                    slug = `/${chapter}/${category}/${article}/`;
+                } else {
+                    const path = url.searchParams.get('path');
+                    slug = path || false;
+                }
+                await this.findCanonical(ids.appId, ids.itemId, slug);
+
             } else {
                 const getCurrentChapter = await window?.getCurrentChapter();
                 const currentChapter = getCurrentChapter ? getCurrentChapter : 'pages';
