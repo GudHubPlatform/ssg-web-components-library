@@ -6,16 +6,74 @@
         </div>
 
         <div class="blocks-wrapper">
-            <div class="block" gh-array="${ghId}.items" itemscope="" itemtype="https://schema.org/Table">
-                ${json.items.reduce((acc, item, index) => {
-                    return acc + `
-                        <div class="item" gh-item itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
-                            <p class="item-title" gh-id="${ghId}.items.${index}.title" itemprop="name"></p>
-                            <p class="item-price" gh-id="${ghId}.items.${index}.price" itemprop="description"></p>
-                        </div>
-                    `
-                }, '')}
-            </div>
+            <table
+                class="block"
+                itemscope
+                itemtype="${json.schema?.tableType || 'https://schema.org/Table'}"
+            >
+                ${json.headers?.length ? `
+                    <thead>
+                        <tr class="table-head" gh-array="${ghId}.headers">
+                            ${json.headers.reduce((acc, item, index) => {
+                                return acc + `
+                                    <th gh-item>
+                                        <span gh-id="${ghId}.headers.${index}"></span>
+                                    </th>
+                                `
+                            }, '')}
+                        </tr>
+                    </thead>
+                ` : ''}
+
+                <tbody gh-array="${ghId}.items">
+                    ${json.items.reduce((acc, item, index) => {
+                        return acc + `
+                            <tr
+                                class="item"
+                                gh-item
+                                itemprop="${json.schema?.rowProp || 'about'}"
+                                itemscope
+                                itemtype="${json.schema?.rowType || 'https://schema.org/Thing'}"
+                            >
+                                <td>
+                                    <p
+                                        class="item-title"
+                                        gh-id="${ghId}.items.${index}.title"
+                                        itemprop="${json.schema?.titleProp || 'name'}"
+                                    ></p>
+                                </td>
+
+                                ${json.schema?.valueType === 'offer' ? `
+                                    <td
+                                        itemprop="${json.schema?.offerProp || 'offers'}"
+                                        itemscope
+                                        itemtype="${json.schema?.offerType || 'https://schema.org/Offer'}"
+                                    >
+                                        <p class="item-price">
+                                            $<span
+                                                gh-id="${ghId}.items.${index}.price"
+                                                itemprop="${json.schema?.priceProp || 'price'}"
+                                            ></span>
+                                            <span
+                                                gh-id="${ghId}.items.${index}.currency"
+                                                itemprop="${json.schema?.currencyProp || 'priceCurrency'}"
+                                            ></span>
+                                        </p>
+                                    </td>
+                                ` : `
+                                    <td>
+                                        <p
+                                            class="item-price"
+                                            gh-id="${ghId}.items.${index}.price"
+                                            itemprop="${json.schema?.valueProp || 'description'}"
+                                        ></p>
+                                    </td>
+                                `}
+                            </tr>
+                        `
+                    }, '')}
+                </tbody>
+            </table>
         </div>
     </div>
 </section>

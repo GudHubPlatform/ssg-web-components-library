@@ -1,22 +1,41 @@
 {
-  "title": "Lorem Ipsum Pricing",
-  "subtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  "items": [
-    {
-      "title": "Basic Plan",
-      "price": "$19 / month"
+    "title": "Lorem Ipsum Pricing",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "schema": {
+        "tableType": "https://schema.org/Table",
+        "rowProp": "about",
+        "rowType": "https://schema.org/Service",
+        "titleProp": "name",
+        "valueType": "offer",
+        "offerProp": "offers",
+        "offerType": "https://schema.org/Offer",
+        "priceProp": "price",
+        "currencyProp": "priceCurrency"
     },
-    {
-      "title": "Standard Plan",
-      "price": "$49 / month"
-    },
-    {
-      "title": "Premium Plan",
-      "price": "$99 / month"
-    },
-    {
-      "title": "Enterprise Plan",
-      "price": "Custom pricing"
-    }
-  ]
+    "headers": [
+        "Service Name",
+        "Price Starts at"
+    ],
+    "items": [
+        {
+            "title": "Lorem Ipsum Service",
+            "price": "120",
+            "currency": "USD"
+        },
+        {
+            "title": "Dolor Sit Service",
+            "price": "240",
+            "currency": "USD"
+        },
+        {
+            "title": "Consectetur Service",
+            "price": "360",
+            "currency": "USD"
+        },
+        {
+            "title": "Adipiscing Service",
+            "price": "480",
+            "currency": "USD"
+        }
+    ]
 }

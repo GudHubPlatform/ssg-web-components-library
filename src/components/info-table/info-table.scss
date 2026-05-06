@@ -4,53 +4,90 @@ info-table {
     }
 
     .top-wrapper {
-        display: flex;
-        align-items: center;
+        margin-bottom: 30px;
 
-        h2 {
+        .title {
+            color: #05183A;
+            font-weight: 700;
+            font-size: 30px;
+            line-height: 136%;
+            letter-spacing: 0%;
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 136%;
+            letter-spacing: 0%;
+            text-align: justify;
+            color: #63636F;
+            text-align: center;
+        }
+    }
+
+    .block {
+        width: 100%;
+        margin-bottom: 25px;
+        border: 1px solid #C8C8C8;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .table-head {
+        th {
             width: 50%;
+            height: 52px;
+            padding: 0 15px;
+            border-bottom: 1px solid #C8C8C8;
+            vertical-align: middle;
+            text-align: center;
             font-size: 18px;
             font-weight: 700;
             color: black;
             line-height: 120%;
         }
 
-        p {
-            width: 50%;
-            font-size: 18px;
-            font-weight: 700 !important;
-            color: black !important;
-            line-height: 120%;
-            text-align: center;
+        th:not(:last-child) {
+            border-right: 1px solid #C8C8C8;
         }
+    }
 
-        .title {
-            margin-bottom: 30px;
-        }
-    }
-    .block {
-        margin-bottom: 25px;
-        border: 1px solid #C8C8C8;
-    }
     .item {
-        display: flex;
-
         &:nth-child(even) {
             background-color: #F6F6F6;
         }
-        &:not(:last-child) {
+
+        td {
+            width: 50%;
+            height: 48px;
+            padding: 0 15px;
             border-bottom: 1px solid #C8C8C8;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        td:not(:last-child) {
+            border-right: 1px solid #C8C8C8;
+        }
+
+        &:last-child {
+            td {
+                border-bottom: none;
+            }
         }
 
         &-title,
         &-price {
-            line-height: 48px;
+            width: 100%;
+            margin: 0;
+            font-size: 16px;
+            font-weight: 400;
+            color: black;
+            line-height: 140%;
             text-align: center;
-            width: 50%;
-            height: 48px;
-        }
-        &-price {
-            border-left: 1px solid #C8C8C8;
         }
     }
 
@@ -70,6 +107,38 @@ info-table {
     @media (max-width: 700px) {
         section {
             padding-bottom: 40px;
-        } 
+        }
+
+        .top-wrapper {
+            margin-bottom: 24px;
+
+            .title {
+                font-size: 26px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+        }
+
+        .table-head {
+            th {
+                height: 48px;
+                padding: 0 10px;
+                font-size: 16px;
+            }
+        }
+
+        .item {
+            td {
+                height: 46px;
+                padding: 0 10px;
+            }
+
+            &-title,
+            &-price {
+                font-size: 15px;
+            }
+        }
     }
 }
