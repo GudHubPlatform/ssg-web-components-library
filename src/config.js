@@ -66,6 +66,8 @@ export { PageBannerImageAndMenu } from './components/page-banner-image-and-menu/
 export { GoogleAnalytics } from './components/google-analytics/config.js';
 export { GoogleTag } from './components/google-tag/config.js';
 export { cookiesPopup } from './components/cookies-popup/config.js';
+export { infoTable } from './components/info-table/config.js';
+export { faqComponent } from './components/faq-component/config.js';
 
 // export { liqPayComponent } from './components/liqpay-component/config.js';
 // export { htmlTextFromEditorJs } from './components/html-text-from-editor-js/config.js';

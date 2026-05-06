@@ -1,0 +1,21 @@
+<section class="info-table">
+    <div class="container">
+        <div class="top-wrapper">
+            ${json.title ? `<h2 class="title" gh-id="${ghId}.title"></h2>` : ''}
+            ${json.subtitle ? `<p class="subtitle" gh-id="${ghId}.subtitle"></p>` : ''}
+        </div>
+
+        <div class="blocks-wrapper">
+            <div class="block" gh-array="${ghId}.items" itemscope="" itemtype="https://schema.org/Table">
+                ${json.items.reduce((acc, item, index) => {
+                    return acc + `
+                        <div class="item" gh-item itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                            <p class="item-title" gh-id="${ghId}.items.${index}.title" itemprop="name"></p>
+                            <p class="item-price" gh-id="${ghId}.items.${index}.price" itemprop="description"></p>
+                        </div>
+                    `
+                }, '')}
+            </div>
+        </div>
+    </div>
+</section>

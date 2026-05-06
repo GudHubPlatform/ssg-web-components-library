@@ -1,0 +1,22 @@
+{
+  "title": "Lorem Ipsum Pricing",
+  "subtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "items": [
+    {
+      "title": "Basic Plan",
+      "price": "$19 / month"
+    },
+    {
+      "title": "Standard Plan",
+      "price": "$49 / month"
+    },
+    {
+      "title": "Premium Plan",
+      "price": "$99 / month"
+    },
+    {
+      "title": "Enterprise Plan",
+      "price": "Custom pricing"
+    }
+  ]
+}

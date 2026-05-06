@@ -1,0 +1,53 @@
+<section itemscope="" itemtype="https://schema.org/FAQPage">
+    <div class="container">
+        <div class="top-wrapper">
+            ${json.title ? `
+                <h2 gh-id="${ghId}.title"> TITLE </h2>
+            ` : ''}
+            ${json.subtitle ? `
+                <p class="subtitle" gh-id="${ghId}.subtitle"> SUBTITLE </p>
+            ` : ''}
+        </div>
+        <div class="flex-wrapper">
+            ${json.items.reduce((acc, itemsColumn, indexColumn) => acc + `
+                <div class="accordion-column">
+                    ${itemsColumn.reduce((acc, item, index) => acc + `
+                        <div class="primary-block" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                            <div class="visible-content">
+                                ${item.title ? `<h3 class="title" gh-id="${ghId}.items.${indexColumn}.${index}.title" itemprop="name"></h3>` : ''}
+                                <div class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M1 8.33333L8.5 14.8148L16 8.33333M8.5 15L8.5 0" stroke="none" stroke-width="2"></path></svg>
+                                </div>
+                            </div>
+                            <div class="expandable-wrapper" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                                <div class="content" itemprop="text">
+                                    ${item.text ? `<p class="text" gh-id="${ghId}.items.${indexColumn}.${index}.text"></p>` : ''}
+                                    ${item.list ? `
+                                        <div class="list">
+                                            ${(() => {
+                                                let tag = 'ul';
+                                                if (item.list.tag === 'ul' || item.list.tag === 'ol') {
+                                                    tag = item.list.tag;
+                                                }
+                                                return `
+                                                    <${tag}>
+                                                        ${item.list.items.reduce((acc, listItem, itemIndex) => acc + `
+                                                            <li gh-id="${ghId}.items.${indexColumn}.${index}.list.items.${itemIndex}"></li>
+                                                        `, '')}
+                                                    </${tag}>
+                                                `
+                                            })()}
+                                        </div>
+                                    ` : ''}
+                                    ${item.button ? `
+                                        <button-component class="btn" data-link="${item.button.link}" data-popup-id="${item.button.popupId}" data-placement="${item.button.placement}">${item.button.text}</button-component>    
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `, '')}
+                </div>
+            `, '')}
+        </div>
+    </div>
+</section>
