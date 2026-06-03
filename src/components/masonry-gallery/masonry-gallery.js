@@ -19,6 +19,9 @@ class MasonryGallery extends GHComponent {
         this.fitWidthValue = !!this.columnWidthValue;
         this.contactUsButton = this.hasAttribute('data-modal-button') ? this.getAttribute('data-modal-button') : null;
         this.contactUsButtonId = this.hasAttribute('data-modal-button-id') ? this.getAttribute('data-modal-button-id') : null;
+        this.showCount = this.hasAttribute('data-show-count')
+            ? +this.getAttribute('data-show-count')
+            : 10;
     }
 
     async onServerRender() {
@@ -27,6 +30,20 @@ class MasonryGallery extends GHComponent {
         this.application = this.hasAttribute('application') ? this.getAttribute('application') : undefined;
         this.ghId = this.getAttribute('data-gh-id') || null;
         this.json = await super.getGhData(this.ghId, this.application);
+
+        if (
+            typeof this.json.items === 'object' &&
+            this.json.items !== null &&
+            this.json.items.url
+        ) {
+            const response = await fetch(this.json.items.url);
+            const data = await response.json();
+
+            this.setCacheGhData(
+                'masonry-images',
+                data.images
+            );
+        }
 
         if (Array.isArray(this.json.items)) {
             const isMoreItems = this.json.moreItems ? this.json.moreItems : null;
@@ -55,32 +72,25 @@ class MasonryGallery extends GHComponent {
         const modal = document.getElementById('modal');
 
         if (this.hasAttribute('images-url')) {
-            try {
-                const url = this.getAttribute('images-url');
+            const images = await this.getCacheGhData(
+                'masonry-images'
+            );
 
-                const response = await fetch(url);
-                const data = await response.json();
+            const isInitImagesEqualNull =
+                this.getAttribute('init-count') === 'null';
 
-                const { images } = data;
+            const initCountImages = this.contactUsButton
+                ? this.showCount
+                : images.length;
 
-                const isInitImagesEqualNull = this.getAttribute('init-count') === 'null';
-                
-                const initCountImages = this.hasAttribute('init-count') && !isInitImagesEqualNull ? this.getAttribute('init-count') : images.length;
+            const initImages = images.slice(0, initCountImages);
+            const initMoreImages = images.slice(initCountImages);
 
-                const initImages = images.slice(0, initCountImages);
-                const initMoreImages = images.slice(initCountImages);
+            this.allImagesArrayLength = images.length;
+            this.initCountImages = initCountImages;
 
-                this.allImagesArrayLength = images.length;
-                this.initCountImages = initCountImages;
-
-                this.initImages = initImages;
-                this.moreImages = initMoreImages;
-            } catch (error) {
-                console.error(error);
-            }
-        } else {
-            this.initImages = JSON.parse(this.getAttribute('init-images'));
-            this.moreImages = JSON.parse(this.getAttribute('add-array'));
+            this.initImages = initImages;
+            this.moreImages = initMoreImages;
         }
 
         const grid = this.imagesContainer;
@@ -200,9 +210,35 @@ class MasonryGallery extends GHComponent {
         const promise = new Promise(async (res, rej) => {
             const img = document.createElement('img');
 
-            const tempoImageSrc = await this.temporaryImage(imageSrc);
+            const fileName = imageSrc.split('/').pop();
 
-            img.setAttribute('src', tempoImageSrc);
+            const pathToJpg = `/assets/images/masonry/${fileName}`;
+            const pathToWebp = `${pathToJpg}.webp`;
+
+            const response = await fetch(pathToWebp, {
+                method: 'HEAD'
+            });
+
+            if (!response.ok) {
+                await fetch('/upload-image-path', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        imageSrc: pathToJpg,
+                        imageUrl: imageSrc,
+                        isCrop: true
+                    })
+                });
+            }
+
+            img.src = `/assets/images/masonry/${fileName}`;
+
+            img.setAttribute(
+                'src',
+                `/assets/images/masonry/${fileName}`
+            );
             img.setAttribute('alt', imageAlt);
             img.setAttribute('title', imageTitle);
 
@@ -252,6 +288,14 @@ class MasonryGallery extends GHComponent {
         const button = buttonWrapper.querySelector('#grid-add-items');
         const addImages = this.addImages;
 
+        if (!this.contactUsButton) {
+            if (button) {
+                button.remove();
+            }
+
+            return;
+        }
+
         const isInitCountEqualAllLength = this.initCountImages === this.allImagesArrayLength;
         
         if (!masonryGrid || !button || !buttonWrapper || !this.moreImages || isInitCountEqualAllLength) {
@@ -263,7 +307,7 @@ class MasonryGallery extends GHComponent {
         let images = [...this.moreImages];
 
         // Get more-count attribute value
-        const moreCountImages = parseInt(this.getAttribute('more-count')) || images.length;
+        const moreCountImages = this.showCount;
 
         button.addEventListener('click', async () => {
             // If we set max-height for block, this code removes styles which hide content, when we click show more
