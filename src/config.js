@@ -68,6 +68,7 @@ export { GoogleTag } from './components/google-tag/config.js';
 export { cookiesPopup } from './components/cookies-popup/config.js';
 export { infoTable } from './components/info-table/config.js';
 export { faqComponent } from './components/faq-component/config.js';
+export { videoSlider } from './components/video-slider/config.js';
 
 // export { liqPayComponent } from './components/liqpay-component/config.js';
 // export { htmlTextFromEditorJs } from './components/html-text-from-editor-js/config.js';
