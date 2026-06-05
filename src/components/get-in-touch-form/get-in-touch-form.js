@@ -5,6 +5,7 @@ import defaultConfigs from './get-in-touch-form-data.json';
 import { checkInputsValidations } from './inputsValidation.js';
 
 let recaptchaPromise = null;
+let recaptchaBadgeObserver = null;
 
 function loadRecaptcha(siteKey) {
     if (!siteKey) {
@@ -35,16 +36,41 @@ function loadRecaptcha(siteKey) {
     return recaptchaPromise;
 }
 
+function hideRecaptchaBadge() {
+    const badge = document.querySelector('.grecaptcha-badge');
+
+    if (!badge) return;
+
+    badge.style.setProperty('visibility', 'hidden', 'important');
+    badge.style.setProperty('opacity', '0', 'important');
+    badge.style.setProperty('pointer-events', 'none', 'important');
+}
+
+function observeRecaptchaBadge() {
+    hideRecaptchaBadge();
+
+    if (recaptchaBadgeObserver) return;
+
+    recaptchaBadgeObserver = new MutationObserver(() => {
+        hideRecaptchaBadge();
+    });
+
+    recaptchaBadgeObserver.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+}
+
 class GetInTouchForm extends GHComponent {
     constructor() {
         super();
 
-        this.formId = this.getAttribute("data-form-id");
+        this.formId = this.getAttribute('data-form-id');
         this.defaultConfigs = defaultConfigs;
 
         this.generateInput = this.generateInput;
         this.isFormSubmitted = false;
-        
+
         this.placement = 'main';
         this.config = window.getConfig()?.componentsConfigs?.formConfig || window.getConfig()?.formConfig;
 
@@ -66,7 +92,11 @@ class GetInTouchForm extends GHComponent {
             this.attachEventListeners();
 
             if (this.recaptcha_site_key) {
-                loadRecaptcha(this.recaptcha_site_key).catch(console.error);
+                loadRecaptcha(this.recaptcha_site_key)
+                    .then(() => {
+                        observeRecaptchaBadge();
+                    })
+                    .catch(console.error);
             }
         }
     }
@@ -76,15 +106,26 @@ class GetInTouchForm extends GHComponent {
         super.render(html);
         this.attachEventListeners();
 
-        loadRecaptcha(this.recaptcha_site_key).catch(console.error);
+        if (this.recaptcha_site_key) {
+            loadRecaptcha(this.recaptcha_site_key)
+                .then(() => {
+                    observeRecaptchaBadge();
+                })
+                .catch(console.error);
+        }
     }
 
     attachEventListeners() {
-        this.getElementsByTagName('form')[0]
-            .addEventListener('submit', (e) => this.handleSubmit(e));
+        const form = this.getElementsByTagName('form')[0];
+        const restartButton = this.getElementsByClassName('restart_button')[0];
 
-        this.getElementsByClassName('restart_button')[0]
-            .addEventListener('click', () => this.hideFail());
+        if (form) {
+            form.addEventListener('submit', (e) => this.handleSubmit(e));
+        }
+
+        if (restartButton) {
+            restartButton.addEventListener('click', () => this.hideFail());
+        }
     }
 
     onParentPopupClose() {
@@ -99,7 +140,7 @@ class GetInTouchForm extends GHComponent {
     initConfig(formConfigs) {
         try {
             this.config = formConfigs.find(({ id }) => id === this.formId);
-            if (!this.config) throw new Error("Config not found");
+            if (!this.config) throw new Error('Config not found');
         } catch {
             const defaultId = this.isInPopup ? 'default popup' : 'default';
             this.config = defaultConfigs.find(({ id }) => id === defaultId);
@@ -107,7 +148,7 @@ class GetInTouchForm extends GHComponent {
 
         this.titleName = this.getAttribute('data-form-title') || this.config.title;
         this.subtitleName = this.getAttribute('data-form-subtitle') || this.config.subtitle;
-        this.placement = this.getAttribute('data-form-placement') || "main";
+        this.placement = this.getAttribute('data-form-placement') || 'main';
         this.buttonText = this.getAttribute('data-form-button-text') || this.config.button_text;
     }
 
@@ -121,6 +162,8 @@ class GetInTouchForm extends GHComponent {
 
         return new Promise((resolve, reject) => {
             grecaptcha.ready(() => {
+                hideRecaptchaBadge();
+
                 grecaptcha.execute(this.recaptcha_site_key, { action })
                     .then(resolve)
                     .catch(reject);
@@ -146,7 +189,6 @@ class GetInTouchForm extends GHComponent {
                 }
 
                 this.handleSuccessFormValidation(form, token);
-
             } catch (error) {
                 console.error(error);
                 this.showFail();
@@ -179,7 +221,7 @@ class GetInTouchForm extends GHComponent {
     inputsValidation = async (form) => {
         const inputs = Array.from(form.querySelectorAll('input'));
         return checkInputsValidations(inputs);
-    }
+    };
 
     verifyRecaptcha = async (recaptchaToken) => {
         const response = await fetch('/api/verify-recaptcha', {
@@ -200,7 +242,7 @@ class GetInTouchForm extends GHComponent {
         }
 
         return data;
-    }
+    };
 
     createDataObject(form, placement, recaptchaToken) {
         const inputs = {};
@@ -230,13 +272,24 @@ class GetInTouchForm extends GHComponent {
 
     addLoader() {
         this.classList.add('loading');
-        this.querySelector('button[type="submit"]').disabled = true;
+
+        const btn = this.querySelector('button[type="submit"]');
+
+        if (btn) {
+            btn.disabled = true;
+        }
     }
 
     removeLoader() {
         this.classList.remove('loading');
+
         const btn = this.querySelector('button[type="submit"]');
-        setTimeout(() => btn.disabled = false, 500);
+
+        if (btn) {
+            setTimeout(() => {
+                btn.disabled = false;
+            }, 500);
+        }
     }
 
     showSuccess({ email, phone }) {
@@ -278,6 +331,9 @@ class GetInTouchForm extends GHComponent {
 
     hideFail() {
         const el = this.querySelector('.overflow.fail');
+
+        if (!el) return;
+
         el.style.opacity = 0;
 
         setTimeout(() => {

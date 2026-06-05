@@ -1,0 +1,91 @@
+<section class="liqpay-component">
+    <!-- <div class="liqpay-component__logo">
+        <div class="liqpay-component__logo-badge">
+            <div class="liqpay-component__logo-badge-text">
+                <span class="liqpay-component__logo-gud">GUD</span>
+                <span class="liqpay-component__logo-hub">HUB</span>
+            </div>
+        </div>
+        <span class="liqpay-component__logo-crm">CRM</span>
+    </div> -->
+
+    <h1 class="liqpay-component__title" data-liqpay-title></h1>
+
+    <p class="liqpay-component__subtitle" data-liqpay-subtitle></p>
+
+    <div class="liqpay-component__card">
+        <div class="liqpay-component__amount-row">
+            <div>
+                <p class="liqpay-component__amount-label">Amount</p>
+                <p class="liqpay-component__amount" data-liqpay-amount></p>
+            </div>
+            <div class="liqpay-component__secured-badge">
+                <div class="liqpay-component__secured-icon" aria-hidden="true">
+                    <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <polyline points="2,5 4,7.5 8,3" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <span class="liqpay-component__secured-text">Secured</span>
+            </div>
+        </div>
+
+        <div class="liqpay-component__divider"></div>
+
+        <div class="liqpay-component__summary">
+            <div class="liqpay-component__summary-row">
+                <span class="liqpay-component__summary-label">Description</span>
+                <strong class="liqpay-component__summary-value" data-liqpay-description></strong>
+            </div>
+
+            <div class="liqpay-component__summary-row" data-liqpay-order-row>
+                <span class="liqpay-component__summary-label">Order ID</span>
+                <strong class="liqpay-component__summary-value" data-liqpay-order-id></strong>
+            </div>
+        </div>
+
+        <p class="liqpay-component__text" data-liqpay-text></p>
+
+        <form
+            class="liqpay-component__form"
+            method="POST"
+            accept-charset="utf-8"
+            data-liqpay-form
+        >
+            <input type="hidden" name="data" data-liqpay-data>
+            <input type="hidden" name="signature" data-liqpay-signature>
+
+            <button class="liqpay-component__button" type="button" data-liqpay-button>
+                <svg class="liqpay-component__button-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="2" y="7" width="14" height="10" rx="2" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6 7V5a3 3 0 016 0v2" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span data-liqpay-button-text></span>
+            </button>
+        </form>
+
+        <p class="liqpay-component__error" data-liqpay-error hidden></p>
+
+        <p class="liqpay-component__powered">
+            Powered by <span class="liqpay-component__powered-brand">LiqPay</span>
+        </p>
+    </div>
+
+    <div class="liqpay-component__security">
+        <div class="liqpay-component__security-item">
+            <div class="liqpay-component__security-icon" aria-hidden="true">
+                <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="2,5 4,7.5 8,3" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <span>256-bit Encryption</span>
+        </div>
+        <div class="liqpay-component__security-item">
+            <div class="liqpay-component__security-icon" aria-hidden="true">
+                <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="2,5 4,7.5 8,3" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <span>PCI DSS Compliant</span>
+        </div>
+    </div>
+</section>

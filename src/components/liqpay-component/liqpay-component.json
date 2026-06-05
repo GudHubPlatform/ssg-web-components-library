@@ -1,0 +1,14 @@
+{
+    "title": "Test Payment",
+    "subtitle": "Complete your test payment securely with LiqPay.",
+    "description": "After clicking the button you will be redirected to the LiqPay secure payment page.",
+    "amount": 1,
+    "currency": "UAH",
+    "order_id": "test-order-001",
+    "payment_description": "Test LiqPay payment",
+    "button_text": "Сплатити",
+    "loading_text": "Підготовка оплати...",
+    "error_text": "Не вдалося підготувати оплату. Спробуйте ще раз.",
+    "create_payment_url": "/liqpay/create-payment",
+    "liqpay_checkout_url": "https://www.liqpay.ua/api/3/checkout"
+}

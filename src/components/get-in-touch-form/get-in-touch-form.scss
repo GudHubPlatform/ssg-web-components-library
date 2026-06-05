@@ -271,6 +271,15 @@ get-in-touch-form {
             }
         }
     }
+    
+    .recaptcha-notice {
+        margin-top: 20px;
+        font-size: 12px;
+        line-height: 1.4;
+        opacity: 0.7;
+        text-align: center;
+    }
+
     &[data-in-popup] {
         .get-in-touch-form {
             padding-top: 0;
@@ -368,4 +377,10 @@ popup-container[data-position="bottom-right"] {
             }
         }
     }
+}
+
+body .grecaptcha-badge {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }

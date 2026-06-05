@@ -1,0 +1,337 @@
+body {
+    padding-top: 0;
+}
+
+liqpay-component {
+    display: block;
+
+    .liqpay-component {
+        position: relative;
+        min-height: 100vh;
+        padding: 48px 20px 80px;
+        background:
+            radial-gradient(ellipse 80% 60% at 15% 50%, rgba(29, 78, 216, 0.18) 0%, transparent 70%),
+            radial-gradient(ellipse 60% 50% at 85% 50%, rgba(109, 40, 217, 0.14) 0%, transparent 70%),
+            linear-gradient(135deg, #0a1628 0%, #0d1f3c 40%, #0e1a35 60%, #0c1525 100%);
+        background-attachment: fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        // &__logo {
+        //     display: flex;
+        //     align-items: center;
+        //     gap: 8px;
+        //     margin-bottom: 28px;
+        // }
+
+        // &__logo-badge {
+        //     background: #1e3a5f;
+        //     border: 1px solid #2a4f7c;
+        //     border-radius: 8px;
+        //     padding: 6px 10px;
+        //     display: flex;
+        //     align-items: center;
+        // }
+
+        // &__logo-badge-text {
+        //     display: flex;
+        //     flex-direction: column;
+        //     line-height: 1;
+        // }
+
+        // &__logo-gud {
+        //     font-size: 17px;
+        //     font-weight: 700;
+        //     color: #4a9eff;
+        //     letter-spacing: 0.02em;
+        // }
+
+        // &__logo-hub {
+        //     font-size: 17px;
+        //     font-weight: 700;
+        //     color: #4a9eff;
+        //     letter-spacing: 0.04em;
+        // }
+
+        // &__logo-crm {
+        //     font-size: 46px;
+        //     font-weight: 700;
+        //     color: #ffffff;
+        //     letter-spacing: -0.3px;
+        // }
+
+        &__title {
+            margin: 0;
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        &__subtitle {
+            margin: 10px 0 32px;
+            color: #8599b5;
+            font-size: 15px;
+            font-weight: 400;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        &__card {
+            width: 100%;
+            max-width: 420px;
+            background: #eef0f4;
+            border-radius: 20px;
+            padding: 28px 28px 24px;
+            border: none;
+            box-shadow: none;
+        }
+
+        &__amount-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        &__amount-label {
+            margin: 0 0 4px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #6b7280;
+        }
+
+        &__amount {
+            margin: 0;
+            font-size: 38px;
+            font-weight: 700;
+            color: #111827;
+            letter-spacing: -1px;
+            line-height: 1;
+        }
+
+        &__secured-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+            margin-top: 6px;
+            background: #ffffff;
+            border: 1.5px solid #16a34a;
+            border-radius: 100px;
+            padding: 5px 12px 5px 7px;
+        }
+
+        &__secured-icon {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #16a34a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+
+            svg {
+                width: 10px;
+                height: 10px;
+                display: block;
+            }
+        }
+
+        &__secured-text {
+            font-size: 12px;
+            font-weight: 600;
+            color: #16a34a;
+            line-height: 1;
+        }
+
+        &__divider {
+            height: 1px;
+            background: #d4d7de;
+            margin: 20px 0;
+        }
+
+        &__summary {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin: 0;
+            padding: 0;
+            border-radius: 0;
+            background: transparent;
+        }
+
+        &__summary-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        &__summary-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #6b7280;
+            flex-shrink: 0;
+        }
+
+        &__summary-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111827;
+            text-align: right;
+            max-width: 60%;
+            word-break: break-word;
+        }
+
+        &__text {
+            margin: 16px 0 0;
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.6;
+
+            &:empty {
+                display: none;
+            }
+        }
+
+        &__form {
+            margin: 0;
+        }
+
+        &__button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            min-height: 52px;
+            margin-top: 22px;
+            padding: 0 24px;
+            border: none;
+            border-radius: 12px;
+            background: #2563eb;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+            cursor: pointer;
+            transition:
+                background 0.18s ease,
+                transform 0.1s ease;
+
+            &:hover {
+                background: #1d4ed8;
+            }
+
+            &:active {
+                background: #1e40af;
+                transform: scale(0.98);
+            }
+
+            &:disabled {
+                cursor: not-allowed;
+                opacity: 0.6;
+                transform: none;
+            }
+        }
+
+        &__button-icon {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        &__error {
+            margin: 14px 0 0;
+            color: #dc2626;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        &__powered {
+            margin: 16px 0 0;
+            text-align: center;
+            font-size: 13px;
+            color: #9ca3af;
+            font-weight: 400;
+        }
+
+        &__powered-brand {
+            color: #16a34a;
+            font-weight: 700;
+        }
+
+        &__security {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        &__security-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 13px;
+            color: #8599b5;
+            font-weight: 500;
+        }
+
+        &__security-icon {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 1.5px solid #16a34a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+
+            svg {
+                width: 10px;
+                height: 10px;
+                display: block;
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        .liqpay-component {
+            padding: 40px 16px 72px;
+
+            &__title {
+                font-size: 26px;
+            }
+
+            &__card {
+                padding: 22px 18px 20px;
+            }
+
+            &__amount {
+                font-size: 30px;
+            }
+
+            &__summary-row {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            &__summary-value {
+                max-width: 100%;
+                text-align: left;
+            }
+
+            &__security {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+        }
+    }
+}
