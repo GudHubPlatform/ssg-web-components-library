@@ -105,6 +105,11 @@ class ImageComponent extends GHComponent {
 
             await this.uploadImagePath(payload);
 
+            if (this.normalizedSrc) {
+                this.generatedImageSrc = this.normalizedSrc;
+                this.dataSrc = this.normalizedSrc;
+            }
+
             await new Promise((resolve, reject) => {
                 this.image = new Image();
         
@@ -157,6 +162,7 @@ class ImageComponent extends GHComponent {
             });
             const data = await response.json();
             this.placeholder = data?.base64_placeholder;
+            this.normalizedSrc = data?.normalizedSrc;
         } catch (error) {
             console.error('Error:', error);
             return imageSrc;
