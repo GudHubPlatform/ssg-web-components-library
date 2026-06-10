@@ -183,7 +183,11 @@ class ImageComponent extends GHComponent {
         const fallbackSrc = this.getAttribute('src');
         const dataMaxWidth = parseInt(this.getAttribute('data-max-width'), 10);
     
-        const src = this.normalizeUrlPath(dataSrc && dataUrl ? dataSrc : fallbackSrc);
+        const rawSrc = this.normalizedSrc 
+            || imageFromPicture.getAttribute('data-src') 
+            || this.getAttribute('src');
+
+        const src = this.normalizeUrlPath(rawSrc);
         if (!src) {
             console.warn('No valid image source found.');
             return;
