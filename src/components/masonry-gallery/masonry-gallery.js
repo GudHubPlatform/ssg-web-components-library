@@ -76,12 +76,12 @@ class MasonryGallery extends GHComponent {
                 'masonry-images'
             );
 
-            const isInitImagesEqualNull =
-                this.getAttribute('init-count') === 'null';
+            const initCountFromJson = Number(this.getAttribute('init-count'));
 
-            const initCountImages = this.contactUsButton
-                ? this.showCount
-                : images.length;
+            const initCountImages =
+                initCountFromJson > 0
+                    ? initCountFromJson
+                    : (this.showCount || 10);
 
             const initImages = images.slice(0, initCountImages);
             const initMoreImages = images.slice(initCountImages);
@@ -208,68 +208,73 @@ class MasonryGallery extends GHComponent {
         const msnry = this.msnry;
 
         const promise = new Promise(async (res, rej) => {
-            const img = document.createElement('img');
+            try {
+                const img = document.createElement('img');
 
-            const fileName = imageSrc.split('/').pop();
+                const fileName = imageSrc.split('/').pop();
 
-            const pathToJpg = `/assets/images/masonry/${fileName}`;
-            const pathToWebp = `${pathToJpg}.webp`;
+                let finalSrc = `/assets/images/masonry/${fileName}`;
 
-            const response = await fetch(pathToWebp, {
-                method: 'HEAD'
-            });
+                try {
+                    const uploadResponse = await fetch('/upload-image-path', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            imageSrc: finalSrc,
+                            imageUrl: imageSrc,
+                            isCrop: true
+                        })
+                    });
 
-            if (!response.ok) {
-                await fetch('/upload-image-path', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        imageSrc: pathToJpg,
-                        imageUrl: imageSrc,
-                        isCrop: true
-                    })
-                });
-            }
+                    const uploadData = await uploadResponse.json();
 
-            img.src = `/assets/images/masonry/${fileName}`;
-
-            img.setAttribute(
-                'src',
-                `/assets/images/masonry/${fileName}`
-            );
-            img.setAttribute('alt', imageAlt);
-            img.setAttribute('title', imageTitle);
-
-            if (fullImageSrc) {
-                const tempoFullImageSrc = await this.temporaryImage(fullImageSrc);
-
-                img.classList.add('open-modal');
-                img.setAttribute('data-modal-image', tempoFullImageSrc);
-            }
-
-            img.setAttribute('data-image-loading', 'true');
-
-            // Set image wrapper size while the image is loading
-            const interval = setInterval(() => {
-                if (img.width !== 0) {
-                    img.style.width = `${img.naturalWidth}px`;
-                    img.style.height = `${img.naturalHeight}px`;
-                    clearInterval(interval);
-                    res(imageWrapper);
+                    if (uploadData?.normalizedSrc) {
+                        finalSrc = uploadData.normalizedSrc;
+                    }
+                } catch (error) {
+                    console.error('upload-image-path error:', error);
                 }
-            }, 10);
-            
-            // Create image wrapper and append the image to it
-            const imageWrapper = document.createElement('div');
-            imageWrapper.classList.add('masonry-grid-item')
-            // img.onload = () => {
-                img.removeAttribute('data-image-loading');
-            // }
-            imageWrapper.appendChild(img);
-            this.imagesContainer.appendChild(imageWrapper);
-        });
+
+                img.src = finalSrc;
+
+                img.setAttribute('src', finalSrc);
+                img.setAttribute('alt', imageAlt);
+                img.setAttribute('title', imageTitle);
+
+                if (fullImageSrc) {
+                    const tempoFullImageSrc = await this.temporaryImage(fullImageSrc);
+
+                    img.classList.add('open-modal');
+                    img.setAttribute('data-modal-image', tempoFullImageSrc);
+                }
+
+                img.setAttribute('data-image-loading', 'true');
+
+                // Set image wrapper size while the image is loading
+                const interval = setInterval(() => {
+                    if (img.width !== 0) {
+                        img.style.width = `${img.naturalWidth}px`;
+                        img.style.height = `${img.naturalHeight}px`;
+                        clearInterval(interval);
+                        res(imageWrapper);
+                    }
+                }, 10);
+                
+                // Create image wrapper and append the image to it
+                const imageWrapper = document.createElement('div');
+                imageWrapper.classList.add('masonry-grid-item')
+                // img.onload = () => {
+                    img.removeAttribute('data-image-loading');
+                // }
+                imageWrapper.appendChild(img);
+                this.imagesContainer.appendChild(imageWrapper);
+            } catch (error) {
+                console.error(error);
+                rej(error);
+            }
+            });
         
         // After image is loaded, append it to Masonry layout and re-layout the grid
         promise.then((img) => {
