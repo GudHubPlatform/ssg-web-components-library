@@ -20,11 +20,15 @@ export const checkInputsValidations = (inputs) => {
     return result;
 };
 
+const isEmptyAndOptional = (input) => {
+    const value = input.value.trim();
+    return value === '' && !input.hasAttribute('required');
+};
 
 const emailValidation = (input) => {
     const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-    let isValid = regex.test(input.value);
+    let isValid = isEmptyAndOptional(input) || regex.test(input.value);
 
     if (!isValid) {
         input.classList.add('error');
@@ -38,11 +42,9 @@ const emailValidation = (input) => {
 };
 
 const phoneValidation = (input) => {
-    // const regex = /^\d{10}$/; // Default strict regex for checking phone number
+    const regex = /^\+?\d+$/;
 
-    const regex = /^\+?\d+$/; // We can write only numbers without special symbols besides "+" sign
-
-    let isValid = regex.test(input.value);
+    let isValid = isEmptyAndOptional(input) || regex.test(input.value);
 
     if (!isValid) {
         input.classList.add('error');
