@@ -99,7 +99,7 @@ class ImageComponent extends GHComponent {
             }
 
             const payload = {
-                imageSrc: this.generatedImageSrc,
+                imageSrc: relativeImagePath,
                 imageUrl: this.dataUrl ?? null
             };
 
