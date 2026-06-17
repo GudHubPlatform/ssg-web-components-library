@@ -257,13 +257,14 @@ class ImageComponent extends GHComponent {
         if (!value) return value;
 
         return value
-            .normalize('NFD')                    // separate diacritics
-            .replace(/[\u0300-\u036f]/g, '')     // remove diacritics
-            .replace(/[()]/g, '')                // remove brackets
-            .replace(/[^a-zA-Z0-9/._-]+/g, '-')  // replace special chars with -
-            .replace(/-+/g, '-')                 // collapse multiple -
-            .replace(/\/-+/g, '/')               // avoid "/-"
-            .replace(/^-|-$/g, '')               // trim -
+            .normalize('NFD')                      // separate diacritics
+            .replace(/[\u0300-\u036f]/g, '')       // remove diacritics
+            .normalize('NFC')                      // recompose unicode letters (важливо для кирилиці)
+            .replace(/[()]/g, '')                  // remove brackets
+            .replace(/[^\p{L}\p{N}/._-]+/gu, '-')  // replace anything that's not a letter/number (будь-якого алфавіту) with -
+            .replace(/-+/g, '-')                   // collapse multiple -
+            .replace(/\/-+/g, '/')                 // avoid "/-"
+            .replace(/^-|-$/g, '')                 // trim -
             .toLowerCase();
     };
 }
