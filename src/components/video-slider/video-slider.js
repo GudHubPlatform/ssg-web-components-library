@@ -30,6 +30,15 @@ class VideoSlider extends GHComponent {
             ? await super.getGhData(this.ghId, this.chapter)
             : console.error('data-gh-id attribute is required for video-slider component');
 
+        if (
+            !this.json ||
+            !Array.isArray(this.json.images) ||
+            this.json.images.length === 0
+        ) {
+            this.remove();
+            return;
+        }
+
         this.setAttribute(
             'data-animation',
             this.json.animation
