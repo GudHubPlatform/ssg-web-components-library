@@ -128,18 +128,37 @@ class MetaTag extends GHComponent {
         const generalInfo = this.config.componentsConfigs?.generalInfo?.[0];
 
         const {
-            title_field_id: titleId,
-            description_field_id: descriptionId,
-            slug_field_id: slugId,
-            image_field_id: imageId,
-            meta_image_field_id: metaImageIdRaw,
+            title_field_id,
+            description_field_id,
+            slug_field_id,
+            image_field_id,
+            meta_title_field_id,
+            meta_description_field_id,
+            meta_image_field_id,
             app_id: chapterAppId
         } = chapterConfig;
 
-        const metaImageId = metaImageIdRaw || imageId;
+        const titleId =
+            this.getAttribute('data-meta-title') ||
+            meta_title_field_id ||
+            title_field_id;
+
+        const descriptionId =
+            this.getAttribute('data-meta-description') ||
+            meta_description_field_id ||
+            description_field_id;
+
+        const imageId =
+            this.getAttribute('data-meta-image') ||
+            meta_image_field_id ||
+            image_field_id;
+
+        const slugId = slug_field_id;
 
         const getFieldValue = (fieldId) => {
-            return fields.find(field => field.field_id === fieldId)?.field_value ?? null;
+            return fields.find(
+                field => String(field.field_id) === String(fieldId)
+            )?.field_value ?? null;
         };
 
         const isNumeric = (val) => {
@@ -165,7 +184,7 @@ class MetaTag extends GHComponent {
         let titleValue = getFieldValue(titleId);
         let descriptionValue = getFieldValue(descriptionId);
         let slugValue = getFieldValue(slugId);
-        let imageValue = getFieldValue(metaImageId);
+        let imageValue = getFieldValue(imageId);
 
         [titleValue, descriptionValue, slugValue, imageValue] = await Promise.all([
             resolveValue(titleValue, 'text'),
@@ -176,7 +195,7 @@ class MetaTag extends GHComponent {
 
         let imageUrl = imageValue;
 
-        if (!metaImageIdRaw) {
+        if (!meta_image_field_id && !this.getAttribute('data-meta-image')) {
             const itemFields = await gudhub.getItem(chapterAppId, chapterItemId);
 
             const currentFieldData = itemFields?.fields?.find(
@@ -193,7 +212,7 @@ class MetaTag extends GHComponent {
             }
         }
 
-        if (metaImageIdRaw && imageUrl) {
+        if ((meta_image_field_id || this.getAttribute('data-meta-image')) && imageUrl) {
             const protocol = window.MODE === 'production' ? 'https' : 'http';
             const website = window.getConfig()?.website;
             imageUrl = `${protocol}://${website}${imageUrl}`
