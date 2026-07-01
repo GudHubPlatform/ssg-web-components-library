@@ -50,7 +50,7 @@
                                         itemtype="${json.schema?.offerType || 'https://schema.org/Offer'}"
                                     >
                                         <p class="item-price">
-                                            $<span
+                                            <span>${item.priceSymbol || '$'}</span><span
                                                 gh-id="${ghId}.items.${index}.price"
                                                 itemprop="${json.schema?.priceProp || 'price'}"
                                             ></span>
