@@ -46,6 +46,13 @@ class TitleTag extends GHComponent {
         const app = await gudhub.getApp(appId);
         const items = app.items_list;
 
+        const chapter = this.hasAttribute('data-chapter')
+            ? this.getAttribute('data-chapter')
+            : 'pages';
+
+        const config = window.getConfig();
+        const chapterConfig = config?.chapters?.[chapter];
+
         let item;
         let fieldId;
         let value;
@@ -59,9 +66,17 @@ class TitleTag extends GHComponent {
                 }
             });
         }
-        fieldId = app.field_list.find(findedField => findedField.name_space === 'title').field_id;
-        value = item.fields.find(findedField => findedField.field_id == fieldId).field_value;
-        
+        fieldId =
+            this.getAttribute('data-meta-title') ||
+            chapterConfig?.meta_title_field_id ||
+            chapterConfig?.title_field_id ||
+            app.field_list.find(
+                findedField => findedField.name_space === 'title'
+            )?.field_id;
+
+        value = item.fields.find(
+            findedField => String(findedField.field_id) === String(fieldId)
+        )?.field_value;
         
         const title = document.createElement('title');
         title.innerText = value;

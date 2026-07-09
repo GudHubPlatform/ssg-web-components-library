@@ -10,11 +10,15 @@ crm-services-banner {
             }
         }
     }
+
+    .container {    
+        margin-top: 35px;
+    }
     .main-subtitle {
         margin-bottom: 40px;
     }
     .banner_list, .text {
-        color: var(--subtitle-color);
+        color: #05183A;
         margin-bottom: 40px;
     }
     .text p {
@@ -32,6 +36,14 @@ crm-services-banner {
         gap: 20px;
         .left {
             flex-shrink: 1;
+
+            h1 {
+                color: #05183A;
+            }
+
+            .main-subtitle {
+                color: #05183A;
+            }
         }
         .right {
             display: flex;
@@ -42,6 +54,8 @@ crm-services-banner {
             img {
                 width: 100%;
                 max-width: 100%;
+
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
             }
         }
     }
