@@ -4,7 +4,7 @@ import generateAuthorsObjectScheme from './authors-object-scheme.js';
 import generateAllArticlesScheme from './all-articles-scheme.js';
 
 import { generateArticlesAndCommentsObject } from '../../../generate-articles-and-comments-object.js';
-import { generateSlugFilterByLanguage } from '../schemeFilters.js';
+import { generateLanguageFilters, getBlogRootLink, renderAlternateLinks } from '../language.js';
 
 import {initBlogConfig} from '../initBlogConfig.js';
 
@@ -17,7 +17,7 @@ class ArticleComponent extends GHComponent {
 
     async onServerRender() {
         
-        this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config[0]);
+        this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config);
         this.comments = JSON.stringify(this.config.comments);
 
         const clientConfig = window.getConfig();
@@ -26,12 +26,7 @@ class ArticleComponent extends GHComponent {
         const url = new URL(window.location.href);
         const articleSlug = url.searchParams.get('path');
 
-        const filters = [];
-
-        if (clientConfig.multiLanguage) {
-            const langFilter = generateSlugFilterByLanguage(slug_field_id);
-            filters.push(langFilter);
-        }
+        const filters = generateLanguageFilters(slug_field_id);
 
         const articlesAndCommentsScheme = await generateArticlesAndCommentsObject('slug', articleSlug, window.getConfig().chapters.blog);
         articlesAndCommentsScheme.childs.find(({ property_name }) => property_name === 'articles').filter.push(...filters);
@@ -86,14 +81,16 @@ class ArticleComponent extends GHComponent {
         
         delete this.article.category;
 
+        const blogRootLink = getBlogRootLink();
+
         this.breadcrumbs = JSON.stringify([
             {
-                "title": "Головна",
-                "link": "/blog/"
+                "title": this.config.breadcrumbs.homepage || "Головна",
+                "link": this.config.breadcrumbs.homepageLink || blogRootLink
             },
             {
-                "title": "Блог",
-                "link": "/blog/"
+                "title": this.config.breadcrumbs.blog || "Блог",
+                "link": this.config.breadcrumbs.blogLink || blogRootLink
             },
             {
                 "title": this.article.categories[0].name,
@@ -139,7 +136,9 @@ class ArticleComponent extends GHComponent {
             }
         }
 
-        this.articles = await gudhub.jsonConstructor(generateAllArticlesScheme(window.getConfig().chapters.blog));
+        const allArticlesScheme = generateAllArticlesScheme(window.getConfig().chapters.blog);
+        allArticlesScheme.filter.push(...filters);
+        this.articles = await gudhub.jsonConstructor(allArticlesScheme);
 
         for (let article = 0; article < this.articles.all_articles.length; article++) {
             if (this.article.slug == this.articles.all_articles[article].slug) {
@@ -148,6 +147,7 @@ class ArticleComponent extends GHComponent {
         }
 
         this.articles = this.articles.all_articles.slice(0, 3);
+        this.alternativeLanguages = await renderAlternateLinks(this.article.slug);
 
         for (let article in this.articles) {
             let postrCategories = [];

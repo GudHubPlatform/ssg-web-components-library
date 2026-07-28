@@ -2,7 +2,7 @@ import html from './authors-list.html';
 import './authors-list.scss';
 
 import generateAuthorsListScheme from './authors-list-scheme.js';
-import { generateSlugFilterByLanguage } from '../schemeFilters.js';
+import { generateLanguageFilters } from '../language.js';
 
 import {initBlogConfig} from '../initBlogConfig.js';
 
@@ -14,19 +14,14 @@ class AuthorsList extends GHComponent {
 
     async onServerRender() {
         
-        this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config[0]);
+        this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config);
         
         this.ghId = this.getAttribute('data-gh-id') || null;
 
         const clientConfig = window.getConfig();
         const { slug_field_id } = clientConfig.chapters.blog;
 
-        const filters = [];
-
-        if (clientConfig.multiLanguage) {
-            const langFilter = generateSlugFilterByLanguage(slug_field_id);
-            filters.push(langFilter);
-        }
+        const filters = generateLanguageFilters(slug_field_id);
 
         const authorsScheme = generateAuthorsListScheme(window.getConfig().chapters.blog);
         authorsScheme.filter.push(...filters);

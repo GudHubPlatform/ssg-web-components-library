@@ -83,7 +83,7 @@
                             <a class="author link" href="${mainArticle.author_slug}">${mainArticle.author}</a>
                             <div class="symbol"> | </div>
                             <div class="posted_at">
-                                ${new Date(Number(mainArticle.posted_at)).toLocaleDateString('uk')}
+                                ${new Date(Number(mainArticle.posted_at)).toLocaleDateString(currentLanguage)}
                             </div>
                         </div>
                     </div>
@@ -137,7 +137,7 @@
                                         <a class="author link" href="${article.author_slug}">${article.author}</a>
                                         <div class="symbol"> | </div>
                                         <div class="posted_at">
-                                            ${new Date(Number(article.posted_at)).toLocaleDateString('uk')}
+                                            ${new Date(Number(article.posted_at)).toLocaleDateString(currentLanguage)}
                                         </div>
                                     </div>
                                     <div class="stats">
@@ -183,13 +183,13 @@
                 <div class="pagination_wrapper">
                     <div class="prev ${numberOfPage == 1 ? 'disable' : ''}">
                         ${numberOfPage == 2 ? `
-                            <a href="${currentCategory ? `${currentCategory.slug}` : '/blog/'}">
+                            <a href="${currentCategory ? `${currentCategory.slug}` : blogRootLink}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M8 13L2 7M2 7L8 0.999999M2 7L18 7" stroke="#4D555B" stroke-width="2"/></svg>
                             </a>
                         ` : numberOfPage == 1 ? `
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M8 13L2 7M2 7L8 0.999999M2 7L18 7" stroke="#4D555B" stroke-width="2"/></svg>
                             ` : `
-                                <a href="${currentCategory ? `${currentCategory.slug}` : '/blog/'}page/${numberOfPage -1}/">
+                                <a href="${currentCategory ? `${currentCategory.slug}` : blogRootLink}page/${numberOfPage -1}/">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M8 13L2 7M2 7L8 0.999999M2 7L18 7" stroke="#4D555B" stroke-width="2"/></svg>
                                 </a>
                             `}
@@ -206,7 +206,7 @@
                                         </li>
                                     ` : `
                                         <li class="page ${numberOfPage == index + 1 ? 'active' : ''}">
-                                            <a href="${currentCategory ? `${currentCategory.slug}` : '/blog/'}page/${index + 1}/">${index + 1}</a>
+                                            <a href="${currentCategory ? `${currentCategory.slug}` : blogRootLink}page/${index + 1}/">${index + 1}</a>
                                         </li>
                                     `}
                                 ` : `
@@ -217,7 +217,7 @@
                                     
                                     ` : `
                                         <li class="page">
-                                            <a href="${currentCategory ? `${currentCategory.slug}` : '/blog/'}">1</a>
+                                            <a href="${currentCategory ? `${currentCategory.slug}` : blogRootLink}">1</a>
                                         </li>    
                                     `}
                                 `}
@@ -229,7 +229,7 @@
                         ${countOfPages.length == numberOfPage ? `
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M10 1L16 7M16 7L10 13M16 7L-1.04907e-06 7" stroke="#4D555B" stroke-width="2"/></svg>
                         ` : `
-                            <a href="${currentCategory ? `${currentCategory.slug}` : '/blog/'}page/${numberOfPage + 1}/">
+                            <a href="${currentCategory ? `${currentCategory.slug}` : blogRootLink}page/${numberOfPage + 1}/">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M10 1L16 7M16 7L10 13M16 7L-1.04907e-06 7" stroke="#4D555B" stroke-width="2"/></svg>
                             </a>
                         `}

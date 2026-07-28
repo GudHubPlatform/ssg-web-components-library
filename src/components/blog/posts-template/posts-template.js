@@ -4,7 +4,7 @@ import './posts-template.scss';
 import generateCategoriesScheme from './categories-scheme.js';
 import generateAuthorsObjectScheme from './authors-object-scheme.js';
 
-import { generateSlugFilterByLanguage } from '../schemeFilters.js';
+import { generateLanguageFilters, getBlogRootLink, getCurrentLanguage } from '../language.js';
 
 import { generateArticlesAndCommentsObject } from '../../../generate-articles-and-comments-object.js';
 
@@ -39,7 +39,10 @@ class PostsTemplate extends GHComponent {
     
     async onServerRender() {
 
-        this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config[0]);
+        this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config);
+
+        this.blogRootLink = getBlogRootLink();
+        this.currentLanguage = getCurrentLanguage() || 'uk';
 
         this.configCategories = JSON.stringify(this.config);
 
@@ -51,12 +54,7 @@ class PostsTemplate extends GHComponent {
         const clientConfig = window.getConfig();
         const { slug_field_id } = clientConfig.chapters.blog;
 
-        const filters = [];
-
-        if (clientConfig.multiLanguage) {
-            const langFilter = generateSlugFilterByLanguage(slug_field_id);
-            filters.push(langFilter);
-        }
+        const filters = generateLanguageFilters(slug_field_id);
 
         const categoriesScheme = generateCategoriesScheme(window.getConfig().chapters.blog);
         categoriesScheme.filter.push(...filters);
@@ -76,7 +74,7 @@ class PostsTemplate extends GHComponent {
             // If this page type is category we fetch articles only of this category by using filter in jsonConstructor
             const url = new URL(window.location.href);
             const category = url.searchParams.get('category');
-            this.currentCategory = categories.find(iterationCategory => iterationCategory.slug.includes(`/blog/${category}/`));
+            this.currentCategory = categories.find(iterationCategory => iterationCategory.slug.includes(`${this.blogRootLink}${category}/`));
             const categoryId = this.currentCategory.category_id;
 
             const articlesAndCommentsScheme = await generateArticlesAndCommentsObject('category', categoryId, window.getConfig().chapters.blog);
@@ -242,9 +240,9 @@ class PostsTemplate extends GHComponent {
                 if (this.type == 'category') {
                     const url = new URL(window.location.href);
                     const category = url.searchParams.get('category');
-                    fetch(`${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}/blog/${category}/page/${this.numberOfPage+1}/?mode=ssr`);
+                    fetch(`${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${this.blogRootLink}${category}/page/${this.numberOfPage+1}/?mode=ssr`);
                 } else {
-                    fetch(`${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}/blog/page/${this.numberOfPage+1}/?mode=ssr`);
+                    fetch(`${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${this.blogRootLink}page/${this.numberOfPage+1}/?mode=ssr`);
                 }
             }
         }
@@ -455,7 +453,7 @@ class PostsTemplate extends GHComponent {
         }
 
         if (!this.config) {
-            this.config = window.getConfig().componentsConfigs.blog_config[0];
+            this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config);
         }
 
 
@@ -510,7 +508,7 @@ class PostsTemplate extends GHComponent {
                                     <a class="author link" href="${articles[article].author_slug}">${articles[article].author}</a>
                                     <div class="symbol"> | </div>
                                     <div class="posted_at">
-                                        ${new Date(Number(articles[article].posted_at)).toLocaleDateString('uk')}
+                                        ${new Date(Number(articles[article].posted_at)).toLocaleDateString(this.currentLanguage || 'uk')}
                                     </div>
                                 </div>
                                 <div class="stats">

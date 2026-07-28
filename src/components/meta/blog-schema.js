@@ -1,5 +1,12 @@
 import { generateAuthorsObject } from "./authors.js";
 import { generateArticlesObject } from "./articles.js";
+
+function toISODateSafe(value) {
+    const num = Number(value);
+    const date = new Date(num);
+    return isNaN(date.getTime()) ? null : date.toISOString();
+}
+
 class BlogSchema extends GHComponent {
     /*
      * data-chapter - chapter, default pages 
@@ -30,6 +37,19 @@ class BlogSchema extends GHComponent {
             for (let article in articles) {
                 let author = authors.find(author => author.id == articles[article].author_id);
 
+                if (!author) {
+                    console.warn(`blog-schema: skip post, author not found for author_id=${articles[article].author_id}, slug=${articles[article].slug}`);
+                    continue;
+                }
+
+                const datePublished = toISODateSafe(articles[article].posted_at);
+                const dateModified = toISODateSafe(articles[article].updated_at) || datePublished;
+
+                if (!datePublished) {
+                    console.warn(`blog-schema: skip post, invalid posted_at for slug=${articles[article].slug}`);
+                    continue;
+                }
+
                 let authorObject = {
                     "@type": "Person",
                     "@id": `${window.MODE === 'production' ? 'https' : 'http'}://${window.getConfig().website}${author.slug}`,
@@ -43,8 +63,8 @@ class BlogSchema extends GHComponent {
                     "headline": articles[article].title,
                     "name": articles[article].title,
                     "description": articles[article].description,
-                    "datePublished": new Date(Number(articles[article].posted_at)).toISOString(),
-                    "dateModified": articles[article].updated_at ? new Date(Number(articles[article].updated_at)).toISOString() : new Date(Number(articles[article].posted_at)).toISOString(),
+                    "datePublished": datePublished,
+                    "dateModified": dateModified,
                     "author": authorObject,
                     "image": {
                         "@type": "ImageObject",

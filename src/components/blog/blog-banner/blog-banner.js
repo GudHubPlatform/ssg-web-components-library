@@ -17,7 +17,7 @@ class BlogBanner extends GHComponent {
     }
 
     async onServerRender() {
-        this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config[0]);
+        this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config);
 
         let url = new URL(window.location.href);
         url = url.searchParams.get('path');

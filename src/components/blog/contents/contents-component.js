@@ -20,7 +20,17 @@ class ContentsComponent extends GHComponent {
             const linkInside = div.querySelector('a');
             let text = linkInside ? `<span>${linkInside.innerText}</span>` : heading.text;
 
-            let textId = text.match(/>(.*?)</)[1].replace(/ /g, '-');
+            const matchedText = text.match(/>(.*?)</);
+            const plainText = matchedText
+                ? matchedText[1]
+                : (linkInside ? linkInside.innerText : div.innerText);
+
+            if (!plainText) {
+                console.warn('[contents-component] heading without text, skipped:', heading);
+                continue;
+            }
+
+            let textId = plainText.replace(/ /g, '-');
 
             this.newHeadings.push({
                 text: text,

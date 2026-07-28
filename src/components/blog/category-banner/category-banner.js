@@ -2,6 +2,7 @@ import html from './category-banner.html';
 import './category-banner.scss';
 
 import {initBlogConfig} from '../initBlogConfig.js';
+import { getBlogRootLink } from '../language.js';
 
 class CategoryBanner extends GHComponent {
     /**
@@ -13,7 +14,7 @@ class CategoryBanner extends GHComponent {
 
     async onServerRender() {
 
-        this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config[0]);
+        this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config);
 
         let chapter = this.getAttribute('data-chapter')
         let url = new URL(window.location.href);
@@ -47,7 +48,7 @@ class CategoryBanner extends GHComponent {
             },
             {
                 "title": this.config.breadcrumbs.blog || "Блог",
-                "link": this.config.breadcrumbs.blogLink || "/blog/"
+                "link": this.config.breadcrumbs.blogLink || getBlogRootLink()
             },
             {
                 "title": this.title
