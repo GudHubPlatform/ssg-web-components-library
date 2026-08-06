@@ -11,13 +11,26 @@ class BlogBanner extends GHComponent {
         try {
             this.homepageObj = homepageAttr && JSON.parse(homepageAttr);
         } catch (e) {
-            console.warn('Invalid data-homepage JSON:', `data-homepage='{"title": "Головна", "link": "/"}'`);
-            this.homepageObj = { title: 'Головна', link: '/' };
+            console.warn('Invalid data-homepage JSON:', homepageAttr);
+            this.homepageObj = null;
         }
     }
 
     async onServerRender() {
-        this.config = initBlogConfig(window.getConfig().componentsConfigs.blog_config);
+        const configs = window.getConfig().componentsConfigs;
+        const currentLanguage = window.getConfig().currentLanguage;
+        const defaultLanguage = window.getConfig().defaultLanguage;
+
+        this.config = initBlogConfig(configs.blog_config);
+
+        this.texts = configs.langConfig.find(l => l.langCode === currentLanguage)
+            || configs.langConfig.find(l => l.langCode === defaultLanguage)
+            || configs.langConfig[0];
+
+        const menuConfig = configs.menuConfig.find(m => m.langCode === currentLanguage)
+            || configs.menuConfig.find(m => m.langCode === defaultLanguage)
+            || configs.menuConfig[0];
+        this.homepage = menuConfig.homepage;
 
         let url = new URL(window.location.href);
         url = url.searchParams.get('path');
@@ -27,33 +40,32 @@ class BlogBanner extends GHComponent {
             this.page = true;
             this.breadcrumbs = JSON.stringify([{"title": this.config.breadcrumbs.blog}])
             this.ghId = this.getAttribute('data-gh-id') || null;
-            
-            // this.json = await super.getGhData(this.ghId, 'pages', window.getConfig().chapters.pages.app_id, window.getConfig().chapters.pages.blog_main_page_item_id);
+
             const response = await gudhub.getDocument({ app_id: window.getConfig().chapters.pages.app_id, item_id: window.getConfig().chapters.pages.blog_main_page_item_id, element_id: window.getConfig().chapters.pages.json_field_id });
             this.json = JSON.parse(response.data)[this.ghId];
         } else {
             this.page = false;
             this.ghId = this.getAttribute('data-gh-id') || null;
             this.json = await super.getGhData(this.ghId);
-            
+
             this.button = this.json.button || null;
             if (!this.json.button) {
                 this.classList.add('without_button');
             }
-            
+
             let breadcrumbsTitle = document.createElement('div')
             breadcrumbsTitle.innerHTML = this.json.title;
-            
+
             this.breadcrumbs = JSON.stringify([
                 this.homepageObj ?? {
-                    title: 'Головна',
-                    link: '/'
+                    title: this.texts.home,
+                    link: this.homepage
                 },
                 {
                     title: breadcrumbsTitle.innerText
                 }
             ]);
-            
+
             this.image = this.json.image || false;
         }
 
