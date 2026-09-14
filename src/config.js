@@ -33,6 +33,7 @@ export { recentPosts } from './components/recent-posts/config.js';
 export { gridOld } from './components/grid/config.js';
 export { editMode } from './components/edit-mode/config.js';
 export { imageComponent } from './components/image-component/config.js';
+export { videoComponent } from './components/video-component/config.js';
 export { fullscreenImageAndText } from './components/fullscreen-image-and-text/config.js';
 export { tabsComponent } from './components/tabs/config.js';
 export { breadcrumbsComponent } from './components/breadcrumbs/config.js';

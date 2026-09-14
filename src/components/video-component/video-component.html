@@ -1,0 +1,55 @@
+<div
+    class="video-component"
+    style="
+        --video-aspect-ratio: ${aspectRatio};
+        --video-object-fit: ${objectFit};
+    "
+>
+    ${fallbackSrc || fallbackUrl
+        ? `
+            <image-component
+                class="video-component__fallback"
+
+                ${fallbackSrc
+                    ? `src="${fallbackSrc}"`
+                    : `data-url="${fallbackUrl}"`
+                }
+
+                alt="${fallbackAlt}"
+                ${fallbackTitle ? `title="${fallbackTitle}"` : ''}
+
+                width="${width}"
+                height="${height}"
+
+                ${fallbackMaxWidth
+                    ? `data-max-width="${fallbackMaxWidth}"`
+                    : ''
+                }
+
+                ${fallbackCrop ? 'data-crop' : ''}
+                ${fallbackLazyload ? 'lazyload' : ''}
+            ></image-component>
+        `
+        : ''
+    }
+
+    <video
+        class="video-component__video"
+
+        ${autoplay ? 'autoplay' : ''}
+        ${muted ? 'muted' : ''}
+        ${loop ? 'loop' : ''}
+        ${playsinline ? 'playsinline' : ''}
+        ${controls ? 'controls' : ''}
+
+        preload="${preload}"
+
+        width="${width}"
+        height="${height}"
+    >
+        <source
+            src="${videoSrc}"
+            type="${videoType}"
+        >
+    </video>
+</div>
