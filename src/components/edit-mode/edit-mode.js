@@ -5,6 +5,12 @@ import './gudhub-login-popup.scss';
 import { EditModeNotifications } from './EditModeNotifications.webcomponent.js';
 import { isUndefined } from './Helpers.js';
 
+function getJsonFieldId(chapter) {
+    return window?.constants?.chapters?.[chapter]?.json_field_id
+        ?? window?.constants?.componentsConfigs?.chapters?.[chapter]?.json_field_id
+        ?? document.documentElement.getAttribute(`data-${chapter}-json_field_id`);
+}
+
 class EditMode extends GHComponent {
     constructor() {
         super();
@@ -129,11 +135,14 @@ class EditMode extends GHComponent {
 
                             let ids = await self.findIds();
                             const currentChapter = window?.constants?.currentChapter || 'pages';
+                            const elementId = getJsonFieldId(currentChapter);
+
+                            if (!ids?.appId || !ids?.itemId || !elementId) return;
 
                             const data = await gudhub.getDocument({
                                 app_id: ids.appId,
                                 item_id: ids.itemId,
-                                element_id: document.querySelector('html').getAttribute(`data-${currentChapter}-json_field_id`)
+                                element_id: elementId
                             });
 
                             const json = JSON.parse(data.data);
@@ -151,7 +160,7 @@ class EditMode extends GHComponent {
                             await gudhub.createDocument({
                                 app_id: ids.appId,
                                 item_id: ids.itemId,
-                                element_id: document.querySelector('html').getAttribute(`data-${currentChapter}-json_field_id`),
+                                element_id: elementId,
                                 data: JSON.stringify(json)
                             });
 
@@ -372,7 +381,8 @@ class EditMode extends GHComponent {
                 if (!ids) return null;
 
                 const currentChapter = window?.constants?.currentChapter || 'pages';
-                const elementId = document.documentElement.getAttribute(`data-${currentChapter}-json_field_id`);
+                const elementId = getJsonFieldId(currentChapter);
+                if (!elementId) return null;
 
                 const cacheKey = `${ids.appId}:${ids.itemId}:${elementId}`;
 
