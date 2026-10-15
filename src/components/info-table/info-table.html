@@ -75,5 +75,11 @@
                 </tbody>
             </table>
         </div>
+
+        ${json.button?.text ? `
+            <div class="button-wrapper">
+                <button-component data-popup-id="${json.button.popupId || ''}" data-placement="${json.button.placement || 'Info Table'}" class="btn">${json.button.text}</button-component>
+            </div>
+        ` : ''}
     </div>
 </section>

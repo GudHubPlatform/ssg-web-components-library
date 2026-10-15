@@ -91,6 +91,16 @@ info-table {
         }
     }
 
+    .button-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+
+        .btn {
+            white-space: nowrap;
+        }
+    }
+
     @media (max-width: 1900px) {
         section {
             padding-left: calc(100vw / 15);

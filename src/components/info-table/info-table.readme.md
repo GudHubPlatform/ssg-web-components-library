@@ -67,6 +67,22 @@
 
 `items.price` - item price/value/description. Usually rendered in the second table column.
 
+`button` - optional object. If passed (with `text`), a button is rendered centered below the table. If the field does not exist, the button will not be rendered.
+
+```json
+"button": {
+    "text": "Get Price List",
+    "popupId": "form2",
+    "placement?": "Info Table"
+}
+```
+
+`button.text` - button text.
+
+`button.popupId` - id of the popup opened on click.
+
+`button.placement` - optional placement label passed to `button-component`. Default value is `Info Table`.
+
 ---
 
 # Pricing table example

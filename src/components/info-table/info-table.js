@@ -12,8 +12,6 @@ class InfoTable extends window.GHComponent {
         this.ghId = this.getAttribute('data-gh-id') || null;
         this.json = await super.getGhData(this.ghId, 'areas');
 
-        console.log("AAAAAAAAAAAAAAAAAAAAAAAA", this.json);
-
         if (this.json) {
             super.render(html);
         }
