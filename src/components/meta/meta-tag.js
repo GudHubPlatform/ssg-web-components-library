@@ -312,20 +312,19 @@ class MetaTag extends GHComponent {
             }
            
         } else {
-            const meta = document.createElement('meta');
-            
-            if (this.type === 'title') {
-                meta.setAttribute('name', 'title');
-                meta.setAttribute('content', titleValue);
-            } else if (this.type === 'description') {
-                meta.setAttribute('name', 'description');
-                meta.setAttribute('content', descriptionValue);
-            } else if (this.type === 'meta_image_src') {
-                meta.setAttribute('name', 'image');
-                meta.setAttribute('content', imageUrl);
-            }
+            const simpleMetaByType = {
+                title: { name: 'title', content: titleValue },
+                description: { name: 'description', content: descriptionValue },
+                meta_image_src: { name: 'image', content: imageUrl },
+            };
+            const simpleMeta = simpleMetaByType[this.type];
 
-            document.querySelector('head').prepend(meta);
+            if (simpleMeta && !document.querySelector(`meta[name="${simpleMeta.name}"]`)) {
+                const meta = document.createElement('meta');
+                meta.setAttribute('name', simpleMeta.name);
+                meta.setAttribute('content', simpleMeta.content);
+                document.querySelector('head').prepend(meta);
+            }
         }
 
         this.remove();
